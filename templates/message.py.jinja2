@@ -1,0 +1,44 @@
+from ship.message_type import *
+import json
+
+MSG_TYPE_INIT = b'\x00\x00'
+MSG_TYPE_CONTROL = b'\x01'
+MSG_TYPE_DATA = b'\x02'
+MSG_TYPE_END = b'\x03'
+
+def get_object_data(obj):
+    return obj.get_data()
+
+class ShipMessage:
+    def __init__(
+        self
+    ):
+        self.root_tag = ""
+        self.msg_type = b'\x00'
+        self.msg: ShipMessageType = ShipMessageType()
+
+    def get_msg_bytes(self):
+        if self.msg:
+            json_data = json.dumps({self.root_tag: self.msg.get_data()}, separators=(',', ':'), default=get_object_data)
+        else:
+            json_data = ""
+        json_bytes = self.msg_type + json_data.encode('utf8')
+        return json_bytes
+
+{% for ele in elements %}
+class {{ ele.name }}(ShipMessage):
+    def __init__(
+        self,
+{% for m in ele.members %}        {{ m.name | lower }}{% if m.data_type %}: {% if m.is_array %}list[{% endif %}{{ m.data_type }}{% if m.is_array %}]{% endif %}{% endif %}{% if m.default_value or m.is_optional %}=None{% endif %},
+{% endfor %}    ):
+        super().__init__()
+        {% for m in ele.members %}{% if m.default_value %}if {{ m.name | lower }} is None:
+            {{ m.name }} = {{ m.default_value }}{% endif %}
+        {% endfor %}
+        self.msg_type = {{ ele.msg_type_numeric }}
+        self.root_tag = "{{ ele.msg_name }}"
+        self.msg = {{ ele.data_type }}(
+{% for m in ele.members %}            {{ m.name | lower }}={{ m.name | lower }},
+{% endfor %}        )
+
+{% endfor %}

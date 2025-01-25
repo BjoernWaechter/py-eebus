@@ -1,0 +1,7 @@
+from enum import Enum
+
+{% for type_name, prop in enum_types.items() %}
+class {{ type_name }}(str, Enum):
+{% for e in prop.enums %}    {{ e|upper }} = '{{ e }}'
+{% endfor %}
+{% endfor %}

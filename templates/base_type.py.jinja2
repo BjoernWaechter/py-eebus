@@ -1,0 +1,29 @@
+from ship.enums import *
+import json
+
+MSG_TYPE_INIT = b'\x00\x00'
+MSG_TYPE_CONTROL = b'\x01'
+MSG_TYPE_DATA = b'\x02'
+MSG_TYPE_END = b'\x03'
+
+{% for type_name, prop in base_types.items() %}
+class {{ type_name }}:
+    def __init__(
+        self,
+{% for m in prop.members %}        {{ m.name | lower }}{% if m.data_type %}: {% if m.is_array %}list[{% endif %}{{ m.data_type }}{% if m.is_array %}]{% endif %}{% endif %}{% if m.default_value or m.is_optional %}=None{% endif %},
+{% endfor %}    ):
+        super().__init__()
+        {% for m in prop.members %}{% if m.default_value %}if {{ m.name | lower }} is None:
+            {{ m.name | lower }} = {{ m.default_value }}{% endif %}
+        {% endfor %}
+{% for m in prop.members %}        self.{{ m.name | lower }} = {{ m.name | lower }}
+{% endfor %}
+    def get_data(self):
+        msg_data = {% if not prop.no_attrib_name %}[]
+        {% else%}self.{% for m in prop.members %}{{ m.name | lower }}{% endfor %}{% endif %}
+        {% if not prop.no_attrib_name %}{% for m in prop.members %}if self.{{ m.name | lower }}:
+            msg_data.append({"{{ m.name }}": self.{{ m.name | lower }}})
+        {% endfor %}
+        {% endif %}return msg_data
+
+{% endfor %}
