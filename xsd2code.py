@@ -1,7 +1,7 @@
 import xmlschema
 from jinja2 import Environment, FileSystemLoader
 
-schema = xmlschema.XMLSchema('EEBus_SHIP_TS_TransferProtocol.xsd')
+schema = xmlschema.XMLSchema('xsd/EEBus_SHIP_TS_TransferProtocol.xsd')
 
 
 default_values = {
