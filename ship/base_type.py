@@ -9,99 +9,93 @@ MSG_TYPE_END = b'\x03'
 
 class MessageProtocolFormatType:
     def __init__(
-        self,
-        messageprotocolformattype: str,
+            self,
+            message_protocol_format_type: str,
     ):
         super().__init__()
         
-        
-        self.messageprotocolformattype = messageprotocolformattype
+        self.message_protocol_format_type = message_protocol_format_type
 
     def get_data(self):
-        msg_data = self.messageprotocolformattype
+        msg_data = self.message_protocol_format_type
         return msg_data
 
 
 class MessageProtocolHandshakeErrorErrorType:
     def __init__(
-        self,
-        messageprotocolhandshakeerrorerrortype: float,
+            self,
+            message_protocol_handshake_error_error_type: float,
     ):
         super().__init__()
         
-        
-        self.messageprotocolhandshakeerrorerrortype = messageprotocolhandshakeerrorerrortype
+        self.message_protocol_handshake_error_error_type = message_protocol_handshake_error_error_type
 
     def get_data(self):
         msg_data = []
         
-        if self.messageprotocolhandshakeerrorerrortype:
-            msg_data.append({"MessageProtocolHandshakeErrorErrorType": self.messageprotocolhandshakeerrorerrortype})
+        if self.message_protocol_handshake_error_error_type:
+            msg_data.append({"MessageProtocolHandshakeErrorErrorType": self.message_protocol_handshake_error_error_type})
         
         return msg_data
 
 
 class PinValueType:
     def __init__(
-        self,
-        pinvaluetype: str,
+            self,
+            pin_value_type: str,
     ):
         super().__init__()
         
-        
-        self.pinvaluetype = pinvaluetype
+        self.pin_value_type = pin_value_type
 
     def get_data(self):
         msg_data = []
         
-        if self.pinvaluetype:
-            msg_data.append({"PinValueType": self.pinvaluetype})
+        if self.pin_value_type:
+            msg_data.append({"PinValueType": self.pin_value_type})
         
         return msg_data
 
 
 class ConnectionPinErrorErrorType:
     def __init__(
-        self,
-        connectionpinerrorerrortype: float,
+            self,
+            connection_pin_error_error_type: float,
     ):
         super().__init__()
         
-        
-        self.connectionpinerrorerrortype = connectionpinerrorerrortype
+        self.connection_pin_error_error_type = connection_pin_error_error_type
 
     def get_data(self):
         msg_data = []
         
-        if self.connectionpinerrorerrortype:
-            msg_data.append({"ConnectionPinErrorErrorType": self.connectionpinerrorerrortype})
+        if self.connection_pin_error_error_type:
+            msg_data.append({"ConnectionPinErrorErrorType": self.connection_pin_error_error_type})
         
         return msg_data
 
 
 class ProtocolIdType:
     def __init__(
-        self,
-        protocolidtype: str=None,
+            self,
+            protocol_id_type: str = None,
     ):
         super().__init__()
-        if protocolidtype is None:
-            protocolidtype = 'ee1.0'
-        
-        self.protocolidtype = protocolidtype
+        if protocol_id_type is None:
+            protocol_id_type = 'ee1.0'
+        self.protocol_id_type = protocol_id_type
 
     def get_data(self):
-        msg_data = self.protocolidtype
+        msg_data = self.protocol_id_type
         return msg_data
 
 
 class MessageProtocolFormatsType:
     def __init__(
-        self,
-        format: list[MessageProtocolFormatType],
+            self,
+            format: list[MessageProtocolFormatType],
     ):
         super().__init__()
-        
         
         self.format = format
 
@@ -116,44 +110,40 @@ class MessageProtocolFormatsType:
 
 class HeaderType:
     def __init__(
-        self,
-        protocolid: ProtocolIdType,
+            self,
+            protocol_id: ProtocolIdType,
     ):
         super().__init__()
         
-        
-        self.protocolid = protocolid
+        self.protocol_id = protocol_id
 
     def get_data(self):
         msg_data = []
         
-        if self.protocolid:
-            msg_data.append({"protocolId": self.protocolid})
+        if self.protocol_id:
+            msg_data.append({"protocolId": self.protocol_id})
         
         return msg_data
 
 
 class ExtensionType:
     def __init__(
-        self,
-        extensionid: str=None,
-        binary: str=None,
-        string: str=None,
+            self,
+            extension_id: str = None,
+            binary: str = None,
+            string: str = None,
     ):
         super().__init__()
         
-        
-        
-        
-        self.extensionid = extensionid
+        self.extension_id = extension_id
         self.binary = binary
         self.string = string
 
     def get_data(self):
         msg_data = []
         
-        if self.extensionid:
-            msg_data.append({"extensionId": self.extensionid})
+        if self.extension_id:
+            msg_data.append({"extensionId": self.extension_id})
         if self.binary:
             msg_data.append({"binary": self.binary})
         if self.string:

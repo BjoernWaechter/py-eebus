@@ -72,7 +72,7 @@ class Cmi(ShipMessage):
 class {{ ele.name }}(ShipMessage):
     def __init__(
             self,
-{% for m in ele.members %}            {{ m.name | lower }}{% if m.data_type %}: {% if m.is_array %}list[{% endif %}{{ m.data_type }}{% if m.is_array %}]{% endif %}{% endif %}{% if m.default_value or m.is_optional %} = None{% endif %},
+{% for m in ele.members %}            {{ m.snake_case_name }}{% if m.data_type %}: {% if m.is_array %}list[{% endif %}{{ m.data_type }}{% if m.is_array %}]{% endif %}{% endif %}{% if m.default_value or m.is_optional %} = None{% endif %},
 {% endfor %}    ):
         super().__init__()
         {% for m in ele.members %}{% if m.default_value %}
@@ -81,14 +81,14 @@ class {{ ele.name }}(ShipMessage):
         self._msg_type = {{ ele.msg_type_numeric }}
         self._root_tag = "{{ ele.msg_name }}"
         self._msg = {{ ele.data_type }}(
-{% for m in ele.members %}            {{ m.name | lower }}={{ m.name | lower }},
+{% for m in ele.members %}            {{ m.snake_case_name }}={{ m.snake_case_name }},
 {% endfor %}        )
 
     @classmethod
     def from_data(cls, data):
         data_dict = array_2_dict(data)
         return cls({% for m in ele.members %}
-            {{ m.name | lower }}=data_dict['{{ m.name }}'], {% endfor %}
+            {{ m.snake_case_name }}=data_dict['{{ m.name }}'], {% endfor %}
         )
 
 {% endfor %}

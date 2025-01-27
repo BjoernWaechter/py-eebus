@@ -24,12 +24,12 @@ class ConnectionHelloType(ShipMessageType):
         self,
         phase: ConnectionHelloPhaseType,
         waiting: int=None,
-        prolongationrequest: bool=None,
+        prolongation_request: bool=None,
     ):
         super().__init__()
         self.phase = phase
         self.waiting = waiting
-        self.prolongationrequest = prolongationrequest
+        self.prolongation_request = prolongation_request
 
     def get_data(self):
         msg_data = []
@@ -38,8 +38,8 @@ class ConnectionHelloType(ShipMessageType):
             msg_data.append({"phase": self.phase})
         if self.waiting:
             msg_data.append({"waiting": self.waiting})
-        if self.prolongationrequest:
-            msg_data.append({"prolongationRequest": self.prolongationrequest})
+        if self.prolongation_request:
+            msg_data.append({"prolongationRequest": self.prolongation_request})
         
         
         return msg_data
@@ -48,20 +48,20 @@ class ConnectionHelloType(ShipMessageType):
 class MessageProtocolHandshakeType(ShipMessageType):
     def __init__(
         self,
-        handshaketype: ProtocolHandshakeTypeType,
+        handshake_type: ProtocolHandshakeTypeType,
         version,
         formats: MessageProtocolFormatsType,
     ):
         super().__init__()
-        self.handshaketype = handshaketype
+        self.handshake_type = handshake_type
         self.version = version
         self.formats = formats
 
     def get_data(self):
         msg_data = []
         
-        if self.handshaketype:
-            msg_data.append({"handshakeType": self.handshaketype})
+        if self.handshake_type:
+            msg_data.append({"handshakeType": self.handshake_type})
         if self.version:
             msg_data.append({"version": self.version})
         if self.formats:
@@ -92,20 +92,20 @@ class MessageProtocolHandshakeErrorType(ShipMessageType):
 class ConnectionPinStateType(ShipMessageType):
     def __init__(
         self,
-        pinstate: PinStateType,
-        inputpermission: PinInputPermissionType=None,
+        pin_state: PinStateType,
+        input_permission: PinInputPermissionType=None,
     ):
         super().__init__()
-        self.pinstate = pinstate
-        self.inputpermission = inputpermission
+        self.pin_state = pin_state
+        self.input_permission = input_permission
 
     def get_data(self):
         msg_data = []
         
-        if self.pinstate:
-            msg_data.append({"pinState": self.pinstate})
-        if self.inputpermission:
-            msg_data.append({"inputPermission": self.inputpermission})
+        if self.pin_state:
+            msg_data.append({"pinState": self.pin_state})
+        if self.input_permission:
+            msg_data.append({"inputPermission": self.input_permission})
         
         
         return msg_data
@@ -177,12 +177,12 @@ class ConnectionCloseType(ShipMessageType):
     def __init__(
         self,
         phase: ConnectionClosePhaseType,
-        maxtime: int=None,
+        max_time: int=None,
         reason: ConnectionCloseReasonType=None,
     ):
         super().__init__()
         self.phase = phase
-        self.maxtime = maxtime
+        self.max_time = max_time
         self.reason = reason
 
     def get_data(self):
@@ -190,8 +190,8 @@ class ConnectionCloseType(ShipMessageType):
         
         if self.phase:
             msg_data.append({"phase": self.phase})
-        if self.maxtime:
-            msg_data.append({"maxTime": self.maxtime})
+        if self.max_time:
+            msg_data.append({"maxTime": self.max_time})
         if self.reason:
             msg_data.append({"reason": self.reason})
         
@@ -217,12 +217,12 @@ class AccessMethodsType(ShipMessageType):
     def __init__(
         self,
         id: str,
-        dnssd_mdns=None,
+        dns_sd_m_dns=None,
         dns=None,
     ):
         super().__init__()
         self.id = id
-        self.dnssd_mdns = dnssd_mdns
+        self.dns_sd_m_dns = dns_sd_m_dns
         self.dns = dns
 
     def get_data(self):
@@ -230,8 +230,8 @@ class AccessMethodsType(ShipMessageType):
         
         if self.id:
             msg_data.append({"id": self.id})
-        if self.dnssd_mdns:
-            msg_data.append({"dnsSd_mDns": self.dnssd_mdns})
+        if self.dns_sd_m_dns:
+            msg_data.append({"dnsSd_mDns": self.dns_sd_m_dns})
         if self.dns:
             msg_data.append({"dns": self.dns})
         

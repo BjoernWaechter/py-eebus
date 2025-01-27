@@ -74,7 +74,7 @@ class ConnectionHello(ShipMessage):
             self,
             phase: ConnectionHelloPhaseType,
             waiting: int = None,
-            prolongationrequest: bool = None,
+            prolongation_request: bool = None,
     ):
         super().__init__()
         
@@ -85,7 +85,7 @@ class ConnectionHello(ShipMessage):
         self._msg = ConnectionHelloType(
             phase=phase,
             waiting=waiting,
-            prolongationrequest=prolongationrequest,
+            prolongation_request=prolongation_request,
         )
 
     @classmethod
@@ -94,14 +94,14 @@ class ConnectionHello(ShipMessage):
         return cls(
             phase=data_dict['phase'], 
             waiting=data_dict['waiting'], 
-            prolongationrequest=data_dict['prolongationRequest'], 
+            prolongation_request=data_dict['prolongationRequest'], 
         )
 
 
 class MessageProtocolHandshake(ShipMessage):
     def __init__(
             self,
-            handshaketype: ProtocolHandshakeTypeType,
+            handshake_type: ProtocolHandshakeTypeType,
             version = None,
             formats: MessageProtocolFormatsType = None,
     ):
@@ -114,7 +114,7 @@ class MessageProtocolHandshake(ShipMessage):
         self._msg_type = MessageType.MSG_TYPE_CONTROL
         self._root_tag = "messageProtocolHandshake"
         self._msg = MessageProtocolHandshakeType(
-            handshaketype=handshaketype,
+            handshake_type=handshake_type,
             version=version,
             formats=formats,
         )
@@ -123,7 +123,7 @@ class MessageProtocolHandshake(ShipMessage):
     def from_data(cls, data):
         data_dict = array_2_dict(data)
         return cls(
-            handshaketype=data_dict['handshakeType'], 
+            handshake_type=data_dict['handshakeType'], 
             version=data_dict['version'], 
             formats=data_dict['formats'], 
         )
@@ -153,24 +153,24 @@ class MessageProtocolHandshakeError(ShipMessage):
 class ConnectionPinState(ShipMessage):
     def __init__(
             self,
-            pinstate: PinStateType,
-            inputpermission: PinInputPermissionType = None,
+            pin_state: PinStateType,
+            input_permission: PinInputPermissionType = None,
     ):
         super().__init__()
         
         self._msg_type = MessageType.MSG_TYPE_CONTROL
         self._root_tag = "connectionPinState"
         self._msg = ConnectionPinStateType(
-            pinstate=pinstate,
-            inputpermission=inputpermission,
+            pin_state=pin_state,
+            input_permission=input_permission,
         )
 
     @classmethod
     def from_data(cls, data):
         data_dict = array_2_dict(data)
         return cls(
-            pinstate=data_dict['pinState'], 
-            inputpermission=data_dict['inputPermission'], 
+            pin_state=data_dict['pinState'], 
+            input_permission=data_dict['inputPermission'], 
         )
 
 
@@ -247,7 +247,7 @@ class ConnectionClose(ShipMessage):
     def __init__(
             self,
             phase: ConnectionClosePhaseType,
-            maxtime: int = None,
+            max_time: int = None,
             reason: ConnectionCloseReasonType = None,
     ):
         super().__init__()
@@ -256,7 +256,7 @@ class ConnectionClose(ShipMessage):
         self._root_tag = "connectionClose"
         self._msg = ConnectionCloseType(
             phase=phase,
-            maxtime=maxtime,
+            max_time=max_time,
             reason=reason,
         )
 
@@ -265,7 +265,7 @@ class ConnectionClose(ShipMessage):
         data_dict = array_2_dict(data)
         return cls(
             phase=data_dict['phase'], 
-            maxtime=data_dict['maxTime'], 
+            max_time=data_dict['maxTime'], 
             reason=data_dict['reason'], 
         )
 
@@ -292,7 +292,7 @@ class AccessMethods(ShipMessage):
     def __init__(
             self,
             id: str,
-            dnssd_mdns = None,
+            dns_sd_m_dns = None,
             dns = None,
     ):
         super().__init__()
@@ -301,7 +301,7 @@ class AccessMethods(ShipMessage):
         self._root_tag = "accessMethods"
         self._msg = AccessMethodsType(
             id=id,
-            dnssd_mdns=dnssd_mdns,
+            dns_sd_m_dns=dns_sd_m_dns,
             dns=dns,
         )
 
@@ -310,7 +310,7 @@ class AccessMethods(ShipMessage):
         data_dict = array_2_dict(data)
         return cls(
             id=data_dict['id'], 
-            dnssd_mdns=data_dict['dnsSd_mDns'], 
+            dns_sd_m_dns=data_dict['dnsSd_mDns'], 
             dns=data_dict['dns'], 
         )
 

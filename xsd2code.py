@@ -1,3 +1,5 @@
+import re
+
 import xmlschema
 from jinja2 import Environment, FileSystemLoader
 
@@ -15,6 +17,12 @@ no_attr_name = {
     "MessageProtocolFormatType",
     "ProtocolIdType"
 }
+
+
+def camel_to_snake(name):
+    name = re.sub('(.)([A-Z][a-z]+)', r'\1_\2', name)
+    return re.sub('([a-z0-9])([A-Z])', r'\1_\2', name).lower()
+
 
 def xsd_to_pyton_type(xsd_type):
     if xsd_type == "xs:unsignedInt":
@@ -69,6 +77,7 @@ for ship_type in schema.types:
         members = [
             {
                 "name": m.local_name,
+                "snake_case_name": camel_to_snake(m.local_name),
                 "data_type": xsd_to_pyton_type(m.type.display_name),
                 "is_array": True if m.max_occurs is None or m.max_occurs > 1 else False,
                 "is_optional": True if m.min_occurs == 0 else False,
@@ -81,6 +90,7 @@ for ship_type in schema.types:
     elif type_name == "XsdAtomicRestriction":
         members = [{
                 "name": type_obj.local_name,
+                "snake_case_name": camel_to_snake(type_obj.local_name),
                 "data_type": xsd_to_pyton_type(type_obj.primitive_type.display_name),
                 "is_array": False,
                 "is_optional": False,
@@ -113,6 +123,7 @@ for ele in schema.elements:
         "msg_type_numeric": msg_group_value(groups[ele_obj.local_name]),
         "members": [{
             "name": m["name"],
+            "snake_case_name": camel_to_snake(m["name"]),
             "data_type": m["data_type"],
             "default_value": m["default_value"],
             "is_array": m["is_array"],

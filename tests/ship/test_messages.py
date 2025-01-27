@@ -1,6 +1,5 @@
 from ship.enums import *
 from ship.message import *
-from ship.message_parser import parse_message
 
 TEST_MESSAGES = {
     "CMI": [
@@ -8,21 +7,21 @@ TEST_MESSAGES = {
     ],
     "ConnectionHello": [
         ConnectionHello(phase=ConnectionHelloPhaseType.READY),
-        ConnectionHello(phase=ConnectionHelloPhaseType.PENDING, prolongationrequest=True),
+        ConnectionHello(phase=ConnectionHelloPhaseType.PENDING, prolongation_request=True),
         ConnectionHello(phase=ConnectionHelloPhaseType.ABORTED),
         ConnectionHello(phase=ConnectionHelloPhaseType.READY, waiting=1000),
     ],
     "MessageProtocolHandshake": [
-        MessageProtocolHandshake(handshaketype=ProtocolHandshakeTypeType.ANNOUNCEMAX),
-        MessageProtocolHandshake(handshaketype=ProtocolHandshakeTypeType.SELECT, formats=MessageProtocolFormatsType(
+        MessageProtocolHandshake(handshake_type=ProtocolHandshakeTypeType.ANNOUNCEMAX),
+        MessageProtocolHandshake(handshake_type=ProtocolHandshakeTypeType.SELECT, formats=MessageProtocolFormatsType(
             format=[MessageProtocolFormatType("JSON-UTF16")])),
-        MessageProtocolHandshake(handshaketype=ProtocolHandshakeTypeType.ANNOUNCEMAX,
+        MessageProtocolHandshake(handshake_type=ProtocolHandshakeTypeType.ANNOUNCEMAX,
                                  version=[{"major": 2}, {"minor": 1}])
     ],
     "AccessMethods": [
         AccessMethods(id="TESTBRAND11314235241414"),
         AccessMethods(id="TESTBRAND11314235241414", dns="dns1"),
-        AccessMethods(id="TESTBRAND11314235241414", dns="dns1", dnssd_mdns="m1"),
+        AccessMethods(id="TESTBRAND11314235241414", dns="dns1", dns_sd_m_dns="m1"),
     ],
     "ConnectionPinState": [
         ConnectionPinState(PinStateType.NONE),
@@ -34,12 +33,12 @@ TEST_MESSAGES = {
         AccessMethodsRequest()
     ],
     "Data": [
-        Data(header=HeaderType(protocolid=ProtocolIdType()), payload="MY_DATA")
+        Data(header=HeaderType(protocol_id=ProtocolIdType()), payload="MY_DATA")
     ],
     "ConnectionClose": [
         ConnectionClose(phase=ConnectionClosePhaseType.CONFIRM),
         ConnectionClose(phase=ConnectionClosePhaseType.ANNOUNCE),
-        ConnectionClose(phase=ConnectionClosePhaseType.ANNOUNCE, maxtime=30),
+        ConnectionClose(phase=ConnectionClosePhaseType.ANNOUNCE, max_time=30),
     ]
 
 }
@@ -113,7 +112,7 @@ class TestTimer:
 
         for msgtype in TEST_MESSAGES:
             for msg in  TEST_MESSAGES[msgtype]:
-                org_msg = AccessMethods(id="TESTBRAND11314235241414", dns="dns1", dnssd_mdns="m1")
+                org_msg = AccessMethods(id="TESTBRAND11314235241414", dns="dns1", dns_sd_m_dns="m1")
                 recove_msg = ShipMessage.from_data(org_msg.get_msg_bytes())
 
                 assert org_msg == recove_msg
