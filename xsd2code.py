@@ -38,11 +38,11 @@ def xsd_to_pyton_type(xsd_type):
 # Section: 13.4.2
 def msg_group_value(group_name):
     if group_name == "MsgTypeControlGroup":
-        return "MSG_TYPE_CONTROL"
+        return "MessageType.MSG_TYPE_CONTROL"
     elif group_name == "MsgTypeDataGroup":
-        return "MSG_TYPE_DATA"
+        return "MessageType.MSG_TYPE_DATA"
     elif group_name == "MsgTypeEndGroup":
-        return "MSG_TYPE_END"
+        return "MessageType.MSG_TYPE_END"
 
 
 env = Environment(loader=FileSystemLoader("templates/"))
