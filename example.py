@@ -1,9 +1,11 @@
 import time
 from pathlib import Path
+from pprint import pprint
 from typing import cast
 
 import inquirer
 
+from ship.connection import ShipConnection
 from ship.mdns_announce import MdnsAnnounceService
 from ship.mdsn_scanner import MdnsScannerService
 
@@ -24,36 +26,30 @@ if __name__ == "__main__":
         runner.start()
 
         srv = MdnsScannerService()
-        srv = srv.search_devices(5)
-        devices = ["-- Query again --"]
-        for name, info in srv.items():
+        devices = srv.search_devices(5)
+        select_devices = ["-- Query again --"]
+        for device in devices:
 
-            print(f"Service {name} added, service info: {info}")
-            addresses = [f"{addr}:{cast(int, info.port)}" for addr in info.parsed_scoped_addresses()]
-            print(f"  Name: {name}")
-            print(f"  Addresses: {', '.join(addresses)}")
-            print(f"  Weight: {info.weight}, priority: {info.priority}")
-            print(f"  Server: {info.server}")
-            if info.properties:
-                print("  Properties are:")
-                for key, value in info.properties.items():
-                    print(f"    {key!r}: {value!r}")
-            else:
-                print("  No properties")
-
-            devices.append((f"{name}-{info.properties.get('ski')}",info))
+            select_devices.append((device.name, device))
 
         questions = [
             inquirer.List('device',
                           message="Which device do you want to connect with?",
-                          choices=devices
+                          choices=select_devices
                           ),
         ]
-        answers = inquirer.prompt(questions)
+        answer = inquirer.prompt(questions)
 
-        addresses = [f"{addr}:{cast(int, info.port)}" for addr in answers['device'].parsed_scoped_addresses()]
-        print(f"you have selected: {answers['device'].name} ski: {answers['device'].properties.get(b'ski')} Adresses: {', '.join(addresses)}")
-        #print(f"you have selected: {srv.items()[answers]}")
+        pprint(answer)
+
+        con = ShipConnection(device=answer["device"], client_key="key.priv", client_cert="key.cert")
+        # time.sleep(20)
+        # con = ShipConnection(device=devices[0], client_key="key.priv", client_cert="key.cert")
+
+
+        con.connect()
+
+
 
 
     finally:

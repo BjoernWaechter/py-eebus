@@ -1,21 +1,16 @@
 from __future__ import annotations
 
 import asyncio
-import logging
-import socket
 from pathlib import Path
 
-from zeroconf import IPVersion, Zeroconf, ServiceInfo
-from zeroconf.asyncio import AsyncServiceInfo, AsyncZeroconf
+from zeroconf import IPVersion, ServiceInfo
+from zeroconf.asyncio import AsyncZeroconf
 from cryptography import x509
 from cryptography.hazmat.backends import default_backend
 
 import socket
 import psutil
 import time
-import threading
-
-from announce import AsyncRunner
 
 
 def get_ip_addresses(family: socket.AddressFamily, interfaces=None):
@@ -47,10 +42,9 @@ class MdnsAnnounceService:
             ipv6s = list(get_ip_addresses(socket.AF_INET6, interfaces))
 
         cert = x509.load_pem_x509_certificate(tls_cert, default_backend())
-        ski = cert.extensions.get_extension_for_oid(x509.oid.ExtensionOID.SUBJECT_KEY_IDENTIFIER)
+        ski: x509.extensions.Extension = cert.extensions.get_extension_for_oid(x509.oid.ExtensionOID.SUBJECT_KEY_IDENTIFIER)
 
         ski_str = ski.value.digest.hex()
-        print(f"SKI: {ski_str}")
 
         mdns_properties = {
             "txtvers": "1",

@@ -9,13 +9,13 @@ schema = xmlschema.XMLSchema('xsd/EEBus_SHIP_TS_TransferProtocol.xsd')
 default_values = {
     "ConnectionHelloType.waiting": 60000,
     "MessageProtocolHandshakeType.version": '[{"major": 1}, {"minor": 0}]',
-    "MessageProtocolHandshakeType.formats": '[{"format": ["JSON-UTF8"]}]',
+    "MessageProtocolHandshakeType.formats": 'MessageProtocolFormatsType(format=[MessageProtocolFormatType("JSON-UTF8")])',
     "ProtocolIdType.protocolidtype": "'ee1.0'"
 }
 
 no_attr_name = {
-    "MessageProtocolFormatType",
-    "ProtocolIdType"
+    "ProtocolIdType",
+    "MessageProtocolFormatType"
 }
 
 
@@ -56,7 +56,6 @@ def msg_group_value(group_name):
 env = Environment(loader=FileSystemLoader("templates/"))
 
 template_enum = env.get_template("enums.py.jinja2")
-template_base_type = env.get_template("base_type.py.jinja2")
 template_message_type = env.get_template("message_type.py.jinja2")
 template_message = env.get_template("message.py.jinja2")
 
@@ -73,7 +72,7 @@ for ship_type in schema.types:
     if type_name == "XsdAtomicRestriction" and type_obj.enumeration:
         enum_types[ship_type] = {"enums": type_obj.enumeration}
     elif type_name == "XsdComplexType":
-        #print(type_obj.content.content)
+        print(type_name)
         members = [
             {
                 "name": m.local_name,
@@ -82,12 +81,14 @@ for ship_type in schema.types:
                 "is_array": True if m.max_occurs is None or m.max_occurs > 1 else False,
                 "is_optional": True if m.min_occurs == 0 else False,
                 "default_value": default_values.get(f"{ship_type}.{m.local_name.lower()}"),
+                "source": "XsdComplexType"
             }
             for m in type_obj.content.content]
 
-        all_types[ship_type] = {"members": members, "no_attrib_name": True if ship_type in  no_attr_name else False}
+        all_types[ship_type] = {"members": members, "no_attrib_name": True if ship_type in no_attr_name else False}
 
     elif type_name == "XsdAtomicRestriction":
+        print(ship_type)
         members = [{
                 "name": type_obj.local_name,
                 "snake_case_name": camel_to_snake(type_obj.local_name),
@@ -95,9 +96,9 @@ for ship_type in schema.types:
                 "is_array": False,
                 "is_optional": False,
                 "default_value": default_values.get(f"{ship_type}.{type_obj.local_name.lower()}"),
+                "source": "XsdAtomicRestriction"
             }]
         all_types[ship_type] = {"members": members, "no_attrib_name": True if ship_type in no_attr_name else False}
-
 
         # print(f"{ship_type}: {members}")
     else:
@@ -115,7 +116,7 @@ elements = []
 msg_type_names = []
 for ele in schema.elements:
     ele_obj = schema.elements[ele]
-    print(f"{ele_obj.local_name} - {groups[ele_obj.local_name]}({ele_obj.min_occurs}/{ele_obj.max_occurs})")
+    #print(f"{ele_obj.local_name} - {groups[ele_obj.local_name]}({ele_obj.min_occurs}/{ele_obj.max_occurs})")
     elements.append({
         "name": ele_obj.local_name[0].upper() + ele_obj.local_name[1:],
         "msg_name": ele_obj.local_name,
@@ -127,7 +128,8 @@ for ele in schema.elements:
             "data_type": m["data_type"],
             "default_value": m["default_value"],
             "is_array": m["is_array"],
-            "is_optional": m["is_optional"]
+            "is_optional": m["is_optional"],
+            "source": "elements"
         } for m in all_types[ele_obj.type.local_name]["members"] ]
     })
 
@@ -143,10 +145,17 @@ with open("ship/enums.py", "w") as text_file:
     text_file.write(template_enum.render(enum_types=enum_types))
 
 with open("ship/base_type.py", "w") as text_file:
-    text_file.write(template_base_type.render(base_types=base_types))
+    text_file.write(template_message_type.render(
+        ship_types=base_types,
+        is_ship_msg_type=False,
+        imports=[]))
 
 with open("ship/message_type.py", "w") as text_file:
-    text_file.write(template_message_type.render(msg_types=msg_types))
+    text_file.write(template_message_type.render(
+        ship_types=msg_types,
+        is_ship_msg_type=True,
+        imports=["from ship.base_type import *"]
+    ))
 
 with open("ship/message.py", "w") as text_file:
     text_file.write(template_message.render(elements=elements))

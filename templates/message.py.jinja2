@@ -32,10 +32,12 @@ class ShipMessage:
     def from_data(cls, bin_msg):
         first_byte = bin_msg[0:1]
         msg_type = MessageType(first_byte)
-        data = json.loads(bin_msg[1:].decode("utf8"))
-        root_tag = list(data.keys())[0]
-
-        msg = ROOT_TAG_2_TYPE[root_tag].from_data(data[root_tag])
+        if msg_type != MessageType.MSG_TYPE_INIT:
+            data = json.loads(bin_msg[1:].decode("utf8"))
+            root_tag = list(data.keys())[0]
+            msg = ROOT_TAG_2_TYPE[root_tag].from_data(data[root_tag])
+        else:
+            msg = Cmi()
 
         if msg_type != msg.get_type():
             raise RuntimeError("Message type of restored message does not match the type of the parsed one.")
@@ -47,6 +49,9 @@ class ShipMessage:
             return json.dumps({self._root_tag: self._msg.get_data()}, separators=(',', ':'), default=get_object_data)
         else:
             return ""
+
+    def __str__(self):
+        return f"{self.__class__.__name__}({int.from_bytes(self._msg_type, 'big')}, {self._msg})"
 
 
 class Cmi(ShipMessage):
@@ -68,6 +73,7 @@ class Cmi(ShipMessage):
     def get_data(self):
         return None
 
+
 {% for ele in elements %}
 class {{ ele.name }}(ShipMessage):
     def __init__(
@@ -88,7 +94,7 @@ class {{ ele.name }}(ShipMessage):
     def from_data(cls, data):
         data_dict = array_2_dict(data)
         return cls({% for m in ele.members %}
-            {{ m.snake_case_name }}=data_dict['{{ m.name }}'], {% endfor %}
+            {{ m.snake_case_name }}=data_dict.get('{{ m.name }}'), {% endfor %}
         )
 
 {% endfor %}

@@ -32,10 +32,12 @@ class ShipMessage:
     def from_data(cls, bin_msg):
         first_byte = bin_msg[0:1]
         msg_type = MessageType(first_byte)
-        data = json.loads(bin_msg[1:].decode("utf8"))
-        root_tag = list(data.keys())[0]
-
-        msg = ROOT_TAG_2_TYPE[root_tag].from_data(data[root_tag])
+        if msg_type != MessageType.MSG_TYPE_INIT:
+            data = json.loads(bin_msg[1:].decode("utf8"))
+            root_tag = list(data.keys())[0]
+            msg = ROOT_TAG_2_TYPE[root_tag].from_data(data[root_tag])
+        else:
+            msg = Cmi()
 
         if msg_type != msg.get_type():
             raise RuntimeError("Message type of restored message does not match the type of the parsed one.")
@@ -47,6 +49,9 @@ class ShipMessage:
             return json.dumps({self._root_tag: self._msg.get_data()}, separators=(',', ':'), default=get_object_data)
         else:
             return ""
+
+    def __str__(self):
+        return f"{self.__class__.__name__}({int.from_bytes(self._msg_type, 'big')}, {self._msg})"
 
 
 class Cmi(ShipMessage):
@@ -67,6 +72,7 @@ class Cmi(ShipMessage):
 
     def get_data(self):
         return None
+
 
 
 class ConnectionHello(ShipMessage):
@@ -92,9 +98,9 @@ class ConnectionHello(ShipMessage):
     def from_data(cls, data):
         data_dict = array_2_dict(data)
         return cls(
-            phase=data_dict['phase'], 
-            waiting=data_dict['waiting'], 
-            prolongation_request=data_dict['prolongationRequest'], 
+            phase=data_dict.get('phase'), 
+            waiting=data_dict.get('waiting'), 
+            prolongation_request=data_dict.get('prolongationRequest'), 
         )
 
 
@@ -110,7 +116,7 @@ class MessageProtocolHandshake(ShipMessage):
         if version is None:
             version = [{"major": 1}, {"minor": 0}]
         if formats is None:
-            formats = [{"format": ["JSON-UTF8"]}]
+            formats = MessageProtocolFormatsType(format=[MessageProtocolFormatType("JSON-UTF8")])
         self._msg_type = MessageType.MSG_TYPE_CONTROL
         self._root_tag = "messageProtocolHandshake"
         self._msg = MessageProtocolHandshakeType(
@@ -123,9 +129,9 @@ class MessageProtocolHandshake(ShipMessage):
     def from_data(cls, data):
         data_dict = array_2_dict(data)
         return cls(
-            handshake_type=data_dict['handshakeType'], 
-            version=data_dict['version'], 
-            formats=data_dict['formats'], 
+            handshake_type=data_dict.get('handshakeType'), 
+            version=data_dict.get('version'), 
+            formats=data_dict.get('formats'), 
         )
 
 
@@ -146,7 +152,7 @@ class MessageProtocolHandshakeError(ShipMessage):
     def from_data(cls, data):
         data_dict = array_2_dict(data)
         return cls(
-            error=data_dict['error'], 
+            error=data_dict.get('error'), 
         )
 
 
@@ -169,8 +175,8 @@ class ConnectionPinState(ShipMessage):
     def from_data(cls, data):
         data_dict = array_2_dict(data)
         return cls(
-            pin_state=data_dict['pinState'], 
-            input_permission=data_dict['inputPermission'], 
+            pin_state=data_dict.get('pinState'), 
+            input_permission=data_dict.get('inputPermission'), 
         )
 
 
@@ -191,7 +197,7 @@ class ConnectionPinInput(ShipMessage):
     def from_data(cls, data):
         data_dict = array_2_dict(data)
         return cls(
-            pin=data_dict['pin'], 
+            pin=data_dict.get('pin'), 
         )
 
 
@@ -212,7 +218,7 @@ class ConnectionPinError(ShipMessage):
     def from_data(cls, data):
         data_dict = array_2_dict(data)
         return cls(
-            error=data_dict['error'], 
+            error=data_dict.get('error'), 
         )
 
 
@@ -237,9 +243,9 @@ class Data(ShipMessage):
     def from_data(cls, data):
         data_dict = array_2_dict(data)
         return cls(
-            header=data_dict['header'], 
-            payload=data_dict['payload'], 
-            extension=data_dict['extension'], 
+            header=data_dict.get('header'), 
+            payload=data_dict.get('payload'), 
+            extension=data_dict.get('extension'), 
         )
 
 
@@ -264,9 +270,9 @@ class ConnectionClose(ShipMessage):
     def from_data(cls, data):
         data_dict = array_2_dict(data)
         return cls(
-            phase=data_dict['phase'], 
-            max_time=data_dict['maxTime'], 
-            reason=data_dict['reason'], 
+            phase=data_dict.get('phase'), 
+            max_time=data_dict.get('maxTime'), 
+            reason=data_dict.get('reason'), 
         )
 
 
@@ -309,9 +315,9 @@ class AccessMethods(ShipMessage):
     def from_data(cls, data):
         data_dict = array_2_dict(data)
         return cls(
-            id=data_dict['id'], 
-            dns_sd_m_dns=data_dict['dnsSd_mDns'], 
-            dns=data_dict['dns'], 
+            id=data_dict.get('id'), 
+            dns_sd_m_dns=data_dict.get('dnsSd_mDns'), 
+            dns=data_dict.get('dns'), 
         )
 
 

@@ -1,5 +1,5 @@
-from ship.base_type import *
-from ship.enums import *
+{% for imp in imports %}{{ imp }}
+{% endfor %}from ship.enums import *
 import json
 
 MSG_TYPE_INIT = b'\x00\x00'
@@ -8,32 +8,47 @@ MSG_TYPE_DATA = b'\x02'
 MSG_TYPE_END = b'\x03'
 
 
-class ShipMessageType:
+{% if is_ship_msg_type %}class ShipMessageType:
     def __init__(
         self
     ):
-        self.root_tag = ""
-        self.msg_type = b'\x00'
+        pass
 
     def get_data(self):
         raise NotImplementedError("get_data has to be implemented")
 
-{% for type_name, prop in msg_types.items() %}
-class {{ type_name }}(ShipMessageType):
+    def __str__(self):
+        pass
+{% endif %}
+{% for type_name, prop in ship_types.items() %}
+class {{ type_name }}{% if is_ship_msg_type %}(ShipMessageType){% endif %}:
     def __init__(
-        self,
-{% for m in prop.members %}        {{ m.snake_case_name }}{% if m.data_type %}: {% if m.is_array %}list[{% endif %}{{ m.data_type }}{% if m.is_array %}]{% endif %}{% endif %}{% if m.is_optional %}=None{% endif %},
+            self,
+{% for m in prop.members %}            {{ m.snake_case_name }}{% if m.data_type %}: {% if m.is_array %}list[{% endif %}{{ m.data_type }}{% if m.is_array %}]{% endif %}{% endif %}{% if m.default_value or m.is_optional %} = None{% endif %},
 {% endfor %}    ):
         super().__init__()
+        {% for m in prop.members %}{% if m.default_value %}
+        if {{ m.snake_case_name }} is None:
+            {{ m.snake_case_name }} = {{ m.default_value }}{% endif %}{% endfor %}
 {% for m in prop.members %}        self.{{ m.snake_case_name }} = {{ m.snake_case_name }}
 {% endfor %}
     def get_data(self):
         msg_data = {% if not prop.no_attrib_name %}[]
-        {% else%}self.{{ prop.members[0].name }}{% endif %}
+        {% else %}self.{% for m in prop.members %}{{ m.snake_case_name }}{% endfor %}{% endif %}
         {% if not prop.no_attrib_name %}{% for m in prop.members %}if self.{{ m.snake_case_name }}:
             msg_data.append({"{{ m.name }}": self.{{ m.snake_case_name }}})
         {% endfor %}
-        {% endif %}
-        return msg_data
+        {% endif %}return msg_data
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        {% for m in prop.members %}if self.{{ m.snake_case_name }}:
+            result_str += f"{sep}{% if not prop.no_attrib_name %}{{ m.name }}: {% endif %}{% if m.is_array %}{', '.join([str(x) for x in self.{{ m.snake_case_name }}])}{% else %}{self.{{ m.snake_case_name }}}{% endif %}"{% if not loop.last %}
+            sep = ", "{% endif %}
+        {% endfor %}
+        return result_str
 
 {% endfor %}
+
+

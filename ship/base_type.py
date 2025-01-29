@@ -7,6 +7,8 @@ MSG_TYPE_DATA = b'\x02'
 MSG_TYPE_END = b'\x03'
 
 
+
+
 class MessageProtocolFormatType:
     def __init__(
             self,
@@ -19,6 +21,14 @@ class MessageProtocolFormatType:
     def get_data(self):
         msg_data = self.message_protocol_format_type
         return msg_data
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        if self.message_protocol_format_type:
+            result_str += f"{sep}{self.message_protocol_format_type}"
+        
+        return result_str
 
 
 class MessageProtocolHandshakeErrorErrorType:
@@ -38,6 +48,14 @@ class MessageProtocolHandshakeErrorErrorType:
         
         return msg_data
 
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        if self.message_protocol_handshake_error_error_type:
+            result_str += f"{sep}MessageProtocolHandshakeErrorErrorType: {self.message_protocol_handshake_error_error_type}"
+        
+        return result_str
+
 
 class PinValueType:
     def __init__(
@@ -55,6 +73,14 @@ class PinValueType:
             msg_data.append({"PinValueType": self.pin_value_type})
         
         return msg_data
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        if self.pin_value_type:
+            result_str += f"{sep}PinValueType: {self.pin_value_type}"
+        
+        return result_str
 
 
 class ConnectionPinErrorErrorType:
@@ -74,6 +100,14 @@ class ConnectionPinErrorErrorType:
         
         return msg_data
 
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        if self.connection_pin_error_error_type:
+            result_str += f"{sep}ConnectionPinErrorErrorType: {self.connection_pin_error_error_type}"
+        
+        return result_str
+
 
 class ProtocolIdType:
     def __init__(
@@ -81,6 +115,7 @@ class ProtocolIdType:
             protocol_id_type: str = None,
     ):
         super().__init__()
+        
         if protocol_id_type is None:
             protocol_id_type = 'ee1.0'
         self.protocol_id_type = protocol_id_type
@@ -88,6 +123,14 @@ class ProtocolIdType:
     def get_data(self):
         msg_data = self.protocol_id_type
         return msg_data
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        if self.protocol_id_type:
+            result_str += f"{sep}{self.protocol_id_type}"
+        
+        return result_str
 
 
 class MessageProtocolFormatsType:
@@ -107,6 +150,14 @@ class MessageProtocolFormatsType:
         
         return msg_data
 
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        if self.format:
+            result_str += f"{sep}format: {', '.join([str(x) for x in self.format])}"
+        
+        return result_str
+
 
 class HeaderType:
     def __init__(
@@ -124,6 +175,14 @@ class HeaderType:
             msg_data.append({"protocolId": self.protocol_id})
         
         return msg_data
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        if self.protocol_id:
+            result_str += f"{sep}protocolId: {self.protocol_id}"
+        
+        return result_str
 
 
 class ExtensionType:
@@ -150,4 +209,20 @@ class ExtensionType:
             msg_data.append({"string": self.string})
         
         return msg_data
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        if self.extension_id:
+            result_str += f"{sep}extensionId: {self.extension_id}"
+            sep = ", "
+        if self.binary:
+            result_str += f"{sep}binary: {self.binary}"
+            sep = ", "
+        if self.string:
+            result_str += f"{sep}string: {self.string}"
+        
+        return result_str
+
+
 

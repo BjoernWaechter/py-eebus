@@ -12,11 +12,16 @@ TEST_MESSAGES = {
         ConnectionHello(phase=ConnectionHelloPhaseType.READY, waiting=1000),
     ],
     "MessageProtocolHandshake": [
-        MessageProtocolHandshake(handshake_type=ProtocolHandshakeTypeType.ANNOUNCEMAX),
-        MessageProtocolHandshake(handshake_type=ProtocolHandshakeTypeType.SELECT, formats=MessageProtocolFormatsType(
-            format=[MessageProtocolFormatType("JSON-UTF16")])),
+        MessageProtocolHandshake(
+            handshake_type=ProtocolHandshakeTypeType.ANNOUNCEMAX,
+            formats=MessageProtocolFormatsType(format=[MessageProtocolFormatType("JSON-UTF8")])),
+        MessageProtocolHandshake(
+            handshake_type=ProtocolHandshakeTypeType.SELECT,
+            formats=MessageProtocolFormatsType(format=[MessageProtocolFormatType("JSON-UTF16")])),
         MessageProtocolHandshake(handshake_type=ProtocolHandshakeTypeType.ANNOUNCEMAX,
-                                 version=[{"major": 2}, {"minor": 1}])
+                                 version=[{"major": 2}, {"minor": 1}]),
+        MessageProtocolHandshake(handshake_type=ProtocolHandshakeTypeType.ANNOUNCEMAX),
+        MessageProtocolHandshake(handshake_type=ProtocolHandshakeTypeType.SELECT),
     ],
     "AccessMethods": [
         AccessMethods(id="TESTBRAND11314235241414"),
@@ -55,31 +60,43 @@ class TestTimer:
         msgs = TEST_MESSAGES["ConnectionHello"]
 
         assert msgs[0].get_msg_bytes() == b'\x01{"connectionHello":[{"phase":"ready"},{"waiting":60000}]}'
-        assert msgs[
-                   1].get_msg_bytes() == b'\x01{"connectionHello":[{"phase":"pending"},{"waiting":60000},{"prolongationRequest":true}]}'
+        assert str(msgs[0]) == 'ConnectionHello(1, phase: ready, waiting: 60000)'
+
+        assert msgs[1].get_msg_bytes() == b'\x01{"connectionHello":[{"phase":"pending"},{"waiting":60000},{"prolongationRequest":true}]}'
+        assert str(msgs[1]) == 'ConnectionHello(1, phase: pending, waiting: 60000, prolongationRequest: True)'
+
         assert msgs[2].get_msg_bytes() == b'\x01{"connectionHello":[{"phase":"aborted"},{"waiting":60000}]}'
+        assert str(msgs[2]) == 'ConnectionHello(1, phase: aborted, waiting: 60000)'
+
         assert msgs[3].get_msg_bytes() == b'\x01{"connectionHello":[{"phase":"ready"},{"waiting":1000}]}'
+        assert str(msgs[3]) == 'ConnectionHello(1, phase: ready, waiting: 1000)'
 
     def test_init_messageprotocolhandshake(self):
         msgs = TEST_MESSAGES["MessageProtocolHandshake"]
 
-        assert msgs[
-                   0].get_msg_bytes() == b'\x01{"messageProtocolHandshake":[{"handshakeType":"announceMax"},{"version":[{"major":1},' \
+        assert msgs[0].get_msg_bytes() == b'\x01{"messageProtocolHandshake":[{"handshakeType":"announceMax"},{"version":[{"major":1},' \
                                          b'{"minor":0}]},{"formats":[{"format":["JSON-UTF8"]}]}]}'
-        assert msgs[
-                   1].get_msg_bytes() == b'\x01{"messageProtocolHandshake":[{"handshakeType":"select"},{"version":[{"major":1},' \
+        assert str(msgs[0]) == "MessageProtocolHandshake(1, handshakeType: announceMax, version: [{'major': 1}, {'minor': 0}], formats: format: JSON-UTF8)"
+
+        assert msgs[1].get_msg_bytes() == b'\x01{"messageProtocolHandshake":[{"handshakeType":"select"},{"version":[{"major":1},' \
                                          b'{"minor":0}]},{"formats":[{"format":["JSON-UTF16"]}]}]}'
-        assert msgs[
-                   2].get_msg_bytes() == (b'\x01{"messageProtocolHandshake":[{"handshakeType":"announceMax"},'
+        assert str(msgs[1]) == "MessageProtocolHandshake(1, handshakeType: select, version: [{'major': 1}, {'minor': 0}], formats: format: JSON-UTF16)"
+
+        assert msgs[2].get_msg_bytes() == (b'\x01{"messageProtocolHandshake":[{"handshakeType":"announceMax"},'
                                           b'{"version":[{"major":2},{"minor":1}]},{"formats":[{"format":["JSON-UTF8"]}]}]}')
+        assert str(msgs[2]) == "MessageProtocolHandshake(1, handshakeType: announceMax, version: [{'major': 2}, {'minor': 1}], formats: format: JSON-UTF8)"
+
+        assert msgs[3].get_msg_bytes() == b'\x01{"messageProtocolHandshake":[{"handshakeType":"announceMax"},{"version":[{"major":1},' \
+                                         b'{"minor":0}]},{"formats":[{"format":["JSON-UTF8"]}]}]}'
+
+        assert str(msgs[3]) == "MessageProtocolHandshake(1, handshakeType: announceMax, version: [{'major': 1}, {'minor': 0}], formats: format: JSON-UTF8)"
 
     def test_init_accessmethods(self):
         msgs = TEST_MESSAGES["AccessMethods"]
 
         assert msgs[0].get_msg_bytes() == b'\x01{"accessMethods":[{"id":"TESTBRAND11314235241414"}]}'
         assert msgs[1].get_msg_bytes() == b'\x01{"accessMethods":[{"id":"TESTBRAND11314235241414"},{"dns":"dns1"}]}'
-        assert msgs[
-                   2].get_msg_bytes() == (b'\x01{"accessMethods":[{"id":"TESTBRAND11314235241414"},'
+        assert msgs[2].get_msg_bytes() == (b'\x01{"accessMethods":[{"id":"TESTBRAND11314235241414"},'
                                           b'{"dnsSd_mDns":"m1"},{"dns":"dns1"}]}')
 
     def test_init_connectionpinstate(self):
@@ -111,8 +128,7 @@ class TestTimer:
     def test_message_parser(self):
 
         for msgtype in TEST_MESSAGES:
-            for msg in  TEST_MESSAGES[msgtype]:
-                org_msg = AccessMethods(id="TESTBRAND11314235241414", dns="dns1", dns_sd_m_dns="m1")
-                recove_msg = ShipMessage.from_data(org_msg.get_msg_bytes())
+            for org_msg in TEST_MESSAGES[msgtype]:
+                recovered_msg = ShipMessage.from_data(org_msg.get_msg_bytes())
 
-                assert org_msg == recove_msg
+                assert org_msg == recovered_msg
