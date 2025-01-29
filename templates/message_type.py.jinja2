@@ -1,6 +1,5 @@
 {% for imp in imports %}{{ imp }}
-{% endfor %}from ship.enums import *
-import json
+{% endfor %}from types import NoneType
 
 MSG_TYPE_INIT = b'\x00\x00'
 MSG_TYPE_CONTROL = b'\x01'
@@ -8,7 +7,11 @@ MSG_TYPE_DATA = b'\x02'
 MSG_TYPE_END = b'\x03'
 
 
-{% if is_ship_msg_type %}class ShipMessageType:
+def array_2_dict(arr):
+    return {list(v.keys())[0]:v[list(v.keys())[0]] for v in arr}
+
+{% if is_ship_msg_type %}
+class ShipMessageType:
     def __init__(
         self
     ):
@@ -31,11 +34,14 @@ class {{ type_name }}{% if is_ship_msg_type %}(ShipMessageType){% endif %}:
         if {{ m.snake_case_name }} is None:
             {{ m.snake_case_name }} = {{ m.default_value }}{% endif %}{% endfor %}
 {% for m in prop.members %}        self.{{ m.snake_case_name }} = {{ m.snake_case_name }}
-{% endfor %}
+{% endfor %}{% for m in prop.members %}{% if m.data_type != "" %}
+        if type(self.{{ m.snake_case_name }}) is not {% if m.is_array %}list{% else %}{{ m.data_type }}{% if m.is_optional %}{% endif %} and type(self.{{ m.snake_case_name }}) is not NoneType{% endif %}:
+            raise TypeError("{{ m.snake_case_name }} is not of type {{ m.data_type }}")
+        {% endif %}{% endfor %}
     def get_data(self):
         msg_data = {% if not prop.no_attrib_name %}[]
         {% else %}self.{% for m in prop.members %}{{ m.snake_case_name }}{% endfor %}{% endif %}
-        {% if not prop.no_attrib_name %}{% for m in prop.members %}if self.{{ m.snake_case_name }}:
+        {% if not prop.no_attrib_name %}{% for m in prop.members %}if self.{{ m.snake_case_name }} is not None:
             msg_data.append({"{{ m.name }}": self.{{ m.snake_case_name }}})
         {% endfor %}
         {% endif %}return msg_data
@@ -43,11 +49,24 @@ class {{ type_name }}{% if is_ship_msg_type %}(ShipMessageType){% endif %}:
     def __str__(self):
         result_str = ""
         sep = ""
-        {% for m in prop.members %}if self.{{ m.snake_case_name }}:
+        {% for m in prop.members %}if self.{{ m.snake_case_name }} is not None:
             result_str += f"{sep}{% if not prop.no_attrib_name %}{{ m.name }}: {% endif %}{% if m.is_array %}{', '.join([str(x) for x in self.{{ m.snake_case_name }}])}{% else %}{self.{{ m.snake_case_name }}}{% endif %}"{% if not loop.last %}
             sep = ", "{% endif %}
         {% endfor %}
         return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls({% for m in prop.members %}
+                {{ m.snake_case_name }}={% if m.is_array %}[{{ m.data_type }}.from_data(x) for x in data_dict.get('{{ m.name }}')]{% else %}
+                {% if m.is_enum %}{{ m.data_type }}({% elif m.type_simple == False %}{{ m.data_type }}.from_data({% endif %}data_dict.get('{{ m.name }}'){% if m.data_type != "" %}{% if m.type_simple == False %}){% endif %}{% endif %}, {% endif %}{% endfor %}
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
 
 {% endfor %}
 

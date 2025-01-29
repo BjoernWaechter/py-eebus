@@ -8,7 +8,7 @@ schema = xmlschema.XMLSchema('xsd/EEBus_SHIP_TS_TransferProtocol.xsd')
 
 default_values = {
     "ConnectionHelloType.waiting": 60000,
-    "MessageProtocolHandshakeType.version": '[{"major": 1}, {"minor": 0}]',
+    "MessageProtocolHandshakeType.version": 'Version(major=1, minor=0)',
     "MessageProtocolHandshakeType.formats": 'MessageProtocolFormatsType(format=[MessageProtocolFormatType("JSON-UTF8")])',
     "ProtocolIdType.protocolidtype": "'ee1.0'"
 }
@@ -18,29 +18,37 @@ no_attr_name = {
     "MessageProtocolFormatType"
 }
 
+attr_2_type = {
+    "MessageProtocolHandshakeType.version": "Version",
+    "AccessMethodsType.dnsSd_mDns": "DnsSd_MDns",
+    "AccessMethodsType.dns": "Dns"
+
+}
 
 def camel_to_snake(name):
     name = re.sub('(.)([A-Z][a-z]+)', r'\1_\2', name)
     return re.sub('([a-z0-9])([A-Z])', r'\1_\2', name).lower()
 
 
-def xsd_to_pyton_type(xsd_type):
+def xsd_to_python_type(xsd_type):
     if xsd_type == "xs:unsignedInt":
-        return "int"
+        return {"type": "int", "simple": True}
     elif xsd_type == "xs:boolean":
-        return "bool"
+        return {"type": "bool", "simple": True}
     elif xsd_type == "xs:string":
-        return "str"
+        return {"type": "str", "simple": True}
     elif xsd_type == "xs:anyType":
-        return ""
+        return {"type": "", "simple": True}
     elif xsd_type == "xs:decimal":
-        return "float"
+        return {"type": "float", "simple": True}
     elif xsd_type == "xs:hexBinary":
-        return "str"
+        return {"type": "str", "simple": True}
+    if xsd_type == "xs:unsignedShort":
+        return {"type": "int", "simple": True}
     elif xsd_type is None:
-        return ""
+        return {"type": "", "simple": True}
     else:
-        return f"{xsd_type.replace('ship:','')}"
+        return {"type": f"{xsd_type.replace('ship:','')}", "simple": False}
 
 
 # Section: 13.4.2
@@ -72,31 +80,65 @@ for ship_type in schema.types:
     if type_name == "XsdAtomicRestriction" and type_obj.enumeration:
         enum_types[ship_type] = {"enums": type_obj.enumeration}
     elif type_name == "XsdComplexType":
-        print(type_name)
-        members = [
-            {
-                "name": m.local_name,
-                "snake_case_name": camel_to_snake(m.local_name),
-                "data_type": xsd_to_pyton_type(m.type.display_name),
-                "is_array": True if m.max_occurs is None or m.max_occurs > 1 else False,
-                "is_optional": True if m.min_occurs == 0 else False,
-                "default_value": default_values.get(f"{ship_type}.{m.local_name.lower()}"),
-                "source": "XsdComplexType"
-            }
-            for m in type_obj.content.content]
+        print(f"{ship_type}")
+
+        members = []
+        for m in type_obj.content.content:
+            print(f"  {m.local_name} - {m.type.display_name}")
+            sub_ship_type = None
+            if hasattr(m.type, "content") and not m.type.display_name:
+                print("   ---- subtype found")
+                sub_ship_type = attr_2_type[f"{ship_type}.{m.local_name}"]
+                sub_members = []
+                for sub_m in m.type.content.content:
+                    data_type = xsd_to_python_type(sub_m.type.display_name)
+                    sub_members.append(
+                        {
+                            "name": sub_m.local_name,
+                            "snake_case_name": camel_to_snake(sub_m.local_name),
+                            "data_type": data_type["type"],
+                            "is_array": True if sub_m.max_occurs is None or sub_m.max_occurs > 1 else False,
+                            "is_optional": True if sub_m.min_occurs == 0 else False,
+                            "default_value": default_values.get(f"{sub_ship_type}.{sub_m.local_name.lower()}"),
+                            "source": "XsdComplexType",
+                            "is_enum": True if data_type["type"] in enum_types else False,
+                            "type_simple": data_type["simple"]
+                        }
+                    )
+
+                all_types[sub_ship_type] = {"members": sub_members, "no_attrib_name": False}
+            else:
+                print(f"    {m.type.display_name}")
+            data_type = {"type": sub_ship_type, "simple": False} if sub_ship_type else xsd_to_python_type(m.type.display_name)
+            members.append(
+                {
+                    "name": m.local_name,
+                    "snake_case_name": camel_to_snake(m.local_name),
+                    "data_type": data_type["type"],
+                    "is_array": True if m.max_occurs is None or m.max_occurs > 1 else False,
+                    "is_optional": True if m.min_occurs == 0 else False,
+                    "default_value": default_values.get(f"{ship_type}.{m.local_name.lower()}"),
+                    "source": "XsdComplexType",
+                    "is_enum": True if data_type["type"] in enum_types else False,
+                    "type_simple": data_type["simple"]
+                }
+            )
 
         all_types[ship_type] = {"members": members, "no_attrib_name": True if ship_type in no_attr_name else False}
 
     elif type_name == "XsdAtomicRestriction":
-        print(ship_type)
+        #print(ship_type)
+        data_type = xsd_to_python_type(type_obj.primitive_type.display_name)
         members = [{
                 "name": type_obj.local_name,
                 "snake_case_name": camel_to_snake(type_obj.local_name),
-                "data_type": xsd_to_pyton_type(type_obj.primitive_type.display_name),
+                "data_type": data_type["type"],
                 "is_array": False,
                 "is_optional": False,
                 "default_value": default_values.get(f"{ship_type}.{type_obj.local_name.lower()}"),
-                "source": "XsdAtomicRestriction"
+                "source": "XsdAtomicRestriction",
+                "is_enum": True if type_obj.primitive_type.display_name in enum_types else False,
+                "type_simple": data_type["simple"]
             }]
         all_types[ship_type] = {"members": members, "no_attrib_name": True if ship_type in no_attr_name else False}
 
@@ -117,21 +159,31 @@ msg_type_names = []
 for ele in schema.elements:
     ele_obj = schema.elements[ele]
     #print(f"{ele_obj.local_name} - {groups[ele_obj.local_name]}({ele_obj.min_occurs}/{ele_obj.max_occurs})")
-    elements.append({
-        "name": ele_obj.local_name[0].upper() + ele_obj.local_name[1:],
-        "msg_name": ele_obj.local_name,
-        "data_type": ele_obj.type.local_name,
-        "msg_type_numeric": msg_group_value(groups[ele_obj.local_name]),
-        "members": [{
+
+    members = []
+    for m in all_types[ele_obj.type.local_name]["members"]:
+        members.append({
             "name": m["name"],
             "snake_case_name": camel_to_snake(m["name"]),
             "data_type": m["data_type"],
             "default_value": m["default_value"],
             "is_array": m["is_array"],
             "is_optional": m["is_optional"],
-            "source": "elements"
-        } for m in all_types[ele_obj.type.local_name]["members"] ]
+            "source": "elements",
+            "is_enum": m["is_enum"],
+            "type_simple": m["type_simple"]
+        })
+
+    elements.append({
+        "name": ele_obj.local_name[0].upper() + ele_obj.local_name[1:],
+        "msg_name": ele_obj.local_name,
+        "data_type": ele_obj.type.local_name,
+        "msg_type_numeric": msg_group_value(groups[ele_obj.local_name]),
+        "members": members
     })
+
+
+
 
     msg_type_names.append(ele_obj.type.local_name)
 
@@ -154,7 +206,7 @@ with open("ship/message_type.py", "w") as text_file:
     text_file.write(template_message_type.render(
         ship_types=msg_types,
         is_ship_msg_type=True,
-        imports=["from ship.base_type import *"]
+        imports=["from ship.base_type import *","from ship.enums import *"]
     ))
 
 with open("ship/message.py", "w") as text_file:

@@ -19,14 +19,14 @@ TEST_MESSAGES = {
             handshake_type=ProtocolHandshakeTypeType.SELECT,
             formats=MessageProtocolFormatsType(format=[MessageProtocolFormatType("JSON-UTF16")])),
         MessageProtocolHandshake(handshake_type=ProtocolHandshakeTypeType.ANNOUNCEMAX,
-                                 version=[{"major": 2}, {"minor": 1}]),
+                                 version=Version(major=2, minor=1)),
         MessageProtocolHandshake(handshake_type=ProtocolHandshakeTypeType.ANNOUNCEMAX),
         MessageProtocolHandshake(handshake_type=ProtocolHandshakeTypeType.SELECT),
     ],
     "AccessMethods": [
         AccessMethods(id="TESTBRAND11314235241414"),
-        AccessMethods(id="TESTBRAND11314235241414", dns="dns1"),
-        AccessMethods(id="TESTBRAND11314235241414", dns="dns1", dns_sd_m_dns="m1"),
+        AccessMethods(id="TESTBRAND11314235241414", dns=Dns(uri="dns1")),
+        AccessMethods(id="TESTBRAND11314235241414", dns=Dns(uri="dns1"), dns_sd_m_dns=DnsSd_MDns()),
     ],
     "ConnectionPinState": [
         ConnectionPinState(PinStateType.NONE),
@@ -76,28 +76,27 @@ class TestTimer:
 
         assert msgs[0].get_msg_bytes() == b'\x01{"messageProtocolHandshake":[{"handshakeType":"announceMax"},{"version":[{"major":1},' \
                                          b'{"minor":0}]},{"formats":[{"format":["JSON-UTF8"]}]}]}'
-        assert str(msgs[0]) == "MessageProtocolHandshake(1, handshakeType: announceMax, version: [{'major': 1}, {'minor': 0}], formats: format: JSON-UTF8)"
+        assert str(msgs[0]) == "MessageProtocolHandshake(1, handshakeType: announceMax, version: major: 1, minor: 0, formats: format: JSON-UTF8)"
 
         assert msgs[1].get_msg_bytes() == b'\x01{"messageProtocolHandshake":[{"handshakeType":"select"},{"version":[{"major":1},' \
                                          b'{"minor":0}]},{"formats":[{"format":["JSON-UTF16"]}]}]}'
-        assert str(msgs[1]) == "MessageProtocolHandshake(1, handshakeType: select, version: [{'major': 1}, {'minor': 0}], formats: format: JSON-UTF16)"
+        assert str(msgs[1]) == "MessageProtocolHandshake(1, handshakeType: select, version: major: 1, minor: 0, formats: format: JSON-UTF16)"
 
         assert msgs[2].get_msg_bytes() == (b'\x01{"messageProtocolHandshake":[{"handshakeType":"announceMax"},'
                                           b'{"version":[{"major":2},{"minor":1}]},{"formats":[{"format":["JSON-UTF8"]}]}]}')
-        assert str(msgs[2]) == "MessageProtocolHandshake(1, handshakeType: announceMax, version: [{'major': 2}, {'minor': 1}], formats: format: JSON-UTF8)"
+        assert str(msgs[2]) == "MessageProtocolHandshake(1, handshakeType: announceMax, version: major: 2, minor: 1, formats: format: JSON-UTF8)"
 
         assert msgs[3].get_msg_bytes() == b'\x01{"messageProtocolHandshake":[{"handshakeType":"announceMax"},{"version":[{"major":1},' \
                                          b'{"minor":0}]},{"formats":[{"format":["JSON-UTF8"]}]}]}'
 
-        assert str(msgs[3]) == "MessageProtocolHandshake(1, handshakeType: announceMax, version: [{'major': 1}, {'minor': 0}], formats: format: JSON-UTF8)"
+        assert str(msgs[3]) == "MessageProtocolHandshake(1, handshakeType: announceMax, version: major: 1, minor: 0, formats: format: JSON-UTF8)"
 
     def test_init_accessmethods(self):
         msgs = TEST_MESSAGES["AccessMethods"]
 
         assert msgs[0].get_msg_bytes() == b'\x01{"accessMethods":[{"id":"TESTBRAND11314235241414"}]}'
-        assert msgs[1].get_msg_bytes() == b'\x01{"accessMethods":[{"id":"TESTBRAND11314235241414"},{"dns":"dns1"}]}'
-        assert msgs[2].get_msg_bytes() == (b'\x01{"accessMethods":[{"id":"TESTBRAND11314235241414"},'
-                                          b'{"dnsSd_mDns":"m1"},{"dns":"dns1"}]}')
+        assert msgs[1].get_msg_bytes() == b'\x01{"accessMethods":[{"id":"TESTBRAND11314235241414"},{"dns":[{"uri":"dns1"}]}]}'
+        assert msgs[2].get_msg_bytes() == b'\x01{"accessMethods":[{"id":"TESTBRAND11314235241414"},{"dnsSd_mDns":[]},{"dns":[{"uri":"dns1"}]}]}'
 
     def test_init_connectionpinstate(self):
         msgs = TEST_MESSAGES["ConnectionPinState"]
@@ -124,11 +123,58 @@ class TestTimer:
         assert msgs[1].get_msg_bytes() == b'\x03{"connectionClose":[{"phase":"announce"}]}'
         assert msgs[2].get_msg_bytes() == b'\x03{"connectionClose":[{"phase":"announce"},{"maxTime":30}]}'
 
+    def test_parse_cmi(self):
+        msgs = TEST_MESSAGES["CMI"]
 
-    def test_message_parser(self):
+        for msg in msgs:
+            assert msg == ShipMessage.from_data(msg.get_msg_bytes())
 
-        for msgtype in TEST_MESSAGES:
-            for org_msg in TEST_MESSAGES[msgtype]:
-                recovered_msg = ShipMessage.from_data(org_msg.get_msg_bytes())
+    def test_parse_connectionhello(self):
+        msgs = TEST_MESSAGES["ConnectionHello"]
 
-                assert org_msg == recovered_msg
+        for msg in msgs:
+            assert msg == ShipMessage.from_data(msg.get_msg_bytes())
+
+    def test_parse_messageprotocolhandshake(self):
+        msgs = TEST_MESSAGES["MessageProtocolHandshake"]
+
+        for msg in msgs:
+            assert msg == ShipMessage.from_data(msg.get_msg_bytes())
+
+    def test_parse_accessmethods(self):
+        msgs = TEST_MESSAGES["AccessMethods"]
+
+        for msg in msgs:
+            assert msg == ShipMessage.from_data(msg.get_msg_bytes())
+
+    def test_parse_connectionpinstate(self):
+        msgs = TEST_MESSAGES["ConnectionPinState"]
+
+        for msg in msgs:
+            assert msg == ShipMessage.from_data(msg.get_msg_bytes())
+
+    def test_parse_accessmethodsrequest(self):
+        msgs = TEST_MESSAGES["AccessMethodsRequest"]
+
+        for msg in msgs:
+            assert msg == ShipMessage.from_data(msg.get_msg_bytes())
+
+    def test_parse_data(self):
+        msgs = TEST_MESSAGES["Data"]
+
+        for msg in msgs:
+            assert msg == ShipMessage.from_data(msg.get_msg_bytes())
+
+    def test_parse_connectionclose(self):
+        msgs = TEST_MESSAGES["ConnectionClose"]
+
+        for msg in msgs:
+            assert msg == ShipMessage.from_data(msg.get_msg_bytes())
+
+    # def test_message_parser(self):
+    #
+    #     for msgtype in TEST_MESSAGES:
+    #         for org_msg in TEST_MESSAGES[msgtype]:
+    #             recovered_msg = ShipMessage.from_data(org_msg.get_msg_bytes())
+    #
+    #             assert org_msg == recovered_msg

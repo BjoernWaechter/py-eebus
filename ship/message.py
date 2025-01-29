@@ -98,7 +98,7 @@ class ConnectionHello(ShipMessage):
     def from_data(cls, data):
         data_dict = array_2_dict(data)
         return cls(
-            phase=data_dict.get('phase'), 
+            phase=ConnectionHelloPhaseType(data_dict.get('phase')) if 'phase' in data_dict else None, 
             waiting=data_dict.get('waiting'), 
             prolongation_request=data_dict.get('prolongationRequest'), 
         )
@@ -108,13 +108,13 @@ class MessageProtocolHandshake(ShipMessage):
     def __init__(
             self,
             handshake_type: ProtocolHandshakeTypeType,
-            version = None,
+            version: Version = None,
             formats: MessageProtocolFormatsType = None,
     ):
         super().__init__()
         
         if version is None:
-            version = [{"major": 1}, {"minor": 0}]
+            version = Version(major=1, minor=0)
         if formats is None:
             formats = MessageProtocolFormatsType(format=[MessageProtocolFormatType("JSON-UTF8")])
         self._msg_type = MessageType.MSG_TYPE_CONTROL
@@ -129,9 +129,9 @@ class MessageProtocolHandshake(ShipMessage):
     def from_data(cls, data):
         data_dict = array_2_dict(data)
         return cls(
-            handshake_type=data_dict.get('handshakeType'), 
-            version=data_dict.get('version'), 
-            formats=data_dict.get('formats'), 
+            handshake_type=ProtocolHandshakeTypeType(data_dict.get('handshakeType')) if 'handshakeType' in data_dict else None, 
+            version=Version.from_data(data_dict.get('version')) if 'version' in data_dict else None, 
+            formats=MessageProtocolFormatsType.from_data(data_dict.get('formats')) if 'formats' in data_dict else None, 
         )
 
 
@@ -152,7 +152,7 @@ class MessageProtocolHandshakeError(ShipMessage):
     def from_data(cls, data):
         data_dict = array_2_dict(data)
         return cls(
-            error=data_dict.get('error'), 
+            error=MessageProtocolHandshakeErrorErrorType.from_data(data_dict.get('error')) if 'error' in data_dict else None, 
         )
 
 
@@ -175,8 +175,8 @@ class ConnectionPinState(ShipMessage):
     def from_data(cls, data):
         data_dict = array_2_dict(data)
         return cls(
-            pin_state=data_dict.get('pinState'), 
-            input_permission=data_dict.get('inputPermission'), 
+            pin_state=PinStateType(data_dict.get('pinState')) if 'pinState' in data_dict else None, 
+            input_permission=PinInputPermissionType(data_dict.get('inputPermission')) if 'inputPermission' in data_dict else None, 
         )
 
 
@@ -197,7 +197,7 @@ class ConnectionPinInput(ShipMessage):
     def from_data(cls, data):
         data_dict = array_2_dict(data)
         return cls(
-            pin=data_dict.get('pin'), 
+            pin=PinValueType.from_data(data_dict.get('pin')) if 'pin' in data_dict else None, 
         )
 
 
@@ -218,7 +218,7 @@ class ConnectionPinError(ShipMessage):
     def from_data(cls, data):
         data_dict = array_2_dict(data)
         return cls(
-            error=data_dict.get('error'), 
+            error=ConnectionPinErrorErrorType.from_data(data_dict.get('error')) if 'error' in data_dict else None, 
         )
 
 
@@ -243,9 +243,9 @@ class Data(ShipMessage):
     def from_data(cls, data):
         data_dict = array_2_dict(data)
         return cls(
-            header=data_dict.get('header'), 
+            header=HeaderType.from_data(data_dict.get('header')) if 'header' in data_dict else None, 
             payload=data_dict.get('payload'), 
-            extension=data_dict.get('extension'), 
+            extension=ExtensionType.from_data(data_dict.get('extension')) if 'extension' in data_dict else None, 
         )
 
 
@@ -270,9 +270,9 @@ class ConnectionClose(ShipMessage):
     def from_data(cls, data):
         data_dict = array_2_dict(data)
         return cls(
-            phase=data_dict.get('phase'), 
+            phase=ConnectionClosePhaseType(data_dict.get('phase')) if 'phase' in data_dict else None, 
             max_time=data_dict.get('maxTime'), 
-            reason=data_dict.get('reason'), 
+            reason=ConnectionCloseReasonType(data_dict.get('reason')) if 'reason' in data_dict else None, 
         )
 
 
@@ -298,8 +298,8 @@ class AccessMethods(ShipMessage):
     def __init__(
             self,
             id: str,
-            dns_sd_m_dns = None,
-            dns = None,
+            dns_sd_m_dns: DnsSd_MDns = None,
+            dns: Dns = None,
     ):
         super().__init__()
         
@@ -316,8 +316,8 @@ class AccessMethods(ShipMessage):
         data_dict = array_2_dict(data)
         return cls(
             id=data_dict.get('id'), 
-            dns_sd_m_dns=data_dict.get('dnsSd_mDns'), 
-            dns=data_dict.get('dns'), 
+            dns_sd_m_dns=DnsSd_MDns.from_data(data_dict.get('dnsSd_mDns')) if 'dnsSd_mDns' in data_dict else None, 
+            dns=Dns.from_data(data_dict.get('dns')) if 'dns' in data_dict else None, 
         )
 
 

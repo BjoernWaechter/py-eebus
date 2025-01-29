@@ -94,7 +94,7 @@ class {{ ele.name }}(ShipMessage):
     def from_data(cls, data):
         data_dict = array_2_dict(data)
         return cls({% for m in ele.members %}
-            {{ m.snake_case_name }}=data_dict.get('{{ m.name }}'), {% endfor %}
+            {{ m.snake_case_name }}={% if m.is_enum %}{{ m.data_type }}({% elif m.type_simple == False %}{{ m.data_type }}.from_data({% endif %}data_dict.get('{{ m.name }}'){% if m.data_type != "" %}{% if m.type_simple == False %}) if '{{ m.name }}' in data_dict else None{% endif %}{% endif %}, {% endfor %}
         )
 
 {% endfor %}
