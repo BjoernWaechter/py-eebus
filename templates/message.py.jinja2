@@ -53,25 +53,28 @@ class ShipMessage:
     def __str__(self):
         return f"{self.__class__.__name__}({int.from_bytes(self._msg_type, 'big')}, {self._msg})"
 
+    def msg(self):
+        return self._msg
+
 
 class Cmi(ShipMessage):
     def __init__(
             self,
+            data = None
     ):
         super().__init__()
         self._msg_type = MessageType.MSG_TYPE_INIT
-        self._msg = None
+        if data is None:
+            data = b'\x00'
+        self._msg = data
 
     @classmethod
     def from_data(cls, data):
-        return cls()
+        return cls(data[1:2])
 
     def get_msg_bytes(self):
-        data_bytes = self._msg_type + b'\x00'
+        data_bytes = self._msg_type + self._msg
         return data_bytes
-
-    def get_data(self):
-        return None
 
 
 {% for ele in elements %}

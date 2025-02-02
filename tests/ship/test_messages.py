@@ -2,9 +2,6 @@ from ship.enums import *
 from ship.message import *
 
 TEST_MESSAGES = {
-    "CMI": [
-        Cmi()
-    ],
     "ConnectionHello": [
         ConnectionHello(phase=ConnectionHelloPhaseType.READY),
         ConnectionHello(phase=ConnectionHelloPhaseType.PENDING, prolongation_request=True),
@@ -52,9 +49,12 @@ TEST_MESSAGES = {
 class TestTimer:
 
     def test_init_cmi(self):
-        msgs = TEST_MESSAGES["CMI"]
+        msgs = [Cmi(), Cmi(b'\x01')]
 
         assert msgs[0].get_msg_bytes() == b'\x00\x00'
+        assert msgs[1].get_msg_bytes() == b'\x00\x01'
+
+        assert msgs[1].msg() == b'\x01'
 
     def test_init_connectionhello(self):
         msgs = TEST_MESSAGES["ConnectionHello"]
@@ -88,8 +88,12 @@ class TestTimer:
 
         assert msgs[3].get_msg_bytes() == b'\x01{"messageProtocolHandshake":[{"handshakeType":"announceMax"},{"version":[{"major":1},' \
                                          b'{"minor":0}]},{"formats":[{"format":["JSON-UTF8"]}]}]}'
-
         assert str(msgs[3]) == "MessageProtocolHandshake(1, handshakeType: announceMax, version: major: 1, minor: 0, formats: format: JSON-UTF8)"
+
+        assert msgs[4].get_msg_bytes() == b'\x01{"messageProtocolHandshake":[{"handshakeType":"select"},{"version":[{"major":1},' \
+                                         b'{"minor":0}]},{"formats":[{"format":["JSON-UTF8"]}]}]}'
+
+        assert str(msgs[4]) == "MessageProtocolHandshake(1, handshakeType: select, version: major: 1, minor: 0, formats: format: JSON-UTF8)"
 
     def test_init_accessmethods(self):
         msgs = TEST_MESSAGES["AccessMethods"]
@@ -124,7 +128,7 @@ class TestTimer:
         assert msgs[2].get_msg_bytes() == b'\x03{"connectionClose":[{"phase":"announce"},{"maxTime":30}]}'
 
     def test_parse_cmi(self):
-        msgs = TEST_MESSAGES["CMI"]
+        msgs = [Cmi(), Cmi(b'\x01')]
 
         for msg in msgs:
             assert msg == ShipMessage.from_data(msg.get_msg_bytes())

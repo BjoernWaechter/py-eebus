@@ -52,14 +52,14 @@ class MessageProtocolFormatType:
 class MessageProtocolHandshakeErrorErrorType:
     def __init__(
             self,
-            message_protocol_handshake_error_error_type: float,
+            message_protocol_handshake_error_error_type: int,
     ):
         super().__init__()
         
         self.message_protocol_handshake_error_error_type = message_protocol_handshake_error_error_type
 
-        if type(self.message_protocol_handshake_error_error_type) is not float and type(self.message_protocol_handshake_error_error_type) is not NoneType:
-            raise TypeError("message_protocol_handshake_error_error_type is not of type float")
+        if type(self.message_protocol_handshake_error_error_type) is not int and type(self.message_protocol_handshake_error_error_type) is not NoneType:
+            raise TypeError("message_protocol_handshake_error_error_type is not of type int")
         
     def get_data(self):
         msg_data = []
@@ -136,14 +136,14 @@ class PinValueType:
 class ConnectionPinErrorErrorType:
     def __init__(
             self,
-            connection_pin_error_error_type: float,
+            connection_pin_error_error_type: int,
     ):
         super().__init__()
         
         self.connection_pin_error_error_type = connection_pin_error_error_type
 
-        if type(self.connection_pin_error_error_type) is not float and type(self.connection_pin_error_error_type) is not NoneType:
-            raise TypeError("connection_pin_error_error_type is not of type float")
+        if type(self.connection_pin_error_error_type) is not int and type(self.connection_pin_error_error_type) is not NoneType:
+            raise TypeError("connection_pin_error_error_type is not of type int")
         
     def get_data(self):
         msg_data = []

@@ -18,7 +18,7 @@ if __name__ == "__main__":
         #print(pem_data)
 
         runner = MdnsAnnounceService(
-            device_id="TESTBRAND11314235241414",
+            device_id="MY_TEST_DEVICE_123",
             tls_cert=pem_data,
             interfaces=["WLAN", ""]
         )
@@ -46,11 +46,9 @@ if __name__ == "__main__":
         # time.sleep(20)
         # con = ShipConnection(device=devices[0], client_key="key.priv", client_cert="key.cert")
 
-
         con.connect()
 
 
-
-
     finally:
+        con.close()
         runner.stop()
