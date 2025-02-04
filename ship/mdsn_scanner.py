@@ -50,7 +50,6 @@ class MdnsScannerService:
         time.sleep(duration_sec)
         browser.cancel()
 
-
         result_devices = []
         for name, srv_info in self.listener.get_services().items():
             print(srv_info)
