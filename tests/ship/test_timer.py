@@ -35,3 +35,10 @@ class TestTimer:
         timer.set_duration(1)
         timer.start()
         assert timer.is_expired() is False
+
+    def test_time_left(self):
+
+        timer = ShipTimer(2)
+        timer.start()
+        time.sleep(1)
+        assert int(round(timer.get_time_left())) == 1

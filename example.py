@@ -42,7 +42,12 @@ if __name__ == "__main__":
 
         pprint(answer)
 
-        con = ShipConnection(device=answer["device"], client_key="key.priv", client_cert="key.cert")
+        con = ShipConnection(
+            device=answer["device"],
+            client_key="key.priv",
+            client_cert="key.cert",
+            partner_known=True
+        )
         # time.sleep(20)
         # con = ShipConnection(device=devices[0], client_key="key.priv", client_cert="key.cert")
 

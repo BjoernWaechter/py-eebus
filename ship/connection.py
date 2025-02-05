@@ -39,7 +39,8 @@ class ShipConnection:
             client_cert: str,
             client_key: str,
             t_hello_init=60,
-            partner_known: bool=False
+            partner_known: bool=False,
+            client_server: ClientServer = ClientServer.CLIENT
     ):
 
         self.device = device
@@ -67,8 +68,9 @@ class ShipConnection:
         self.ws = None
 
         self.partner_known = partner_known
+        self._client_server = client_server
 
-        self.handle_cmi = HandleCMI(con=self)
+        self.handle_cmi = HandleCMI(con=self, client_server=self._client_server)
         self.handle_hello = HandleHello(con=self, partner_known=partner_known)
         self.handle_protocol_handshake = HandleProtocol(con=self)
 
@@ -130,8 +132,10 @@ class ShipConnection:
         while handling_ongoing:
 
             if self.con_state == ConState.CMI_STATE:
+                self.handle_cmi.start_handler()
                 handling_ongoing = self.handle_cmi.handle_state(msg=msg)
             elif self.con_state == ConState.SME_HELLO_STATE:
+                self.handle_hello.start_handler()
                 handling_ongoing = self.handle_hello.handle_state(msg=msg)
             elif self.con_state == ConState.PROTOCOL_HANDSHAKE:
                 handling_ongoing = self.handle_protocol_handshake.handle_state(msg=msg)
