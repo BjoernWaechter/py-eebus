@@ -1,3 +1,5 @@
+import pytest
+
 from ship.enums import *
 from ship.message import *
 
@@ -127,6 +129,13 @@ class TestTimer:
         assert msgs[1].get_msg_bytes() == b'\x03{"connectionClose":[{"phase":"announce"}]}'
         assert msgs[2].get_msg_bytes() == b'\x03{"connectionClose":[{"phase":"announce"},{"maxTime":30}]}'
 
+    def test_failed_parse(self):
+
+        with pytest.raises(RuntimeError):
+            ShipMessage.from_data(b'\x01{"connectionClose":[{"phase":"confirm"}]}')
+
+
+
     def test_parse_cmi(self):
         msgs = [Cmi(), Cmi(b'\x01')]
 
@@ -174,6 +183,27 @@ class TestTimer:
 
         for msg in msgs:
             assert msg == ShipMessage.from_data(msg.get_msg_bytes())
+
+    def test_parse_connection_pin_error(self):
+        msgs = [ConnectionPinError(error=ConnectionPinErrorErrorType(connection_pin_error_error_type=1))]
+
+        for msg in msgs:
+            assert msg == ShipMessage.from_data(msg.get_msg_bytes())
+
+    def test_parse_connection_pin_input(self):
+        msgs = [ConnectionPinInput(pin=PinValueType(pin_value_type="1234"))]
+
+        for msg in msgs:
+            assert msg == ShipMessage.from_data(msg.get_msg_bytes())
+
+    def test_parse_messageprotocolhandshakeerror(self):
+        msgs = [MessageProtocolHandshakeError(
+            error=MessageProtocolHandshakeErrorErrorType(message_protocol_handshake_error_error_type=1))
+        ]
+
+        for msg in msgs:
+            assert msg == ShipMessage.from_data(msg.get_msg_bytes())
+
 
     # def test_message_parser(self):
     #

@@ -10,7 +10,7 @@ class TestTimer:
     def test_init(self):
 
         timer = ShipTimer()
-        assert timer.is_running is False
+        assert timer._is_running is False
 
     def test_not_expired(self):
 
@@ -42,3 +42,17 @@ class TestTimer:
         timer.start()
         time.sleep(1)
         assert int(round(timer.get_time_left())) == 1
+
+    def test_start_if_not_running(self):
+
+        timer = ShipTimer(2)
+        timer.start_if_not_running()
+        assert timer.is_running() is True
+
+    def test_time_left_not_running(self):
+
+        timer = ShipTimer(2)
+        assert timer.get_time_left() is None
+
+
+
