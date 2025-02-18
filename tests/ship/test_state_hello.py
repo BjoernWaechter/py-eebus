@@ -14,7 +14,18 @@ class TestHandleHello:
     def test_ok_flow_known(self, mock_send_message):
         mock_send_message.return_value = ""
 
-        device = ShipDevice(
+        local_device = ShipDevice(
+            name="",
+            ski="",
+            ip_addresses=[""],
+            port=5431,
+            model="",
+            type="",
+            id="",
+            path="",
+        )
+
+        remote_device = ShipDevice(
             name="",
             ski="",
             ip_addresses=[""],
@@ -25,7 +36,8 @@ class TestHandleHello:
             path="",
         )
         con = ShipConnection(
-            device=device,
+            local_device=local_device,
+            remote_device=remote_device,
             client_cert="my.cert",
             client_key="my.key",
             partner_known=True
@@ -36,13 +48,13 @@ class TestHandleHello:
         con.handle_state()
 
         mock_send_message.assert_called_with(ConnectionHello(phase=ConnectionHelloPhaseType.READY))
-        assert con.handle_hello.hello_state == HelloState.SME_HELLO_STATE_READY
-        assert con.handle_hello.hello_sub_state == HelloSubState.SME_HELLO_STATE_READY_LISTEN
+        assert con._handle_hello.hello_state == HelloState.SME_HELLO_STATE_READY
+        assert con._handle_hello.hello_sub_state == HelloSubState.SME_HELLO_STATE_READY_LISTEN
 
         con.on_message(None, ConnectionHello(phase=ConnectionHelloPhaseType.READY).get_msg_bytes())
 
-        assert con.handle_hello.hello_state == HelloState.SME_HELLO_STATE_READY
-        assert con.handle_hello.hello_sub_state == HelloSubState.SME_HELLO_STATE_OK
+        assert con._handle_hello.hello_state == HelloState.SME_HELLO_STATE_READY
+        assert con._handle_hello.hello_sub_state == HelloSubState.SME_HELLO_STATE_OK
 
         assert con.con_state == ConState.PROTOCOL_HANDSHAKE
 

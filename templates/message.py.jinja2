@@ -1,24 +1,32 @@
 from dataclasses import dataclass
-from ship.message_type import *
+{% for imp in imports %}{{ imp }}
+{% endfor %}
+{% for type_name in base_types -%}
+from {{folder}}.base_type import {{ type_name.base_name }}
+{% endfor %}
+from {{ folder }}.message_type import *
 import json
 
 
 def array_2_dict(arr):
-    return {list(v.keys())[0]:v[list(v.keys())[0]] for v in arr}
+    return {list(v.keys())[0]: v[list(v.keys())[0]] for v in arr}
 
 
 def get_object_data(obj):
     return obj.get_data()
 
+{%- set base_type = 'ShipMessage' if folder == 'ship' else 'SpineMessage' %}
+{%- set base_type_type = 'ShipMessageType' if folder == 'ship' else 'SpineMessageType' %}
+
 
 @dataclass()
-class ShipMessage:
+class {{ base_type }}:
     def __init__(
             self
     ):
         self._root_tag = ""
-        self._msg_type = b'\x00'
-        self._msg: ShipMessageType = ShipMessageType()
+        self._msg_type = {% if folder == 'ship' %}MessageType.MSG_TYPE_INIT{% else %}MessageType.MSG_TYPE_DATA{% endif %}
+        self._msg: {{ base_type_type }} = {{ base_type_type }}()
 
     def get_msg_bytes(self):
         json_data = self.get_data()
@@ -32,13 +40,16 @@ class ShipMessage:
     def from_data(cls, bin_msg):
         first_byte = bin_msg[0:1]
         msg_type = MessageType(first_byte)
-        if msg_type != MessageType.MSG_TYPE_INIT:
+        {% if folder == 'ship' %}if msg_type != MessageType.MSG_TYPE_INIT:
             data = json.loads(bin_msg[1:].decode("utf8"))
             root_tag = list(data.keys())[0]
             msg = ROOT_TAG_2_TYPE[root_tag].from_data(data[root_tag])
         else:
-            msg = Cmi()
-
+            msg = Cmi(){% else %}
+        data = json.loads(bin_msg[1:].decode("utf8"))
+        root_tag = list(data.keys())[0]
+        msg = ROOT_TAG_2_TYPE[root_tag].from_data(data[root_tag])
+        {% endif %}
         if msg_type != msg.get_type():
             raise RuntimeError("Message type of restored message does not match the type of the parsed one.")
 
@@ -56,8 +67,8 @@ class ShipMessage:
     def msg(self):
         return self._msg
 
-
-class Cmi(ShipMessage):
+{% if folder == 'ship' %}
+class Cmi({{ base_type }}):
     def __init__(
             self,
             data = None
@@ -75,19 +86,22 @@ class Cmi(ShipMessage):
     def get_msg_bytes(self):
         data_bytes = self._msg_type + self._msg
         return data_bytes
-
+{% endif %}
 
 {% for ele in elements %}
-class {{ ele.name }}(ShipMessage):
+class {{ ele.name }}({{ base_type }}):
     def __init__(
             self,
 {% for m in ele.members %}            {{ m.snake_case_name }}{% if m.data_type %}: {% if m.is_array %}list[{% endif %}{{ m.data_type }}{% if m.is_array %}]{% endif %}{% endif %}{% if m.default_value or m.is_optional %} = None{% endif %},
 {% endfor %}    ):
         super().__init__()
-        {% for m in ele.members %}{% if m.default_value %}
+        {% for m in ele.members -%}
+        {% if m.default_value %}
         if {{ m.name | lower }} is None:
-            {{ m.name }} = {{ m.default_value }}{% endif %}{% endfor %}
-        self._msg_type = {{ ele.msg_type_numeric }}
+            {{ m.name }} = {{ m.default_value }}{% endif %}
+        {%- endfor %}
+        {% if folder == 'ship' %}self._msg_type = {{ ele.msg_type_numeric }}
+        {% endif -%}
         self._root_tag = "{{ ele.msg_name }}"
         self._msg = {{ ele.data_type }}(
 {% for m in ele.members %}            {{ m.snake_case_name }}={{ m.snake_case_name }},
@@ -95,7 +109,8 @@ class {{ ele.name }}(ShipMessage):
 
     @classmethod
     def from_data(cls, data):
-        data_dict = array_2_dict(data)
+        {%- if ele.members | length > 0 %}
+        data_dict = array_2_dict(data){% endif %}
         return cls({% for m in ele.members %}
             {{ m.snake_case_name }}={% if m.is_enum %}{{ m.data_type }}({% elif m.type_simple == False %}{{ m.data_type }}.from_data({% endif %}data_dict.get('{{ m.name }}'){% if m.data_type != "" %}{% if m.type_simple == False %}) if '{{ m.name }}' in data_dict else None{% endif %}{% endif %}, {% endfor %}
         )

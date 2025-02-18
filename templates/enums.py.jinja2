@@ -9,6 +9,11 @@ class MessageType(bytes, Enum):
 
 {% for type_name, prop in enum_types.items() %}
 class {{ type_name }}(str, Enum):
-{% for e in prop.enums %}    {{ e|upper }} = '{{ e }}'
+{% for e in prop.enums %}    {% if e[0] in ["0","1","2","3","4","5","6","7","8","9"] %}_{% endif -%}
+{%- if folder == 'ship' -%}
+{{ e | upper | replace("/","_") | replace("^","_")| replace(".","_") }} = '{{ e }}'
+{%- else -%}
+{{ e | replace("/","_") | replace("^","_")| replace(".","_") }} = '{{ e }}'
+{%- endif %}
 {% endfor %}
 {% endfor %}

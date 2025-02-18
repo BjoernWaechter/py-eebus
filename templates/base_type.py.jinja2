@@ -1,5 +1,5 @@
 {% for imp in imports %}{{ imp }}
-{% endfor %}from ship.enums import *
+{% endfor %}from {{ folder }}.enums import *
 import json
 
 MSG_TYPE_INIT = b'\x00\x00'

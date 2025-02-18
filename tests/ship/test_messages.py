@@ -4,12 +4,6 @@ from ship.enums import *
 from ship.message import *
 
 TEST_MESSAGES = {
-    "ConnectionHello": [
-        ConnectionHello(phase=ConnectionHelloPhaseType.READY),
-        ConnectionHello(phase=ConnectionHelloPhaseType.PENDING, prolongation_request=True),
-        ConnectionHello(phase=ConnectionHelloPhaseType.ABORTED),
-        ConnectionHello(phase=ConnectionHelloPhaseType.READY, waiting=1000),
-    ],
     "MessageProtocolHandshake": [
         MessageProtocolHandshake(
             handshake_type=ProtocolHandshakeTypeType.ANNOUNCEMAX,
@@ -48,7 +42,7 @@ TEST_MESSAGES = {
 }
 
 
-class TestTimer:
+class TestShip:
 
     def test_init_cmi(self):
         msgs = [Cmi(), Cmi(b'\x01')]
@@ -59,7 +53,12 @@ class TestTimer:
         assert msgs[1].msg() == b'\x01'
 
     def test_init_connectionhello(self):
-        msgs = TEST_MESSAGES["ConnectionHello"]
+        msgs = [
+            ConnectionHello(phase=ConnectionHelloPhaseType.READY),
+            ConnectionHello(phase=ConnectionHelloPhaseType.PENDING, prolongation_request=True),
+            ConnectionHello(phase=ConnectionHelloPhaseType.ABORTED),
+            ConnectionHello(phase=ConnectionHelloPhaseType.READY, waiting=1000),
+        ]
 
         assert msgs[0].get_msg_bytes() == b'\x01{"connectionHello":[{"phase":"ready"},{"waiting":60000}]}'
         assert str(msgs[0]) == 'ConnectionHello(1, phase: ready, waiting: 60000)'
@@ -143,7 +142,12 @@ class TestTimer:
             assert msg == ShipMessage.from_data(msg.get_msg_bytes())
 
     def test_parse_connectionhello(self):
-        msgs = TEST_MESSAGES["ConnectionHello"]
+        msgs = [
+            ConnectionHello(phase=ConnectionHelloPhaseType.READY),
+            ConnectionHello(phase=ConnectionHelloPhaseType.PENDING, prolongation_request=True),
+            ConnectionHello(phase=ConnectionHelloPhaseType.ABORTED),
+            ConnectionHello(phase=ConnectionHelloPhaseType.READY, waiting=1000),
+        ]
 
         for msg in msgs:
             assert msg == ShipMessage.from_data(msg.get_msg_bytes())

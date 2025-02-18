@@ -19,7 +19,7 @@ class ProtocolState(Enum):
 class HandleProtocol:
 
     def __init__(self, con):
-        self.con = con
+        self._con = con
         self._proto_state: ProtocolState = ProtocolState.SME_PROT_H_STATE_CLIENT_INIT
 
     def set_proto_state(self, state: ProtocolState):
@@ -30,7 +30,7 @@ class HandleProtocol:
         return self._proto_state
 
     def handle_state(self, msg: ShipMessage) -> bool:
-        print(f"handle proto state: {self.proto_state}")
+        print(f"handle protocol state: {self.proto_state}")
         if self.proto_state == ProtocolState.SME_PROT_H_STATE_CLIENT_INIT:
 
             return self.handle_state_sme_prot_h_state_client_init()
@@ -39,12 +39,17 @@ class HandleProtocol:
 
             return self.handle_state_sme_prot_h_state_client_listen_choice(msg)
 
+        elif self.proto_state == ProtocolState.SME_PROT_H_STATE_CLIENT_OK:
+            # End of handler
+            self._con.set_con_state(ConState.PIN_VERIFICATION)
+            return True
+
         else:
             return False
 
     def handle_state_sme_prot_h_state_client_init(self):
 
-        self.con.send_message(MessageProtocolHandshake(handshake_type=ProtocolHandshakeTypeType.ANNOUNCEMAX))
+        self._con.send_message(MessageProtocolHandshake(handshake_type=ProtocolHandshakeTypeType.ANNOUNCEMAX))
         # TODO: init wait timer
 
         self.set_proto_state(ProtocolState.SME_PROT_H_STATE_CLIENT_LISTEN_CHOICE)
@@ -54,16 +59,17 @@ class HandleProtocol:
         # TODO: deactivate timer
         if not isinstance(msg, MessageProtocolHandshake):
             print(f"Wrong message type expected: ConnectionHello received: {type(msg)}")
-            self.con.close()
+            self._con.close()
             return False
         if msg.msg().handshake_type != ProtocolHandshakeTypeType.SELECT:
             print(f"Wrong message value expected READY received: {msg.msg().phase}")
-            self.con.close()
+            self._con.close()
             return False
         # TODO: check version
         # TODO: check formats
-        self.con.send_message(msg)
+        self._con.send_message(msg)
         self.set_proto_state(ProtocolState.SME_PROT_H_STATE_CLIENT_OK)
+        return True
 
 
 

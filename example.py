@@ -6,21 +6,26 @@ from typing import cast
 import inquirer
 
 from ship.connection import ShipConnection
+from ship.device import ShipDevice
 from ship.mdns_announce import MdnsAnnounceService
 from ship.mdsn_scanner import MdnsScannerService
 
 if __name__ == "__main__":
 
+    cert_path = 'f90d886eb34325082f7513bbdcc03ae2609a7625.cert'
+    key_path = 'f90d886eb34325082f7513bbdcc03ae2609a7625.priv'
+
     try:
-        file_path = Path('key.cert')
+        #file_path = Path('f90d886eb34325082f7513bbdcc03ae2609a7625.cert')
+        file_path = Path(cert_path)
         pem_data = file_path.read_bytes()
 
-        #print(pem_data)
+        local_device_name = "Bjoerns_Dev"
 
         runner = MdnsAnnounceService(
-            device_id="MY_TEST_DEVICE_123",
+            device_id=local_device_name,
             tls_cert=pem_data,
-            interfaces=["WLAN", ""]
+            interfaces=["WLAN"]
         )
 
         runner.start()
@@ -43,16 +48,25 @@ if __name__ == "__main__":
         pprint(answer)
 
         con = ShipConnection(
-            device=answer["device"],
-            client_key="key.priv",
-            client_cert="key.cert",
+            local_device=ShipDevice(
+                name=local_device_name,
+                ski="",
+                ip_addresses=[],
+                port=None,
+                model=None,
+                type=None,
+                id=None,
+                path=None
+            ),
+            remote_device=answer["device"],
+            client_key=key_path,
+            client_cert=cert_path,
             partner_known=True
         )
         # time.sleep(20)
         # con = ShipConnection(device=devices[0], client_key="key.priv", client_cert="key.cert")
 
         con.connect()
-
 
     finally:
         con.close()

@@ -1,10 +1,24 @@
 from dataclasses import dataclass
+from ship.enums import *
+
+from ship.base_type import ProtocolIdType
+from ship.base_type import MessageProtocolFormatType
+from ship.base_type import Dns
+from ship.base_type import DnsSd_MDns
+from ship.base_type import ExtensionType
+from ship.base_type import HeaderType
+from ship.base_type import ConnectionPinErrorErrorType
+from ship.base_type import PinValueType
+from ship.base_type import MessageProtocolHandshakeErrorErrorType
+from ship.base_type import MessageProtocolFormatsType
+from ship.base_type import Version
+
 from ship.message_type import *
 import json
 
 
 def array_2_dict(arr):
-    return {list(v.keys())[0]:v[list(v.keys())[0]] for v in arr}
+    return {list(v.keys())[0]: v[list(v.keys())[0]] for v in arr}
 
 
 def get_object_data(obj):
@@ -17,7 +31,7 @@ class ShipMessage:
             self
     ):
         self._root_tag = ""
-        self._msg_type = b'\x00'
+        self._msg_type = MessageType.MSG_TYPE_INIT
         self._msg: ShipMessageType = ShipMessageType()
 
     def get_msg_bytes(self):
@@ -38,7 +52,6 @@ class ShipMessage:
             msg = ROOT_TAG_2_TYPE[root_tag].from_data(data[root_tag])
         else:
             msg = Cmi()
-
         if msg_type != msg.get_type():
             raise RuntimeError("Message type of restored message does not match the type of the parsed one.")
 
@@ -292,7 +305,6 @@ class AccessMethodsRequest(ShipMessage):
 
     @classmethod
     def from_data(cls, data):
-        data_dict = array_2_dict(data)
         return cls(
         )
 

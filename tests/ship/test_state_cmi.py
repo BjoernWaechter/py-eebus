@@ -14,7 +14,7 @@ class TestHandleCMI:
 
     @pytest.fixture
     def get_connection(self):
-        device = ShipDevice(
+        local_device = ShipDevice(
             name="",
             ski="",
             ip_addresses=[""],
@@ -25,7 +25,18 @@ class TestHandleCMI:
             path="",
         )
 
-        return ShipConnection(device=device, client_cert="my.cert", client_key="my.key")
+        remote_device = ShipDevice(
+            name="",
+            ski="",
+            ip_addresses=[""],
+            port=5431,
+            model="",
+            type="",
+            id="",
+            path="",
+        )
+
+        return ShipConnection(local_device=local_device, remote_device=remote_device, client_cert="my.cert", client_key="my.key")
 
     @patch("ship.connection.ShipConnection.send_message")
     def test_ok_flow(self, mock_send_message, get_connection):

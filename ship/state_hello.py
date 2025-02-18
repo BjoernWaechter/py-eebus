@@ -31,7 +31,7 @@ class HandleHello:
             partner_known: bool,
             t_hello_init: float = 60
     ):
-        self.con = con
+        self._con = con
         if partner_known:
             self._hello_state: HelloState = HelloState.SME_HELLO_STATE_READY
             self._hello_sub_state: HelloSubState = HelloSubState.SME_HELLO_STATE_READY_INIT
@@ -79,7 +79,7 @@ class HandleHello:
 
             elif self.hello_sub_state == HelloSubState.SME_HELLO_STATE_OK:
 
-                self.con.set_con_state(ConState.PROTOCOL_HANDSHAKE)
+                self._con.set_con_state(ConState.PROTOCOL_HANDSHAKE)
                 return True
 
         elif self.hello_state == HelloState.SME_HELLO_STATE_PENDING:
@@ -93,8 +93,8 @@ class HandleHello:
                 return self.handle_state_sme_hello_state_pending_listen(msg)
 
             elif self.hello_sub_state == HelloSubState.SME_HELLO_STATE_OK:
-
-                self.con.set_con_state(ConState.PROTOCOL_HANDSHAKE)
+                # End of handler
+                self._con.set_con_state(ConState.PROTOCOL_HANDSHAKE)
                 return True
 
             else:
@@ -106,7 +106,7 @@ class HandleHello:
 
     def send_hello_update_msg(self):
 
-        self.con.send_message(
+        self._con.send_message(
             ConnectionHello(
                 phase=ConnectionHelloPhaseType.READY if self._hello_state == HelloState.SME_HELLO_STATE_READY
                 else ConnectionHelloPhaseType.PENDING,
@@ -145,7 +145,7 @@ class HandleHello:
 
     # State PENDING methods:
     def handle_state_sme_hello_state_pending_init(self):
-        self.con.send_message(ConnectionHello(phase=ConnectionHelloPhaseType.READY))
+        self._con.send_message(ConnectionHello(phase=ConnectionHelloPhaseType.READY))
         self.set_hello_sub_state(HelloSubState.SME_HELLO_STATE_PENDING_LISTEN)
         return False
 
@@ -173,7 +173,7 @@ class HandleHello:
 
         if msg.msg().phase != ConnectionHelloPhaseType.READY:
             print(f"Wrong message value expected READY received: {msg.msg().phase}")
-            self.con.close()
+            self._con.close()
             return False
 
         self.set_hello_sub_state(HelloSubState.SME_HELLO_STATE_OK)
@@ -183,5 +183,5 @@ class HandleHello:
         self._timer_wait_for_ready.stop()
         self._timer_prolongation_request.stop()
         self._timer_prolongation_reply.stop()
-        self.con.send_message(ConnectionHello(phase=ConnectionHelloPhaseType.ABORTED))
-        self.con.close()
+        self._con.send_message(ConnectionHello(phase=ConnectionHelloPhaseType.ABORTED))
+        self._con.close()

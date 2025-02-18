@@ -1,0 +1,15 @@
+{% for imp in imports %}{{ imp }}
+{% endfor %}
+
+{% for gc in group_class %}
+class {{ gc.name }}:
+
+    def __init__(
+            self,
+            msg
+            {% for ele in gc.elements %}#{{ ele.name }}{{ " | " if not loop.last else "" }}
+            {% endfor %}
+    ):
+        self._msg = msg
+
+{% endfor %}
