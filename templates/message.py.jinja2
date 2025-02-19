@@ -1,9 +1,6 @@
 from dataclasses import dataclass
 {% for imp in imports %}{{ imp }}
 {% endfor %}
-{% for type_name in base_types -%}
-from {{folder}}.base_type import {{ type_name.base_name }}
-{% endfor %}
 from {{ folder }}.message_type import *
 import json
 
@@ -18,54 +15,6 @@ def get_object_data(obj):
 {%- set base_type = 'ShipMessage' if folder == 'ship' else 'SpineMessage' %}
 {%- set base_type_type = 'ShipMessageType' if folder == 'ship' else 'SpineMessageType' %}
 
-
-@dataclass()
-class {{ base_type }}:
-    def __init__(
-            self
-    ):
-        self._root_tag = ""
-        self._msg_type = {% if folder == 'ship' %}MessageType.MSG_TYPE_INIT{% else %}MessageType.MSG_TYPE_DATA{% endif %}
-        self._msg: {{ base_type_type }} = {{ base_type_type }}()
-
-    def get_msg_bytes(self):
-        json_data = self.get_data()
-        data_bytes = self._msg_type + json_data.encode('utf8')
-        return data_bytes
-
-    def get_type(self):
-        return self._msg_type
-
-    @classmethod
-    def from_data(cls, bin_msg):
-        first_byte = bin_msg[0:1]
-        msg_type = MessageType(first_byte)
-        {% if folder == 'ship' %}if msg_type != MessageType.MSG_TYPE_INIT:
-            data = json.loads(bin_msg[1:].decode("utf8"))
-            root_tag = list(data.keys())[0]
-            msg = ROOT_TAG_2_TYPE[root_tag].from_data(data[root_tag])
-        else:
-            msg = Cmi(){% else %}
-        data = json.loads(bin_msg[1:].decode("utf8"))
-        root_tag = list(data.keys())[0]
-        msg = ROOT_TAG_2_TYPE[root_tag].from_data(data[root_tag])
-        {% endif %}
-        if msg_type != msg.get_type():
-            raise RuntimeError("Message type of restored message does not match the type of the parsed one.")
-
-        return msg
-
-    def get_data(self):
-        if self._msg:
-            return json.dumps({self._root_tag: self._msg.get_data()}, separators=(',', ':'), default=get_object_data)
-        else:
-            return ""
-
-    def __str__(self):
-        return f"{self.__class__.__name__}({int.from_bytes(self._msg_type, 'big')}, {self._msg})"
-
-    def msg(self):
-        return self._msg
 
 {% if folder == 'ship' %}
 class Cmi({{ base_type }}):
@@ -89,7 +38,7 @@ class Cmi({{ base_type }}):
 {% endif %}
 
 {% for ele in elements %}
-class {{ ele.name }}({{ base_type }}):
+class {{ ele.base_name }}({{ base_type }}):
     def __init__(
             self,
 {% for m in ele.members %}            {{ m.snake_case_name }}{% if m.data_type %}: {% if m.is_array %}list[{% endif %}{{ m.data_type }}{% if m.is_array %}]{% endif %}{% endif %}{% if m.default_value or m.is_optional %} = None{% endif %},
@@ -117,5 +66,5 @@ class {{ ele.name }}({{ base_type }}):
 
 {% endfor %}
 ROOT_TAG_2_TYPE = {
-{% for ele in elements %}    "{{ ele.msg_name }}": {{ ele.name }},
+{% for ele in elements %}    "{{ ele.msg_name }}": {{ ele.base_name }},
 {% endfor %}}

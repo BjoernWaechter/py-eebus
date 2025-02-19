@@ -1,36 +1,16 @@
 {% for imp in imports %}{{ imp }}
 {% endfor %}from types import NoneType
-
-MSG_TYPE_INIT = b'\x00\x00'
-MSG_TYPE_CONTROL = b'\x01'
-MSG_TYPE_DATA = b'\x02'
-MSG_TYPE_END = b'\x03'
-
-
-def array_2_dict(arr):
-    return {list(v.keys())[0]:v[list(v.keys())[0]] for v in arr}
+from {{ folder }}.message_type.message_type import array_2_dict
 
 {% if is_ship_msg_type %}
-{%- set base_type = 'ShipMessageType' if folder == 'ship' else 'SpineMessageType' %}
-class {{ base_type }}:
-    def __init__(
-        self
-    ):
-        pass
-
-    def get_data(self):
-        raise NotImplementedError("get_data has to be implemented")
-
-    def __str__(self):
-        pass
-{% endif %}
-{% for type_ele in ship_types %}
+{%- set base_type = 'ShipMessageType' if folder == 'ship' else 'SpineMessageType' %}{% endif %}
+{%- for type_ele in ship_types %}
 class {{ type_ele.base_name }}{% if is_ship_msg_type %}({{ base_type }}){% endif %}:
     def __init__(
             self,
 {% for m in type_ele.members %}            {{ m.snake_case_name }}{% if m.data_type %}: {% if m.is_array %}list[{% endif %}{% if m.data_type is not string -%}
 {% for t in m.data_type %}{{ t }}{{ " | " if not loop.last else "" }}{% endfor %}
-{%- else %}{{ m.data_type }}{% endif %}{% if m.is_array %}]{% endif %}{% endif %}{% if m.default_value or m.is_optional %} = None{% endif %},
+{%- else %}{{ m }}{% endif %}{% if m.is_array %}]{% endif %}{% endif %}{% if m.default_value or m.is_optional %} = None{% endif %},
 {% endfor %}    ):
         super().__init__()
         {% for m in type_ele.members %}{% if m.default_value %}
@@ -38,7 +18,7 @@ class {{ type_ele.base_name }}{% if is_ship_msg_type %}({{ base_type }}){% endif
             {{ m.snake_case_name }} = {{ m.default_value }}{% endif %}{% endfor %}
 {% for m in type_ele.members %}        self.{{ m.snake_case_name }} = {{ m.snake_case_name }}
 {% endfor %}{% for m in type_ele.members %}{% if m.data_type != "" %}
-        if type(self.{{ m.snake_case_name }}) is not {% if m.is_array %}list{% else %}{{ m.data_type }}{% if m.is_optional %}{% endif %} and type(self.{{ m.snake_case_name }}) is not NoneType{% endif %}:
+        if not isinstance(self.{{ m.snake_case_name }}, {% if m.is_array %}list{% else %}{{ m.data_type }}{% endif %}{% if m.is_optional %} | NoneType{% endif %}):
             raise TypeError("{{ m.snake_case_name }} is not of type {{ m.data_type }}")
         {% endif %}{% endfor %}
     def get_data(self):
