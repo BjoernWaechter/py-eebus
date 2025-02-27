@@ -1,0 +1,8 @@
+{%- for src, eles in element.items() -%}
+{%- if eles | length > 0 %}# {{ src }}
+{%-  for ele in eles %}
+from .{{ src | lower }} import {{ ele.base_name }}
+{%- endfor %}
+{% endif -%}
+
+{%- endfor -%}

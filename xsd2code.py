@@ -4,6 +4,8 @@ import re
 import xmlschema
 from jinja2 import Environment, FileSystemLoader
 import networkx as nx
+from xmlschema import XsdElement
+from xmlschema.validators import XsdGroup
 
 from xsd2code import Member, ALL_TYPES
 
@@ -71,6 +73,7 @@ def get_imports_and_sort(type_list, type_2_source, dest_folder):
 
 # Section: 13.4.2
 def msg_group_value(group_name):
+
     if group_name == "MsgTypeControlGroup":
         return "MessageType.MSG_TYPE_CONTROL"
     elif group_name == "MsgTypeDataGroup":
@@ -125,10 +128,12 @@ for schema_cfg in schemas:
     #     ele_obj = schema.elements[ele]
     #     #print(f"{ele_obj.display_name}")
 
-    for ship_type in schema.types:
+    # for group in schema.groups:
+    #     print(group)
 
-        # if ship_type not in ["SmartEnergyManagementPsAlternativesRelationType", "_FeatureAddressType", "_EntityAddressType"]:
-        #     continue
+    for ship_type in schema.types:
+        if ship_type not in ["CmdType"]:
+            continue
 
         type_name = type(schema.types[ship_type]).__name__
         type_obj = schema.types[ship_type]
@@ -192,32 +197,34 @@ for schema_cfg in schemas:
 
     # choice_graph = nx.DiGraph()
     #
-    # for grp in schema.groups:
-    #     grp_obj = schema.groups[grp]
-    #     #print(f"{folder}-{grp_obj.display_name}")
-    #
-    #     group_type = ALL_TYPES.get_or_create(
-    #         ChoiceType(type_name=grp_obj.display_name, source_file=grp_obj.schema.name)
-    #     )
-    #
-    #
-    #     group_elements = []
-    #
-    #     choice_graph.add_node(grp_obj.local_name)
-    #
-    #     for ele in grp_obj.content:
-    #         #print(f"{ele.local_name} - {grp_obj.local_name}")
-    #         groups[ele.local_name] = grp_obj.local_name
-    #         group_elements.append({"name": to_class_name(ele.local_name)})
-    #         choice_graph.add_edge(grp_obj.local_name, ele.local_name)
-    #         group_type.add_choice_type(
-    #             add_type=ALL_TYPES.get_by_name(grp_obj.display_name)
-    #         )
-    #
-    #     group_class[grp_obj.local_name] = {
-    #         "folder": folder,
-    #         "elements": group_elements
-    #     }
+    for grp in schema.groups:
+        grp_obj = schema.groups[grp]
+        print(f"{folder}-{grp_obj.display_name}")
+
+        ALL_TYPES.get_or_create(
+            create_type_from_xsd(grp_obj)
+        )
+
+        # for ele in grp_obj.content:
+        #     print(f"   -{ele.display_name} {type(ele).__name__}")
+        #     if isinstance(ele, XsdElement):
+        #         group_type.add_choice_member(
+        #             Member(
+        #                 fq_member_name=ele.display_name,
+        #                 data_type=ALL_TYPES.get_or_create(create_type_from_xsd(ele.type)),
+        #                 is_optional=True if ele.min_occurs == 0 else False,
+        #                 is_array=True if ele.max_occurs is None or ele.max_occurs > 1 else False
+        #             )
+        #         )
+        #     elif isinstance(ele, XsdGroup):
+        #         group_type.add_choice_type(
+        #             ALL_TYPES.get_or_create(
+        #                 ChoiceType(type_name=ele.display_name, source_file=ele.schema.name)
+        #             )
+        #         )
+
+
+
     #
     # sorted_choices = list(reversed(list(nx.topological_sort(choice_graph))))
     #
