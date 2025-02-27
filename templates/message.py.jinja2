@@ -1,3 +1,4 @@
+# Jinja Template message.py.jinja2
 from dataclasses import dataclass
 {% for imp in imports %}{{ imp }}
 {% endfor %}
@@ -41,7 +42,7 @@ class Cmi({{ base_type }}):
 class {{ ele.base_name }}({{ base_type }}):
     def __init__(
             self,
-{% for m in ele.members %}            {{ m.snake_case_name }}{% if m.data_type %}: {% if m.is_array %}list[{% endif %}{{ m.data_type }}{% if m.is_array %}]{% endif %}{% endif %}{% if m.default_value or m.is_optional %} = None{% endif %},
+{% for m in class_type.members %}            {{ m.snake_case_name }}{% if m.class_name %}: {{ m.class_name }}{% endif %}{% if m.default_value or m.is_optional %} = None{% endif %},
 {% endfor %}    ):
         super().__init__()
         {% for m in ele.members -%}
