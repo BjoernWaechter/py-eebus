@@ -8,8 +8,12 @@ class MessageType(bytes, Enum):
     MSG_TYPE_END = b'\x03'
 
 
-class BillTypeEnumType(str, Enum):
-    chargingSummary = 'chargingSummary'
+class BillCostTypeEnumType(str, Enum):
+    absolutePrice = 'absolutePrice'
+    relativePrice = 'relativePrice'
+    co2Emission = 'co2Emission'
+    renewableEnergy = 'renewableEnergy'
+    radioactiveWaste = 'radioactiveWaste'
 
 
 class BillPositionTypeEnumType(str, Enum):
@@ -17,10 +21,6 @@ class BillPositionTypeEnumType(str, Enum):
     selfProducedElectricEnergy = 'selfProducedElectricEnergy'
 
 
-class BillCostTypeEnumType(str, Enum):
-    absolutePrice = 'absolutePrice'
-    relativePrice = 'relativePrice'
-    co2Emission = 'co2Emission'
-    renewableEnergy = 'renewableEnergy'
-    radioactiveWaste = 'radioactiveWaste'
+class BillTypeEnumType(str, Enum):
+    chargingSummary = 'chargingSummary'
 

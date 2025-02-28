@@ -4,7 +4,7 @@ from types import NoneType
 from spine import array_2_dict
 
 
-class SpecificationVersionDataType:
+class SpecificationVersionDataType: # EEBus_SPINE_TS_Version.xsd: ComplexType
     def __init__(
             self,
             value: str,
@@ -16,7 +16,7 @@ class SpecificationVersionDataType:
         if not isinstance(self.value, str):
             raise TypeError("value is not of type str")
         
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
@@ -47,7 +47,7 @@ class SpecificationVersionDataType:
             return cls()
 
 
-class SpecificationVersionListDataType:
+class SpecificationVersionListDataType: # EEBus_SPINE_TS_Version.xsd: ComplexType
     def __init__(
             self,
             specification_version_data: list[SpecificationVersionDataType] = None,
@@ -59,7 +59,7 @@ class SpecificationVersionListDataType:
         if not isinstance(self.specification_version_data, list | NoneType):
             raise TypeError("specification_version_data is not of type list[SpecificationVersionDataType]")
         
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
@@ -90,14 +90,14 @@ class SpecificationVersionListDataType:
             return cls()
 
 
-class SpecificationVersionListDataSelectorsType:
+class SpecificationVersionDataElementsType: # EEBus_SPINE_TS_Version.xsd: ComplexType
     def __init__(
             self,
     ):
         super().__init__()
         
 
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
@@ -123,14 +123,14 @@ class SpecificationVersionListDataSelectorsType:
             return cls()
 
 
-class SpecificationVersionDataElementsType:
+class SpecificationVersionListDataSelectorsType: # EEBus_SPINE_TS_Version.xsd: ComplexType
     def __init__(
             self,
     ):
         super().__init__()
         
 
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         

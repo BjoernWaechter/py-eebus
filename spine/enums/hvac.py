@@ -8,11 +8,11 @@ class MessageType(bytes, Enum):
     MSG_TYPE_END = b'\x03'
 
 
-class HvacSystemFunctionTypeEnumType(str, Enum):
-    heating = 'heating'
-    cooling = 'cooling'
-    ventilation = 'ventilation'
-    dhw = 'dhw'
+class HvacOverrunStatusEnumType(str, Enum):
+    active = 'active'
+    running = 'running'
+    finished = 'finished'
+    inactive = 'inactive'
 
 
 class HvacOverrunTypeEnumType(str, Enum):
@@ -28,16 +28,16 @@ class HvacOverrunTypeEnumType(str, Enum):
     valveKick = 'valveKick'
 
 
-class HvacOverrunStatusEnumType(str, Enum):
-    active = 'active'
-    running = 'running'
-    finished = 'finished'
-    inactive = 'inactive'
-
-
 class HvacOperationModeTypeEnumType(str, Enum):
     auto = 'auto'
     on = 'on'
     off = 'off'
     eco = 'eco'
+
+
+class HvacSystemFunctionTypeEnumType(str, Enum):
+    heating = 'heating'
+    cooling = 'cooling'
+    ventilation = 'ventilation'
+    dhw = 'dhw'
 

@@ -8,21 +8,6 @@ class MessageType(bytes, Enum):
     MSG_TYPE_END = b'\x03'
 
 
-class PowerTimeSlotValueTypeEnumType(str, Enum):
-    power = 'power'
-    powerMin = 'powerMin'
-    powerMax = 'powerMax'
-    powerExpectedValue = 'powerExpectedValue'
-    powerStandardDeviation = 'powerStandardDeviation'
-    powerSkewness = 'powerSkewness'
-    energy = 'energy'
-    energyMin = 'energyMin'
-    energyMax = 'energyMax'
-    energyExpectedValue = 'energyExpectedValue'
-    energyStandardDeviation = 'energyStandardDeviation'
-    energySkewness = 'energySkewness'
-
-
 class PowerSequenceStateEnumType(str, Enum):
     running = 'running'
     paused = 'paused'
@@ -38,4 +23,19 @@ class PowerSequenceScopeEnumType(str, Enum):
     forecast = 'forecast'
     measurement = 'measurement'
     recommendation = 'recommendation'
+
+
+class PowerTimeSlotValueTypeEnumType(str, Enum):
+    power = 'power'
+    powerMin = 'powerMin'
+    powerMax = 'powerMax'
+    powerExpectedValue = 'powerExpectedValue'
+    powerStandardDeviation = 'powerStandardDeviation'
+    powerSkewness = 'powerSkewness'
+    energy = 'energy'
+    energyMin = 'energyMin'
+    energyMax = 'energyMax'
+    energyExpectedValue = 'energyExpectedValue'
+    energyStandardDeviation = 'energyStandardDeviation'
+    energySkewness = 'energySkewness'
 

@@ -1,16 +1,16 @@
 # Jinja Template message_type.py.jinja2
-from spine.simple_type.bindingmanagement import BindingIdType
-from spine.simple_type.commondatatypes import LabelType
-from spine.simple_type.commondatatypes import DescriptionType
 from spine.base_type.commondatatypes import ElementTagType
-from spine.union_type.commondatatypes import FunctionType
-from spine.base_type.commondatatypes import FeatureAddressType
 from spine.base_type.commondatatypes import FeatureAddressElementsType
+from spine.base_type.commondatatypes import FeatureAddressType
+from spine.simple_type.bindingmanagement import BindingIdType
+from spine.simple_type.commondatatypes import DescriptionType
+from spine.simple_type.commondatatypes import LabelType
+from spine.union_type.commondatatypes import FeatureTypeType
 from types import NoneType
 from spine import array_2_dict
 
 
-class BindingManagementEntryDataType:
+class BindingManagementEntryDataType: # EEBus_SPINE_TS_BindingManagement.xsd: ComplexType
     def __init__(
             self,
             binding_id: BindingIdType = None,
@@ -42,7 +42,7 @@ class BindingManagementEntryDataType:
         if not isinstance(self.description, DescriptionType | NoneType):
             raise TypeError("description is not of type DescriptionType")
         
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
@@ -97,180 +97,7 @@ class BindingManagementEntryDataType:
             return cls()
 
 
-class BindingManagementRequestCallType:
-    def __init__(
-            self,
-            client_address: FeatureAddressType = None,
-            server_address: FeatureAddressType = None,
-            server_feature_type: FunctionType = None,
-    ):
-        super().__init__()
-        
-        self.client_address = client_address
-        self.server_address = server_address
-        self.server_feature_type = server_feature_type
-
-        if not isinstance(self.client_address, FeatureAddressType | NoneType):
-            raise TypeError("client_address is not of type FeatureAddressType")
-        
-        if not isinstance(self.server_address, FeatureAddressType | NoneType):
-            raise TypeError("server_address is not of type FeatureAddressType")
-        
-        if not isinstance(self.server_feature_type, FunctionType | NoneType):
-            raise TypeError("server_feature_type is not of type FunctionType")
-        
-    def get_data(self): # ComplexType
-
-        msg_data = []
-        
-        if self.client_address is not None:
-            msg_data.append({"clientAddress": self.client_address.get_data()})
-        if self.server_address is not None:
-            msg_data.append({"serverAddress": self.server_address.get_data()})
-        if self.server_feature_type is not None:
-            msg_data.append({"serverFeatureType": self.server_feature_type.get_data()})
-        
-        return msg_data
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        if self.client_address is not None:
-            result_str += f"{sep}clientAddress: {self.client_address}"
-            sep = ", "
-        if self.server_address is not None:
-            result_str += f"{sep}serverAddress: {self.server_address}"
-            sep = ", "
-        if self.server_feature_type is not None:
-            result_str += f"{sep}serverFeatureType: {self.server_feature_type}"
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
-                client_address=data_dict.get('clientAddress'),
-                server_address=data_dict.get('serverAddress'),
-                server_feature_type=data_dict.get('serverFeatureType'),
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class BindingManagementRequestCallElementsType:
-    def __init__(
-            self,
-            client_address: FeatureAddressElementsType = None,
-            server_address: FeatureAddressElementsType = None,
-            server_feature_type: ElementTagType = None,
-    ):
-        super().__init__()
-        
-        self.client_address = client_address
-        self.server_address = server_address
-        self.server_feature_type = server_feature_type
-
-        if not isinstance(self.client_address, FeatureAddressElementsType | NoneType):
-            raise TypeError("client_address is not of type FeatureAddressElementsType")
-        
-        if not isinstance(self.server_address, FeatureAddressElementsType | NoneType):
-            raise TypeError("server_address is not of type FeatureAddressElementsType")
-        
-        if not isinstance(self.server_feature_type, ElementTagType | NoneType):
-            raise TypeError("server_feature_type is not of type ElementTagType")
-        
-    def get_data(self): # ComplexType
-
-        msg_data = []
-        
-        if self.client_address is not None:
-            msg_data.append({"clientAddress": self.client_address.get_data()})
-        if self.server_address is not None:
-            msg_data.append({"serverAddress": self.server_address.get_data()})
-        if self.server_feature_type is not None:
-            msg_data.append({"serverFeatureType": self.server_feature_type.get_data()})
-        
-        return msg_data
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        if self.client_address is not None:
-            result_str += f"{sep}clientAddress: {self.client_address}"
-            sep = ", "
-        if self.server_address is not None:
-            result_str += f"{sep}serverAddress: {self.server_address}"
-            sep = ", "
-        if self.server_feature_type is not None:
-            result_str += f"{sep}serverFeatureType: {self.server_feature_type}"
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
-                client_address=data_dict.get('clientAddress'),
-                server_address=data_dict.get('serverAddress'),
-                server_feature_type=data_dict.get('serverFeatureType'),
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class BindingManagementEntryListDataType:
-    def __init__(
-            self,
-            binding_management_entry_data: list[BindingManagementEntryDataType] = None,
-    ):
-        super().__init__()
-        
-        self.binding_management_entry_data = binding_management_entry_data
-
-        if not isinstance(self.binding_management_entry_data, list | NoneType):
-            raise TypeError("binding_management_entry_data is not of type list[BindingManagementEntryDataType]")
-        
-    def get_data(self): # ComplexType
-
-        msg_data = []
-        
-        if self.binding_management_entry_data is not None:
-            msg_data.append({"bindingManagementEntryData": [d.get_data() for d in self.binding_management_entry_data]})
-        
-        return msg_data
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        if self.binding_management_entry_data is not None:
-            result_str += f"{sep}bindingManagementEntryData: {self.binding_management_entry_data}"
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
-                binding_management_entry_data=data_dict.get('bindingManagementEntryData'),
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class BindingManagementEntryListDataSelectorsType:
+class BindingManagementDeleteCallType: # EEBus_SPINE_TS_BindingManagement.xsd: ComplexType
     def __init__(
             self,
             binding_id: BindingIdType = None,
@@ -292,7 +119,7 @@ class BindingManagementEntryListDataSelectorsType:
         if not isinstance(self.server_address, FeatureAddressType | NoneType):
             raise TypeError("server_address is not of type FeatureAddressType")
         
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
@@ -335,7 +162,180 @@ class BindingManagementEntryListDataSelectorsType:
             return cls()
 
 
-class BindingManagementEntryDataElementsType:
+class BindingManagementRequestCallType: # EEBus_SPINE_TS_BindingManagement.xsd: ComplexType
+    def __init__(
+            self,
+            client_address: FeatureAddressType = None,
+            server_address: FeatureAddressType = None,
+            server_feature_type: FeatureTypeType = None,
+    ):
+        super().__init__()
+        
+        self.client_address = client_address
+        self.server_address = server_address
+        self.server_feature_type = server_feature_type
+
+        if not isinstance(self.client_address, FeatureAddressType | NoneType):
+            raise TypeError("client_address is not of type FeatureAddressType")
+        
+        if not isinstance(self.server_address, FeatureAddressType | NoneType):
+            raise TypeError("server_address is not of type FeatureAddressType")
+        
+        if not isinstance(self.server_feature_type, FeatureTypeType | NoneType):
+            raise TypeError("server_feature_type is not of type FeatureTypeType")
+        
+    def get_data(self):
+
+        msg_data = []
+        
+        if self.client_address is not None:
+            msg_data.append({"clientAddress": self.client_address.get_data()})
+        if self.server_address is not None:
+            msg_data.append({"serverAddress": self.server_address.get_data()})
+        if self.server_feature_type is not None:
+            msg_data.append({"serverFeatureType": self.server_feature_type.get_data()})
+        
+        return msg_data
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        if self.client_address is not None:
+            result_str += f"{sep}clientAddress: {self.client_address}"
+            sep = ", "
+        if self.server_address is not None:
+            result_str += f"{sep}serverAddress: {self.server_address}"
+            sep = ", "
+        if self.server_feature_type is not None:
+            result_str += f"{sep}serverFeatureType: {self.server_feature_type}"
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+                client_address=data_dict.get('clientAddress'),
+                server_address=data_dict.get('serverAddress'),
+                server_feature_type=data_dict.get('serverFeatureType'),
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class BindingManagementEntryListDataType: # EEBus_SPINE_TS_BindingManagement.xsd: ComplexType
+    def __init__(
+            self,
+            binding_management_entry_data: list[BindingManagementEntryDataType] = None,
+    ):
+        super().__init__()
+        
+        self.binding_management_entry_data = binding_management_entry_data
+
+        if not isinstance(self.binding_management_entry_data, list | NoneType):
+            raise TypeError("binding_management_entry_data is not of type list[BindingManagementEntryDataType]")
+        
+    def get_data(self):
+
+        msg_data = []
+        
+        if self.binding_management_entry_data is not None:
+            msg_data.append({"bindingManagementEntryData": [d.get_data() for d in self.binding_management_entry_data]})
+        
+        return msg_data
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        if self.binding_management_entry_data is not None:
+            result_str += f"{sep}bindingManagementEntryData: {self.binding_management_entry_data}"
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+                binding_management_entry_data=data_dict.get('bindingManagementEntryData'),
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class BindingManagementRequestCallElementsType: # EEBus_SPINE_TS_BindingManagement.xsd: ComplexType
+    def __init__(
+            self,
+            client_address: FeatureAddressElementsType = None,
+            server_address: FeatureAddressElementsType = None,
+            server_feature_type: ElementTagType = None,
+    ):
+        super().__init__()
+        
+        self.client_address = client_address
+        self.server_address = server_address
+        self.server_feature_type = server_feature_type
+
+        if not isinstance(self.client_address, FeatureAddressElementsType | NoneType):
+            raise TypeError("client_address is not of type FeatureAddressElementsType")
+        
+        if not isinstance(self.server_address, FeatureAddressElementsType | NoneType):
+            raise TypeError("server_address is not of type FeatureAddressElementsType")
+        
+        if not isinstance(self.server_feature_type, ElementTagType | NoneType):
+            raise TypeError("server_feature_type is not of type ElementTagType")
+        
+    def get_data(self):
+
+        msg_data = []
+        
+        if self.client_address is not None:
+            msg_data.append({"clientAddress": self.client_address.get_data()})
+        if self.server_address is not None:
+            msg_data.append({"serverAddress": self.server_address.get_data()})
+        if self.server_feature_type is not None:
+            msg_data.append({"serverFeatureType": self.server_feature_type.get_data()})
+        
+        return msg_data
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        if self.client_address is not None:
+            result_str += f"{sep}clientAddress: {self.client_address}"
+            sep = ", "
+        if self.server_address is not None:
+            result_str += f"{sep}serverAddress: {self.server_address}"
+            sep = ", "
+        if self.server_feature_type is not None:
+            result_str += f"{sep}serverFeatureType: {self.server_feature_type}"
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+                client_address=data_dict.get('clientAddress'),
+                server_address=data_dict.get('serverAddress'),
+                server_feature_type=data_dict.get('serverFeatureType'),
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class BindingManagementEntryDataElementsType: # EEBus_SPINE_TS_BindingManagement.xsd: ComplexType
     def __init__(
             self,
             binding_id: ElementTagType = None,
@@ -367,7 +367,7 @@ class BindingManagementEntryDataElementsType:
         if not isinstance(self.description, ElementTagType | NoneType):
             raise TypeError("description is not of type ElementTagType")
         
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
@@ -422,12 +422,12 @@ class BindingManagementEntryDataElementsType:
             return cls()
 
 
-class BindingManagementDeleteCallType:
+class BindingManagementDeleteCallElementsType: # EEBus_SPINE_TS_BindingManagement.xsd: ComplexType
     def __init__(
             self,
-            binding_id: BindingIdType = None,
-            client_address: FeatureAddressType = None,
-            server_address: FeatureAddressType = None,
+            binding_id: ElementTagType = None,
+            client_address: FeatureAddressElementsType = None,
+            server_address: FeatureAddressElementsType = None,
     ):
         super().__init__()
         
@@ -435,16 +435,16 @@ class BindingManagementDeleteCallType:
         self.client_address = client_address
         self.server_address = server_address
 
-        if not isinstance(self.binding_id, BindingIdType | NoneType):
-            raise TypeError("binding_id is not of type BindingIdType")
+        if not isinstance(self.binding_id, ElementTagType | NoneType):
+            raise TypeError("binding_id is not of type ElementTagType")
         
-        if not isinstance(self.client_address, FeatureAddressType | NoneType):
-            raise TypeError("client_address is not of type FeatureAddressType")
+        if not isinstance(self.client_address, FeatureAddressElementsType | NoneType):
+            raise TypeError("client_address is not of type FeatureAddressElementsType")
         
-        if not isinstance(self.server_address, FeatureAddressType | NoneType):
-            raise TypeError("server_address is not of type FeatureAddressType")
+        if not isinstance(self.server_address, FeatureAddressElementsType | NoneType):
+            raise TypeError("server_address is not of type FeatureAddressElementsType")
         
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
@@ -487,12 +487,12 @@ class BindingManagementDeleteCallType:
             return cls()
 
 
-class BindingManagementDeleteCallElementsType:
+class BindingManagementEntryListDataSelectorsType: # EEBus_SPINE_TS_BindingManagement.xsd: ComplexType
     def __init__(
             self,
-            binding_id: ElementTagType = None,
-            client_address: FeatureAddressElementsType = None,
-            server_address: FeatureAddressElementsType = None,
+            binding_id: BindingIdType = None,
+            client_address: FeatureAddressType = None,
+            server_address: FeatureAddressType = None,
     ):
         super().__init__()
         
@@ -500,16 +500,16 @@ class BindingManagementDeleteCallElementsType:
         self.client_address = client_address
         self.server_address = server_address
 
-        if not isinstance(self.binding_id, ElementTagType | NoneType):
-            raise TypeError("binding_id is not of type ElementTagType")
+        if not isinstance(self.binding_id, BindingIdType | NoneType):
+            raise TypeError("binding_id is not of type BindingIdType")
         
-        if not isinstance(self.client_address, FeatureAddressElementsType | NoneType):
-            raise TypeError("client_address is not of type FeatureAddressElementsType")
+        if not isinstance(self.client_address, FeatureAddressType | NoneType):
+            raise TypeError("client_address is not of type FeatureAddressType")
         
-        if not isinstance(self.server_address, FeatureAddressElementsType | NoneType):
-            raise TypeError("server_address is not of type FeatureAddressElementsType")
+        if not isinstance(self.server_address, FeatureAddressType | NoneType):
+            raise TypeError("server_address is not of type FeatureAddressType")
         
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         

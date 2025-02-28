@@ -1,25 +1,28 @@
 # Jinja Template message_type.py.jinja2
-from spine.simple_type.commondatatypes import DayOfMonthType
-from spine.simple_type.commondatatypes import CalendarWeekType
-from spine.simple_type.commondatatypes import AddressDeviceType
-from spine.simple_type.commondatatypes import NumberType
 from spine.enums.commondatatypes import MonthType
-from spine.union_type.commondatatypes import FunctionType
-from spine.simple_type.commondatatypes import ScaleType
-from spine.simple_type.commondatatypes import AddressFeatureType
+from spine.simple_type.commondatatypes import AddressDeviceType
 from spine.simple_type.commondatatypes import AddressEntityType
+from spine.simple_type.commondatatypes import AddressFeatureType
+from spine.simple_type.commondatatypes import CalendarWeekType
+from spine.simple_type.commondatatypes import DayOfMonthType
+from spine.simple_type.commondatatypes import NumberType
+from spine.simple_type.commondatatypes import ScaleType
+from spine.union_type.commondatatypes import AbsoluteOrRelativeTimeType
+from spine.union_type.commondatatypes import FunctionType
+from spine.union_type.commondatatypes import OccurrenceType
+from spine.union_type.commondatatypes import RecurringIntervalType
 from types import NoneType
 from spine import array_2_dict
 
 
-class ElementTagType:
+class ElementTagType: # EEBus_SPINE_TS_CommonDataTypes.xsd: ComplexType
     def __init__(
             self,
     ):
         super().__init__()
         
 
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
@@ -45,7 +48,7 @@ class ElementTagType:
             return cls()
 
 
-class PossibleOperationsClassifierType:
+class PossibleOperationsClassifierType: # EEBus_SPINE_TS_CommonDataTypes.xsd: ComplexType
     def __init__(
             self,
             partial: ElementTagType = None,
@@ -57,7 +60,7 @@ class PossibleOperationsClassifierType:
         if not isinstance(self.partial, ElementTagType | NoneType):
             raise TypeError("partial is not of type ElementTagType")
         
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
@@ -88,7 +91,93 @@ class PossibleOperationsClassifierType:
             return cls()
 
 
-class ScaledNumberType:
+class PossibleOperationsWriteType: # EEBus_SPINE_TS_CommonDataTypes.xsd: ComplexType
+    def __init__(
+            self,
+            partial: ElementTagType = None,
+    ):
+        super().__init__()
+        
+        self.partial = partial
+
+        if not isinstance(self.partial, ElementTagType | NoneType):
+            raise TypeError("partial is not of type ElementTagType")
+        
+    def get_data(self):
+
+        msg_data = []
+        
+        if self.partial is not None:
+            msg_data.append({"partial": self.partial.get_data()})
+        
+        return msg_data
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        if self.partial is not None:
+            result_str += f"{sep}partial: {self.partial}"
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+                partial=data_dict.get('partial'),
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class PossibleOperationsReadType: # EEBus_SPINE_TS_CommonDataTypes.xsd: ComplexType
+    def __init__(
+            self,
+            partial: ElementTagType = None,
+    ):
+        super().__init__()
+        
+        self.partial = partial
+
+        if not isinstance(self.partial, ElementTagType | NoneType):
+            raise TypeError("partial is not of type ElementTagType")
+        
+    def get_data(self):
+
+        msg_data = []
+        
+        if self.partial is not None:
+            msg_data.append({"partial": self.partial.get_data()})
+        
+        return msg_data
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        if self.partial is not None:
+            result_str += f"{sep}partial: {self.partial}"
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+                partial=data_dict.get('partial'),
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class ScaledNumberType: # EEBus_SPINE_TS_CommonDataTypes.xsd: ComplexType
     def __init__(
             self,
             number: NumberType = None,
@@ -105,7 +194,7 @@ class ScaledNumberType:
         if not isinstance(self.scale, ScaleType | NoneType):
             raise TypeError("scale is not of type ScaleType")
         
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
@@ -142,7 +231,7 @@ class ScaledNumberType:
             return cls()
 
 
-class ScaledNumberElementsType:
+class ScaledNumberElementsType: # EEBus_SPINE_TS_CommonDataTypes.xsd: ComplexType
     def __init__(
             self,
             number: ElementTagType = None,
@@ -159,7 +248,7 @@ class ScaledNumberElementsType:
         if not isinstance(self.scale, ElementTagType | NoneType):
             raise TypeError("scale is not of type ElementTagType")
         
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
@@ -196,136 +285,7 @@ class ScaledNumberElementsType:
             return cls()
 
 
-class PossibleOperationsWriteType:
-    def __init__(
-            self,
-            partial: ElementTagType = None,
-    ):
-        super().__init__()
-        
-        self.partial = partial
-
-        if not isinstance(self.partial, ElementTagType | NoneType):
-            raise TypeError("partial is not of type ElementTagType")
-        
-    def get_data(self): # ComplexType
-
-        msg_data = []
-        
-        if self.partial is not None:
-            msg_data.append({"partial": self.partial.get_data()})
-        
-        return msg_data
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        if self.partial is not None:
-            result_str += f"{sep}partial: {self.partial}"
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
-                partial=data_dict.get('partial'),
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class PossibleOperationsReadType:
-    def __init__(
-            self,
-            partial: ElementTagType = None,
-    ):
-        super().__init__()
-        
-        self.partial = partial
-
-        if not isinstance(self.partial, ElementTagType | NoneType):
-            raise TypeError("partial is not of type ElementTagType")
-        
-    def get_data(self): # ComplexType
-
-        msg_data = []
-        
-        if self.partial is not None:
-            msg_data.append({"partial": self.partial.get_data()})
-        
-        return msg_data
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        if self.partial is not None:
-            result_str += f"{sep}partial: {self.partial}"
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
-                partial=data_dict.get('partial'),
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class DeviceAddressType:
-    def __init__(
-            self,
-            device: AddressDeviceType = None,
-    ):
-        super().__init__()
-        
-        self.device = device
-
-        if not isinstance(self.device, AddressDeviceType | NoneType):
-            raise TypeError("device is not of type AddressDeviceType")
-        
-    def get_data(self): # ComplexType
-
-        msg_data = []
-        
-        if self.device is not None:
-            msg_data.append({"device": self.device.get_data()})
-        
-        return msg_data
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        if self.device is not None:
-            result_str += f"{sep}device: {self.device}"
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
-                device=data_dict.get('device'),
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class DeviceAddressElementsType:
+class DeviceAddressElementsType: # EEBus_SPINE_TS_CommonDataTypes.xsd: ComplexType
     def __init__(
             self,
             device: ElementTagType = None,
@@ -337,7 +297,7 @@ class DeviceAddressElementsType:
         if not isinstance(self.device, ElementTagType | NoneType):
             raise TypeError("device is not of type ElementTagType")
         
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
@@ -368,31 +328,24 @@ class DeviceAddressElementsType:
             return cls()
 
 
-class ScaledNumberRangeType:
+class DeviceAddressType: # EEBus_SPINE_TS_CommonDataTypes.xsd: ComplexType
     def __init__(
             self,
-            min: ScaledNumberType = None,
-            max: ScaledNumberType = None,
+            device: AddressDeviceType = None,
     ):
         super().__init__()
         
-        self.min = min
-        self.max = max
+        self.device = device
 
-        if not isinstance(self.min, ScaledNumberType | NoneType):
-            raise TypeError("min is not of type ScaledNumberType")
+        if not isinstance(self.device, AddressDeviceType | NoneType):
+            raise TypeError("device is not of type AddressDeviceType")
         
-        if not isinstance(self.max, ScaledNumberType | NoneType):
-            raise TypeError("max is not of type ScaledNumberType")
-        
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
-        if self.min is not None:
-            msg_data.append({"min": self.min.get_data()})
-        if self.max is not None:
-            msg_data.append({"max": self.max.get_data()})
+        if self.device is not None:
+            msg_data.append({"device": self.device.get_data()})
         
         return msg_data
 
@@ -400,11 +353,8 @@ class ScaledNumberRangeType:
     def __str__(self):
         result_str = ""
         sep = ""
-        if self.min is not None:
-            result_str += f"{sep}min: {self.min}"
-            sep = ", "
-        if self.max is not None:
-            result_str += f"{sep}max: {self.max}"
+        if self.device is not None:
+            result_str += f"{sep}device: {self.device}"
         
         return result_str
 
@@ -413,8 +363,7 @@ class ScaledNumberRangeType:
         if type(data) == list:
             data_dict = array_2_dict(data)
             return cls(
-                min=data_dict.get('min'),
-                max=data_dict.get('max'),
+                device=data_dict.get('device'),
             )
         elif data:
             return cls(data)
@@ -422,61 +371,7 @@ class ScaledNumberRangeType:
             return cls()
 
 
-class ScaledNumberRangeElementsType:
-    def __init__(
-            self,
-            min: ScaledNumberElementsType = None,
-            max: ScaledNumberElementsType = None,
-    ):
-        super().__init__()
-        
-        self.min = min
-        self.max = max
-
-        if not isinstance(self.min, ScaledNumberElementsType | NoneType):
-            raise TypeError("min is not of type ScaledNumberElementsType")
-        
-        if not isinstance(self.max, ScaledNumberElementsType | NoneType):
-            raise TypeError("max is not of type ScaledNumberElementsType")
-        
-    def get_data(self): # ComplexType
-
-        msg_data = []
-        
-        if self.min is not None:
-            msg_data.append({"min": self.min.get_data()})
-        if self.max is not None:
-            msg_data.append({"max": self.max.get_data()})
-        
-        return msg_data
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        if self.min is not None:
-            result_str += f"{sep}min: {self.min}"
-            sep = ", "
-        if self.max is not None:
-            result_str += f"{sep}max: {self.max}"
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
-                min=data_dict.get('min'),
-                max=data_dict.get('max'),
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class PossibleOperationsType:
+class PossibleOperationsType: # EEBus_SPINE_TS_CommonDataTypes.xsd: ComplexType
     def __init__(
             self,
             read: PossibleOperationsReadType = None,
@@ -493,7 +388,7 @@ class PossibleOperationsType:
         if not isinstance(self.write, PossibleOperationsWriteType | NoneType):
             raise TypeError("write is not of type PossibleOperationsWriteType")
         
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
@@ -530,31 +425,31 @@ class PossibleOperationsType:
             return cls()
 
 
-class PossibleOperationsElementsType:
+class ScaledNumberRangeType: # EEBus_SPINE_TS_CommonDataTypes.xsd: ComplexType
     def __init__(
             self,
-            read: ElementTagType = None,
-            write: ElementTagType = None,
+            min: ScaledNumberType = None,
+            max: ScaledNumberType = None,
     ):
         super().__init__()
         
-        self.read = read
-        self.write = write
+        self.min = min
+        self.max = max
 
-        if not isinstance(self.read, ElementTagType | NoneType):
-            raise TypeError("read is not of type ElementTagType")
+        if not isinstance(self.min, ScaledNumberType | NoneType):
+            raise TypeError("min is not of type ScaledNumberType")
         
-        if not isinstance(self.write, ElementTagType | NoneType):
-            raise TypeError("write is not of type ElementTagType")
+        if not isinstance(self.max, ScaledNumberType | NoneType):
+            raise TypeError("max is not of type ScaledNumberType")
         
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
-        if self.read is not None:
-            msg_data.append({"read": self.read.get_data()})
-        if self.write is not None:
-            msg_data.append({"write": self.write.get_data()})
+        if self.min is not None:
+            msg_data.append({"min": self.min.get_data()})
+        if self.max is not None:
+            msg_data.append({"max": self.max.get_data()})
         
         return msg_data
 
@@ -562,11 +457,11 @@ class PossibleOperationsElementsType:
     def __str__(self):
         result_str = ""
         sep = ""
-        if self.read is not None:
-            result_str += f"{sep}read: {self.read}"
+        if self.min is not None:
+            result_str += f"{sep}min: {self.min}"
             sep = ", "
-        if self.write is not None:
-            result_str += f"{sep}write: {self.write}"
+        if self.max is not None:
+            result_str += f"{sep}max: {self.max}"
         
         return result_str
 
@@ -575,8 +470,8 @@ class PossibleOperationsElementsType:
         if type(data) == list:
             data_dict = array_2_dict(data)
             return cls(
-                read=data_dict.get('read'),
-                write=data_dict.get('write'),
+                min=data_dict.get('min'),
+                max=data_dict.get('max'),
             )
         elif data:
             return cls(data)
@@ -584,115 +479,7 @@ class PossibleOperationsElementsType:
             return cls()
 
 
-class EntityAddressType:
-    def __init__(
-            self,
-            device: AddressDeviceType = None,
-            entity: list[AddressEntityType] = None,
-    ):
-        super().__init__()
-        
-        self.device = device
-        self.entity = entity
-
-        if not isinstance(self.device, AddressDeviceType | NoneType):
-            raise TypeError("device is not of type AddressDeviceType")
-        
-        if not isinstance(self.entity, list | NoneType):
-            raise TypeError("entity is not of type list[AddressEntityType]")
-        
-    def get_data(self): # ComplexType
-
-        msg_data = []
-        
-        if self.device is not None:
-            msg_data.append({"device": self.device.get_data()})
-        if self.entity is not None:
-            msg_data.append({"entity": [d.get_data() for d in self.entity]})
-        
-        return msg_data
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        if self.device is not None:
-            result_str += f"{sep}device: {self.device}"
-            sep = ", "
-        if self.entity is not None:
-            result_str += f"{sep}entity: {self.entity}"
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
-                device=data_dict.get('device'),
-                entity=data_dict.get('entity'),
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class EntityAddressElementsType:
-    def __init__(
-            self,
-            device: ElementTagType = None,
-            entity: ElementTagType = None,
-    ):
-        super().__init__()
-        
-        self.device = device
-        self.entity = entity
-
-        if not isinstance(self.device, ElementTagType | NoneType):
-            raise TypeError("device is not of type ElementTagType")
-        
-        if not isinstance(self.entity, ElementTagType | NoneType):
-            raise TypeError("entity is not of type ElementTagType")
-        
-    def get_data(self): # ComplexType
-
-        msg_data = []
-        
-        if self.device is not None:
-            msg_data.append({"device": self.device.get_data()})
-        if self.entity is not None:
-            msg_data.append({"entity": self.entity.get_data()})
-        
-        return msg_data
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        if self.device is not None:
-            result_str += f"{sep}device: {self.device}"
-            sep = ", "
-        if self.entity is not None:
-            result_str += f"{sep}entity: {self.entity}"
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
-                device=data_dict.get('device'),
-                entity=data_dict.get('entity'),
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class DaysOfWeekType:
+class DaysOfWeekType: # EEBus_SPINE_TS_CommonDataTypes.xsd: ComplexType
     def __init__(
             self,
             monday: ElementTagType = None,
@@ -734,7 +521,7 @@ class DaysOfWeekType:
         if not isinstance(self.sunday, ElementTagType | NoneType):
             raise TypeError("sunday is not of type ElementTagType")
         
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
@@ -801,31 +588,31 @@ class DaysOfWeekType:
             return cls()
 
 
-class TimestampIntervalType:
+class PossibleOperationsElementsType: # EEBus_SPINE_TS_CommonDataTypes.xsd: ComplexType
     def __init__(
             self,
-            start_time: FunctionType = None,
-            end_time: FunctionType = None,
+            read: ElementTagType = None,
+            write: ElementTagType = None,
     ):
         super().__init__()
         
-        self.start_time = start_time
-        self.end_time = end_time
+        self.read = read
+        self.write = write
 
-        if not isinstance(self.start_time, FunctionType | NoneType):
-            raise TypeError("start_time is not of type FunctionType")
+        if not isinstance(self.read, ElementTagType | NoneType):
+            raise TypeError("read is not of type ElementTagType")
         
-        if not isinstance(self.end_time, FunctionType | NoneType):
-            raise TypeError("end_time is not of type FunctionType")
+        if not isinstance(self.write, ElementTagType | NoneType):
+            raise TypeError("write is not of type ElementTagType")
         
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
-        if self.start_time is not None:
-            msg_data.append({"startTime": self.start_time.get_data()})
-        if self.end_time is not None:
-            msg_data.append({"endTime": self.end_time.get_data()})
+        if self.read is not None:
+            msg_data.append({"read": self.read.get_data()})
+        if self.write is not None:
+            msg_data.append({"write": self.write.get_data()})
         
         return msg_data
 
@@ -833,11 +620,11 @@ class TimestampIntervalType:
     def __str__(self):
         result_str = ""
         sep = ""
-        if self.start_time is not None:
-            result_str += f"{sep}startTime: {self.start_time}"
+        if self.read is not None:
+            result_str += f"{sep}read: {self.read}"
             sep = ", "
-        if self.end_time is not None:
-            result_str += f"{sep}endTime: {self.end_time}"
+        if self.write is not None:
+            result_str += f"{sep}write: {self.write}"
         
         return result_str
 
@@ -846,8 +633,8 @@ class TimestampIntervalType:
         if type(data) == list:
             data_dict = array_2_dict(data)
             return cls(
-                start_time=data_dict.get('startTime'),
-                end_time=data_dict.get('endTime'),
+                read=data_dict.get('read'),
+                write=data_dict.get('write'),
             )
         elif data:
             return cls(data)
@@ -855,31 +642,31 @@ class TimestampIntervalType:
             return cls()
 
 
-class TimePeriodType:
+class ScaledNumberRangeElementsType: # EEBus_SPINE_TS_CommonDataTypes.xsd: ComplexType
     def __init__(
             self,
-            start_time: FunctionType = None,
-            end_time: FunctionType = None,
+            min: ScaledNumberElementsType = None,
+            max: ScaledNumberElementsType = None,
     ):
         super().__init__()
         
-        self.start_time = start_time
-        self.end_time = end_time
+        self.min = min
+        self.max = max
 
-        if not isinstance(self.start_time, FunctionType | NoneType):
-            raise TypeError("start_time is not of type FunctionType")
+        if not isinstance(self.min, ScaledNumberElementsType | NoneType):
+            raise TypeError("min is not of type ScaledNumberElementsType")
         
-        if not isinstance(self.end_time, FunctionType | NoneType):
-            raise TypeError("end_time is not of type FunctionType")
+        if not isinstance(self.max, ScaledNumberElementsType | NoneType):
+            raise TypeError("max is not of type ScaledNumberElementsType")
         
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
-        if self.start_time is not None:
-            msg_data.append({"startTime": self.start_time.get_data()})
-        if self.end_time is not None:
-            msg_data.append({"endTime": self.end_time.get_data()})
+        if self.min is not None:
+            msg_data.append({"min": self.min.get_data()})
+        if self.max is not None:
+            msg_data.append({"max": self.max.get_data()})
         
         return msg_data
 
@@ -887,11 +674,11 @@ class TimePeriodType:
     def __str__(self):
         result_str = ""
         sep = ""
-        if self.start_time is not None:
-            result_str += f"{sep}startTime: {self.start_time}"
+        if self.min is not None:
+            result_str += f"{sep}min: {self.min}"
             sep = ", "
-        if self.end_time is not None:
-            result_str += f"{sep}endTime: {self.end_time}"
+        if self.max is not None:
+            result_str += f"{sep}max: {self.max}"
         
         return result_str
 
@@ -900,8 +687,8 @@ class TimePeriodType:
         if type(data) == list:
             data_dict = array_2_dict(data)
             return cls(
-                start_time=data_dict.get('startTime'),
-                end_time=data_dict.get('endTime'),
+                min=data_dict.get('min'),
+                max=data_dict.get('max'),
             )
         elif data:
             return cls(data)
@@ -909,31 +696,31 @@ class TimePeriodType:
             return cls()
 
 
-class TimePeriodElementsType:
+class EntityAddressElementsType: # EEBus_SPINE_TS_CommonDataTypes.xsd: ComplexType
     def __init__(
             self,
-            start_time: ElementTagType = None,
-            end_time: ElementTagType = None,
+            device: ElementTagType = None,
+            entity: ElementTagType = None,
     ):
         super().__init__()
         
-        self.start_time = start_time
-        self.end_time = end_time
+        self.device = device
+        self.entity = entity
 
-        if not isinstance(self.start_time, ElementTagType | NoneType):
-            raise TypeError("start_time is not of type ElementTagType")
+        if not isinstance(self.device, ElementTagType | NoneType):
+            raise TypeError("device is not of type ElementTagType")
         
-        if not isinstance(self.end_time, ElementTagType | NoneType):
-            raise TypeError("end_time is not of type ElementTagType")
+        if not isinstance(self.entity, ElementTagType | NoneType):
+            raise TypeError("entity is not of type ElementTagType")
         
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
-        if self.start_time is not None:
-            msg_data.append({"startTime": self.start_time.get_data()})
-        if self.end_time is not None:
-            msg_data.append({"endTime": self.end_time.get_data()})
+        if self.device is not None:
+            msg_data.append({"device": self.device.get_data()})
+        if self.entity is not None:
+            msg_data.append({"entity": self.entity.get_data()})
         
         return msg_data
 
@@ -941,11 +728,11 @@ class TimePeriodElementsType:
     def __str__(self):
         result_str = ""
         sep = ""
-        if self.start_time is not None:
-            result_str += f"{sep}startTime: {self.start_time}"
+        if self.device is not None:
+            result_str += f"{sep}device: {self.device}"
             sep = ", "
-        if self.end_time is not None:
-            result_str += f"{sep}endTime: {self.end_time}"
+        if self.entity is not None:
+            result_str += f"{sep}entity: {self.entity}"
         
         return result_str
 
@@ -954,8 +741,8 @@ class TimePeriodElementsType:
         if type(data) == list:
             data_dict = array_2_dict(data)
             return cls(
-                start_time=data_dict.get('startTime'),
-                end_time=data_dict.get('endTime'),
+                device=data_dict.get('device'),
+                entity=data_dict.get('entity'),
             )
         elif data:
             return cls(data)
@@ -963,7 +750,115 @@ class TimePeriodElementsType:
             return cls()
 
 
-class ScaledNumberSetType:
+class EntityAddressType: # EEBus_SPINE_TS_CommonDataTypes.xsd: ComplexType
+    def __init__(
+            self,
+            device: AddressDeviceType = None,
+            entity: list[AddressEntityType] = None,
+    ):
+        super().__init__()
+        
+        self.device = device
+        self.entity = entity
+
+        if not isinstance(self.device, AddressDeviceType | NoneType):
+            raise TypeError("device is not of type AddressDeviceType")
+        
+        if not isinstance(self.entity, list | NoneType):
+            raise TypeError("entity is not of type list[AddressEntityType]")
+        
+    def get_data(self):
+
+        msg_data = []
+        
+        if self.device is not None:
+            msg_data.append({"device": self.device.get_data()})
+        if self.entity is not None:
+            msg_data.append({"entity": [d.get_data() for d in self.entity]})
+        
+        return msg_data
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        if self.device is not None:
+            result_str += f"{sep}device: {self.device}"
+            sep = ", "
+        if self.entity is not None:
+            result_str += f"{sep}entity: {self.entity}"
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+                device=data_dict.get('device'),
+                entity=data_dict.get('entity'),
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class FunctionPropertyType: # EEBus_SPINE_TS_CommonDataTypes.xsd: ComplexType
+    def __init__(
+            self,
+            function: FunctionType = None,
+            possible_operations: PossibleOperationsType = None,
+    ):
+        super().__init__()
+        
+        self.function = function
+        self.possible_operations = possible_operations
+
+        if not isinstance(self.function, FunctionType | NoneType):
+            raise TypeError("function is not of type FunctionType")
+        
+        if not isinstance(self.possible_operations, PossibleOperationsType | NoneType):
+            raise TypeError("possible_operations is not of type PossibleOperationsType")
+        
+    def get_data(self):
+
+        msg_data = []
+        
+        if self.function is not None:
+            msg_data.append({"function": self.function.get_data()})
+        if self.possible_operations is not None:
+            msg_data.append({"possibleOperations": self.possible_operations.get_data()})
+        
+        return msg_data
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        if self.function is not None:
+            result_str += f"{sep}function: {self.function}"
+            sep = ", "
+        if self.possible_operations is not None:
+            result_str += f"{sep}possibleOperations: {self.possible_operations}"
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+                function=data_dict.get('function'),
+                possible_operations=data_dict.get('possibleOperations'),
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class ScaledNumberSetType: # EEBus_SPINE_TS_CommonDataTypes.xsd: ComplexType
     def __init__(
             self,
             value: list[ScaledNumberType] = None,
@@ -980,7 +875,7 @@ class ScaledNumberSetType:
         if not isinstance(self.range, list | NoneType):
             raise TypeError("range is not of type list[ScaledNumberRangeType]")
         
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
@@ -1017,64 +912,10 @@ class ScaledNumberSetType:
             return cls()
 
 
-class ScaledNumberSetElementsType:
+class RecurrenceInformationType: # EEBus_SPINE_TS_CommonDataTypes.xsd: ComplexType
     def __init__(
             self,
-            value: ScaledNumberElementsType = None,
-            range: ScaledNumberRangeElementsType = None,
-    ):
-        super().__init__()
-        
-        self.value = value
-        self.range = range
-
-        if not isinstance(self.value, ScaledNumberElementsType | NoneType):
-            raise TypeError("value is not of type ScaledNumberElementsType")
-        
-        if not isinstance(self.range, ScaledNumberRangeElementsType | NoneType):
-            raise TypeError("range is not of type ScaledNumberRangeElementsType")
-        
-    def get_data(self): # ComplexType
-
-        msg_data = []
-        
-        if self.value is not None:
-            msg_data.append({"value": self.value.get_data()})
-        if self.range is not None:
-            msg_data.append({"range": self.range.get_data()})
-        
-        return msg_data
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        if self.value is not None:
-            result_str += f"{sep}value: {self.value}"
-            sep = ", "
-        if self.range is not None:
-            result_str += f"{sep}range: {self.range}"
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
-                value=data_dict.get('value'),
-                range=data_dict.get('range'),
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class RecurrenceInformationType:
-    def __init__(
-            self,
-            recurring_interval: FunctionType = None,
+            recurring_interval: RecurringIntervalType = None,
             recurring_interval_step: int = None,
             first_execution: str = None,
             execution_count: int = None,
@@ -1088,8 +929,8 @@ class RecurrenceInformationType:
         self.execution_count = execution_count
         self.last_execution = last_execution
 
-        if not isinstance(self.recurring_interval, FunctionType | NoneType):
-            raise TypeError("recurring_interval is not of type FunctionType")
+        if not isinstance(self.recurring_interval, RecurringIntervalType | NoneType):
+            raise TypeError("recurring_interval is not of type RecurringIntervalType")
         
         if not isinstance(self.recurring_interval_step, int | NoneType):
             raise TypeError("recurring_interval_step is not of type int")
@@ -1103,7 +944,7 @@ class RecurrenceInformationType:
         if not isinstance(self.last_execution, str | NoneType):
             raise TypeError("last_execution is not of type str")
         
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
@@ -1158,339 +999,14 @@ class RecurrenceInformationType:
             return cls()
 
 
-class RecurrenceInformationElementsType:
-    def __init__(
-            self,
-            recurring_interval: ElementTagType = None,
-            recurring_interval_step: ElementTagType = None,
-            first_execution: ElementTagType = None,
-            execution_count: ElementTagType = None,
-            last_execution: ElementTagType = None,
-    ):
-        super().__init__()
-        
-        self.recurring_interval = recurring_interval
-        self.recurring_interval_step = recurring_interval_step
-        self.first_execution = first_execution
-        self.execution_count = execution_count
-        self.last_execution = last_execution
-
-        if not isinstance(self.recurring_interval, ElementTagType | NoneType):
-            raise TypeError("recurring_interval is not of type ElementTagType")
-        
-        if not isinstance(self.recurring_interval_step, ElementTagType | NoneType):
-            raise TypeError("recurring_interval_step is not of type ElementTagType")
-        
-        if not isinstance(self.first_execution, ElementTagType | NoneType):
-            raise TypeError("first_execution is not of type ElementTagType")
-        
-        if not isinstance(self.execution_count, ElementTagType | NoneType):
-            raise TypeError("execution_count is not of type ElementTagType")
-        
-        if not isinstance(self.last_execution, ElementTagType | NoneType):
-            raise TypeError("last_execution is not of type ElementTagType")
-        
-    def get_data(self): # ComplexType
-
-        msg_data = []
-        
-        if self.recurring_interval is not None:
-            msg_data.append({"recurringInterval": self.recurring_interval.get_data()})
-        if self.recurring_interval_step is not None:
-            msg_data.append({"recurringIntervalStep": self.recurring_interval_step.get_data()})
-        if self.first_execution is not None:
-            msg_data.append({"firstExecution": self.first_execution.get_data()})
-        if self.execution_count is not None:
-            msg_data.append({"executionCount": self.execution_count.get_data()})
-        if self.last_execution is not None:
-            msg_data.append({"lastExecution": self.last_execution.get_data()})
-        
-        return msg_data
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        if self.recurring_interval is not None:
-            result_str += f"{sep}recurringInterval: {self.recurring_interval}"
-            sep = ", "
-        if self.recurring_interval_step is not None:
-            result_str += f"{sep}recurringIntervalStep: {self.recurring_interval_step}"
-            sep = ", "
-        if self.first_execution is not None:
-            result_str += f"{sep}firstExecution: {self.first_execution}"
-            sep = ", "
-        if self.execution_count is not None:
-            result_str += f"{sep}executionCount: {self.execution_count}"
-            sep = ", "
-        if self.last_execution is not None:
-            result_str += f"{sep}lastExecution: {self.last_execution}"
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
-                recurring_interval=data_dict.get('recurringInterval'),
-                recurring_interval_step=data_dict.get('recurringIntervalStep'),
-                first_execution=data_dict.get('firstExecution'),
-                execution_count=data_dict.get('executionCount'),
-                last_execution=data_dict.get('lastExecution'),
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class FunctionPropertyType:
-    def __init__(
-            self,
-            function: FunctionType = None,
-            possible_operations: PossibleOperationsType = None,
-    ):
-        super().__init__()
-        
-        self.function = function
-        self.possible_operations = possible_operations
-
-        if not isinstance(self.function, FunctionType | NoneType):
-            raise TypeError("function is not of type FunctionType")
-        
-        if not isinstance(self.possible_operations, PossibleOperationsType | NoneType):
-            raise TypeError("possible_operations is not of type PossibleOperationsType")
-        
-    def get_data(self): # ComplexType
-
-        msg_data = []
-        
-        if self.function is not None:
-            msg_data.append({"function": self.function.get_data()})
-        if self.possible_operations is not None:
-            msg_data.append({"possibleOperations": self.possible_operations.get_data()})
-        
-        return msg_data
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        if self.function is not None:
-            result_str += f"{sep}function: {self.function}"
-            sep = ", "
-        if self.possible_operations is not None:
-            result_str += f"{sep}possibleOperations: {self.possible_operations}"
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
-                function=data_dict.get('function'),
-                possible_operations=data_dict.get('possibleOperations'),
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class FunctionPropertyElementsType:
-    def __init__(
-            self,
-            function: ElementTagType = None,
-            possible_operations: PossibleOperationsElementsType = None,
-    ):
-        super().__init__()
-        
-        self.function = function
-        self.possible_operations = possible_operations
-
-        if not isinstance(self.function, ElementTagType | NoneType):
-            raise TypeError("function is not of type ElementTagType")
-        
-        if not isinstance(self.possible_operations, PossibleOperationsElementsType | NoneType):
-            raise TypeError("possible_operations is not of type PossibleOperationsElementsType")
-        
-    def get_data(self): # ComplexType
-
-        msg_data = []
-        
-        if self.function is not None:
-            msg_data.append({"function": self.function.get_data()})
-        if self.possible_operations is not None:
-            msg_data.append({"possibleOperations": self.possible_operations.get_data()})
-        
-        return msg_data
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        if self.function is not None:
-            result_str += f"{sep}function: {self.function}"
-            sep = ", "
-        if self.possible_operations is not None:
-            result_str += f"{sep}possibleOperations: {self.possible_operations}"
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
-                function=data_dict.get('function'),
-                possible_operations=data_dict.get('possibleOperations'),
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class FeatureAddressType:
-    def __init__(
-            self,
-            device: AddressDeviceType = None,
-            entity: list[AddressEntityType] = None,
-            feature: AddressFeatureType = None,
-    ):
-        super().__init__()
-        
-        self.device = device
-        self.entity = entity
-        self.feature = feature
-
-        if not isinstance(self.device, AddressDeviceType | NoneType):
-            raise TypeError("device is not of type AddressDeviceType")
-        
-        if not isinstance(self.entity, list | NoneType):
-            raise TypeError("entity is not of type list[AddressEntityType]")
-        
-        if not isinstance(self.feature, AddressFeatureType | NoneType):
-            raise TypeError("feature is not of type AddressFeatureType")
-        
-    def get_data(self): # ComplexType
-
-        msg_data = []
-        
-        if self.device is not None:
-            msg_data.append({"device": self.device.get_data()})
-        if self.entity is not None:
-            msg_data.append({"entity": [d.get_data() for d in self.entity]})
-        if self.feature is not None:
-            msg_data.append({"feature": self.feature.get_data()})
-        
-        return msg_data
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        if self.device is not None:
-            result_str += f"{sep}device: {self.device}"
-            sep = ", "
-        if self.entity is not None:
-            result_str += f"{sep}entity: {self.entity}"
-            sep = ", "
-        if self.feature is not None:
-            result_str += f"{sep}feature: {self.feature}"
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
-                device=data_dict.get('device'),
-                entity=data_dict.get('entity'),
-                feature=data_dict.get('feature'),
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class FeatureAddressElementsType:
-    def __init__(
-            self,
-            device: ElementTagType = None,
-            entity: ElementTagType = None,
-            feature: ElementTagType = None,
-    ):
-        super().__init__()
-        
-        self.device = device
-        self.entity = entity
-        self.feature = feature
-
-        if not isinstance(self.device, ElementTagType | NoneType):
-            raise TypeError("device is not of type ElementTagType")
-        
-        if not isinstance(self.entity, ElementTagType | NoneType):
-            raise TypeError("entity is not of type ElementTagType")
-        
-        if not isinstance(self.feature, ElementTagType | NoneType):
-            raise TypeError("feature is not of type ElementTagType")
-        
-    def get_data(self): # ComplexType
-
-        msg_data = []
-        
-        if self.device is not None:
-            msg_data.append({"device": self.device.get_data()})
-        if self.entity is not None:
-            msg_data.append({"entity": self.entity.get_data()})
-        if self.feature is not None:
-            msg_data.append({"feature": self.feature.get_data()})
-        
-        return msg_data
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        if self.device is not None:
-            result_str += f"{sep}device: {self.device}"
-            sep = ", "
-        if self.entity is not None:
-            result_str += f"{sep}entity: {self.entity}"
-            sep = ", "
-        if self.feature is not None:
-            result_str += f"{sep}feature: {self.feature}"
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
-                device=data_dict.get('device'),
-                entity=data_dict.get('entity'),
-                feature=data_dict.get('feature'),
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class AbsoluteOrRecurringTimeType:
+class AbsoluteOrRecurringTimeType: # EEBus_SPINE_TS_CommonDataTypes.xsd: ComplexType
     def __init__(
             self,
             date_time: str = None,
             month: MonthType = None,
             day_of_month: DayOfMonthType = None,
             calendar_week: CalendarWeekType = None,
-            day_of_week_occurrence: FunctionType = None,
+            day_of_week_occurrence: OccurrenceType = None,
             days_of_week: DaysOfWeekType = None,
             time: str = None,
             relative: str = None,
@@ -1518,8 +1034,8 @@ class AbsoluteOrRecurringTimeType:
         if not isinstance(self.calendar_week, CalendarWeekType | NoneType):
             raise TypeError("calendar_week is not of type CalendarWeekType")
         
-        if not isinstance(self.day_of_week_occurrence, FunctionType | NoneType):
-            raise TypeError("day_of_week_occurrence is not of type FunctionType")
+        if not isinstance(self.day_of_week_occurrence, OccurrenceType | NoneType):
+            raise TypeError("day_of_week_occurrence is not of type OccurrenceType")
         
         if not isinstance(self.days_of_week, DaysOfWeekType | NoneType):
             raise TypeError("days_of_week is not of type DaysOfWeekType")
@@ -1530,7 +1046,7 @@ class AbsoluteOrRecurringTimeType:
         if not isinstance(self.relative, str | NoneType):
             raise TypeError("relative is not of type str")
         
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
@@ -1603,7 +1119,94 @@ class AbsoluteOrRecurringTimeType:
             return cls()
 
 
-class AbsoluteOrRecurringTimeElementsType:
+class RecurrenceInformationElementsType: # EEBus_SPINE_TS_CommonDataTypes.xsd: ComplexType
+    def __init__(
+            self,
+            recurring_interval: ElementTagType = None,
+            recurring_interval_step: ElementTagType = None,
+            first_execution: ElementTagType = None,
+            execution_count: ElementTagType = None,
+            last_execution: ElementTagType = None,
+    ):
+        super().__init__()
+        
+        self.recurring_interval = recurring_interval
+        self.recurring_interval_step = recurring_interval_step
+        self.first_execution = first_execution
+        self.execution_count = execution_count
+        self.last_execution = last_execution
+
+        if not isinstance(self.recurring_interval, ElementTagType | NoneType):
+            raise TypeError("recurring_interval is not of type ElementTagType")
+        
+        if not isinstance(self.recurring_interval_step, ElementTagType | NoneType):
+            raise TypeError("recurring_interval_step is not of type ElementTagType")
+        
+        if not isinstance(self.first_execution, ElementTagType | NoneType):
+            raise TypeError("first_execution is not of type ElementTagType")
+        
+        if not isinstance(self.execution_count, ElementTagType | NoneType):
+            raise TypeError("execution_count is not of type ElementTagType")
+        
+        if not isinstance(self.last_execution, ElementTagType | NoneType):
+            raise TypeError("last_execution is not of type ElementTagType")
+        
+    def get_data(self):
+
+        msg_data = []
+        
+        if self.recurring_interval is not None:
+            msg_data.append({"recurringInterval": self.recurring_interval.get_data()})
+        if self.recurring_interval_step is not None:
+            msg_data.append({"recurringIntervalStep": self.recurring_interval_step.get_data()})
+        if self.first_execution is not None:
+            msg_data.append({"firstExecution": self.first_execution.get_data()})
+        if self.execution_count is not None:
+            msg_data.append({"executionCount": self.execution_count.get_data()})
+        if self.last_execution is not None:
+            msg_data.append({"lastExecution": self.last_execution.get_data()})
+        
+        return msg_data
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        if self.recurring_interval is not None:
+            result_str += f"{sep}recurringInterval: {self.recurring_interval}"
+            sep = ", "
+        if self.recurring_interval_step is not None:
+            result_str += f"{sep}recurringIntervalStep: {self.recurring_interval_step}"
+            sep = ", "
+        if self.first_execution is not None:
+            result_str += f"{sep}firstExecution: {self.first_execution}"
+            sep = ", "
+        if self.execution_count is not None:
+            result_str += f"{sep}executionCount: {self.execution_count}"
+            sep = ", "
+        if self.last_execution is not None:
+            result_str += f"{sep}lastExecution: {self.last_execution}"
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+                recurring_interval=data_dict.get('recurringInterval'),
+                recurring_interval_step=data_dict.get('recurringIntervalStep'),
+                first_execution=data_dict.get('firstExecution'),
+                execution_count=data_dict.get('executionCount'),
+                last_execution=data_dict.get('lastExecution'),
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class AbsoluteOrRecurringTimeElementsType: # EEBus_SPINE_TS_CommonDataTypes.xsd: ComplexType
     def __init__(
             self,
             date_time: ElementTagType = None,
@@ -1650,7 +1253,7 @@ class AbsoluteOrRecurringTimeElementsType:
         if not isinstance(self.relative, ElementTagType | NoneType):
             raise TypeError("relative is not of type ElementTagType")
         
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
@@ -1716,6 +1319,406 @@ class AbsoluteOrRecurringTimeElementsType:
                 days_of_week=data_dict.get('daysOfWeek'),
                 time=data_dict.get('time'),
                 relative=data_dict.get('relative'),
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class FunctionPropertyElementsType: # EEBus_SPINE_TS_CommonDataTypes.xsd: ComplexType
+    def __init__(
+            self,
+            function: ElementTagType = None,
+            possible_operations: PossibleOperationsElementsType = None,
+    ):
+        super().__init__()
+        
+        self.function = function
+        self.possible_operations = possible_operations
+
+        if not isinstance(self.function, ElementTagType | NoneType):
+            raise TypeError("function is not of type ElementTagType")
+        
+        if not isinstance(self.possible_operations, PossibleOperationsElementsType | NoneType):
+            raise TypeError("possible_operations is not of type PossibleOperationsElementsType")
+        
+    def get_data(self):
+
+        msg_data = []
+        
+        if self.function is not None:
+            msg_data.append({"function": self.function.get_data()})
+        if self.possible_operations is not None:
+            msg_data.append({"possibleOperations": self.possible_operations.get_data()})
+        
+        return msg_data
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        if self.function is not None:
+            result_str += f"{sep}function: {self.function}"
+            sep = ", "
+        if self.possible_operations is not None:
+            result_str += f"{sep}possibleOperations: {self.possible_operations}"
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+                function=data_dict.get('function'),
+                possible_operations=data_dict.get('possibleOperations'),
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class ScaledNumberSetElementsType: # EEBus_SPINE_TS_CommonDataTypes.xsd: ComplexType
+    def __init__(
+            self,
+            value: ScaledNumberElementsType = None,
+            range: ScaledNumberRangeElementsType = None,
+    ):
+        super().__init__()
+        
+        self.value = value
+        self.range = range
+
+        if not isinstance(self.value, ScaledNumberElementsType | NoneType):
+            raise TypeError("value is not of type ScaledNumberElementsType")
+        
+        if not isinstance(self.range, ScaledNumberRangeElementsType | NoneType):
+            raise TypeError("range is not of type ScaledNumberRangeElementsType")
+        
+    def get_data(self):
+
+        msg_data = []
+        
+        if self.value is not None:
+            msg_data.append({"value": self.value.get_data()})
+        if self.range is not None:
+            msg_data.append({"range": self.range.get_data()})
+        
+        return msg_data
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        if self.value is not None:
+            result_str += f"{sep}value: {self.value}"
+            sep = ", "
+        if self.range is not None:
+            result_str += f"{sep}range: {self.range}"
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+                value=data_dict.get('value'),
+                range=data_dict.get('range'),
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class FeatureAddressElementsType: # EEBus_SPINE_TS_CommonDataTypes.xsd: ComplexType
+    def __init__(
+            self,
+            device: ElementTagType = None,
+            entity: ElementTagType = None,
+            feature: ElementTagType = None,
+    ):
+        super().__init__()
+        
+        self.device = device
+        self.entity = entity
+        self.feature = feature
+
+        if not isinstance(self.device, ElementTagType | NoneType):
+            raise TypeError("device is not of type ElementTagType")
+        
+        if not isinstance(self.entity, ElementTagType | NoneType):
+            raise TypeError("entity is not of type ElementTagType")
+        
+        if not isinstance(self.feature, ElementTagType | NoneType):
+            raise TypeError("feature is not of type ElementTagType")
+        
+    def get_data(self):
+
+        msg_data = []
+        
+        if self.device is not None:
+            msg_data.append({"device": self.device.get_data()})
+        if self.entity is not None:
+            msg_data.append({"entity": self.entity.get_data()})
+        if self.feature is not None:
+            msg_data.append({"feature": self.feature.get_data()})
+        
+        return msg_data
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        if self.device is not None:
+            result_str += f"{sep}device: {self.device}"
+            sep = ", "
+        if self.entity is not None:
+            result_str += f"{sep}entity: {self.entity}"
+            sep = ", "
+        if self.feature is not None:
+            result_str += f"{sep}feature: {self.feature}"
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+                device=data_dict.get('device'),
+                entity=data_dict.get('entity'),
+                feature=data_dict.get('feature'),
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class TimePeriodElementsType: # EEBus_SPINE_TS_CommonDataTypes.xsd: ComplexType
+    def __init__(
+            self,
+            start_time: ElementTagType = None,
+            end_time: ElementTagType = None,
+    ):
+        super().__init__()
+        
+        self.start_time = start_time
+        self.end_time = end_time
+
+        if not isinstance(self.start_time, ElementTagType | NoneType):
+            raise TypeError("start_time is not of type ElementTagType")
+        
+        if not isinstance(self.end_time, ElementTagType | NoneType):
+            raise TypeError("end_time is not of type ElementTagType")
+        
+    def get_data(self):
+
+        msg_data = []
+        
+        if self.start_time is not None:
+            msg_data.append({"startTime": self.start_time.get_data()})
+        if self.end_time is not None:
+            msg_data.append({"endTime": self.end_time.get_data()})
+        
+        return msg_data
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        if self.start_time is not None:
+            result_str += f"{sep}startTime: {self.start_time}"
+            sep = ", "
+        if self.end_time is not None:
+            result_str += f"{sep}endTime: {self.end_time}"
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+                start_time=data_dict.get('startTime'),
+                end_time=data_dict.get('endTime'),
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class TimePeriodType: # EEBus_SPINE_TS_CommonDataTypes.xsd: ComplexType
+    def __init__(
+            self,
+            start_time: AbsoluteOrRelativeTimeType = None,
+            end_time: AbsoluteOrRelativeTimeType = None,
+    ):
+        super().__init__()
+        
+        self.start_time = start_time
+        self.end_time = end_time
+
+        if not isinstance(self.start_time, AbsoluteOrRelativeTimeType | NoneType):
+            raise TypeError("start_time is not of type AbsoluteOrRelativeTimeType")
+        
+        if not isinstance(self.end_time, AbsoluteOrRelativeTimeType | NoneType):
+            raise TypeError("end_time is not of type AbsoluteOrRelativeTimeType")
+        
+    def get_data(self):
+
+        msg_data = []
+        
+        if self.start_time is not None:
+            msg_data.append({"startTime": self.start_time.get_data()})
+        if self.end_time is not None:
+            msg_data.append({"endTime": self.end_time.get_data()})
+        
+        return msg_data
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        if self.start_time is not None:
+            result_str += f"{sep}startTime: {self.start_time}"
+            sep = ", "
+        if self.end_time is not None:
+            result_str += f"{sep}endTime: {self.end_time}"
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+                start_time=data_dict.get('startTime'),
+                end_time=data_dict.get('endTime'),
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class TimestampIntervalType: # EEBus_SPINE_TS_CommonDataTypes.xsd: ComplexType
+    def __init__(
+            self,
+            start_time: AbsoluteOrRelativeTimeType = None,
+            end_time: AbsoluteOrRelativeTimeType = None,
+    ):
+        super().__init__()
+        
+        self.start_time = start_time
+        self.end_time = end_time
+
+        if not isinstance(self.start_time, AbsoluteOrRelativeTimeType | NoneType):
+            raise TypeError("start_time is not of type AbsoluteOrRelativeTimeType")
+        
+        if not isinstance(self.end_time, AbsoluteOrRelativeTimeType | NoneType):
+            raise TypeError("end_time is not of type AbsoluteOrRelativeTimeType")
+        
+    def get_data(self):
+
+        msg_data = []
+        
+        if self.start_time is not None:
+            msg_data.append({"startTime": self.start_time.get_data()})
+        if self.end_time is not None:
+            msg_data.append({"endTime": self.end_time.get_data()})
+        
+        return msg_data
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        if self.start_time is not None:
+            result_str += f"{sep}startTime: {self.start_time}"
+            sep = ", "
+        if self.end_time is not None:
+            result_str += f"{sep}endTime: {self.end_time}"
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+                start_time=data_dict.get('startTime'),
+                end_time=data_dict.get('endTime'),
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class FeatureAddressType: # EEBus_SPINE_TS_CommonDataTypes.xsd: ComplexType
+    def __init__(
+            self,
+            device: AddressDeviceType = None,
+            entity: list[AddressEntityType] = None,
+            feature: AddressFeatureType = None,
+    ):
+        super().__init__()
+        
+        self.device = device
+        self.entity = entity
+        self.feature = feature
+
+        if not isinstance(self.device, AddressDeviceType | NoneType):
+            raise TypeError("device is not of type AddressDeviceType")
+        
+        if not isinstance(self.entity, list | NoneType):
+            raise TypeError("entity is not of type list[AddressEntityType]")
+        
+        if not isinstance(self.feature, AddressFeatureType | NoneType):
+            raise TypeError("feature is not of type AddressFeatureType")
+        
+    def get_data(self):
+
+        msg_data = []
+        
+        if self.device is not None:
+            msg_data.append({"device": self.device.get_data()})
+        if self.entity is not None:
+            msg_data.append({"entity": [d.get_data() for d in self.entity]})
+        if self.feature is not None:
+            msg_data.append({"feature": self.feature.get_data()})
+        
+        return msg_data
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        if self.device is not None:
+            result_str += f"{sep}device: {self.device}"
+            sep = ", "
+        if self.entity is not None:
+            result_str += f"{sep}entity: {self.entity}"
+            sep = ", "
+        if self.feature is not None:
+            result_str += f"{sep}feature: {self.feature}"
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+                device=data_dict.get('device'),
+                entity=data_dict.get('entity'),
+                feature=data_dict.get('feature'),
             )
         elif data:
             return cls(data)

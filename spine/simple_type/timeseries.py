@@ -3,7 +3,7 @@ from types import NoneType
 from spine import array_2_dict
 
 
-class TimeSeriesSlotIdType:
+class TimeSeriesSlotIdType: # EEBus_SPINE_TS_TimeSeries.xsd: AliasType
     def __init__(
             self,
             value: int,
@@ -15,7 +15,7 @@ class TimeSeriesSlotIdType:
         if not isinstance(self.value, int):
             raise TypeError("value is not of type int")
         
-    def get_data(self): # AliasType
+    def get_data(self):
 
         return self.value
 
@@ -41,7 +41,7 @@ class TimeSeriesSlotIdType:
             return cls()
 
 
-class TimeSeriesSlotCountType:
+class TimeSeriesSlotCountType: # EEBus_SPINE_TS_TimeSeries.xsd: AliasType
     def __init__(
             self,
             value: TimeSeriesSlotIdType,
@@ -53,7 +53,7 @@ class TimeSeriesSlotCountType:
         if not isinstance(self.value, TimeSeriesSlotIdType):
             raise TypeError("value is not of type TimeSeriesSlotIdType")
         
-    def get_data(self): # AliasType
+    def get_data(self):
 
         return self.value
 
@@ -79,7 +79,7 @@ class TimeSeriesSlotCountType:
             return cls()
 
 
-class TimeSeriesIdType:
+class TimeSeriesIdType: # EEBus_SPINE_TS_TimeSeries.xsd: AliasType
     def __init__(
             self,
             value: int,
@@ -91,7 +91,7 @@ class TimeSeriesIdType:
         if not isinstance(self.value, int):
             raise TypeError("value is not of type int")
         
-    def get_data(self): # AliasType
+    def get_data(self):
 
         return self.value
 

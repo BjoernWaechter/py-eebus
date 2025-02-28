@@ -5,7 +5,7 @@ from types import NoneType
 from spine import array_2_dict
 
 
-class ResultDataType:
+class ResultDataType: # EEBus_SPINE_TS_Result.xsd: ComplexType
     def __init__(
             self,
             error_number: ErrorNumberType = None,
@@ -22,7 +22,7 @@ class ResultDataType:
         if not isinstance(self.description, DescriptionType | NoneType):
             raise TypeError("description is not of type DescriptionType")
         
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         

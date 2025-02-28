@@ -3,7 +3,7 @@ from types import NoneType
 from spine import array_2_dict
 
 
-class NetworkManagementTechnologyAddressType:
+class NetworkManagementMinimumTrustLevelType: # EEBus_SPINE_TS_NetworkManagement.xsd: AliasType
     def __init__(
             self,
             value: str,
@@ -15,7 +15,7 @@ class NetworkManagementTechnologyAddressType:
         if not isinstance(self.value, str):
             raise TypeError("value is not of type str")
         
-    def get_data(self): # AliasType
+    def get_data(self):
 
         return self.value
 
@@ -41,7 +41,7 @@ class NetworkManagementTechnologyAddressType:
             return cls()
 
 
-class NetworkManagementSetupType:
+class NetworkManagementCommunicationsTechnologyInformationType: # EEBus_SPINE_TS_NetworkManagement.xsd: AliasType
     def __init__(
             self,
             value: str,
@@ -53,7 +53,7 @@ class NetworkManagementSetupType:
         if not isinstance(self.value, str):
             raise TypeError("value is not of type str")
         
-    def get_data(self): # AliasType
+    def get_data(self):
 
         return self.value
 
@@ -79,7 +79,7 @@ class NetworkManagementSetupType:
             return cls()
 
 
-class NetworkManagementScanSetupType:
+class NetworkManagementTechnologyAddressType: # EEBus_SPINE_TS_NetworkManagement.xsd: AliasType
     def __init__(
             self,
             value: str,
@@ -91,7 +91,7 @@ class NetworkManagementScanSetupType:
         if not isinstance(self.value, str):
             raise TypeError("value is not of type str")
         
-    def get_data(self): # AliasType
+    def get_data(self):
 
         return self.value
 
@@ -117,7 +117,7 @@ class NetworkManagementScanSetupType:
             return cls()
 
 
-class NetworkManagementProcessTimeoutType:
+class NetworkManagementCandidateSetupType: # EEBus_SPINE_TS_NetworkManagement.xsd: AliasType
     def __init__(
             self,
             value: str,
@@ -129,7 +129,7 @@ class NetworkManagementProcessTimeoutType:
         if not isinstance(self.value, str):
             raise TypeError("value is not of type str")
         
-    def get_data(self): # AliasType
+    def get_data(self):
 
         return self.value
 
@@ -155,7 +155,7 @@ class NetworkManagementProcessTimeoutType:
             return cls()
 
 
-class NetworkManagementNativeSetupType:
+class NetworkManagementSetupType: # EEBus_SPINE_TS_NetworkManagement.xsd: AliasType
     def __init__(
             self,
             value: str,
@@ -167,7 +167,7 @@ class NetworkManagementNativeSetupType:
         if not isinstance(self.value, str):
             raise TypeError("value is not of type str")
         
-    def get_data(self): # AliasType
+    def get_data(self):
 
         return self.value
 
@@ -193,7 +193,7 @@ class NetworkManagementNativeSetupType:
             return cls()
 
 
-class NetworkManagementMinimumTrustLevelType:
+class NetworkManagementScanSetupType: # EEBus_SPINE_TS_NetworkManagement.xsd: AliasType
     def __init__(
             self,
             value: str,
@@ -205,7 +205,7 @@ class NetworkManagementMinimumTrustLevelType:
         if not isinstance(self.value, str):
             raise TypeError("value is not of type str")
         
-    def get_data(self): # AliasType
+    def get_data(self):
 
         return self.value
 
@@ -231,7 +231,7 @@ class NetworkManagementMinimumTrustLevelType:
             return cls()
 
 
-class NetworkManagementCommunicationsTechnologyInformationType:
+class NetworkManagementProcessTimeoutType: # EEBus_SPINE_TS_NetworkManagement.xsd: AliasType
     def __init__(
             self,
             value: str,
@@ -243,7 +243,7 @@ class NetworkManagementCommunicationsTechnologyInformationType:
         if not isinstance(self.value, str):
             raise TypeError("value is not of type str")
         
-    def get_data(self): # AliasType
+    def get_data(self):
 
         return self.value
 
@@ -269,7 +269,7 @@ class NetworkManagementCommunicationsTechnologyInformationType:
             return cls()
 
 
-class NetworkManagementCandidateSetupType:
+class NetworkManagementNativeSetupType: # EEBus_SPINE_TS_NetworkManagement.xsd: AliasType
     def __init__(
             self,
             value: str,
@@ -281,7 +281,7 @@ class NetworkManagementCandidateSetupType:
         if not isinstance(self.value, str):
             raise TypeError("value is not of type str")
         
-    def get_data(self): # AliasType
+    def get_data(self):
 
         return self.value
 

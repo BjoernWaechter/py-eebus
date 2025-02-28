@@ -8,6 +8,14 @@ class MessageType(bytes, Enum):
     MSG_TYPE_END = b'\x03'
 
 
+class GridConditionEnumType(str, Enum):
+    consumptionRed = 'consumptionRed'
+    consumptionYellow = 'consumptionYellow'
+    good = 'good'
+    productionYellow = 'productionYellow'
+    productionRed = 'productionRed'
+
+
 class SupplyConditionOriginatorEnumType(str, Enum):
     externDSO = 'externDSO'
     externSupplier = 'externSupplier'
@@ -23,12 +31,4 @@ class SupplyConditionEventTypeEnumType(str, Enum):
     releaseOfLimitations = 'releaseOfLimitations'
     otherProblem = 'otherProblem'
     gridConditionUpdate = 'gridConditionUpdate'
-
-
-class GridConditionEnumType(str, Enum):
-    consumptionRed = 'consumptionRed'
-    consumptionYellow = 'consumptionYellow'
-    good = 'good'
-    productionYellow = 'productionYellow'
-    productionRed = 'productionRed'
 

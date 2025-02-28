@@ -8,20 +8,9 @@ class MessageType(bytes, Enum):
     MSG_TYPE_END = b'\x03'
 
 
-class StateInformationFunctionalityEnumType(str, Enum):
-    externalOverrideFromGrid = 'externalOverrideFromGrid'
-    autonomousGridSupport = 'autonomousGridSupport'
-    islandingMode = 'islandingMode'
-    balancing = 'balancing'
-    trickleCharging = 'trickleCharging'
-    calibration = 'calibration'
-    commissioningMissing = 'commissioningMissing'
-    sleeping = 'sleeping'
-    starting = 'starting'
-    mppt = 'mppt'
-    throttled = 'throttled'
-    shuttingDown = 'shuttingDown'
-    manualShutdown = 'manualShutdown'
+class StateInformationCategoryEnumType(str, Enum):
+    functionality = 'functionality'
+    failure = 'failure'
 
 
 class StateInformationFailureEnumType(str, Enum):
@@ -45,7 +34,18 @@ class StateInformationFailureEnumType(str, Enum):
     genericInternalError = 'genericInternalError'
 
 
-class StateInformationCategoryEnumType(str, Enum):
-    functionality = 'functionality'
-    failure = 'failure'
+class StateInformationFunctionalityEnumType(str, Enum):
+    externalOverrideFromGrid = 'externalOverrideFromGrid'
+    autonomousGridSupport = 'autonomousGridSupport'
+    islandingMode = 'islandingMode'
+    balancing = 'balancing'
+    trickleCharging = 'trickleCharging'
+    calibration = 'calibration'
+    commissioningMissing = 'commissioningMissing'
+    sleeping = 'sleeping'
+    starting = 'starting'
+    mppt = 'mppt'
+    throttled = 'throttled'
+    shuttingDown = 'shuttingDown'
+    manualShutdown = 'manualShutdown'
 

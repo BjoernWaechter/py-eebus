@@ -1,12 +1,12 @@
 # Jinja Template message_type.py.jinja2
-from spine.simple_type.datatunneling import PurposeIdType
-from spine.simple_type.datatunneling import ChannelIdType
 from spine.base_type.commondatatypes import ElementTagType
+from spine.simple_type.datatunneling import ChannelIdType
+from spine.simple_type.datatunneling import PurposeIdType
 from types import NoneType
 from spine import array_2_dict
 
 
-class DataTunnelingHeaderType:
+class DataTunnelingHeaderType: # EEBus_SPINE_TS_DataTunneling.xsd: ComplexType
     def __init__(
             self,
             purpose_id: PurposeIdType = None,
@@ -28,7 +28,7 @@ class DataTunnelingHeaderType:
         if not isinstance(self.sequence_id, int | NoneType):
             raise TypeError("sequence_id is not of type int")
         
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
@@ -71,7 +71,7 @@ class DataTunnelingHeaderType:
             return cls()
 
 
-class DataTunnelingHeaderElementsType:
+class DataTunnelingHeaderElementsType: # EEBus_SPINE_TS_DataTunneling.xsd: ComplexType
     def __init__(
             self,
             purpose_id: ElementTagType = None,
@@ -93,7 +93,7 @@ class DataTunnelingHeaderElementsType:
         if not isinstance(self.sequence_id, ElementTagType | NoneType):
             raise TypeError("sequence_id is not of type ElementTagType")
         
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
@@ -136,7 +136,7 @@ class DataTunnelingHeaderElementsType:
             return cls()
 
 
-class DataTunnelingCallType:
+class DataTunnelingCallType: # EEBus_SPINE_TS_DataTunneling.xsd: ComplexType
     def __init__(
             self,
             header: DataTunnelingHeaderType = None,
@@ -153,7 +153,7 @@ class DataTunnelingCallType:
         if not isinstance(self.payload, str | NoneType):
             raise TypeError("payload is not of type str")
         
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
@@ -190,7 +190,7 @@ class DataTunnelingCallType:
             return cls()
 
 
-class DataTunnelingCallElementsType:
+class DataTunnelingCallElementsType: # EEBus_SPINE_TS_DataTunneling.xsd: ComplexType
     def __init__(
             self,
             header: DataTunnelingHeaderElementsType = None,
@@ -207,7 +207,7 @@ class DataTunnelingCallElementsType:
         if not isinstance(self.payload, ElementTagType | NoneType):
             raise TypeError("payload is not of type ElementTagType")
         
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         

@@ -3,7 +3,7 @@ from types import NoneType
 from spine import array_2_dict
 
 
-class SpecificationVersionType:
+class MaxResponseDelayType: # EEBus_SPINE_TS_CommonDataTypes.xsd: AliasType
     def __init__(
             self,
             value: str,
@@ -15,7 +15,7 @@ class SpecificationVersionType:
         if not isinstance(self.value, str):
             raise TypeError("value is not of type str")
         
-    def get_data(self): # AliasType
+    def get_data(self):
 
         return self.value
 
@@ -41,83 +41,7 @@ class SpecificationVersionType:
             return cls()
 
 
-class ScaleType:
-    def __init__(
-            self,
-            value: int,
-    ):
-        super().__init__()
-        
-        self.value = value
-
-        if not isinstance(self.value, int):
-            raise TypeError("value is not of type int")
-        
-    def get_data(self): # AliasType
-
-        return self.value
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        if self.value is not None:
-            result_str += f"{sep}value: {self.value}"
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
-                value=data_dict.get('value'),
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class NumberType:
-    def __init__(
-            self,
-            value: int,
-    ):
-        super().__init__()
-        
-        self.value = value
-
-        if not isinstance(self.value, int):
-            raise TypeError("value is not of type int")
-        
-    def get_data(self): # AliasType
-
-        return self.value
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        if self.value is not None:
-            result_str += f"{sep}value: {self.value}"
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
-                value=data_dict.get('value'),
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class MaxResponseDelayType:
+class FeatureGroupType: # EEBus_SPINE_TS_CommonDataTypes.xsd: AliasType
     def __init__(
             self,
             value: str,
@@ -129,7 +53,7 @@ class MaxResponseDelayType:
         if not isinstance(self.value, str):
             raise TypeError("value is not of type str")
         
-    def get_data(self): # AliasType
+    def get_data(self):
 
         return self.value
 
@@ -155,121 +79,7 @@ class MaxResponseDelayType:
             return cls()
 
 
-class LabelType:
-    def __init__(
-            self,
-            value: str,
-    ):
-        super().__init__()
-        
-        self.value = value
-
-        if not isinstance(self.value, str):
-            raise TypeError("value is not of type str")
-        
-    def get_data(self): # AliasType
-
-        return self.value
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        if self.value is not None:
-            result_str += f"{sep}value: {self.value}"
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
-                value=data_dict.get('value'),
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class FeatureGroupType:
-    def __init__(
-            self,
-            value: str,
-    ):
-        super().__init__()
-        
-        self.value = value
-
-        if not isinstance(self.value, str):
-            raise TypeError("value is not of type str")
-        
-    def get_data(self): # AliasType
-
-        return self.value
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        if self.value is not None:
-            result_str += f"{sep}value: {self.value}"
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
-                value=data_dict.get('value'),
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class DescriptionType:
-    def __init__(
-            self,
-            value: str,
-    ):
-        super().__init__()
-        
-        self.value = value
-
-        if not isinstance(self.value, str):
-            raise TypeError("value is not of type str")
-        
-    def get_data(self): # AliasType
-
-        return self.value
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        if self.value is not None:
-            result_str += f"{sep}value: {self.value}"
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
-                value=data_dict.get('value'),
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class DayOfMonthType:
+class CalendarWeekType: # EEBus_SPINE_TS_CommonDataTypes.xsd: AliasType
     def __init__(
             self,
             value: int,
@@ -281,7 +91,7 @@ class DayOfMonthType:
         if not isinstance(self.value, int):
             raise TypeError("value is not of type int")
         
-    def get_data(self): # AliasType
+    def get_data(self):
 
         return self.value
 
@@ -307,7 +117,7 @@ class DayOfMonthType:
             return cls()
 
 
-class CalendarWeekType:
+class DayOfMonthType: # EEBus_SPINE_TS_CommonDataTypes.xsd: AliasType
     def __init__(
             self,
             value: int,
@@ -319,7 +129,7 @@ class CalendarWeekType:
         if not isinstance(self.value, int):
             raise TypeError("value is not of type int")
         
-    def get_data(self): # AliasType
+    def get_data(self):
 
         return self.value
 
@@ -345,83 +155,7 @@ class CalendarWeekType:
             return cls()
 
 
-class AddressFeatureType:
-    def __init__(
-            self,
-            value: int,
-    ):
-        super().__init__()
-        
-        self.value = value
-
-        if not isinstance(self.value, int):
-            raise TypeError("value is not of type int")
-        
-    def get_data(self): # AliasType
-
-        return self.value
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        if self.value is not None:
-            result_str += f"{sep}value: {self.value}"
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
-                value=data_dict.get('value'),
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class AddressEntityType:
-    def __init__(
-            self,
-            value: int,
-    ):
-        super().__init__()
-        
-        self.value = value
-
-        if not isinstance(self.value, int):
-            raise TypeError("value is not of type int")
-        
-    def get_data(self): # AliasType
-
-        return self.value
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        if self.value is not None:
-            result_str += f"{sep}value: {self.value}"
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
-                value=data_dict.get('value'),
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class AddressDeviceType:
+class DescriptionType: # EEBus_SPINE_TS_CommonDataTypes.xsd: AliasType
     def __init__(
             self,
             value: str,
@@ -433,7 +167,273 @@ class AddressDeviceType:
         if not isinstance(self.value, str):
             raise TypeError("value is not of type str")
         
-    def get_data(self): # AliasType
+    def get_data(self):
+
+        return self.value
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        if self.value is not None:
+            result_str += f"{sep}value: {self.value}"
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+                value=data_dict.get('value'),
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class LabelType: # EEBus_SPINE_TS_CommonDataTypes.xsd: AliasType
+    def __init__(
+            self,
+            value: str,
+    ):
+        super().__init__()
+        
+        self.value = value
+
+        if not isinstance(self.value, str):
+            raise TypeError("value is not of type str")
+        
+    def get_data(self):
+
+        return self.value
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        if self.value is not None:
+            result_str += f"{sep}value: {self.value}"
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+                value=data_dict.get('value'),
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class ScaleType: # EEBus_SPINE_TS_CommonDataTypes.xsd: AliasType
+    def __init__(
+            self,
+            value: int,
+    ):
+        super().__init__()
+        
+        self.value = value
+
+        if not isinstance(self.value, int):
+            raise TypeError("value is not of type int")
+        
+    def get_data(self):
+
+        return self.value
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        if self.value is not None:
+            result_str += f"{sep}value: {self.value}"
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+                value=data_dict.get('value'),
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class NumberType: # EEBus_SPINE_TS_CommonDataTypes.xsd: AliasType
+    def __init__(
+            self,
+            value: int,
+    ):
+        super().__init__()
+        
+        self.value = value
+
+        if not isinstance(self.value, int):
+            raise TypeError("value is not of type int")
+        
+    def get_data(self):
+
+        return self.value
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        if self.value is not None:
+            result_str += f"{sep}value: {self.value}"
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+                value=data_dict.get('value'),
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class AddressFeatureType: # EEBus_SPINE_TS_CommonDataTypes.xsd: AliasType
+    def __init__(
+            self,
+            value: int,
+    ):
+        super().__init__()
+        
+        self.value = value
+
+        if not isinstance(self.value, int):
+            raise TypeError("value is not of type int")
+        
+    def get_data(self):
+
+        return self.value
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        if self.value is not None:
+            result_str += f"{sep}value: {self.value}"
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+                value=data_dict.get('value'),
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class AddressEntityType: # EEBus_SPINE_TS_CommonDataTypes.xsd: AliasType
+    def __init__(
+            self,
+            value: int,
+    ):
+        super().__init__()
+        
+        self.value = value
+
+        if not isinstance(self.value, int):
+            raise TypeError("value is not of type int")
+        
+    def get_data(self):
+
+        return self.value
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        if self.value is not None:
+            result_str += f"{sep}value: {self.value}"
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+                value=data_dict.get('value'),
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class AddressDeviceType: # EEBus_SPINE_TS_CommonDataTypes.xsd: AliasType
+    def __init__(
+            self,
+            value: str,
+    ):
+        super().__init__()
+        
+        self.value = value
+
+        if not isinstance(self.value, str):
+            raise TypeError("value is not of type str")
+        
+    def get_data(self):
+
+        return self.value
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        if self.value is not None:
+            result_str += f"{sep}value: {self.value}"
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+                value=data_dict.get('value'),
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class SpecificationVersionType: # EEBus_SPINE_TS_CommonDataTypes.xsd: AliasType
+    def __init__(
+            self,
+            value: str,
+    ):
+        super().__init__()
+        
+        self.value = value
+
+        if not isinstance(self.value, str):
+            raise TypeError("value is not of type str")
+        
+    def get_data(self):
 
         return self.value
 

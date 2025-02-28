@@ -1,15 +1,15 @@
 # Jinja Template message_type.py.jinja2
-from spine.simple_type.commondatatypes import SpecificationVersionType
-from spine.enums.commandframe import CmdClassifierType
-from spine.union_type.actuatorlevel import ActuatorLevelFctType
 from spine.base_type.commandframe import CmdType
-from spine.simple_type.commandframe import MsgCounterType
 from spine.base_type.commondatatypes import FeatureAddressType
+from spine.enums.commandframe import CmdClassifierType
+from spine.simple_type.commandframe import MsgCounterType
+from spine.simple_type.commondatatypes import SpecificationVersionType
+from spine.union_type.commondatatypes import AbsoluteOrRelativeTimeType
 from types import NoneType
 from spine import array_2_dict
 
 
-class PayloadType:
+class PayloadType: # EEBus_SPINE_TS_Datagram.xsd: ComplexType
     def __init__(
             self,
             cmd: list[CmdType] = None,
@@ -21,7 +21,7 @@ class PayloadType:
         if not isinstance(self.cmd, list | NoneType):
             raise TypeError("cmd is not of type list[CmdType]")
         
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
@@ -52,7 +52,7 @@ class PayloadType:
             return cls()
 
 
-class HeaderType:
+class HeaderType: # EEBus_SPINE_TS_Datagram.xsd: ComplexType
     def __init__(
             self,
             specification_version: SpecificationVersionType = None,
@@ -63,7 +63,7 @@ class HeaderType:
             msg_counter_reference: MsgCounterType = None,
             cmd_classifier: CmdClassifierType = None,
             ack_request: bool = None,
-            timestamp: ActuatorLevelFctType = None,
+            timestamp: AbsoluteOrRelativeTimeType = None,
     ):
         super().__init__()
         
@@ -101,10 +101,10 @@ class HeaderType:
         if not isinstance(self.ack_request, bool | NoneType):
             raise TypeError("ack_request is not of type bool")
         
-        if not isinstance(self.timestamp, ActuatorLevelFctType | NoneType):
-            raise TypeError("timestamp is not of type ActuatorLevelFctType")
+        if not isinstance(self.timestamp, AbsoluteOrRelativeTimeType | NoneType):
+            raise TypeError("timestamp is not of type AbsoluteOrRelativeTimeType")
         
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
@@ -183,7 +183,7 @@ class HeaderType:
             return cls()
 
 
-class DatagramType:
+class DatagramType: # EEBus_SPINE_TS_Datagram.xsd: ComplexType
     def __init__(
             self,
             header: HeaderType,
@@ -200,7 +200,7 @@ class DatagramType:
         if not isinstance(self.payload, PayloadType):
             raise TypeError("payload is not of type PayloadType")
         
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         

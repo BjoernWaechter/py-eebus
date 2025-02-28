@@ -1,18 +1,19 @@
 # Jinja Template message_type.py.jinja2
-from spine.simple_type.commondatatypes import LabelType
-from spine.simple_type.deviceconfiguration import DeviceConfigurationKeyValueStringType
-from spine.simple_type.commondatatypes import DescriptionType
-from spine.base_type.commondatatypes import ScaledNumberElementsType
 from spine.base_type.commondatatypes import ElementTagType
-from spine.simple_type.deviceconfiguration import DeviceConfigurationKeyIdType
-from spine.union_type.commondatatypes import FunctionType
-from spine.enums.deviceconfiguration import DeviceConfigurationKeyValueTypeType
+from spine.base_type.commondatatypes import ScaledNumberElementsType
 from spine.base_type.commondatatypes import ScaledNumberType
+from spine.enums.deviceconfiguration import DeviceConfigurationKeyValueTypeType
+from spine.simple_type.commondatatypes import DescriptionType
+from spine.simple_type.commondatatypes import LabelType
+from spine.simple_type.deviceconfiguration import DeviceConfigurationKeyIdType
+from spine.simple_type.deviceconfiguration import DeviceConfigurationKeyValueStringType
+from spine.union_type.commondatatypes import UnitOfMeasurementType
+from spine.union_type.deviceconfiguration import DeviceConfigurationKeyNameType
 from types import NoneType
 from spine import array_2_dict
 
 
-class DeviceConfigurationKeyValueValueType:
+class DeviceConfigurationKeyValueValueType: # EEBus_SPINE_TS_DeviceConfiguration.xsd: ComplexType
     def __init__(
             self,
             boolean: bool = None,
@@ -59,7 +60,7 @@ class DeviceConfigurationKeyValueValueType:
         if not isinstance(self.integer, int | NoneType):
             raise TypeError("integer is not of type int")
         
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
@@ -132,38 +133,45 @@ class DeviceConfigurationKeyValueValueType:
             return cls()
 
 
-class DeviceConfigurationKeyValueDataType:
+class DeviceConfigurationKeyValueConstraintsDataType: # EEBus_SPINE_TS_DeviceConfiguration.xsd: ComplexType
     def __init__(
             self,
             key_id: DeviceConfigurationKeyIdType = None,
-            value: DeviceConfigurationKeyValueValueType = None,
-            is_value_changeable: bool = None,
+            value_range_min: DeviceConfigurationKeyValueValueType = None,
+            value_range_max: DeviceConfigurationKeyValueValueType = None,
+            value_step_size: DeviceConfigurationKeyValueValueType = None,
     ):
         super().__init__()
         
         self.key_id = key_id
-        self.value = value
-        self.is_value_changeable = is_value_changeable
+        self.value_range_min = value_range_min
+        self.value_range_max = value_range_max
+        self.value_step_size = value_step_size
 
         if not isinstance(self.key_id, DeviceConfigurationKeyIdType | NoneType):
             raise TypeError("key_id is not of type DeviceConfigurationKeyIdType")
         
-        if not isinstance(self.value, DeviceConfigurationKeyValueValueType | NoneType):
-            raise TypeError("value is not of type DeviceConfigurationKeyValueValueType")
+        if not isinstance(self.value_range_min, DeviceConfigurationKeyValueValueType | NoneType):
+            raise TypeError("value_range_min is not of type DeviceConfigurationKeyValueValueType")
         
-        if not isinstance(self.is_value_changeable, bool | NoneType):
-            raise TypeError("is_value_changeable is not of type bool")
+        if not isinstance(self.value_range_max, DeviceConfigurationKeyValueValueType | NoneType):
+            raise TypeError("value_range_max is not of type DeviceConfigurationKeyValueValueType")
         
-    def get_data(self): # ComplexType
+        if not isinstance(self.value_step_size, DeviceConfigurationKeyValueValueType | NoneType):
+            raise TypeError("value_step_size is not of type DeviceConfigurationKeyValueValueType")
+        
+    def get_data(self):
 
         msg_data = []
         
         if self.key_id is not None:
             msg_data.append({"keyId": self.key_id.get_data()})
-        if self.value is not None:
-            msg_data.append({"value": self.value.get_data()})
-        if self.is_value_changeable is not None:
-            msg_data.append({"isValueChangeable": self.is_value_changeable})
+        if self.value_range_min is not None:
+            msg_data.append({"valueRangeMin": self.value_range_min.get_data()})
+        if self.value_range_max is not None:
+            msg_data.append({"valueRangeMax": self.value_range_max.get_data()})
+        if self.value_step_size is not None:
+            msg_data.append({"valueStepSize": self.value_step_size.get_data()})
         
         return msg_data
 
@@ -174,11 +182,14 @@ class DeviceConfigurationKeyValueDataType:
         if self.key_id is not None:
             result_str += f"{sep}keyId: {self.key_id}"
             sep = ", "
-        if self.value is not None:
-            result_str += f"{sep}value: {self.value}"
+        if self.value_range_min is not None:
+            result_str += f"{sep}valueRangeMin: {self.value_range_min}"
             sep = ", "
-        if self.is_value_changeable is not None:
-            result_str += f"{sep}isValueChangeable: {self.is_value_changeable}"
+        if self.value_range_max is not None:
+            result_str += f"{sep}valueRangeMax: {self.value_range_max}"
+            sep = ", "
+        if self.value_step_size is not None:
+            result_str += f"{sep}valueStepSize: {self.value_step_size}"
         
         return result_str
 
@@ -188,8 +199,9 @@ class DeviceConfigurationKeyValueDataType:
             data_dict = array_2_dict(data)
             return cls(
                 key_id=data_dict.get('keyId'),
-                value=data_dict.get('value'),
-                is_value_changeable=data_dict.get('isValueChangeable'),
+                value_range_min=data_dict.get('valueRangeMin'),
+                value_range_max=data_dict.get('valueRangeMax'),
+                value_step_size=data_dict.get('valueStepSize'),
             )
         elif data:
             return cls(data)
@@ -197,13 +209,13 @@ class DeviceConfigurationKeyValueDataType:
             return cls()
 
 
-class DeviceConfigurationKeyValueDescriptionDataType:
+class DeviceConfigurationKeyValueDescriptionDataType: # EEBus_SPINE_TS_DeviceConfiguration.xsd: ComplexType
     def __init__(
             self,
             key_id: DeviceConfigurationKeyIdType = None,
-            key_name: FunctionType = None,
+            key_name: DeviceConfigurationKeyNameType = None,
             value_type: DeviceConfigurationKeyValueTypeType = None,
-            unit: FunctionType = None,
+            unit: UnitOfMeasurementType = None,
             label: LabelType = None,
             description: DescriptionType = None,
     ):
@@ -219,14 +231,14 @@ class DeviceConfigurationKeyValueDescriptionDataType:
         if not isinstance(self.key_id, DeviceConfigurationKeyIdType | NoneType):
             raise TypeError("key_id is not of type DeviceConfigurationKeyIdType")
         
-        if not isinstance(self.key_name, FunctionType | NoneType):
-            raise TypeError("key_name is not of type FunctionType")
+        if not isinstance(self.key_name, DeviceConfigurationKeyNameType | NoneType):
+            raise TypeError("key_name is not of type DeviceConfigurationKeyNameType")
         
         if not isinstance(self.value_type, DeviceConfigurationKeyValueTypeType | NoneType):
             raise TypeError("value_type is not of type DeviceConfigurationKeyValueTypeType")
         
-        if not isinstance(self.unit, FunctionType | NoneType):
-            raise TypeError("unit is not of type FunctionType")
+        if not isinstance(self.unit, UnitOfMeasurementType | NoneType):
+            raise TypeError("unit is not of type UnitOfMeasurementType")
         
         if not isinstance(self.label, LabelType | NoneType):
             raise TypeError("label is not of type LabelType")
@@ -234,7 +246,7 @@ class DeviceConfigurationKeyValueDescriptionDataType:
         if not isinstance(self.description, DescriptionType | NoneType):
             raise TypeError("description is not of type DescriptionType")
         
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
@@ -295,7 +307,72 @@ class DeviceConfigurationKeyValueDescriptionDataType:
             return cls()
 
 
-class DeviceConfigurationKeyValueValueElementsType:
+class DeviceConfigurationKeyValueDataType: # EEBus_SPINE_TS_DeviceConfiguration.xsd: ComplexType
+    def __init__(
+            self,
+            key_id: DeviceConfigurationKeyIdType = None,
+            value: DeviceConfigurationKeyValueValueType = None,
+            is_value_changeable: bool = None,
+    ):
+        super().__init__()
+        
+        self.key_id = key_id
+        self.value = value
+        self.is_value_changeable = is_value_changeable
+
+        if not isinstance(self.key_id, DeviceConfigurationKeyIdType | NoneType):
+            raise TypeError("key_id is not of type DeviceConfigurationKeyIdType")
+        
+        if not isinstance(self.value, DeviceConfigurationKeyValueValueType | NoneType):
+            raise TypeError("value is not of type DeviceConfigurationKeyValueValueType")
+        
+        if not isinstance(self.is_value_changeable, bool | NoneType):
+            raise TypeError("is_value_changeable is not of type bool")
+        
+    def get_data(self):
+
+        msg_data = []
+        
+        if self.key_id is not None:
+            msg_data.append({"keyId": self.key_id.get_data()})
+        if self.value is not None:
+            msg_data.append({"value": self.value.get_data()})
+        if self.is_value_changeable is not None:
+            msg_data.append({"isValueChangeable": self.is_value_changeable})
+        
+        return msg_data
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        if self.key_id is not None:
+            result_str += f"{sep}keyId: {self.key_id}"
+            sep = ", "
+        if self.value is not None:
+            result_str += f"{sep}value: {self.value}"
+            sep = ", "
+        if self.is_value_changeable is not None:
+            result_str += f"{sep}isValueChangeable: {self.is_value_changeable}"
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+                key_id=data_dict.get('keyId'),
+                value=data_dict.get('value'),
+                is_value_changeable=data_dict.get('isValueChangeable'),
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class DeviceConfigurationKeyValueValueElementsType: # EEBus_SPINE_TS_DeviceConfiguration.xsd: ComplexType
     def __init__(
             self,
             boolean: ElementTagType = None,
@@ -337,7 +414,7 @@ class DeviceConfigurationKeyValueValueElementsType:
         if not isinstance(self.scaled_number, ScaledNumberElementsType | NoneType):
             raise TypeError("scaled_number is not of type ScaledNumberElementsType")
         
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
@@ -404,45 +481,24 @@ class DeviceConfigurationKeyValueValueElementsType:
             return cls()
 
 
-class DeviceConfigurationKeyValueConstraintsDataType:
+class DeviceConfigurationKeyValueConstraintsListDataType: # EEBus_SPINE_TS_DeviceConfiguration.xsd: ComplexType
     def __init__(
             self,
-            key_id: DeviceConfigurationKeyIdType = None,
-            value_range_min: DeviceConfigurationKeyValueValueType = None,
-            value_range_max: DeviceConfigurationKeyValueValueType = None,
-            value_step_size: DeviceConfigurationKeyValueValueType = None,
+            device_configuration_key_value_constraints_data: list[DeviceConfigurationKeyValueConstraintsDataType] = None,
     ):
         super().__init__()
         
-        self.key_id = key_id
-        self.value_range_min = value_range_min
-        self.value_range_max = value_range_max
-        self.value_step_size = value_step_size
+        self.device_configuration_key_value_constraints_data = device_configuration_key_value_constraints_data
 
-        if not isinstance(self.key_id, DeviceConfigurationKeyIdType | NoneType):
-            raise TypeError("key_id is not of type DeviceConfigurationKeyIdType")
+        if not isinstance(self.device_configuration_key_value_constraints_data, list | NoneType):
+            raise TypeError("device_configuration_key_value_constraints_data is not of type list[DeviceConfigurationKeyValueConstraintsDataType]")
         
-        if not isinstance(self.value_range_min, DeviceConfigurationKeyValueValueType | NoneType):
-            raise TypeError("value_range_min is not of type DeviceConfigurationKeyValueValueType")
-        
-        if not isinstance(self.value_range_max, DeviceConfigurationKeyValueValueType | NoneType):
-            raise TypeError("value_range_max is not of type DeviceConfigurationKeyValueValueType")
-        
-        if not isinstance(self.value_step_size, DeviceConfigurationKeyValueValueType | NoneType):
-            raise TypeError("value_step_size is not of type DeviceConfigurationKeyValueValueType")
-        
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
-        if self.key_id is not None:
-            msg_data.append({"keyId": self.key_id.get_data()})
-        if self.value_range_min is not None:
-            msg_data.append({"valueRangeMin": self.value_range_min.get_data()})
-        if self.value_range_max is not None:
-            msg_data.append({"valueRangeMax": self.value_range_max.get_data()})
-        if self.value_step_size is not None:
-            msg_data.append({"valueStepSize": self.value_step_size.get_data()})
+        if self.device_configuration_key_value_constraints_data is not None:
+            msg_data.append({"deviceConfigurationKeyValueConstraintsData": [d.get_data() for d in self.device_configuration_key_value_constraints_data]})
         
         return msg_data
 
@@ -450,17 +506,8 @@ class DeviceConfigurationKeyValueConstraintsDataType:
     def __str__(self):
         result_str = ""
         sep = ""
-        if self.key_id is not None:
-            result_str += f"{sep}keyId: {self.key_id}"
-            sep = ", "
-        if self.value_range_min is not None:
-            result_str += f"{sep}valueRangeMin: {self.value_range_min}"
-            sep = ", "
-        if self.value_range_max is not None:
-            result_str += f"{sep}valueRangeMax: {self.value_range_max}"
-            sep = ", "
-        if self.value_step_size is not None:
-            result_str += f"{sep}valueStepSize: {self.value_step_size}"
+        if self.device_configuration_key_value_constraints_data is not None:
+            result_str += f"{sep}deviceConfigurationKeyValueConstraintsData: {self.device_configuration_key_value_constraints_data}"
         
         return result_str
 
@@ -469,10 +516,7 @@ class DeviceConfigurationKeyValueConstraintsDataType:
         if type(data) == list:
             data_dict = array_2_dict(data)
             return cls(
-                key_id=data_dict.get('keyId'),
-                value_range_min=data_dict.get('valueRangeMin'),
-                value_range_max=data_dict.get('valueRangeMax'),
-                value_step_size=data_dict.get('valueStepSize'),
+                device_configuration_key_value_constraints_data=data_dict.get('deviceConfigurationKeyValueConstraintsData'),
             )
         elif data:
             return cls(data)
@@ -480,93 +524,7 @@ class DeviceConfigurationKeyValueConstraintsDataType:
             return cls()
 
 
-class DeviceConfigurationKeyValueListDataType:
-    def __init__(
-            self,
-            device_configuration_key_value_data: list[DeviceConfigurationKeyValueDataType] = None,
-    ):
-        super().__init__()
-        
-        self.device_configuration_key_value_data = device_configuration_key_value_data
-
-        if not isinstance(self.device_configuration_key_value_data, list | NoneType):
-            raise TypeError("device_configuration_key_value_data is not of type list[DeviceConfigurationKeyValueDataType]")
-        
-    def get_data(self): # ComplexType
-
-        msg_data = []
-        
-        if self.device_configuration_key_value_data is not None:
-            msg_data.append({"deviceConfigurationKeyValueData": [d.get_data() for d in self.device_configuration_key_value_data]})
-        
-        return msg_data
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        if self.device_configuration_key_value_data is not None:
-            result_str += f"{sep}deviceConfigurationKeyValueData: {self.device_configuration_key_value_data}"
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
-                device_configuration_key_value_data=data_dict.get('deviceConfigurationKeyValueData'),
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class DeviceConfigurationKeyValueListDataSelectorsType:
-    def __init__(
-            self,
-            key_id: DeviceConfigurationKeyIdType = None,
-    ):
-        super().__init__()
-        
-        self.key_id = key_id
-
-        if not isinstance(self.key_id, DeviceConfigurationKeyIdType | NoneType):
-            raise TypeError("key_id is not of type DeviceConfigurationKeyIdType")
-        
-    def get_data(self): # ComplexType
-
-        msg_data = []
-        
-        if self.key_id is not None:
-            msg_data.append({"keyId": self.key_id.get_data()})
-        
-        return msg_data
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        if self.key_id is not None:
-            result_str += f"{sep}keyId: {self.key_id}"
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
-                key_id=data_dict.get('keyId'),
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class DeviceConfigurationKeyValueDescriptionListDataType:
+class DeviceConfigurationKeyValueDescriptionListDataType: # EEBus_SPINE_TS_DeviceConfiguration.xsd: ComplexType
     def __init__(
             self,
             device_configuration_key_value_description_data: list[DeviceConfigurationKeyValueDescriptionDataType] = None,
@@ -578,7 +536,7 @@ class DeviceConfigurationKeyValueDescriptionListDataType:
         if not isinstance(self.device_configuration_key_value_description_data, list | NoneType):
             raise TypeError("device_configuration_key_value_description_data is not of type list[DeviceConfigurationKeyValueDescriptionDataType]")
         
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
@@ -609,31 +567,24 @@ class DeviceConfigurationKeyValueDescriptionListDataType:
             return cls()
 
 
-class DeviceConfigurationKeyValueDescriptionListDataSelectorsType:
+class DeviceConfigurationKeyValueListDataType: # EEBus_SPINE_TS_DeviceConfiguration.xsd: ComplexType
     def __init__(
             self,
-            key_id: DeviceConfigurationKeyIdType = None,
-            key_name: FunctionType = None,
+            device_configuration_key_value_data: list[DeviceConfigurationKeyValueDataType] = None,
     ):
         super().__init__()
         
-        self.key_id = key_id
-        self.key_name = key_name
+        self.device_configuration_key_value_data = device_configuration_key_value_data
 
-        if not isinstance(self.key_id, DeviceConfigurationKeyIdType | NoneType):
-            raise TypeError("key_id is not of type DeviceConfigurationKeyIdType")
+        if not isinstance(self.device_configuration_key_value_data, list | NoneType):
+            raise TypeError("device_configuration_key_value_data is not of type list[DeviceConfigurationKeyValueDataType]")
         
-        if not isinstance(self.key_name, FunctionType | NoneType):
-            raise TypeError("key_name is not of type FunctionType")
-        
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
-        if self.key_id is not None:
-            msg_data.append({"keyId": self.key_id.get_data()})
-        if self.key_name is not None:
-            msg_data.append({"keyName": self.key_name.get_data()})
+        if self.device_configuration_key_value_data is not None:
+            msg_data.append({"deviceConfigurationKeyValueData": [d.get_data() for d in self.device_configuration_key_value_data]})
         
         return msg_data
 
@@ -641,11 +592,8 @@ class DeviceConfigurationKeyValueDescriptionListDataSelectorsType:
     def __str__(self):
         result_str = ""
         sep = ""
-        if self.key_id is not None:
-            result_str += f"{sep}keyId: {self.key_id}"
-            sep = ", "
-        if self.key_name is not None:
-            result_str += f"{sep}keyName: {self.key_name}"
+        if self.device_configuration_key_value_data is not None:
+            result_str += f"{sep}deviceConfigurationKeyValueData: {self.device_configuration_key_value_data}"
         
         return result_str
 
@@ -654,8 +602,7 @@ class DeviceConfigurationKeyValueDescriptionListDataSelectorsType:
         if type(data) == list:
             data_dict = array_2_dict(data)
             return cls(
-                key_id=data_dict.get('keyId'),
-                key_name=data_dict.get('keyName'),
+                device_configuration_key_value_data=data_dict.get('deviceConfigurationKeyValueData'),
             )
         elif data:
             return cls(data)
@@ -663,7 +610,7 @@ class DeviceConfigurationKeyValueDescriptionListDataSelectorsType:
             return cls()
 
 
-class DeviceConfigurationKeyValueDescriptionDataElementsType:
+class DeviceConfigurationKeyValueDescriptionDataElementsType: # EEBus_SPINE_TS_DeviceConfiguration.xsd: ComplexType
     def __init__(
             self,
             key_id: ElementTagType = None,
@@ -700,7 +647,7 @@ class DeviceConfigurationKeyValueDescriptionDataElementsType:
         if not isinstance(self.description, ElementTagType | NoneType):
             raise TypeError("description is not of type ElementTagType")
         
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
@@ -761,7 +708,7 @@ class DeviceConfigurationKeyValueDescriptionDataElementsType:
             return cls()
 
 
-class DeviceConfigurationKeyValueDataElementsType:
+class DeviceConfigurationKeyValueDataElementsType: # EEBus_SPINE_TS_DeviceConfiguration.xsd: ComplexType
     def __init__(
             self,
             key_id: ElementTagType = None,
@@ -783,7 +730,7 @@ class DeviceConfigurationKeyValueDataElementsType:
         if not isinstance(self.is_value_changeable, ElementTagType | NoneType):
             raise TypeError("is_value_changeable is not of type ElementTagType")
         
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
@@ -826,93 +773,7 @@ class DeviceConfigurationKeyValueDataElementsType:
             return cls()
 
 
-class DeviceConfigurationKeyValueConstraintsListDataType:
-    def __init__(
-            self,
-            device_configuration_key_value_constraints_data: list[DeviceConfigurationKeyValueConstraintsDataType] = None,
-    ):
-        super().__init__()
-        
-        self.device_configuration_key_value_constraints_data = device_configuration_key_value_constraints_data
-
-        if not isinstance(self.device_configuration_key_value_constraints_data, list | NoneType):
-            raise TypeError("device_configuration_key_value_constraints_data is not of type list[DeviceConfigurationKeyValueConstraintsDataType]")
-        
-    def get_data(self): # ComplexType
-
-        msg_data = []
-        
-        if self.device_configuration_key_value_constraints_data is not None:
-            msg_data.append({"deviceConfigurationKeyValueConstraintsData": [d.get_data() for d in self.device_configuration_key_value_constraints_data]})
-        
-        return msg_data
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        if self.device_configuration_key_value_constraints_data is not None:
-            result_str += f"{sep}deviceConfigurationKeyValueConstraintsData: {self.device_configuration_key_value_constraints_data}"
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
-                device_configuration_key_value_constraints_data=data_dict.get('deviceConfigurationKeyValueConstraintsData'),
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class DeviceConfigurationKeyValueConstraintsListDataSelectorsType:
-    def __init__(
-            self,
-            key_id: DeviceConfigurationKeyIdType = None,
-    ):
-        super().__init__()
-        
-        self.key_id = key_id
-
-        if not isinstance(self.key_id, DeviceConfigurationKeyIdType | NoneType):
-            raise TypeError("key_id is not of type DeviceConfigurationKeyIdType")
-        
-    def get_data(self): # ComplexType
-
-        msg_data = []
-        
-        if self.key_id is not None:
-            msg_data.append({"keyId": self.key_id.get_data()})
-        
-        return msg_data
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        if self.key_id is not None:
-            result_str += f"{sep}keyId: {self.key_id}"
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
-                key_id=data_dict.get('keyId'),
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class DeviceConfigurationKeyValueConstraintsDataElementsType:
+class DeviceConfigurationKeyValueConstraintsDataElementsType: # EEBus_SPINE_TS_DeviceConfiguration.xsd: ComplexType
     def __init__(
             self,
             key_id: ElementTagType = None,
@@ -939,7 +800,7 @@ class DeviceConfigurationKeyValueConstraintsDataElementsType:
         if not isinstance(self.value_step_size, DeviceConfigurationKeyValueValueElementsType | NoneType):
             raise TypeError("value_step_size is not of type DeviceConfigurationKeyValueValueElementsType")
         
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
@@ -981,6 +842,146 @@ class DeviceConfigurationKeyValueConstraintsDataElementsType:
                 value_range_min=data_dict.get('valueRangeMin'),
                 value_range_max=data_dict.get('valueRangeMax'),
                 value_step_size=data_dict.get('valueStepSize'),
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class DeviceConfigurationKeyValueListDataSelectorsType: # EEBus_SPINE_TS_DeviceConfiguration.xsd: ComplexType
+    def __init__(
+            self,
+            key_id: DeviceConfigurationKeyIdType = None,
+    ):
+        super().__init__()
+        
+        self.key_id = key_id
+
+        if not isinstance(self.key_id, DeviceConfigurationKeyIdType | NoneType):
+            raise TypeError("key_id is not of type DeviceConfigurationKeyIdType")
+        
+    def get_data(self):
+
+        msg_data = []
+        
+        if self.key_id is not None:
+            msg_data.append({"keyId": self.key_id.get_data()})
+        
+        return msg_data
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        if self.key_id is not None:
+            result_str += f"{sep}keyId: {self.key_id}"
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+                key_id=data_dict.get('keyId'),
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class DeviceConfigurationKeyValueDescriptionListDataSelectorsType: # EEBus_SPINE_TS_DeviceConfiguration.xsd: ComplexType
+    def __init__(
+            self,
+            key_id: DeviceConfigurationKeyIdType = None,
+            key_name: DeviceConfigurationKeyNameType = None,
+    ):
+        super().__init__()
+        
+        self.key_id = key_id
+        self.key_name = key_name
+
+        if not isinstance(self.key_id, DeviceConfigurationKeyIdType | NoneType):
+            raise TypeError("key_id is not of type DeviceConfigurationKeyIdType")
+        
+        if not isinstance(self.key_name, DeviceConfigurationKeyNameType | NoneType):
+            raise TypeError("key_name is not of type DeviceConfigurationKeyNameType")
+        
+    def get_data(self):
+
+        msg_data = []
+        
+        if self.key_id is not None:
+            msg_data.append({"keyId": self.key_id.get_data()})
+        if self.key_name is not None:
+            msg_data.append({"keyName": self.key_name.get_data()})
+        
+        return msg_data
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        if self.key_id is not None:
+            result_str += f"{sep}keyId: {self.key_id}"
+            sep = ", "
+        if self.key_name is not None:
+            result_str += f"{sep}keyName: {self.key_name}"
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+                key_id=data_dict.get('keyId'),
+                key_name=data_dict.get('keyName'),
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class DeviceConfigurationKeyValueConstraintsListDataSelectorsType: # EEBus_SPINE_TS_DeviceConfiguration.xsd: ComplexType
+    def __init__(
+            self,
+            key_id: DeviceConfigurationKeyIdType = None,
+    ):
+        super().__init__()
+        
+        self.key_id = key_id
+
+        if not isinstance(self.key_id, DeviceConfigurationKeyIdType | NoneType):
+            raise TypeError("key_id is not of type DeviceConfigurationKeyIdType")
+        
+    def get_data(self):
+
+        msg_data = []
+        
+        if self.key_id is not None:
+            msg_data.append({"keyId": self.key_id.get_data()})
+        
+        return msg_data
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        if self.key_id is not None:
+            result_str += f"{sep}keyId: {self.key_id}"
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+                key_id=data_dict.get('keyId'),
             )
         elif data:
             return cls(data)

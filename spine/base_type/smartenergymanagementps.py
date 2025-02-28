@@ -1,21 +1,21 @@
 # Jinja Template message_type.py.jinja2
-from spine.simple_type.powersequences import PowerSequenceIdType
+from spine.base_type.commondatatypes import ElementTagType
 from spine.base_type.powersequences import PowerSequenceAlternativesRelationDataElementsType
 from spine.base_type.powersequences import PowerSequenceAlternativesRelationDataType
-from spine.base_type.commondatatypes import ElementTagType
 from spine.simple_type.powersequences import AlternativesIdType
+from spine.simple_type.powersequences import PowerSequenceIdType
 from types import NoneType
 from spine import array_2_dict
 
 
-class SmartEnergyManagementPsPowerTimeSlotValueListType:
+class SmartEnergyManagementPsPowerTimeSlotValueListType: # EEBus_SPINE_TS_SmartEnergyManagementPs.xsd: ComplexType
     def __init__(
             self,
     ):
         super().__init__()
         
 
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
@@ -41,14 +41,14 @@ class SmartEnergyManagementPsPowerTimeSlotValueListType:
             return cls()
 
 
-class SmartEnergyManagementPsPowerTimeSlotValueListElementsType:
+class SmartEnergyManagementPsPowerTimeSlotValueListElementsType: # EEBus_SPINE_TS_SmartEnergyManagementPs.xsd: ComplexType
     def __init__(
             self,
     ):
         super().__init__()
         
 
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
@@ -74,7 +74,7 @@ class SmartEnergyManagementPsPowerTimeSlotValueListElementsType:
             return cls()
 
 
-class SmartEnergyManagementPsPowerTimeSlotType:
+class SmartEnergyManagementPsPowerTimeSlotType: # EEBus_SPINE_TS_SmartEnergyManagementPs.xsd: ComplexType
     def __init__(
             self,
             value_list: SmartEnergyManagementPsPowerTimeSlotValueListType = None,
@@ -86,7 +86,7 @@ class SmartEnergyManagementPsPowerTimeSlotType:
         if not isinstance(self.value_list, SmartEnergyManagementPsPowerTimeSlotValueListType | NoneType):
             raise TypeError("value_list is not of type SmartEnergyManagementPsPowerTimeSlotValueListType")
         
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
@@ -117,7 +117,7 @@ class SmartEnergyManagementPsPowerTimeSlotType:
             return cls()
 
 
-class SmartEnergyManagementPsPowerTimeSlotElementsType:
+class SmartEnergyManagementPsPowerTimeSlotElementsType: # EEBus_SPINE_TS_SmartEnergyManagementPs.xsd: ComplexType
     def __init__(
             self,
             value_list: SmartEnergyManagementPsPowerTimeSlotValueListElementsType = None,
@@ -129,7 +129,7 @@ class SmartEnergyManagementPsPowerTimeSlotElementsType:
         if not isinstance(self.value_list, SmartEnergyManagementPsPowerTimeSlotValueListElementsType | NoneType):
             raise TypeError("value_list is not of type SmartEnergyManagementPsPowerTimeSlotValueListElementsType")
         
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
@@ -160,7 +160,7 @@ class SmartEnergyManagementPsPowerTimeSlotElementsType:
             return cls()
 
 
-class SmartEnergyManagementPsPowerSequenceType:
+class SmartEnergyManagementPsPowerSequenceType: # EEBus_SPINE_TS_SmartEnergyManagementPs.xsd: ComplexType
     def __init__(
             self,
             power_time_slot: list[SmartEnergyManagementPsPowerTimeSlotType] = None,
@@ -172,7 +172,7 @@ class SmartEnergyManagementPsPowerSequenceType:
         if not isinstance(self.power_time_slot, list | NoneType):
             raise TypeError("power_time_slot is not of type list[SmartEnergyManagementPsPowerTimeSlotType]")
         
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
@@ -203,7 +203,7 @@ class SmartEnergyManagementPsPowerSequenceType:
             return cls()
 
 
-class SmartEnergyManagementPsAlternativesRelationType:
+class SmartEnergyManagementPsAlternativesRelationType: # EEBus_SPINE_TS_SmartEnergyManagementPs.xsd: ComplexType
     def __init__(
             self,
             alternatives_id: AlternativesIdType = None,
@@ -220,7 +220,7 @@ class SmartEnergyManagementPsAlternativesRelationType:
         if not isinstance(self.sequence_id, list | NoneType):
             raise TypeError("sequence_id is not of type list[PowerSequenceIdType]")
         
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
@@ -257,7 +257,7 @@ class SmartEnergyManagementPsAlternativesRelationType:
             return cls()
 
 
-class SmartEnergyManagementPsPowerSequenceElementsType:
+class SmartEnergyManagementPsPowerSequenceElementsType: # EEBus_SPINE_TS_SmartEnergyManagementPs.xsd: ComplexType
     def __init__(
             self,
             power_time_slot: SmartEnergyManagementPsPowerTimeSlotElementsType = None,
@@ -269,7 +269,7 @@ class SmartEnergyManagementPsPowerSequenceElementsType:
         if not isinstance(self.power_time_slot, SmartEnergyManagementPsPowerTimeSlotElementsType | NoneType):
             raise TypeError("power_time_slot is not of type SmartEnergyManagementPsPowerTimeSlotElementsType")
         
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
@@ -300,7 +300,7 @@ class SmartEnergyManagementPsPowerSequenceElementsType:
             return cls()
 
 
-class SmartEnergyManagementPsAlternativesRelationElementsType:
+class SmartEnergyManagementPsAlternativesRelationElementsType: # EEBus_SPINE_TS_SmartEnergyManagementPs.xsd: ComplexType
     def __init__(
             self,
             alternatives_id: ElementTagType = None,
@@ -317,7 +317,7 @@ class SmartEnergyManagementPsAlternativesRelationElementsType:
         if not isinstance(self.sequence_id, ElementTagType | NoneType):
             raise TypeError("sequence_id is not of type ElementTagType")
         
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
@@ -354,7 +354,7 @@ class SmartEnergyManagementPsAlternativesRelationElementsType:
             return cls()
 
 
-class SmartEnergyManagementPsAlternativesType:
+class SmartEnergyManagementPsAlternativesType: # EEBus_SPINE_TS_SmartEnergyManagementPs.xsd: ComplexType
     def __init__(
             self,
             relation: SmartEnergyManagementPsAlternativesRelationType = None,
@@ -371,7 +371,7 @@ class SmartEnergyManagementPsAlternativesType:
         if not isinstance(self.power_sequence, list | NoneType):
             raise TypeError("power_sequence is not of type list[SmartEnergyManagementPsPowerSequenceType]")
         
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
@@ -408,7 +408,7 @@ class SmartEnergyManagementPsAlternativesType:
             return cls()
 
 
-class SmartEnergyManagementPsAlternativesElementsType:
+class SmartEnergyManagementPsAlternativesElementsType: # EEBus_SPINE_TS_SmartEnergyManagementPs.xsd: ComplexType
     def __init__(
             self,
             relation: SmartEnergyManagementPsAlternativesRelationElementsType = None,
@@ -425,7 +425,7 @@ class SmartEnergyManagementPsAlternativesElementsType:
         if not isinstance(self.power_sequence, SmartEnergyManagementPsPowerSequenceElementsType | NoneType):
             raise TypeError("power_sequence is not of type SmartEnergyManagementPsPowerSequenceElementsType")
         
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
@@ -462,14 +462,14 @@ class SmartEnergyManagementPsAlternativesElementsType:
             return cls()
 
 
-class SmartEnergyManagementPsPriceDataType:
+class SmartEnergyManagementPsPriceCalculationRequestCallType: # EEBus_SPINE_TS_SmartEnergyManagementPs.xsd: ComplexType
     def __init__(
             self,
     ):
         super().__init__()
         
 
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
@@ -495,14 +495,14 @@ class SmartEnergyManagementPsPriceDataType:
             return cls()
 
 
-class SmartEnergyManagementPsPriceDataSelectorsType:
+class SmartEnergyManagementPsConfigurationRequestCallType: # EEBus_SPINE_TS_SmartEnergyManagementPs.xsd: ComplexType
     def __init__(
             self,
     ):
         super().__init__()
         
 
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
@@ -528,14 +528,14 @@ class SmartEnergyManagementPsPriceDataSelectorsType:
             return cls()
 
 
-class SmartEnergyManagementPsPriceDataElementsType:
+class SmartEnergyManagementPsPriceDataType: # EEBus_SPINE_TS_SmartEnergyManagementPs.xsd: ComplexType
     def __init__(
             self,
     ):
         super().__init__()
         
 
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
@@ -561,73 +561,7 @@ class SmartEnergyManagementPsPriceDataElementsType:
             return cls()
 
 
-class SmartEnergyManagementPsPriceCalculationRequestCallType:
-    def __init__(
-            self,
-    ):
-        super().__init__()
-        
-
-    def get_data(self): # ComplexType
-
-        msg_data = []
-        
-        
-        return msg_data
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class SmartEnergyManagementPsPriceCalculationRequestCallElementsType:
-    def __init__(
-            self,
-    ):
-        super().__init__()
-        
-
-    def get_data(self): # ComplexType
-
-        msg_data = []
-        
-        
-        return msg_data
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class SmartEnergyManagementPsDataType:
+class SmartEnergyManagementPsDataType: # EEBus_SPINE_TS_SmartEnergyManagementPs.xsd: ComplexType
     def __init__(
             self,
             alternatives: list[SmartEnergyManagementPsAlternativesType] = None,
@@ -639,7 +573,7 @@ class SmartEnergyManagementPsDataType:
         if not isinstance(self.alternatives, list | NoneType):
             raise TypeError("alternatives is not of type list[SmartEnergyManagementPsAlternativesType]")
         
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
@@ -670,14 +604,14 @@ class SmartEnergyManagementPsDataType:
             return cls()
 
 
-class SmartEnergyManagementPsDataSelectorsType:
+class SmartEnergyManagementPsPriceDataElementsType: # EEBus_SPINE_TS_SmartEnergyManagementPs.xsd: ComplexType
     def __init__(
             self,
     ):
         super().__init__()
         
 
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
@@ -703,7 +637,40 @@ class SmartEnergyManagementPsDataSelectorsType:
             return cls()
 
 
-class SmartEnergyManagementPsDataElementsType:
+class SmartEnergyManagementPsPriceCalculationRequestCallElementsType: # EEBus_SPINE_TS_SmartEnergyManagementPs.xsd: ComplexType
+    def __init__(
+            self,
+    ):
+        super().__init__()
+        
+
+    def get_data(self):
+
+        msg_data = []
+        
+        
+        return msg_data
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class SmartEnergyManagementPsDataElementsType: # EEBus_SPINE_TS_SmartEnergyManagementPs.xsd: ComplexType
     def __init__(
             self,
             alternatives: SmartEnergyManagementPsAlternativesElementsType = None,
@@ -715,7 +682,7 @@ class SmartEnergyManagementPsDataElementsType:
         if not isinstance(self.alternatives, SmartEnergyManagementPsAlternativesElementsType | NoneType):
             raise TypeError("alternatives is not of type SmartEnergyManagementPsAlternativesElementsType")
         
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
@@ -746,14 +713,14 @@ class SmartEnergyManagementPsDataElementsType:
             return cls()
 
 
-class SmartEnergyManagementPsConfigurationRequestCallType:
+class SmartEnergyManagementPsConfigurationRequestCallElementsType: # EEBus_SPINE_TS_SmartEnergyManagementPs.xsd: ComplexType
     def __init__(
             self,
     ):
         super().__init__()
         
 
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
@@ -779,14 +746,47 @@ class SmartEnergyManagementPsConfigurationRequestCallType:
             return cls()
 
 
-class SmartEnergyManagementPsConfigurationRequestCallElementsType:
+class SmartEnergyManagementPsPriceDataSelectorsType: # EEBus_SPINE_TS_SmartEnergyManagementPs.xsd: ComplexType
     def __init__(
             self,
     ):
         super().__init__()
         
 
-    def get_data(self): # ComplexType
+    def get_data(self):
+
+        msg_data = []
+        
+        
+        return msg_data
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class SmartEnergyManagementPsDataSelectorsType: # EEBus_SPINE_TS_SmartEnergyManagementPs.xsd: ComplexType
+    def __init__(
+            self,
+    ):
+        super().__init__()
+        
+
+    def get_data(self):
 
         msg_data = []
         

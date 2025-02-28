@@ -3,14 +3,14 @@ from types import NoneType
 from spine import array_2_dict
 
 
-class ActuatorLevelFctType:
+class ActuatorLevelFctType: # EEBus_SPINE_TS_ActuatorLevel.xsd: UnionType
     def __init__(
             self,
     ):
         super().__init__()
         
 
-    def get_data(self): # UnionType
+    def get_data(self):
 
         msg_data = []
         

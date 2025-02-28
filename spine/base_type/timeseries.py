@@ -1,23 +1,27 @@
 # Jinja Template message_type.py.jinja2
-from spine.simple_type.timeseries import TimeSeriesSlotIdType
-from spine.simple_type.commondatatypes import LabelType
-from spine.base_type.commondatatypes import TimePeriodElementsType
-from spine.simple_type.commondatatypes import DescriptionType
-from spine.base_type.commondatatypes import ScaledNumberElementsType
+from spine.base_type.commondatatypes import AbsoluteOrRecurringTimeElementsType
 from spine.base_type.commondatatypes import AbsoluteOrRecurringTimeType
 from spine.base_type.commondatatypes import ElementTagType
-from spine.simple_type.timeseries import TimeSeriesSlotCountType
+from spine.base_type.commondatatypes import ScaledNumberElementsType
+from spine.base_type.commondatatypes import ScaledNumberType
+from spine.base_type.commondatatypes import TimePeriodElementsType
+from spine.base_type.commondatatypes import TimePeriodType
+from spine.simple_type.commondatatypes import DescriptionType
+from spine.simple_type.commondatatypes import LabelType
 from spine.simple_type.measurement import MeasurementIdType
 from spine.simple_type.timeseries import TimeSeriesIdType
-from spine.union_type.commondatatypes import FunctionType
-from spine.base_type.commondatatypes import ScaledNumberType
-from spine.base_type.commondatatypes import AbsoluteOrRecurringTimeElementsType
-from spine.base_type.commondatatypes import TimePeriodType
+from spine.simple_type.timeseries import TimeSeriesSlotCountType
+from spine.simple_type.timeseries import TimeSeriesSlotIdType
+from spine.union_type.commondatatypes import AbsoluteOrRelativeTimeType
+from spine.union_type.commondatatypes import CurrencyType
+from spine.union_type.commondatatypes import ScopeTypeType
+from spine.union_type.commondatatypes import UnitOfMeasurementType
+from spine.union_type.timeseries import TimeSeriesTypeType
 from types import NoneType
 from spine import array_2_dict
 
 
-class TimeSeriesSlotType:
+class TimeSeriesSlotType: # EEBus_SPINE_TS_TimeSeries.xsd: ComplexType
     def __init__(
             self,
             time_series_slot_id: TimeSeriesSlotIdType = None,
@@ -59,7 +63,7 @@ class TimeSeriesSlotType:
         if not isinstance(self.max_value, ScaledNumberType | NoneType):
             raise TypeError("max_value is not of type ScaledNumberType")
         
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
@@ -126,323 +130,7 @@ class TimeSeriesSlotType:
             return cls()
 
 
-class TimeSeriesDataType:
-    def __init__(
-            self,
-            time_series_id: TimeSeriesIdType = None,
-            time_period: TimePeriodType = None,
-            time_series_slot: list[TimeSeriesSlotType] = None,
-    ):
-        super().__init__()
-        
-        self.time_series_id = time_series_id
-        self.time_period = time_period
-        self.time_series_slot = time_series_slot
-
-        if not isinstance(self.time_series_id, TimeSeriesIdType | NoneType):
-            raise TypeError("time_series_id is not of type TimeSeriesIdType")
-        
-        if not isinstance(self.time_period, TimePeriodType | NoneType):
-            raise TypeError("time_period is not of type TimePeriodType")
-        
-        if not isinstance(self.time_series_slot, list | NoneType):
-            raise TypeError("time_series_slot is not of type list[TimeSeriesSlotType]")
-        
-    def get_data(self): # ComplexType
-
-        msg_data = []
-        
-        if self.time_series_id is not None:
-            msg_data.append({"timeSeriesId": self.time_series_id.get_data()})
-        if self.time_period is not None:
-            msg_data.append({"timePeriod": self.time_period.get_data()})
-        if self.time_series_slot is not None:
-            msg_data.append({"timeSeriesSlot": [d.get_data() for d in self.time_series_slot]})
-        
-        return msg_data
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        if self.time_series_id is not None:
-            result_str += f"{sep}timeSeriesId: {self.time_series_id}"
-            sep = ", "
-        if self.time_period is not None:
-            result_str += f"{sep}timePeriod: {self.time_period}"
-            sep = ", "
-        if self.time_series_slot is not None:
-            result_str += f"{sep}timeSeriesSlot: {self.time_series_slot}"
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
-                time_series_id=data_dict.get('timeSeriesId'),
-                time_period=data_dict.get('timePeriod'),
-                time_series_slot=data_dict.get('timeSeriesSlot'),
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class TimeSeriesDescriptionDataType:
-    def __init__(
-            self,
-            time_series_id: TimeSeriesIdType = None,
-            time_series_type: FunctionType = None,
-            time_series_writeable: bool = None,
-            update_required: bool = None,
-            measurement_id: MeasurementIdType = None,
-            currency: FunctionType = None,
-            unit: FunctionType = None,
-            label: LabelType = None,
-            description: DescriptionType = None,
-            scope_type: FunctionType = None,
-    ):
-        super().__init__()
-        
-        self.time_series_id = time_series_id
-        self.time_series_type = time_series_type
-        self.time_series_writeable = time_series_writeable
-        self.update_required = update_required
-        self.measurement_id = measurement_id
-        self.currency = currency
-        self.unit = unit
-        self.label = label
-        self.description = description
-        self.scope_type = scope_type
-
-        if not isinstance(self.time_series_id, TimeSeriesIdType | NoneType):
-            raise TypeError("time_series_id is not of type TimeSeriesIdType")
-        
-        if not isinstance(self.time_series_type, FunctionType | NoneType):
-            raise TypeError("time_series_type is not of type FunctionType")
-        
-        if not isinstance(self.time_series_writeable, bool | NoneType):
-            raise TypeError("time_series_writeable is not of type bool")
-        
-        if not isinstance(self.update_required, bool | NoneType):
-            raise TypeError("update_required is not of type bool")
-        
-        if not isinstance(self.measurement_id, MeasurementIdType | NoneType):
-            raise TypeError("measurement_id is not of type MeasurementIdType")
-        
-        if not isinstance(self.currency, FunctionType | NoneType):
-            raise TypeError("currency is not of type FunctionType")
-        
-        if not isinstance(self.unit, FunctionType | NoneType):
-            raise TypeError("unit is not of type FunctionType")
-        
-        if not isinstance(self.label, LabelType | NoneType):
-            raise TypeError("label is not of type LabelType")
-        
-        if not isinstance(self.description, DescriptionType | NoneType):
-            raise TypeError("description is not of type DescriptionType")
-        
-        if not isinstance(self.scope_type, FunctionType | NoneType):
-            raise TypeError("scope_type is not of type FunctionType")
-        
-    def get_data(self): # ComplexType
-
-        msg_data = []
-        
-        if self.time_series_id is not None:
-            msg_data.append({"timeSeriesId": self.time_series_id.get_data()})
-        if self.time_series_type is not None:
-            msg_data.append({"timeSeriesType": self.time_series_type.get_data()})
-        if self.time_series_writeable is not None:
-            msg_data.append({"timeSeriesWriteable": self.time_series_writeable})
-        if self.update_required is not None:
-            msg_data.append({"updateRequired": self.update_required})
-        if self.measurement_id is not None:
-            msg_data.append({"measurementId": self.measurement_id.get_data()})
-        if self.currency is not None:
-            msg_data.append({"currency": self.currency.get_data()})
-        if self.unit is not None:
-            msg_data.append({"unit": self.unit.get_data()})
-        if self.label is not None:
-            msg_data.append({"label": self.label.get_data()})
-        if self.description is not None:
-            msg_data.append({"description": self.description.get_data()})
-        if self.scope_type is not None:
-            msg_data.append({"scopeType": self.scope_type.get_data()})
-        
-        return msg_data
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        if self.time_series_id is not None:
-            result_str += f"{sep}timeSeriesId: {self.time_series_id}"
-            sep = ", "
-        if self.time_series_type is not None:
-            result_str += f"{sep}timeSeriesType: {self.time_series_type}"
-            sep = ", "
-        if self.time_series_writeable is not None:
-            result_str += f"{sep}timeSeriesWriteable: {self.time_series_writeable}"
-            sep = ", "
-        if self.update_required is not None:
-            result_str += f"{sep}updateRequired: {self.update_required}"
-            sep = ", "
-        if self.measurement_id is not None:
-            result_str += f"{sep}measurementId: {self.measurement_id}"
-            sep = ", "
-        if self.currency is not None:
-            result_str += f"{sep}currency: {self.currency}"
-            sep = ", "
-        if self.unit is not None:
-            result_str += f"{sep}unit: {self.unit}"
-            sep = ", "
-        if self.label is not None:
-            result_str += f"{sep}label: {self.label}"
-            sep = ", "
-        if self.description is not None:
-            result_str += f"{sep}description: {self.description}"
-            sep = ", "
-        if self.scope_type is not None:
-            result_str += f"{sep}scopeType: {self.scope_type}"
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
-                time_series_id=data_dict.get('timeSeriesId'),
-                time_series_type=data_dict.get('timeSeriesType'),
-                time_series_writeable=data_dict.get('timeSeriesWriteable'),
-                update_required=data_dict.get('updateRequired'),
-                measurement_id=data_dict.get('measurementId'),
-                currency=data_dict.get('currency'),
-                unit=data_dict.get('unit'),
-                label=data_dict.get('label'),
-                description=data_dict.get('description'),
-                scope_type=data_dict.get('scopeType'),
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class TimeSeriesSlotElementsType:
-    def __init__(
-            self,
-            time_series_slot_id: ElementTagType = None,
-            time_period: TimePeriodElementsType = None,
-            duration: ElementTagType = None,
-            recurrence_information: AbsoluteOrRecurringTimeElementsType = None,
-            value: ElementTagType = None,
-            min_value: ElementTagType = None,
-            max_value: ElementTagType = None,
-    ):
-        super().__init__()
-        
-        self.time_series_slot_id = time_series_slot_id
-        self.time_period = time_period
-        self.duration = duration
-        self.recurrence_information = recurrence_information
-        self.value = value
-        self.min_value = min_value
-        self.max_value = max_value
-
-        if not isinstance(self.time_series_slot_id, ElementTagType | NoneType):
-            raise TypeError("time_series_slot_id is not of type ElementTagType")
-        
-        if not isinstance(self.time_period, TimePeriodElementsType | NoneType):
-            raise TypeError("time_period is not of type TimePeriodElementsType")
-        
-        if not isinstance(self.duration, ElementTagType | NoneType):
-            raise TypeError("duration is not of type ElementTagType")
-        
-        if not isinstance(self.recurrence_information, AbsoluteOrRecurringTimeElementsType | NoneType):
-            raise TypeError("recurrence_information is not of type AbsoluteOrRecurringTimeElementsType")
-        
-        if not isinstance(self.value, ElementTagType | NoneType):
-            raise TypeError("value is not of type ElementTagType")
-        
-        if not isinstance(self.min_value, ElementTagType | NoneType):
-            raise TypeError("min_value is not of type ElementTagType")
-        
-        if not isinstance(self.max_value, ElementTagType | NoneType):
-            raise TypeError("max_value is not of type ElementTagType")
-        
-    def get_data(self): # ComplexType
-
-        msg_data = []
-        
-        if self.time_series_slot_id is not None:
-            msg_data.append({"timeSeriesSlotId": self.time_series_slot_id.get_data()})
-        if self.time_period is not None:
-            msg_data.append({"timePeriod": self.time_period.get_data()})
-        if self.duration is not None:
-            msg_data.append({"duration": self.duration.get_data()})
-        if self.recurrence_information is not None:
-            msg_data.append({"recurrenceInformation": self.recurrence_information.get_data()})
-        if self.value is not None:
-            msg_data.append({"value": self.value.get_data()})
-        if self.min_value is not None:
-            msg_data.append({"minValue": self.min_value.get_data()})
-        if self.max_value is not None:
-            msg_data.append({"maxValue": self.max_value.get_data()})
-        
-        return msg_data
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        if self.time_series_slot_id is not None:
-            result_str += f"{sep}timeSeriesSlotId: {self.time_series_slot_id}"
-            sep = ", "
-        if self.time_period is not None:
-            result_str += f"{sep}timePeriod: {self.time_period}"
-            sep = ", "
-        if self.duration is not None:
-            result_str += f"{sep}duration: {self.duration}"
-            sep = ", "
-        if self.recurrence_information is not None:
-            result_str += f"{sep}recurrenceInformation: {self.recurrence_information}"
-            sep = ", "
-        if self.value is not None:
-            result_str += f"{sep}value: {self.value}"
-            sep = ", "
-        if self.min_value is not None:
-            result_str += f"{sep}minValue: {self.min_value}"
-            sep = ", "
-        if self.max_value is not None:
-            result_str += f"{sep}maxValue: {self.max_value}"
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
-                time_series_slot_id=data_dict.get('timeSeriesSlotId'),
-                time_period=data_dict.get('timePeriod'),
-                duration=data_dict.get('duration'),
-                recurrence_information=data_dict.get('recurrenceInformation'),
-                value=data_dict.get('value'),
-                min_value=data_dict.get('minValue'),
-                max_value=data_dict.get('maxValue'),
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class TimeSeriesConstraintsDataType:
+class TimeSeriesConstraintsDataType: # EEBus_SPINE_TS_TimeSeries.xsd: ComplexType
     def __init__(
             self,
             time_series_id: TimeSeriesIdType = None,
@@ -451,8 +139,8 @@ class TimeSeriesConstraintsDataType:
             slot_duration_min: str = None,
             slot_duration_max: str = None,
             slot_duration_step_size: str = None,
-            earliest_time_series_start_time: FunctionType = None,
-            latest_time_series_end_time: FunctionType = None,
+            earliest_time_series_start_time: AbsoluteOrRelativeTimeType = None,
+            latest_time_series_end_time: AbsoluteOrRelativeTimeType = None,
             slot_value_min: ScaledNumberType = None,
             slot_value_max: ScaledNumberType = None,
             slot_value_step_size: ScaledNumberType = None,
@@ -489,11 +177,11 @@ class TimeSeriesConstraintsDataType:
         if not isinstance(self.slot_duration_step_size, str | NoneType):
             raise TypeError("slot_duration_step_size is not of type str")
         
-        if not isinstance(self.earliest_time_series_start_time, FunctionType | NoneType):
-            raise TypeError("earliest_time_series_start_time is not of type FunctionType")
+        if not isinstance(self.earliest_time_series_start_time, AbsoluteOrRelativeTimeType | NoneType):
+            raise TypeError("earliest_time_series_start_time is not of type AbsoluteOrRelativeTimeType")
         
-        if not isinstance(self.latest_time_series_end_time, FunctionType | NoneType):
-            raise TypeError("latest_time_series_end_time is not of type FunctionType")
+        if not isinstance(self.latest_time_series_end_time, AbsoluteOrRelativeTimeType | NoneType):
+            raise TypeError("latest_time_series_end_time is not of type AbsoluteOrRelativeTimeType")
         
         if not isinstance(self.slot_value_min, ScaledNumberType | NoneType):
             raise TypeError("slot_value_min is not of type ScaledNumberType")
@@ -504,7 +192,7 @@ class TimeSeriesConstraintsDataType:
         if not isinstance(self.slot_value_step_size, ScaledNumberType | NoneType):
             raise TypeError("slot_value_step_size is not of type ScaledNumberType")
         
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
@@ -595,74 +283,87 @@ class TimeSeriesConstraintsDataType:
             return cls()
 
 
-class TimeSeriesListDataType:
-    def __init__(
-            self,
-            time_series_data: list[TimeSeriesDataType] = None,
-    ):
-        super().__init__()
-        
-        self.time_series_data = time_series_data
-
-        if not isinstance(self.time_series_data, list | NoneType):
-            raise TypeError("time_series_data is not of type list[TimeSeriesDataType]")
-        
-    def get_data(self): # ComplexType
-
-        msg_data = []
-        
-        if self.time_series_data is not None:
-            msg_data.append({"timeSeriesData": [d.get_data() for d in self.time_series_data]})
-        
-        return msg_data
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        if self.time_series_data is not None:
-            result_str += f"{sep}timeSeriesData: {self.time_series_data}"
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
-                time_series_data=data_dict.get('timeSeriesData'),
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class TimeSeriesListDataSelectorsType:
+class TimeSeriesDescriptionDataType: # EEBus_SPINE_TS_TimeSeries.xsd: ComplexType
     def __init__(
             self,
             time_series_id: TimeSeriesIdType = None,
-            time_series_slot_id: TimeSeriesSlotIdType = None,
+            time_series_type: TimeSeriesTypeType = None,
+            time_series_writeable: bool = None,
+            update_required: bool = None,
+            measurement_id: MeasurementIdType = None,
+            currency: CurrencyType = None,
+            unit: UnitOfMeasurementType = None,
+            label: LabelType = None,
+            description: DescriptionType = None,
+            scope_type: ScopeTypeType = None,
     ):
         super().__init__()
         
         self.time_series_id = time_series_id
-        self.time_series_slot_id = time_series_slot_id
+        self.time_series_type = time_series_type
+        self.time_series_writeable = time_series_writeable
+        self.update_required = update_required
+        self.measurement_id = measurement_id
+        self.currency = currency
+        self.unit = unit
+        self.label = label
+        self.description = description
+        self.scope_type = scope_type
 
         if not isinstance(self.time_series_id, TimeSeriesIdType | NoneType):
             raise TypeError("time_series_id is not of type TimeSeriesIdType")
         
-        if not isinstance(self.time_series_slot_id, TimeSeriesSlotIdType | NoneType):
-            raise TypeError("time_series_slot_id is not of type TimeSeriesSlotIdType")
+        if not isinstance(self.time_series_type, TimeSeriesTypeType | NoneType):
+            raise TypeError("time_series_type is not of type TimeSeriesTypeType")
         
-    def get_data(self): # ComplexType
+        if not isinstance(self.time_series_writeable, bool | NoneType):
+            raise TypeError("time_series_writeable is not of type bool")
+        
+        if not isinstance(self.update_required, bool | NoneType):
+            raise TypeError("update_required is not of type bool")
+        
+        if not isinstance(self.measurement_id, MeasurementIdType | NoneType):
+            raise TypeError("measurement_id is not of type MeasurementIdType")
+        
+        if not isinstance(self.currency, CurrencyType | NoneType):
+            raise TypeError("currency is not of type CurrencyType")
+        
+        if not isinstance(self.unit, UnitOfMeasurementType | NoneType):
+            raise TypeError("unit is not of type UnitOfMeasurementType")
+        
+        if not isinstance(self.label, LabelType | NoneType):
+            raise TypeError("label is not of type LabelType")
+        
+        if not isinstance(self.description, DescriptionType | NoneType):
+            raise TypeError("description is not of type DescriptionType")
+        
+        if not isinstance(self.scope_type, ScopeTypeType | NoneType):
+            raise TypeError("scope_type is not of type ScopeTypeType")
+        
+    def get_data(self):
 
         msg_data = []
         
         if self.time_series_id is not None:
             msg_data.append({"timeSeriesId": self.time_series_id.get_data()})
-        if self.time_series_slot_id is not None:
-            msg_data.append({"timeSeriesSlotId": self.time_series_slot_id.get_data()})
+        if self.time_series_type is not None:
+            msg_data.append({"timeSeriesType": self.time_series_type.get_data()})
+        if self.time_series_writeable is not None:
+            msg_data.append({"timeSeriesWriteable": self.time_series_writeable})
+        if self.update_required is not None:
+            msg_data.append({"updateRequired": self.update_required})
+        if self.measurement_id is not None:
+            msg_data.append({"measurementId": self.measurement_id.get_data()})
+        if self.currency is not None:
+            msg_data.append({"currency": self.currency.get_data()})
+        if self.unit is not None:
+            msg_data.append({"unit": self.unit.get_data()})
+        if self.label is not None:
+            msg_data.append({"label": self.label.get_data()})
+        if self.description is not None:
+            msg_data.append({"description": self.description.get_data()})
+        if self.scope_type is not None:
+            msg_data.append({"scopeType": self.scope_type.get_data()})
         
         return msg_data
 
@@ -673,8 +374,32 @@ class TimeSeriesListDataSelectorsType:
         if self.time_series_id is not None:
             result_str += f"{sep}timeSeriesId: {self.time_series_id}"
             sep = ", "
-        if self.time_series_slot_id is not None:
-            result_str += f"{sep}timeSeriesSlotId: {self.time_series_slot_id}"
+        if self.time_series_type is not None:
+            result_str += f"{sep}timeSeriesType: {self.time_series_type}"
+            sep = ", "
+        if self.time_series_writeable is not None:
+            result_str += f"{sep}timeSeriesWriteable: {self.time_series_writeable}"
+            sep = ", "
+        if self.update_required is not None:
+            result_str += f"{sep}updateRequired: {self.update_required}"
+            sep = ", "
+        if self.measurement_id is not None:
+            result_str += f"{sep}measurementId: {self.measurement_id}"
+            sep = ", "
+        if self.currency is not None:
+            result_str += f"{sep}currency: {self.currency}"
+            sep = ", "
+        if self.unit is not None:
+            result_str += f"{sep}unit: {self.unit}"
+            sep = ", "
+        if self.label is not None:
+            result_str += f"{sep}label: {self.label}"
+            sep = ", "
+        if self.description is not None:
+            result_str += f"{sep}description: {self.description}"
+            sep = ", "
+        if self.scope_type is not None:
+            result_str += f"{sep}scopeType: {self.scope_type}"
         
         return result_str
 
@@ -684,7 +409,15 @@ class TimeSeriesListDataSelectorsType:
             data_dict = array_2_dict(data)
             return cls(
                 time_series_id=data_dict.get('timeSeriesId'),
-                time_series_slot_id=data_dict.get('timeSeriesSlotId'),
+                time_series_type=data_dict.get('timeSeriesType'),
+                time_series_writeable=data_dict.get('timeSeriesWriteable'),
+                update_required=data_dict.get('updateRequired'),
+                measurement_id=data_dict.get('measurementId'),
+                currency=data_dict.get('currency'),
+                unit=data_dict.get('unit'),
+                label=data_dict.get('label'),
+                description=data_dict.get('description'),
+                scope_type=data_dict.get('scopeType'),
             )
         elif data:
             return cls(data)
@@ -692,7 +425,224 @@ class TimeSeriesListDataSelectorsType:
             return cls()
 
 
-class TimeSeriesDescriptionListDataType:
+class TimeSeriesDataType: # EEBus_SPINE_TS_TimeSeries.xsd: ComplexType
+    def __init__(
+            self,
+            time_series_id: TimeSeriesIdType = None,
+            time_period: TimePeriodType = None,
+            time_series_slot: list[TimeSeriesSlotType] = None,
+    ):
+        super().__init__()
+        
+        self.time_series_id = time_series_id
+        self.time_period = time_period
+        self.time_series_slot = time_series_slot
+
+        if not isinstance(self.time_series_id, TimeSeriesIdType | NoneType):
+            raise TypeError("time_series_id is not of type TimeSeriesIdType")
+        
+        if not isinstance(self.time_period, TimePeriodType | NoneType):
+            raise TypeError("time_period is not of type TimePeriodType")
+        
+        if not isinstance(self.time_series_slot, list | NoneType):
+            raise TypeError("time_series_slot is not of type list[TimeSeriesSlotType]")
+        
+    def get_data(self):
+
+        msg_data = []
+        
+        if self.time_series_id is not None:
+            msg_data.append({"timeSeriesId": self.time_series_id.get_data()})
+        if self.time_period is not None:
+            msg_data.append({"timePeriod": self.time_period.get_data()})
+        if self.time_series_slot is not None:
+            msg_data.append({"timeSeriesSlot": [d.get_data() for d in self.time_series_slot]})
+        
+        return msg_data
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        if self.time_series_id is not None:
+            result_str += f"{sep}timeSeriesId: {self.time_series_id}"
+            sep = ", "
+        if self.time_period is not None:
+            result_str += f"{sep}timePeriod: {self.time_period}"
+            sep = ", "
+        if self.time_series_slot is not None:
+            result_str += f"{sep}timeSeriesSlot: {self.time_series_slot}"
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+                time_series_id=data_dict.get('timeSeriesId'),
+                time_period=data_dict.get('timePeriod'),
+                time_series_slot=data_dict.get('timeSeriesSlot'),
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class TimeSeriesSlotElementsType: # EEBus_SPINE_TS_TimeSeries.xsd: ComplexType
+    def __init__(
+            self,
+            time_series_slot_id: ElementTagType = None,
+            time_period: TimePeriodElementsType = None,
+            duration: ElementTagType = None,
+            recurrence_information: AbsoluteOrRecurringTimeElementsType = None,
+            value: ElementTagType = None,
+            min_value: ElementTagType = None,
+            max_value: ElementTagType = None,
+    ):
+        super().__init__()
+        
+        self.time_series_slot_id = time_series_slot_id
+        self.time_period = time_period
+        self.duration = duration
+        self.recurrence_information = recurrence_information
+        self.value = value
+        self.min_value = min_value
+        self.max_value = max_value
+
+        if not isinstance(self.time_series_slot_id, ElementTagType | NoneType):
+            raise TypeError("time_series_slot_id is not of type ElementTagType")
+        
+        if not isinstance(self.time_period, TimePeriodElementsType | NoneType):
+            raise TypeError("time_period is not of type TimePeriodElementsType")
+        
+        if not isinstance(self.duration, ElementTagType | NoneType):
+            raise TypeError("duration is not of type ElementTagType")
+        
+        if not isinstance(self.recurrence_information, AbsoluteOrRecurringTimeElementsType | NoneType):
+            raise TypeError("recurrence_information is not of type AbsoluteOrRecurringTimeElementsType")
+        
+        if not isinstance(self.value, ElementTagType | NoneType):
+            raise TypeError("value is not of type ElementTagType")
+        
+        if not isinstance(self.min_value, ElementTagType | NoneType):
+            raise TypeError("min_value is not of type ElementTagType")
+        
+        if not isinstance(self.max_value, ElementTagType | NoneType):
+            raise TypeError("max_value is not of type ElementTagType")
+        
+    def get_data(self):
+
+        msg_data = []
+        
+        if self.time_series_slot_id is not None:
+            msg_data.append({"timeSeriesSlotId": self.time_series_slot_id.get_data()})
+        if self.time_period is not None:
+            msg_data.append({"timePeriod": self.time_period.get_data()})
+        if self.duration is not None:
+            msg_data.append({"duration": self.duration.get_data()})
+        if self.recurrence_information is not None:
+            msg_data.append({"recurrenceInformation": self.recurrence_information.get_data()})
+        if self.value is not None:
+            msg_data.append({"value": self.value.get_data()})
+        if self.min_value is not None:
+            msg_data.append({"minValue": self.min_value.get_data()})
+        if self.max_value is not None:
+            msg_data.append({"maxValue": self.max_value.get_data()})
+        
+        return msg_data
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        if self.time_series_slot_id is not None:
+            result_str += f"{sep}timeSeriesSlotId: {self.time_series_slot_id}"
+            sep = ", "
+        if self.time_period is not None:
+            result_str += f"{sep}timePeriod: {self.time_period}"
+            sep = ", "
+        if self.duration is not None:
+            result_str += f"{sep}duration: {self.duration}"
+            sep = ", "
+        if self.recurrence_information is not None:
+            result_str += f"{sep}recurrenceInformation: {self.recurrence_information}"
+            sep = ", "
+        if self.value is not None:
+            result_str += f"{sep}value: {self.value}"
+            sep = ", "
+        if self.min_value is not None:
+            result_str += f"{sep}minValue: {self.min_value}"
+            sep = ", "
+        if self.max_value is not None:
+            result_str += f"{sep}maxValue: {self.max_value}"
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+                time_series_slot_id=data_dict.get('timeSeriesSlotId'),
+                time_period=data_dict.get('timePeriod'),
+                duration=data_dict.get('duration'),
+                recurrence_information=data_dict.get('recurrenceInformation'),
+                value=data_dict.get('value'),
+                min_value=data_dict.get('minValue'),
+                max_value=data_dict.get('maxValue'),
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class TimeSeriesConstraintsListDataType: # EEBus_SPINE_TS_TimeSeries.xsd: ComplexType
+    def __init__(
+            self,
+            time_series_constraints_data: list[TimeSeriesConstraintsDataType] = None,
+    ):
+        super().__init__()
+        
+        self.time_series_constraints_data = time_series_constraints_data
+
+        if not isinstance(self.time_series_constraints_data, list | NoneType):
+            raise TypeError("time_series_constraints_data is not of type list[TimeSeriesConstraintsDataType]")
+        
+    def get_data(self):
+
+        msg_data = []
+        
+        if self.time_series_constraints_data is not None:
+            msg_data.append({"timeSeriesConstraintsData": [d.get_data() for d in self.time_series_constraints_data]})
+        
+        return msg_data
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        if self.time_series_constraints_data is not None:
+            result_str += f"{sep}timeSeriesConstraintsData: {self.time_series_constraints_data}"
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+                time_series_constraints_data=data_dict.get('timeSeriesConstraintsData'),
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class TimeSeriesDescriptionListDataType: # EEBus_SPINE_TS_TimeSeries.xsd: ComplexType
     def __init__(
             self,
             time_series_description_data: list[TimeSeriesDescriptionDataType] = None,
@@ -704,7 +654,7 @@ class TimeSeriesDescriptionListDataType:
         if not isinstance(self.time_series_description_data, list | NoneType):
             raise TypeError("time_series_description_data is not of type list[TimeSeriesDescriptionDataType]")
         
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
@@ -735,45 +685,24 @@ class TimeSeriesDescriptionListDataType:
             return cls()
 
 
-class TimeSeriesDescriptionListDataSelectorsType:
+class TimeSeriesListDataType: # EEBus_SPINE_TS_TimeSeries.xsd: ComplexType
     def __init__(
             self,
-            time_series_id: TimeSeriesIdType = None,
-            time_series_type: FunctionType = None,
-            measurement_id: MeasurementIdType = None,
-            scope_type: FunctionType = None,
+            time_series_data: list[TimeSeriesDataType] = None,
     ):
         super().__init__()
         
-        self.time_series_id = time_series_id
-        self.time_series_type = time_series_type
-        self.measurement_id = measurement_id
-        self.scope_type = scope_type
+        self.time_series_data = time_series_data
 
-        if not isinstance(self.time_series_id, TimeSeriesIdType | NoneType):
-            raise TypeError("time_series_id is not of type TimeSeriesIdType")
+        if not isinstance(self.time_series_data, list | NoneType):
+            raise TypeError("time_series_data is not of type list[TimeSeriesDataType]")
         
-        if not isinstance(self.time_series_type, FunctionType | NoneType):
-            raise TypeError("time_series_type is not of type FunctionType")
-        
-        if not isinstance(self.measurement_id, MeasurementIdType | NoneType):
-            raise TypeError("measurement_id is not of type MeasurementIdType")
-        
-        if not isinstance(self.scope_type, FunctionType | NoneType):
-            raise TypeError("scope_type is not of type FunctionType")
-        
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
-        if self.time_series_id is not None:
-            msg_data.append({"timeSeriesId": self.time_series_id.get_data()})
-        if self.time_series_type is not None:
-            msg_data.append({"timeSeriesType": self.time_series_type.get_data()})
-        if self.measurement_id is not None:
-            msg_data.append({"measurementId": self.measurement_id.get_data()})
-        if self.scope_type is not None:
-            msg_data.append({"scopeType": self.scope_type.get_data()})
+        if self.time_series_data is not None:
+            msg_data.append({"timeSeriesData": [d.get_data() for d in self.time_series_data]})
         
         return msg_data
 
@@ -781,17 +710,8 @@ class TimeSeriesDescriptionListDataSelectorsType:
     def __str__(self):
         result_str = ""
         sep = ""
-        if self.time_series_id is not None:
-            result_str += f"{sep}timeSeriesId: {self.time_series_id}"
-            sep = ", "
-        if self.time_series_type is not None:
-            result_str += f"{sep}timeSeriesType: {self.time_series_type}"
-            sep = ", "
-        if self.measurement_id is not None:
-            result_str += f"{sep}measurementId: {self.measurement_id}"
-            sep = ", "
-        if self.scope_type is not None:
-            result_str += f"{sep}scopeType: {self.scope_type}"
+        if self.time_series_data is not None:
+            result_str += f"{sep}timeSeriesData: {self.time_series_data}"
         
         return result_str
 
@@ -800,10 +720,7 @@ class TimeSeriesDescriptionListDataSelectorsType:
         if type(data) == list:
             data_dict = array_2_dict(data)
             return cls(
-                time_series_id=data_dict.get('timeSeriesId'),
-                time_series_type=data_dict.get('timeSeriesType'),
-                measurement_id=data_dict.get('measurementId'),
-                scope_type=data_dict.get('scopeType'),
+                time_series_data=data_dict.get('timeSeriesData'),
             )
         elif data:
             return cls(data)
@@ -811,7 +728,7 @@ class TimeSeriesDescriptionListDataSelectorsType:
             return cls()
 
 
-class TimeSeriesDescriptionDataElementsType:
+class TimeSeriesDescriptionDataElementsType: # EEBus_SPINE_TS_TimeSeries.xsd: ComplexType
     def __init__(
             self,
             time_series_id: ElementTagType = None,
@@ -868,7 +785,7 @@ class TimeSeriesDescriptionDataElementsType:
         if not isinstance(self.scope_type, ElementTagType | NoneType):
             raise TypeError("scope_type is not of type ElementTagType")
         
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
@@ -953,7 +870,7 @@ class TimeSeriesDescriptionDataElementsType:
             return cls()
 
 
-class TimeSeriesDataElementsType:
+class TimeSeriesDataElementsType: # EEBus_SPINE_TS_TimeSeries.xsd: ComplexType
     def __init__(
             self,
             time_series_id: ElementTagType = None,
@@ -975,7 +892,7 @@ class TimeSeriesDataElementsType:
         if not isinstance(self.time_series_slot, TimeSeriesSlotElementsType | NoneType):
             raise TypeError("time_series_slot is not of type TimeSeriesSlotElementsType")
         
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
@@ -1018,93 +935,7 @@ class TimeSeriesDataElementsType:
             return cls()
 
 
-class TimeSeriesConstraintsListDataType:
-    def __init__(
-            self,
-            time_series_constraints_data: list[TimeSeriesConstraintsDataType] = None,
-    ):
-        super().__init__()
-        
-        self.time_series_constraints_data = time_series_constraints_data
-
-        if not isinstance(self.time_series_constraints_data, list | NoneType):
-            raise TypeError("time_series_constraints_data is not of type list[TimeSeriesConstraintsDataType]")
-        
-    def get_data(self): # ComplexType
-
-        msg_data = []
-        
-        if self.time_series_constraints_data is not None:
-            msg_data.append({"timeSeriesConstraintsData": [d.get_data() for d in self.time_series_constraints_data]})
-        
-        return msg_data
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        if self.time_series_constraints_data is not None:
-            result_str += f"{sep}timeSeriesConstraintsData: {self.time_series_constraints_data}"
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
-                time_series_constraints_data=data_dict.get('timeSeriesConstraintsData'),
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class TimeSeriesConstraintsListDataSelectorsType:
-    def __init__(
-            self,
-            time_series_id: TimeSeriesIdType = None,
-    ):
-        super().__init__()
-        
-        self.time_series_id = time_series_id
-
-        if not isinstance(self.time_series_id, TimeSeriesIdType | NoneType):
-            raise TypeError("time_series_id is not of type TimeSeriesIdType")
-        
-    def get_data(self): # ComplexType
-
-        msg_data = []
-        
-        if self.time_series_id is not None:
-            msg_data.append({"timeSeriesId": self.time_series_id.get_data()})
-        
-        return msg_data
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        if self.time_series_id is not None:
-            result_str += f"{sep}timeSeriesId: {self.time_series_id}"
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
-                time_series_id=data_dict.get('timeSeriesId'),
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class TimeSeriesConstraintsDataElementsType:
+class TimeSeriesConstraintsDataElementsType: # EEBus_SPINE_TS_TimeSeries.xsd: ComplexType
     def __init__(
             self,
             time_series_id: ElementTagType = None,
@@ -1166,7 +997,7 @@ class TimeSeriesConstraintsDataElementsType:
         if not isinstance(self.slot_value_step_size, ScaledNumberElementsType | NoneType):
             raise TypeError("slot_value_step_size is not of type ScaledNumberElementsType")
         
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
@@ -1250,6 +1081,179 @@ class TimeSeriesConstraintsDataElementsType:
                 slot_value_min=data_dict.get('slotValueMin'),
                 slot_value_max=data_dict.get('slotValueMax'),
                 slot_value_step_size=data_dict.get('slotValueStepSize'),
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class TimeSeriesListDataSelectorsType: # EEBus_SPINE_TS_TimeSeries.xsd: ComplexType
+    def __init__(
+            self,
+            time_series_id: TimeSeriesIdType = None,
+            time_series_slot_id: TimeSeriesSlotIdType = None,
+    ):
+        super().__init__()
+        
+        self.time_series_id = time_series_id
+        self.time_series_slot_id = time_series_slot_id
+
+        if not isinstance(self.time_series_id, TimeSeriesIdType | NoneType):
+            raise TypeError("time_series_id is not of type TimeSeriesIdType")
+        
+        if not isinstance(self.time_series_slot_id, TimeSeriesSlotIdType | NoneType):
+            raise TypeError("time_series_slot_id is not of type TimeSeriesSlotIdType")
+        
+    def get_data(self):
+
+        msg_data = []
+        
+        if self.time_series_id is not None:
+            msg_data.append({"timeSeriesId": self.time_series_id.get_data()})
+        if self.time_series_slot_id is not None:
+            msg_data.append({"timeSeriesSlotId": self.time_series_slot_id.get_data()})
+        
+        return msg_data
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        if self.time_series_id is not None:
+            result_str += f"{sep}timeSeriesId: {self.time_series_id}"
+            sep = ", "
+        if self.time_series_slot_id is not None:
+            result_str += f"{sep}timeSeriesSlotId: {self.time_series_slot_id}"
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+                time_series_id=data_dict.get('timeSeriesId'),
+                time_series_slot_id=data_dict.get('timeSeriesSlotId'),
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class TimeSeriesDescriptionListDataSelectorsType: # EEBus_SPINE_TS_TimeSeries.xsd: ComplexType
+    def __init__(
+            self,
+            time_series_id: TimeSeriesIdType = None,
+            time_series_type: TimeSeriesTypeType = None,
+            measurement_id: MeasurementIdType = None,
+            scope_type: ScopeTypeType = None,
+    ):
+        super().__init__()
+        
+        self.time_series_id = time_series_id
+        self.time_series_type = time_series_type
+        self.measurement_id = measurement_id
+        self.scope_type = scope_type
+
+        if not isinstance(self.time_series_id, TimeSeriesIdType | NoneType):
+            raise TypeError("time_series_id is not of type TimeSeriesIdType")
+        
+        if not isinstance(self.time_series_type, TimeSeriesTypeType | NoneType):
+            raise TypeError("time_series_type is not of type TimeSeriesTypeType")
+        
+        if not isinstance(self.measurement_id, MeasurementIdType | NoneType):
+            raise TypeError("measurement_id is not of type MeasurementIdType")
+        
+        if not isinstance(self.scope_type, ScopeTypeType | NoneType):
+            raise TypeError("scope_type is not of type ScopeTypeType")
+        
+    def get_data(self):
+
+        msg_data = []
+        
+        if self.time_series_id is not None:
+            msg_data.append({"timeSeriesId": self.time_series_id.get_data()})
+        if self.time_series_type is not None:
+            msg_data.append({"timeSeriesType": self.time_series_type.get_data()})
+        if self.measurement_id is not None:
+            msg_data.append({"measurementId": self.measurement_id.get_data()})
+        if self.scope_type is not None:
+            msg_data.append({"scopeType": self.scope_type.get_data()})
+        
+        return msg_data
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        if self.time_series_id is not None:
+            result_str += f"{sep}timeSeriesId: {self.time_series_id}"
+            sep = ", "
+        if self.time_series_type is not None:
+            result_str += f"{sep}timeSeriesType: {self.time_series_type}"
+            sep = ", "
+        if self.measurement_id is not None:
+            result_str += f"{sep}measurementId: {self.measurement_id}"
+            sep = ", "
+        if self.scope_type is not None:
+            result_str += f"{sep}scopeType: {self.scope_type}"
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+                time_series_id=data_dict.get('timeSeriesId'),
+                time_series_type=data_dict.get('timeSeriesType'),
+                measurement_id=data_dict.get('measurementId'),
+                scope_type=data_dict.get('scopeType'),
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class TimeSeriesConstraintsListDataSelectorsType: # EEBus_SPINE_TS_TimeSeries.xsd: ComplexType
+    def __init__(
+            self,
+            time_series_id: TimeSeriesIdType = None,
+    ):
+        super().__init__()
+        
+        self.time_series_id = time_series_id
+
+        if not isinstance(self.time_series_id, TimeSeriesIdType | NoneType):
+            raise TypeError("time_series_id is not of type TimeSeriesIdType")
+        
+    def get_data(self):
+
+        msg_data = []
+        
+        if self.time_series_id is not None:
+            msg_data.append({"timeSeriesId": self.time_series_id.get_data()})
+        
+        return msg_data
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        if self.time_series_id is not None:
+            result_str += f"{sep}timeSeriesId: {self.time_series_id}"
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+                time_series_id=data_dict.get('timeSeriesId'),
             )
         elif data:
             return cls(data)

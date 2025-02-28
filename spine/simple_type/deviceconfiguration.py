@@ -3,7 +3,7 @@ from types import NoneType
 from spine import array_2_dict
 
 
-class DeviceConfigurationKeyValueStringType:
+class DeviceConfigurationKeyValueStringType: # EEBus_SPINE_TS_DeviceConfiguration.xsd: AliasType
     def __init__(
             self,
             value: str,
@@ -15,7 +15,7 @@ class DeviceConfigurationKeyValueStringType:
         if not isinstance(self.value, str):
             raise TypeError("value is not of type str")
         
-    def get_data(self): # AliasType
+    def get_data(self):
 
         return self.value
 
@@ -41,7 +41,7 @@ class DeviceConfigurationKeyValueStringType:
             return cls()
 
 
-class DeviceConfigurationKeyIdType:
+class DeviceConfigurationKeyIdType: # EEBus_SPINE_TS_DeviceConfiguration.xsd: AliasType
     def __init__(
             self,
             value: int,
@@ -53,7 +53,7 @@ class DeviceConfigurationKeyIdType:
         if not isinstance(self.value, int):
             raise TypeError("value is not of type int")
         
-    def get_data(self): # AliasType
+    def get_data(self):
 
         return self.value
 

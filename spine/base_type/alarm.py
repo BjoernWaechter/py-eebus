@@ -1,28 +1,30 @@
 # Jinja Template message_type.py.jinja2
-from spine.simple_type.commondatatypes import LabelType
-from spine.base_type.commondatatypes import TimePeriodElementsType
-from spine.simple_type.commondatatypes import DescriptionType
-from spine.base_type.commondatatypes import ScaledNumberElementsType
 from spine.base_type.commondatatypes import ElementTagType
-from spine.simple_type.alarm import AlarmIdType
-from spine.union_type.commondatatypes import FunctionType
+from spine.base_type.commondatatypes import ScaledNumberElementsType
 from spine.base_type.commondatatypes import ScaledNumberType
-from spine.simple_type.threshold import ThresholdIdType
+from spine.base_type.commondatatypes import TimePeriodElementsType
 from spine.base_type.commondatatypes import TimePeriodType
+from spine.simple_type.alarm import AlarmIdType
+from spine.simple_type.commondatatypes import DescriptionType
+from spine.simple_type.commondatatypes import LabelType
+from spine.simple_type.threshold import ThresholdIdType
+from spine.union_type.alarm import AlarmTypeType
+from spine.union_type.commondatatypes import AbsoluteOrRelativeTimeType
+from spine.union_type.commondatatypes import ScopeTypeType
 from types import NoneType
 from spine import array_2_dict
 
 
-class AlarmDataType:
+class AlarmDataType: # EEBus_SPINE_TS_Alarm.xsd: ComplexType
     def __init__(
             self,
             alarm_id: AlarmIdType = None,
             threshold_id: ThresholdIdType = None,
-            timestamp: FunctionType = None,
-            alarm_type: FunctionType = None,
+            timestamp: AbsoluteOrRelativeTimeType = None,
+            alarm_type: AlarmTypeType = None,
             measured_value: ScaledNumberType = None,
             evaluation_period: TimePeriodType = None,
-            scope_type: FunctionType = None,
+            scope_type: ScopeTypeType = None,
             label: LabelType = None,
             description: DescriptionType = None,
     ):
@@ -44,11 +46,11 @@ class AlarmDataType:
         if not isinstance(self.threshold_id, ThresholdIdType | NoneType):
             raise TypeError("threshold_id is not of type ThresholdIdType")
         
-        if not isinstance(self.timestamp, FunctionType | NoneType):
-            raise TypeError("timestamp is not of type FunctionType")
+        if not isinstance(self.timestamp, AbsoluteOrRelativeTimeType | NoneType):
+            raise TypeError("timestamp is not of type AbsoluteOrRelativeTimeType")
         
-        if not isinstance(self.alarm_type, FunctionType | NoneType):
-            raise TypeError("alarm_type is not of type FunctionType")
+        if not isinstance(self.alarm_type, AlarmTypeType | NoneType):
+            raise TypeError("alarm_type is not of type AlarmTypeType")
         
         if not isinstance(self.measured_value, ScaledNumberType | NoneType):
             raise TypeError("measured_value is not of type ScaledNumberType")
@@ -56,8 +58,8 @@ class AlarmDataType:
         if not isinstance(self.evaluation_period, TimePeriodType | NoneType):
             raise TypeError("evaluation_period is not of type TimePeriodType")
         
-        if not isinstance(self.scope_type, FunctionType | NoneType):
-            raise TypeError("scope_type is not of type FunctionType")
+        if not isinstance(self.scope_type, ScopeTypeType | NoneType):
+            raise TypeError("scope_type is not of type ScopeTypeType")
         
         if not isinstance(self.label, LabelType | NoneType):
             raise TypeError("label is not of type LabelType")
@@ -65,7 +67,7 @@ class AlarmDataType:
         if not isinstance(self.description, DescriptionType | NoneType):
             raise TypeError("description is not of type DescriptionType")
         
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
@@ -144,7 +146,7 @@ class AlarmDataType:
             return cls()
 
 
-class AlarmListDataType:
+class AlarmListDataType: # EEBus_SPINE_TS_Alarm.xsd: ComplexType
     def __init__(
             self,
             alarm_data: list[AlarmDataType] = None,
@@ -156,7 +158,7 @@ class AlarmListDataType:
         if not isinstance(self.alarm_data, list | NoneType):
             raise TypeError("alarm_data is not of type list[AlarmDataType]")
         
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
@@ -187,61 +189,7 @@ class AlarmListDataType:
             return cls()
 
 
-class AlarmListDataSelectorsType:
-    def __init__(
-            self,
-            alarm_id: AlarmIdType = None,
-            scope_type: FunctionType = None,
-    ):
-        super().__init__()
-        
-        self.alarm_id = alarm_id
-        self.scope_type = scope_type
-
-        if not isinstance(self.alarm_id, AlarmIdType | NoneType):
-            raise TypeError("alarm_id is not of type AlarmIdType")
-        
-        if not isinstance(self.scope_type, FunctionType | NoneType):
-            raise TypeError("scope_type is not of type FunctionType")
-        
-    def get_data(self): # ComplexType
-
-        msg_data = []
-        
-        if self.alarm_id is not None:
-            msg_data.append({"alarmId": self.alarm_id.get_data()})
-        if self.scope_type is not None:
-            msg_data.append({"scopeType": self.scope_type.get_data()})
-        
-        return msg_data
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        if self.alarm_id is not None:
-            result_str += f"{sep}alarmId: {self.alarm_id}"
-            sep = ", "
-        if self.scope_type is not None:
-            result_str += f"{sep}scopeType: {self.scope_type}"
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
-                alarm_id=data_dict.get('alarmId'),
-                scope_type=data_dict.get('scopeType'),
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class AlarmDataElementsType:
+class AlarmDataElementsType: # EEBus_SPINE_TS_Alarm.xsd: ComplexType
     def __init__(
             self,
             alarm_id: ElementTagType = None,
@@ -293,7 +241,7 @@ class AlarmDataElementsType:
         if not isinstance(self.description, ElementTagType | NoneType):
             raise TypeError("description is not of type ElementTagType")
         
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
@@ -365,6 +313,60 @@ class AlarmDataElementsType:
                 scope_type=data_dict.get('scopeType'),
                 label=data_dict.get('label'),
                 description=data_dict.get('description'),
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class AlarmListDataSelectorsType: # EEBus_SPINE_TS_Alarm.xsd: ComplexType
+    def __init__(
+            self,
+            alarm_id: AlarmIdType = None,
+            scope_type: ScopeTypeType = None,
+    ):
+        super().__init__()
+        
+        self.alarm_id = alarm_id
+        self.scope_type = scope_type
+
+        if not isinstance(self.alarm_id, AlarmIdType | NoneType):
+            raise TypeError("alarm_id is not of type AlarmIdType")
+        
+        if not isinstance(self.scope_type, ScopeTypeType | NoneType):
+            raise TypeError("scope_type is not of type ScopeTypeType")
+        
+    def get_data(self):
+
+        msg_data = []
+        
+        if self.alarm_id is not None:
+            msg_data.append({"alarmId": self.alarm_id.get_data()})
+        if self.scope_type is not None:
+            msg_data.append({"scopeType": self.scope_type.get_data()})
+        
+        return msg_data
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        if self.alarm_id is not None:
+            result_str += f"{sep}alarmId: {self.alarm_id}"
+            sep = ", "
+        if self.scope_type is not None:
+            result_str += f"{sep}scopeType: {self.scope_type}"
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+                alarm_id=data_dict.get('alarmId'),
+                scope_type=data_dict.get('scopeType'),
             )
         elif data:
             return cls(data)

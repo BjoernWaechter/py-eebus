@@ -1,113 +1,26 @@
 # Jinja Template message_type.py.jinja2
-from spine.base_type.commondatatypes import RecurrenceInformationElementsType
-from spine.simple_type.commondatatypes import LabelType
-from spine.simple_type.timetable import TimeSlotCountType
-from spine.simple_type.commondatatypes import DescriptionType
-from spine.simple_type.timetable import TimeTableIdType
+from spine.base_type.commondatatypes import AbsoluteOrRecurringTimeElementsType
 from spine.base_type.commondatatypes import AbsoluteOrRecurringTimeType
 from spine.base_type.commondatatypes import ElementTagType
-from spine.simple_type.timetable import TimeSlotIdType
-from spine.union_type.commondatatypes import FunctionType
+from spine.base_type.commondatatypes import RecurrenceInformationElementsType
 from spine.base_type.commondatatypes import RecurrenceInformationType
-from spine.base_type.commondatatypes import AbsoluteOrRecurringTimeElementsType
+from spine.simple_type.commondatatypes import DescriptionType
+from spine.simple_type.commondatatypes import LabelType
+from spine.simple_type.timetable import TimeSlotCountType
+from spine.simple_type.timetable import TimeSlotIdType
+from spine.simple_type.timetable import TimeTableIdType
+from spine.union_type.timetable import TimeSlotTimeModeType
 from types import NoneType
 from spine import array_2_dict
 
 
-class TimeTableDataType:
-    def __init__(
-            self,
-            time_table_id: TimeTableIdType = None,
-            time_slot_id: TimeSlotIdType = None,
-            recurrence_information: RecurrenceInformationType = None,
-            start_time: AbsoluteOrRecurringTimeType = None,
-            end_time: AbsoluteOrRecurringTimeType = None,
-    ):
-        super().__init__()
-        
-        self.time_table_id = time_table_id
-        self.time_slot_id = time_slot_id
-        self.recurrence_information = recurrence_information
-        self.start_time = start_time
-        self.end_time = end_time
-
-        if not isinstance(self.time_table_id, TimeTableIdType | NoneType):
-            raise TypeError("time_table_id is not of type TimeTableIdType")
-        
-        if not isinstance(self.time_slot_id, TimeSlotIdType | NoneType):
-            raise TypeError("time_slot_id is not of type TimeSlotIdType")
-        
-        if not isinstance(self.recurrence_information, RecurrenceInformationType | NoneType):
-            raise TypeError("recurrence_information is not of type RecurrenceInformationType")
-        
-        if not isinstance(self.start_time, AbsoluteOrRecurringTimeType | NoneType):
-            raise TypeError("start_time is not of type AbsoluteOrRecurringTimeType")
-        
-        if not isinstance(self.end_time, AbsoluteOrRecurringTimeType | NoneType):
-            raise TypeError("end_time is not of type AbsoluteOrRecurringTimeType")
-        
-    def get_data(self): # ComplexType
-
-        msg_data = []
-        
-        if self.time_table_id is not None:
-            msg_data.append({"timeTableId": self.time_table_id.get_data()})
-        if self.time_slot_id is not None:
-            msg_data.append({"timeSlotId": self.time_slot_id.get_data()})
-        if self.recurrence_information is not None:
-            msg_data.append({"recurrenceInformation": self.recurrence_information.get_data()})
-        if self.start_time is not None:
-            msg_data.append({"startTime": self.start_time.get_data()})
-        if self.end_time is not None:
-            msg_data.append({"endTime": self.end_time.get_data()})
-        
-        return msg_data
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        if self.time_table_id is not None:
-            result_str += f"{sep}timeTableId: {self.time_table_id}"
-            sep = ", "
-        if self.time_slot_id is not None:
-            result_str += f"{sep}timeSlotId: {self.time_slot_id}"
-            sep = ", "
-        if self.recurrence_information is not None:
-            result_str += f"{sep}recurrenceInformation: {self.recurrence_information}"
-            sep = ", "
-        if self.start_time is not None:
-            result_str += f"{sep}startTime: {self.start_time}"
-            sep = ", "
-        if self.end_time is not None:
-            result_str += f"{sep}endTime: {self.end_time}"
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
-                time_table_id=data_dict.get('timeTableId'),
-                time_slot_id=data_dict.get('timeSlotId'),
-                recurrence_information=data_dict.get('recurrenceInformation'),
-                start_time=data_dict.get('startTime'),
-                end_time=data_dict.get('endTime'),
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class TimeTableDescriptionDataType:
+class TimeTableDescriptionDataType: # EEBus_SPINE_TS_TimeTable.xsd: ComplexType
     def __init__(
             self,
             time_table_id: int = None,
             time_slot_count_changeable: bool = None,
             time_slot_times_changeable: bool = None,
-            time_slot_time_mode: FunctionType = None,
+            time_slot_time_mode: TimeSlotTimeModeType = None,
             label: LabelType = None,
             description: DescriptionType = None,
     ):
@@ -129,8 +42,8 @@ class TimeTableDescriptionDataType:
         if not isinstance(self.time_slot_times_changeable, bool | NoneType):
             raise TypeError("time_slot_times_changeable is not of type bool")
         
-        if not isinstance(self.time_slot_time_mode, FunctionType | NoneType):
-            raise TypeError("time_slot_time_mode is not of type FunctionType")
+        if not isinstance(self.time_slot_time_mode, TimeSlotTimeModeType | NoneType):
+            raise TypeError("time_slot_time_mode is not of type TimeSlotTimeModeType")
         
         if not isinstance(self.label, LabelType | NoneType):
             raise TypeError("label is not of type LabelType")
@@ -138,7 +51,7 @@ class TimeTableDescriptionDataType:
         if not isinstance(self.description, DescriptionType | NoneType):
             raise TypeError("description is not of type DescriptionType")
         
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
@@ -199,7 +112,7 @@ class TimeTableDescriptionDataType:
             return cls()
 
 
-class TimeTableConstraintsDataType:
+class TimeTableConstraintsDataType: # EEBus_SPINE_TS_TimeTable.xsd: ComplexType
     def __init__(
             self,
             time_table_id: int = None,
@@ -246,7 +159,7 @@ class TimeTableConstraintsDataType:
         if not isinstance(self.first_slot_begins_at, str | NoneType):
             raise TypeError("first_slot_begins_at is not of type str")
         
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
@@ -319,59 +232,22 @@ class TimeTableConstraintsDataType:
             return cls()
 
 
-class TimeTableListDataType:
-    def __init__(
-            self,
-            time_table_data: list[TimeTableDataType] = None,
-    ):
-        super().__init__()
-        
-        self.time_table_data = time_table_data
-
-        if not isinstance(self.time_table_data, list | NoneType):
-            raise TypeError("time_table_data is not of type list[TimeTableDataType]")
-        
-    def get_data(self): # ComplexType
-
-        msg_data = []
-        
-        if self.time_table_data is not None:
-            msg_data.append({"timeTableData": [d.get_data() for d in self.time_table_data]})
-        
-        return msg_data
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        if self.time_table_data is not None:
-            result_str += f"{sep}timeTableData: {self.time_table_data}"
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
-                time_table_data=data_dict.get('timeTableData'),
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class TimeTableListDataSelectorsType:
+class TimeTableDataType: # EEBus_SPINE_TS_TimeTable.xsd: ComplexType
     def __init__(
             self,
             time_table_id: TimeTableIdType = None,
             time_slot_id: TimeSlotIdType = None,
+            recurrence_information: RecurrenceInformationType = None,
+            start_time: AbsoluteOrRecurringTimeType = None,
+            end_time: AbsoluteOrRecurringTimeType = None,
     ):
         super().__init__()
         
         self.time_table_id = time_table_id
         self.time_slot_id = time_slot_id
+        self.recurrence_information = recurrence_information
+        self.start_time = start_time
+        self.end_time = end_time
 
         if not isinstance(self.time_table_id, TimeTableIdType | NoneType):
             raise TypeError("time_table_id is not of type TimeTableIdType")
@@ -379,7 +255,16 @@ class TimeTableListDataSelectorsType:
         if not isinstance(self.time_slot_id, TimeSlotIdType | NoneType):
             raise TypeError("time_slot_id is not of type TimeSlotIdType")
         
-    def get_data(self): # ComplexType
+        if not isinstance(self.recurrence_information, RecurrenceInformationType | NoneType):
+            raise TypeError("recurrence_information is not of type RecurrenceInformationType")
+        
+        if not isinstance(self.start_time, AbsoluteOrRecurringTimeType | NoneType):
+            raise TypeError("start_time is not of type AbsoluteOrRecurringTimeType")
+        
+        if not isinstance(self.end_time, AbsoluteOrRecurringTimeType | NoneType):
+            raise TypeError("end_time is not of type AbsoluteOrRecurringTimeType")
+        
+    def get_data(self):
 
         msg_data = []
         
@@ -387,6 +272,12 @@ class TimeTableListDataSelectorsType:
             msg_data.append({"timeTableId": self.time_table_id.get_data()})
         if self.time_slot_id is not None:
             msg_data.append({"timeSlotId": self.time_slot_id.get_data()})
+        if self.recurrence_information is not None:
+            msg_data.append({"recurrenceInformation": self.recurrence_information.get_data()})
+        if self.start_time is not None:
+            msg_data.append({"startTime": self.start_time.get_data()})
+        if self.end_time is not None:
+            msg_data.append({"endTime": self.end_time.get_data()})
         
         return msg_data
 
@@ -399,6 +290,15 @@ class TimeTableListDataSelectorsType:
             sep = ", "
         if self.time_slot_id is not None:
             result_str += f"{sep}timeSlotId: {self.time_slot_id}"
+            sep = ", "
+        if self.recurrence_information is not None:
+            result_str += f"{sep}recurrenceInformation: {self.recurrence_information}"
+            sep = ", "
+        if self.start_time is not None:
+            result_str += f"{sep}startTime: {self.start_time}"
+            sep = ", "
+        if self.end_time is not None:
+            result_str += f"{sep}endTime: {self.end_time}"
         
         return result_str
 
@@ -409,6 +309,9 @@ class TimeTableListDataSelectorsType:
             return cls(
                 time_table_id=data_dict.get('timeTableId'),
                 time_slot_id=data_dict.get('timeSlotId'),
+                recurrence_information=data_dict.get('recurrenceInformation'),
+                start_time=data_dict.get('startTime'),
+                end_time=data_dict.get('endTime'),
             )
         elif data:
             return cls(data)
@@ -416,7 +319,7 @@ class TimeTableListDataSelectorsType:
             return cls()
 
 
-class TimeTableDescriptionListDataType:
+class TimeTableDescriptionListDataType: # EEBus_SPINE_TS_TimeTable.xsd: ComplexType
     def __init__(
             self,
             time_table_description_data: list[TimeTableDescriptionDataType] = None,
@@ -428,7 +331,7 @@ class TimeTableDescriptionListDataType:
         if not isinstance(self.time_table_description_data, list | NoneType):
             raise TypeError("time_table_description_data is not of type list[TimeTableDescriptionDataType]")
         
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
@@ -459,24 +362,24 @@ class TimeTableDescriptionListDataType:
             return cls()
 
 
-class TimeTableDescriptionListDataSelectorsType:
+class TimeTableConstraintsListDataType: # EEBus_SPINE_TS_TimeTable.xsd: ComplexType
     def __init__(
             self,
-            time_table_id: TimeTableIdType = None,
+            time_table_constraints_data: list[TimeTableConstraintsDataType] = None,
     ):
         super().__init__()
         
-        self.time_table_id = time_table_id
+        self.time_table_constraints_data = time_table_constraints_data
 
-        if not isinstance(self.time_table_id, TimeTableIdType | NoneType):
-            raise TypeError("time_table_id is not of type TimeTableIdType")
+        if not isinstance(self.time_table_constraints_data, list | NoneType):
+            raise TypeError("time_table_constraints_data is not of type list[TimeTableConstraintsDataType]")
         
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
-        if self.time_table_id is not None:
-            msg_data.append({"timeTableId": self.time_table_id.get_data()})
+        if self.time_table_constraints_data is not None:
+            msg_data.append({"timeTableConstraintsData": [d.get_data() for d in self.time_table_constraints_data]})
         
         return msg_data
 
@@ -484,8 +387,8 @@ class TimeTableDescriptionListDataSelectorsType:
     def __str__(self):
         result_str = ""
         sep = ""
-        if self.time_table_id is not None:
-            result_str += f"{sep}timeTableId: {self.time_table_id}"
+        if self.time_table_constraints_data is not None:
+            result_str += f"{sep}timeTableConstraintsData: {self.time_table_constraints_data}"
         
         return result_str
 
@@ -494,7 +397,7 @@ class TimeTableDescriptionListDataSelectorsType:
         if type(data) == list:
             data_dict = array_2_dict(data)
             return cls(
-                time_table_id=data_dict.get('timeTableId'),
+                time_table_constraints_data=data_dict.get('timeTableConstraintsData'),
             )
         elif data:
             return cls(data)
@@ -502,7 +405,50 @@ class TimeTableDescriptionListDataSelectorsType:
             return cls()
 
 
-class TimeTableDescriptionDataElementsType:
+class TimeTableListDataType: # EEBus_SPINE_TS_TimeTable.xsd: ComplexType
+    def __init__(
+            self,
+            time_table_data: list[TimeTableDataType] = None,
+    ):
+        super().__init__()
+        
+        self.time_table_data = time_table_data
+
+        if not isinstance(self.time_table_data, list | NoneType):
+            raise TypeError("time_table_data is not of type list[TimeTableDataType]")
+        
+    def get_data(self):
+
+        msg_data = []
+        
+        if self.time_table_data is not None:
+            msg_data.append({"timeTableData": [d.get_data() for d in self.time_table_data]})
+        
+        return msg_data
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        if self.time_table_data is not None:
+            result_str += f"{sep}timeTableData: {self.time_table_data}"
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+                time_table_data=data_dict.get('timeTableData'),
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class TimeTableDescriptionDataElementsType: # EEBus_SPINE_TS_TimeTable.xsd: ComplexType
     def __init__(
             self,
             time_table_id: ElementTagType = None,
@@ -539,7 +485,7 @@ class TimeTableDescriptionDataElementsType:
         if not isinstance(self.description, ElementTagType | NoneType):
             raise TypeError("description is not of type ElementTagType")
         
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
@@ -600,7 +546,7 @@ class TimeTableDescriptionDataElementsType:
             return cls()
 
 
-class TimeTableDataElementsType:
+class TimeTableDataElementsType: # EEBus_SPINE_TS_TimeTable.xsd: ComplexType
     def __init__(
             self,
             time_table_id: ElementTagType = None,
@@ -632,7 +578,7 @@ class TimeTableDataElementsType:
         if not isinstance(self.end_time, AbsoluteOrRecurringTimeElementsType | NoneType):
             raise TypeError("end_time is not of type AbsoluteOrRecurringTimeElementsType")
         
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
@@ -687,93 +633,7 @@ class TimeTableDataElementsType:
             return cls()
 
 
-class TimeTableConstraintsListDataType:
-    def __init__(
-            self,
-            time_table_constraints_data: list[TimeTableConstraintsDataType] = None,
-    ):
-        super().__init__()
-        
-        self.time_table_constraints_data = time_table_constraints_data
-
-        if not isinstance(self.time_table_constraints_data, list | NoneType):
-            raise TypeError("time_table_constraints_data is not of type list[TimeTableConstraintsDataType]")
-        
-    def get_data(self): # ComplexType
-
-        msg_data = []
-        
-        if self.time_table_constraints_data is not None:
-            msg_data.append({"timeTableConstraintsData": [d.get_data() for d in self.time_table_constraints_data]})
-        
-        return msg_data
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        if self.time_table_constraints_data is not None:
-            result_str += f"{sep}timeTableConstraintsData: {self.time_table_constraints_data}"
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
-                time_table_constraints_data=data_dict.get('timeTableConstraintsData'),
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class TimeTableConstraintsListDataSelectorsType:
-    def __init__(
-            self,
-            time_table_id: TimeTableIdType = None,
-    ):
-        super().__init__()
-        
-        self.time_table_id = time_table_id
-
-        if not isinstance(self.time_table_id, TimeTableIdType | NoneType):
-            raise TypeError("time_table_id is not of type TimeTableIdType")
-        
-    def get_data(self): # ComplexType
-
-        msg_data = []
-        
-        if self.time_table_id is not None:
-            msg_data.append({"timeTableId": self.time_table_id.get_data()})
-        
-        return msg_data
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        if self.time_table_id is not None:
-            result_str += f"{sep}timeTableId: {self.time_table_id}"
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
-                time_table_id=data_dict.get('timeTableId'),
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class TimeTableConstraintsDataElementsType:
+class TimeTableConstraintsDataElementsType: # EEBus_SPINE_TS_TimeTable.xsd: ComplexType
     def __init__(
             self,
             time_table_id: ElementTagType = None,
@@ -820,7 +680,7 @@ class TimeTableConstraintsDataElementsType:
         if not isinstance(self.first_slot_begins_at, ElementTagType | NoneType):
             raise TypeError("first_slot_begins_at is not of type ElementTagType")
         
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
@@ -886,6 +746,146 @@ class TimeTableConstraintsDataElementsType:
                 slot_duration_step_size=data_dict.get('slotDurationStepSize'),
                 slot_shift_step_size=data_dict.get('slotShiftStepSize'),
                 first_slot_begins_at=data_dict.get('firstSlotBeginsAt'),
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class TimeTableListDataSelectorsType: # EEBus_SPINE_TS_TimeTable.xsd: ComplexType
+    def __init__(
+            self,
+            time_table_id: TimeTableIdType = None,
+            time_slot_id: TimeSlotIdType = None,
+    ):
+        super().__init__()
+        
+        self.time_table_id = time_table_id
+        self.time_slot_id = time_slot_id
+
+        if not isinstance(self.time_table_id, TimeTableIdType | NoneType):
+            raise TypeError("time_table_id is not of type TimeTableIdType")
+        
+        if not isinstance(self.time_slot_id, TimeSlotIdType | NoneType):
+            raise TypeError("time_slot_id is not of type TimeSlotIdType")
+        
+    def get_data(self):
+
+        msg_data = []
+        
+        if self.time_table_id is not None:
+            msg_data.append({"timeTableId": self.time_table_id.get_data()})
+        if self.time_slot_id is not None:
+            msg_data.append({"timeSlotId": self.time_slot_id.get_data()})
+        
+        return msg_data
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        if self.time_table_id is not None:
+            result_str += f"{sep}timeTableId: {self.time_table_id}"
+            sep = ", "
+        if self.time_slot_id is not None:
+            result_str += f"{sep}timeSlotId: {self.time_slot_id}"
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+                time_table_id=data_dict.get('timeTableId'),
+                time_slot_id=data_dict.get('timeSlotId'),
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class TimeTableDescriptionListDataSelectorsType: # EEBus_SPINE_TS_TimeTable.xsd: ComplexType
+    def __init__(
+            self,
+            time_table_id: TimeTableIdType = None,
+    ):
+        super().__init__()
+        
+        self.time_table_id = time_table_id
+
+        if not isinstance(self.time_table_id, TimeTableIdType | NoneType):
+            raise TypeError("time_table_id is not of type TimeTableIdType")
+        
+    def get_data(self):
+
+        msg_data = []
+        
+        if self.time_table_id is not None:
+            msg_data.append({"timeTableId": self.time_table_id.get_data()})
+        
+        return msg_data
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        if self.time_table_id is not None:
+            result_str += f"{sep}timeTableId: {self.time_table_id}"
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+                time_table_id=data_dict.get('timeTableId'),
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class TimeTableConstraintsListDataSelectorsType: # EEBus_SPINE_TS_TimeTable.xsd: ComplexType
+    def __init__(
+            self,
+            time_table_id: TimeTableIdType = None,
+    ):
+        super().__init__()
+        
+        self.time_table_id = time_table_id
+
+        if not isinstance(self.time_table_id, TimeTableIdType | NoneType):
+            raise TypeError("time_table_id is not of type TimeTableIdType")
+        
+    def get_data(self):
+
+        msg_data = []
+        
+        if self.time_table_id is not None:
+            msg_data.append({"timeTableId": self.time_table_id.get_data()})
+        
+        return msg_data
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        if self.time_table_id is not None:
+            result_str += f"{sep}timeTableId: {self.time_table_id}"
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+                time_table_id=data_dict.get('timeTableId'),
             )
         elif data:
             return cls(data)

@@ -1,18 +1,19 @@
 # Jinja Template message_type.py.jinja2
-from spine.simple_type.commondatatypes import SpecificationVersionType
 from spine.base_type.commondatatypes import ElementTagType
-from spine.simple_type.usecaseinformation import UseCaseScenarioSupportType
-from spine.union_type.commondatatypes import FunctionType
-from spine.base_type.commondatatypes import FeatureAddressType
 from spine.base_type.commondatatypes import FeatureAddressElementsType
+from spine.base_type.commondatatypes import FeatureAddressType
+from spine.simple_type.commondatatypes import SpecificationVersionType
+from spine.simple_type.usecaseinformation import UseCaseScenarioSupportType
+from spine.union_type.usecaseinformation import UseCaseActorType
+from spine.union_type.usecaseinformation import UseCaseNameType
 from types import NoneType
 from spine import array_2_dict
 
 
-class UseCaseSupportType:
+class UseCaseSupportType: # EEBus_SPINE_TS_UseCaseInformation.xsd: ComplexType
     def __init__(
             self,
-            use_case_name: FunctionType = None,
+            use_case_name: UseCaseNameType = None,
             use_case_version: SpecificationVersionType = None,
             use_case_available: bool = None,
             scenario_support: list[UseCaseScenarioSupportType] = None,
@@ -26,8 +27,8 @@ class UseCaseSupportType:
         self.scenario_support = scenario_support
         self.use_case_document_sub_revision = use_case_document_sub_revision
 
-        if not isinstance(self.use_case_name, FunctionType | NoneType):
-            raise TypeError("use_case_name is not of type FunctionType")
+        if not isinstance(self.use_case_name, UseCaseNameType | NoneType):
+            raise TypeError("use_case_name is not of type UseCaseNameType")
         
         if not isinstance(self.use_case_version, SpecificationVersionType | NoneType):
             raise TypeError("use_case_version is not of type SpecificationVersionType")
@@ -41,7 +42,7 @@ class UseCaseSupportType:
         if not isinstance(self.use_case_document_sub_revision, str | NoneType):
             raise TypeError("use_case_document_sub_revision is not of type str")
         
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
@@ -96,11 +97,11 @@ class UseCaseSupportType:
             return cls()
 
 
-class UseCaseInformationDataType:
+class UseCaseInformationDataType: # EEBus_SPINE_TS_UseCaseInformation.xsd: ComplexType
     def __init__(
             self,
             address: FeatureAddressType = None,
-            actor: FunctionType = None,
+            actor: UseCaseActorType = None,
             use_case_support: list[UseCaseSupportType] = None,
     ):
         super().__init__()
@@ -112,13 +113,13 @@ class UseCaseInformationDataType:
         if not isinstance(self.address, FeatureAddressType | NoneType):
             raise TypeError("address is not of type FeatureAddressType")
         
-        if not isinstance(self.actor, FunctionType | NoneType):
-            raise TypeError("actor is not of type FunctionType")
+        if not isinstance(self.actor, UseCaseActorType | NoneType):
+            raise TypeError("actor is not of type UseCaseActorType")
         
         if not isinstance(self.use_case_support, list | NoneType):
             raise TypeError("use_case_support is not of type list[UseCaseSupportType]")
         
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
@@ -161,72 +162,7 @@ class UseCaseInformationDataType:
             return cls()
 
 
-class UseCaseSupportSelectorsType:
-    def __init__(
-            self,
-            use_case_name: FunctionType = None,
-            use_case_version: SpecificationVersionType = None,
-            scenario_support: UseCaseScenarioSupportType = None,
-    ):
-        super().__init__()
-        
-        self.use_case_name = use_case_name
-        self.use_case_version = use_case_version
-        self.scenario_support = scenario_support
-
-        if not isinstance(self.use_case_name, FunctionType | NoneType):
-            raise TypeError("use_case_name is not of type FunctionType")
-        
-        if not isinstance(self.use_case_version, SpecificationVersionType | NoneType):
-            raise TypeError("use_case_version is not of type SpecificationVersionType")
-        
-        if not isinstance(self.scenario_support, UseCaseScenarioSupportType | NoneType):
-            raise TypeError("scenario_support is not of type UseCaseScenarioSupportType")
-        
-    def get_data(self): # ComplexType
-
-        msg_data = []
-        
-        if self.use_case_name is not None:
-            msg_data.append({"useCaseName": self.use_case_name.get_data()})
-        if self.use_case_version is not None:
-            msg_data.append({"useCaseVersion": self.use_case_version.get_data()})
-        if self.scenario_support is not None:
-            msg_data.append({"scenarioSupport": self.scenario_support.get_data()})
-        
-        return msg_data
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        if self.use_case_name is not None:
-            result_str += f"{sep}useCaseName: {self.use_case_name}"
-            sep = ", "
-        if self.use_case_version is not None:
-            result_str += f"{sep}useCaseVersion: {self.use_case_version}"
-            sep = ", "
-        if self.scenario_support is not None:
-            result_str += f"{sep}scenarioSupport: {self.scenario_support}"
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
-                use_case_name=data_dict.get('useCaseName'),
-                use_case_version=data_dict.get('useCaseVersion'),
-                scenario_support=data_dict.get('scenarioSupport'),
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class UseCaseSupportElementsType:
+class UseCaseSupportElementsType: # EEBus_SPINE_TS_UseCaseInformation.xsd: ComplexType
     def __init__(
             self,
             use_case_name: ElementTagType = None,
@@ -258,7 +194,7 @@ class UseCaseSupportElementsType:
         if not isinstance(self.use_case_document_sub_revision, ElementTagType | NoneType):
             raise TypeError("use_case_document_sub_revision is not of type ElementTagType")
         
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
@@ -313,7 +249,72 @@ class UseCaseSupportElementsType:
             return cls()
 
 
-class UseCaseInformationListDataType:
+class UseCaseSupportSelectorsType: # EEBus_SPINE_TS_UseCaseInformation.xsd: ComplexType
+    def __init__(
+            self,
+            use_case_name: UseCaseNameType = None,
+            use_case_version: SpecificationVersionType = None,
+            scenario_support: UseCaseScenarioSupportType = None,
+    ):
+        super().__init__()
+        
+        self.use_case_name = use_case_name
+        self.use_case_version = use_case_version
+        self.scenario_support = scenario_support
+
+        if not isinstance(self.use_case_name, UseCaseNameType | NoneType):
+            raise TypeError("use_case_name is not of type UseCaseNameType")
+        
+        if not isinstance(self.use_case_version, SpecificationVersionType | NoneType):
+            raise TypeError("use_case_version is not of type SpecificationVersionType")
+        
+        if not isinstance(self.scenario_support, UseCaseScenarioSupportType | NoneType):
+            raise TypeError("scenario_support is not of type UseCaseScenarioSupportType")
+        
+    def get_data(self):
+
+        msg_data = []
+        
+        if self.use_case_name is not None:
+            msg_data.append({"useCaseName": self.use_case_name.get_data()})
+        if self.use_case_version is not None:
+            msg_data.append({"useCaseVersion": self.use_case_version.get_data()})
+        if self.scenario_support is not None:
+            msg_data.append({"scenarioSupport": self.scenario_support.get_data()})
+        
+        return msg_data
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        if self.use_case_name is not None:
+            result_str += f"{sep}useCaseName: {self.use_case_name}"
+            sep = ", "
+        if self.use_case_version is not None:
+            result_str += f"{sep}useCaseVersion: {self.use_case_version}"
+            sep = ", "
+        if self.scenario_support is not None:
+            result_str += f"{sep}scenarioSupport: {self.scenario_support}"
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+                use_case_name=data_dict.get('useCaseName'),
+                use_case_version=data_dict.get('useCaseVersion'),
+                scenario_support=data_dict.get('scenarioSupport'),
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class UseCaseInformationListDataType: # EEBus_SPINE_TS_UseCaseInformation.xsd: ComplexType
     def __init__(
             self,
             use_case_information_data: list[UseCaseInformationDataType] = None,
@@ -325,7 +326,7 @@ class UseCaseInformationListDataType:
         if not isinstance(self.use_case_information_data, list | NoneType):
             raise TypeError("use_case_information_data is not of type list[UseCaseInformationDataType]")
         
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
@@ -356,12 +357,12 @@ class UseCaseInformationListDataType:
             return cls()
 
 
-class UseCaseInformationListDataSelectorsType:
+class UseCaseInformationDataElementsType: # EEBus_SPINE_TS_UseCaseInformation.xsd: ComplexType
     def __init__(
             self,
-            address: FeatureAddressType = None,
-            actor: FunctionType = None,
-            use_case_support: UseCaseSupportSelectorsType = None,
+            address: FeatureAddressElementsType = None,
+            actor: ElementTagType = None,
+            use_case_support: UseCaseSupportElementsType = None,
     ):
         super().__init__()
         
@@ -369,16 +370,16 @@ class UseCaseInformationListDataSelectorsType:
         self.actor = actor
         self.use_case_support = use_case_support
 
-        if not isinstance(self.address, FeatureAddressType | NoneType):
-            raise TypeError("address is not of type FeatureAddressType")
+        if not isinstance(self.address, FeatureAddressElementsType | NoneType):
+            raise TypeError("address is not of type FeatureAddressElementsType")
         
-        if not isinstance(self.actor, FunctionType | NoneType):
-            raise TypeError("actor is not of type FunctionType")
+        if not isinstance(self.actor, ElementTagType | NoneType):
+            raise TypeError("actor is not of type ElementTagType")
         
-        if not isinstance(self.use_case_support, UseCaseSupportSelectorsType | NoneType):
-            raise TypeError("use_case_support is not of type UseCaseSupportSelectorsType")
+        if not isinstance(self.use_case_support, UseCaseSupportElementsType | NoneType):
+            raise TypeError("use_case_support is not of type UseCaseSupportElementsType")
         
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
@@ -421,12 +422,12 @@ class UseCaseInformationListDataSelectorsType:
             return cls()
 
 
-class UseCaseInformationDataElementsType:
+class UseCaseInformationListDataSelectorsType: # EEBus_SPINE_TS_UseCaseInformation.xsd: ComplexType
     def __init__(
             self,
-            address: FeatureAddressElementsType = None,
-            actor: ElementTagType = None,
-            use_case_support: UseCaseSupportElementsType = None,
+            address: FeatureAddressType = None,
+            actor: UseCaseActorType = None,
+            use_case_support: UseCaseSupportSelectorsType = None,
     ):
         super().__init__()
         
@@ -434,16 +435,16 @@ class UseCaseInformationDataElementsType:
         self.actor = actor
         self.use_case_support = use_case_support
 
-        if not isinstance(self.address, FeatureAddressElementsType | NoneType):
-            raise TypeError("address is not of type FeatureAddressElementsType")
+        if not isinstance(self.address, FeatureAddressType | NoneType):
+            raise TypeError("address is not of type FeatureAddressType")
         
-        if not isinstance(self.actor, ElementTagType | NoneType):
-            raise TypeError("actor is not of type ElementTagType")
+        if not isinstance(self.actor, UseCaseActorType | NoneType):
+            raise TypeError("actor is not of type UseCaseActorType")
         
-        if not isinstance(self.use_case_support, UseCaseSupportElementsType | NoneType):
-            raise TypeError("use_case_support is not of type UseCaseSupportElementsType")
+        if not isinstance(self.use_case_support, UseCaseSupportSelectorsType | NoneType):
+            raise TypeError("use_case_support is not of type UseCaseSupportSelectorsType")
         
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         

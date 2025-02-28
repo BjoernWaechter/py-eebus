@@ -8,40 +8,6 @@ class MessageType(bytes, Enum):
     MSG_TYPE_END = b'\x03'
 
 
-class ElectricalConnectionVoltageTypeEnumType(str, Enum):
-    ac = 'ac'
-    dc = 'dc'
-
-
-class ElectricalConnectionPhaseNameEnumType(str, Enum):
-    a = 'a'
-    b = 'b'
-    c = 'c'
-    ab = 'ab'
-    bc = 'bc'
-    ac = 'ac'
-    abc = 'abc'
-    neutral = 'neutral'
-    ground = 'ground'
-    none = 'none'
-
-
-class ElectricalConnectionMeasurandVariantEnumType(str, Enum):
-    amplitude = 'amplitude'
-    rms = 'rms'
-    instantaneous = 'instantaneous'
-    angle = 'angle'
-    cosPhi = 'cosPhi'
-
-
-class ElectricalConnectionConnectionPointType(str, Enum):
-    grid = 'grid'
-    home = 'home'
-    pv = 'pv'
-    sd = 'sd'
-    other = 'other'
-
-
 class ElectricalConnectionCharacteristicTypeEnumType(str, Enum):
     powerConsumptionMin = 'powerConsumptionMin'
     powerConsumptionMax = 'powerConsumptionMax'
@@ -66,9 +32,43 @@ class ElectricalConnectionCharacteristicContextEnumType(str, Enum):
     battery = 'battery'
 
 
+class ElectricalConnectionConnectionPointType(str, Enum):
+    grid = 'grid'
+    home = 'home'
+    pv = 'pv'
+    sd = 'sd'
+    other = 'other'
+
+
+class ElectricalConnectionPhaseNameEnumType(str, Enum):
+    a = 'a'
+    b = 'b'
+    c = 'c'
+    ab = 'ab'
+    bc = 'bc'
+    ac = 'ac'
+    abc = 'abc'
+    neutral = 'neutral'
+    ground = 'ground'
+    none = 'none'
+
+
 class ElectricalConnectionAcMeasurementTypeEnumType(str, Enum):
     real = 'real'
     reactive = 'reactive'
     apparent = 'apparent'
     phase = 'phase'
+
+
+class ElectricalConnectionVoltageTypeEnumType(str, Enum):
+    ac = 'ac'
+    dc = 'dc'
+
+
+class ElectricalConnectionMeasurandVariantEnumType(str, Enum):
+    amplitude = 'amplitude'
+    rms = 'rms'
+    instantaneous = 'instantaneous'
+    angle = 'angle'
+    cosPhi = 'cosPhi'
 

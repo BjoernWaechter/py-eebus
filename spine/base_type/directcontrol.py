@@ -1,21 +1,25 @@
 # Jinja Template message_type.py.jinja2
-from spine.simple_type.powersequences import PowerSequenceIdType
-from spine.base_type.commondatatypes import TimestampIntervalType
-from spine.base_type.commondatatypes import ScaledNumberElementsType
 from spine.base_type.commondatatypes import ElementTagType
-from spine.union_type.commondatatypes import FunctionType
+from spine.base_type.commondatatypes import ScaledNumberElementsType
 from spine.base_type.commondatatypes import ScaledNumberType
+from spine.base_type.commondatatypes import TimestampIntervalType
+from spine.simple_type.powersequences import PowerSequenceIdType
+from spine.union_type.commondatatypes import AbsoluteOrRelativeTimeType
+from spine.union_type.commondatatypes import EnergyDirectionType
+from spine.union_type.commondatatypes import EnergyModeType
+from spine.union_type.commondatatypes import UnitOfMeasurementType
+from spine.union_type.directcontrol import DirectControlActivityStateType
 from types import NoneType
 from spine import array_2_dict
 
 
-class DirectControlActivityDataType:
+class DirectControlActivityDataType: # EEBus_SPINE_TS_DirectControl.xsd: ComplexType
     def __init__(
             self,
-            timestamp: FunctionType = None,
-            activity_state: FunctionType = None,
+            timestamp: AbsoluteOrRelativeTimeType = None,
+            activity_state: DirectControlActivityStateType = None,
             is_activity_state_changeable: bool = None,
-            energy_mode: FunctionType = None,
+            energy_mode: EnergyModeType = None,
             is_energy_mode_changeable: bool = None,
             power: ScaledNumberType = None,
             is_power_changeable: bool = None,
@@ -36,17 +40,17 @@ class DirectControlActivityDataType:
         self.is_energy_changeable = is_energy_changeable
         self.sequence_id = sequence_id
 
-        if not isinstance(self.timestamp, FunctionType | NoneType):
-            raise TypeError("timestamp is not of type FunctionType")
+        if not isinstance(self.timestamp, AbsoluteOrRelativeTimeType | NoneType):
+            raise TypeError("timestamp is not of type AbsoluteOrRelativeTimeType")
         
-        if not isinstance(self.activity_state, FunctionType | NoneType):
-            raise TypeError("activity_state is not of type FunctionType")
+        if not isinstance(self.activity_state, DirectControlActivityStateType | NoneType):
+            raise TypeError("activity_state is not of type DirectControlActivityStateType")
         
         if not isinstance(self.is_activity_state_changeable, bool | NoneType):
             raise TypeError("is_activity_state_changeable is not of type bool")
         
-        if not isinstance(self.energy_mode, FunctionType | NoneType):
-            raise TypeError("energy_mode is not of type FunctionType")
+        if not isinstance(self.energy_mode, EnergyModeType | NoneType):
+            raise TypeError("energy_mode is not of type EnergyModeType")
         
         if not isinstance(self.is_energy_mode_changeable, bool | NoneType):
             raise TypeError("is_energy_mode_changeable is not of type bool")
@@ -66,7 +70,7 @@ class DirectControlActivityDataType:
         if not isinstance(self.sequence_id, PowerSequenceIdType | NoneType):
             raise TypeError("sequence_id is not of type PowerSequenceIdType")
         
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
@@ -151,12 +155,12 @@ class DirectControlActivityDataType:
             return cls()
 
 
-class DirectControlDescriptionDataType:
+class DirectControlDescriptionDataType: # EEBus_SPINE_TS_DirectControl.xsd: ComplexType
     def __init__(
             self,
-            positive_energy_direction: FunctionType = None,
-            power_unit: FunctionType = None,
-            energy_unit: FunctionType = None,
+            positive_energy_direction: EnergyDirectionType = None,
+            power_unit: UnitOfMeasurementType = None,
+            energy_unit: UnitOfMeasurementType = None,
     ):
         super().__init__()
         
@@ -164,16 +168,16 @@ class DirectControlDescriptionDataType:
         self.power_unit = power_unit
         self.energy_unit = energy_unit
 
-        if not isinstance(self.positive_energy_direction, FunctionType | NoneType):
-            raise TypeError("positive_energy_direction is not of type FunctionType")
+        if not isinstance(self.positive_energy_direction, EnergyDirectionType | NoneType):
+            raise TypeError("positive_energy_direction is not of type EnergyDirectionType")
         
-        if not isinstance(self.power_unit, FunctionType | NoneType):
-            raise TypeError("power_unit is not of type FunctionType")
+        if not isinstance(self.power_unit, UnitOfMeasurementType | NoneType):
+            raise TypeError("power_unit is not of type UnitOfMeasurementType")
         
-        if not isinstance(self.energy_unit, FunctionType | NoneType):
-            raise TypeError("energy_unit is not of type FunctionType")
+        if not isinstance(self.energy_unit, UnitOfMeasurementType | NoneType):
+            raise TypeError("energy_unit is not of type UnitOfMeasurementType")
         
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
@@ -216,72 +220,7 @@ class DirectControlDescriptionDataType:
             return cls()
 
 
-class DirectControlDescriptionDataElementsType:
-    def __init__(
-            self,
-            positive_energy_direction: ElementTagType = None,
-            power_unit: ElementTagType = None,
-            energy_unit: ElementTagType = None,
-    ):
-        super().__init__()
-        
-        self.positive_energy_direction = positive_energy_direction
-        self.power_unit = power_unit
-        self.energy_unit = energy_unit
-
-        if not isinstance(self.positive_energy_direction, ElementTagType | NoneType):
-            raise TypeError("positive_energy_direction is not of type ElementTagType")
-        
-        if not isinstance(self.power_unit, ElementTagType | NoneType):
-            raise TypeError("power_unit is not of type ElementTagType")
-        
-        if not isinstance(self.energy_unit, ElementTagType | NoneType):
-            raise TypeError("energy_unit is not of type ElementTagType")
-        
-    def get_data(self): # ComplexType
-
-        msg_data = []
-        
-        if self.positive_energy_direction is not None:
-            msg_data.append({"positiveEnergyDirection": self.positive_energy_direction.get_data()})
-        if self.power_unit is not None:
-            msg_data.append({"powerUnit": self.power_unit.get_data()})
-        if self.energy_unit is not None:
-            msg_data.append({"energyUnit": self.energy_unit.get_data()})
-        
-        return msg_data
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        if self.positive_energy_direction is not None:
-            result_str += f"{sep}positiveEnergyDirection: {self.positive_energy_direction}"
-            sep = ", "
-        if self.power_unit is not None:
-            result_str += f"{sep}powerUnit: {self.power_unit}"
-            sep = ", "
-        if self.energy_unit is not None:
-            result_str += f"{sep}energyUnit: {self.energy_unit}"
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
-                positive_energy_direction=data_dict.get('positiveEnergyDirection'),
-                power_unit=data_dict.get('powerUnit'),
-                energy_unit=data_dict.get('energyUnit'),
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class DirectControlActivityListDataType:
+class DirectControlActivityListDataType: # EEBus_SPINE_TS_DirectControl.xsd: ComplexType
     def __init__(
             self,
             direct_control_activity_data: list[DirectControlActivityDataType] = None,
@@ -293,7 +232,7 @@ class DirectControlActivityListDataType:
         if not isinstance(self.direct_control_activity_data, list | NoneType):
             raise TypeError("direct_control_activity_data is not of type list[DirectControlActivityDataType]")
         
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
@@ -324,24 +263,38 @@ class DirectControlActivityListDataType:
             return cls()
 
 
-class DirectControlActivityListDataSelectorsType:
+class DirectControlDescriptionDataElementsType: # EEBus_SPINE_TS_DirectControl.xsd: ComplexType
     def __init__(
             self,
-            timestamp_interval: TimestampIntervalType = None,
+            positive_energy_direction: ElementTagType = None,
+            power_unit: ElementTagType = None,
+            energy_unit: ElementTagType = None,
     ):
         super().__init__()
         
-        self.timestamp_interval = timestamp_interval
+        self.positive_energy_direction = positive_energy_direction
+        self.power_unit = power_unit
+        self.energy_unit = energy_unit
 
-        if not isinstance(self.timestamp_interval, TimestampIntervalType | NoneType):
-            raise TypeError("timestamp_interval is not of type TimestampIntervalType")
+        if not isinstance(self.positive_energy_direction, ElementTagType | NoneType):
+            raise TypeError("positive_energy_direction is not of type ElementTagType")
         
-    def get_data(self): # ComplexType
+        if not isinstance(self.power_unit, ElementTagType | NoneType):
+            raise TypeError("power_unit is not of type ElementTagType")
+        
+        if not isinstance(self.energy_unit, ElementTagType | NoneType):
+            raise TypeError("energy_unit is not of type ElementTagType")
+        
+    def get_data(self):
 
         msg_data = []
         
-        if self.timestamp_interval is not None:
-            msg_data.append({"timestampInterval": self.timestamp_interval.get_data()})
+        if self.positive_energy_direction is not None:
+            msg_data.append({"positiveEnergyDirection": self.positive_energy_direction.get_data()})
+        if self.power_unit is not None:
+            msg_data.append({"powerUnit": self.power_unit.get_data()})
+        if self.energy_unit is not None:
+            msg_data.append({"energyUnit": self.energy_unit.get_data()})
         
         return msg_data
 
@@ -349,8 +302,14 @@ class DirectControlActivityListDataSelectorsType:
     def __str__(self):
         result_str = ""
         sep = ""
-        if self.timestamp_interval is not None:
-            result_str += f"{sep}timestampInterval: {self.timestamp_interval}"
+        if self.positive_energy_direction is not None:
+            result_str += f"{sep}positiveEnergyDirection: {self.positive_energy_direction}"
+            sep = ", "
+        if self.power_unit is not None:
+            result_str += f"{sep}powerUnit: {self.power_unit}"
+            sep = ", "
+        if self.energy_unit is not None:
+            result_str += f"{sep}energyUnit: {self.energy_unit}"
         
         return result_str
 
@@ -359,7 +318,9 @@ class DirectControlActivityListDataSelectorsType:
         if type(data) == list:
             data_dict = array_2_dict(data)
             return cls(
-                timestamp_interval=data_dict.get('timestampInterval'),
+                positive_energy_direction=data_dict.get('positiveEnergyDirection'),
+                power_unit=data_dict.get('powerUnit'),
+                energy_unit=data_dict.get('energyUnit'),
             )
         elif data:
             return cls(data)
@@ -367,7 +328,7 @@ class DirectControlActivityListDataSelectorsType:
             return cls()
 
 
-class DirectControlActivityDataElementsType:
+class DirectControlActivityDataElementsType: # EEBus_SPINE_TS_DirectControl.xsd: ComplexType
     def __init__(
             self,
             timestamp: ElementTagType = None,
@@ -424,7 +385,7 @@ class DirectControlActivityDataElementsType:
         if not isinstance(self.sequence_id, ElementTagType | NoneType):
             raise TypeError("sequence_id is not of type ElementTagType")
         
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
@@ -502,6 +463,49 @@ class DirectControlActivityDataElementsType:
                 energy=data_dict.get('energy'),
                 is_energy_changeable=data_dict.get('isEnergyChangeable'),
                 sequence_id=data_dict.get('sequenceId'),
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class DirectControlActivityListDataSelectorsType: # EEBus_SPINE_TS_DirectControl.xsd: ComplexType
+    def __init__(
+            self,
+            timestamp_interval: TimestampIntervalType = None,
+    ):
+        super().__init__()
+        
+        self.timestamp_interval = timestamp_interval
+
+        if not isinstance(self.timestamp_interval, TimestampIntervalType | NoneType):
+            raise TypeError("timestamp_interval is not of type TimestampIntervalType")
+        
+    def get_data(self):
+
+        msg_data = []
+        
+        if self.timestamp_interval is not None:
+            msg_data.append({"timestampInterval": self.timestamp_interval.get_data()})
+        
+        return msg_data
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        if self.timestamp_interval is not None:
+            result_str += f"{sep}timestampInterval: {self.timestamp_interval}"
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+                timestamp_interval=data_dict.get('timestampInterval'),
             )
         elif data:
             return cls(data)

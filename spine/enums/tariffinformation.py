@@ -8,17 +8,6 @@ class MessageType(bytes, Enum):
     MSG_TYPE_END = b'\x03'
 
 
-class TierTypeEnumType(str, Enum):
-    fixedCost = 'fixedCost'
-    dynamicCost = 'dynamicCost'
-
-
-class TierBoundaryTypeEnumType(str, Enum):
-    powerBoundary = 'powerBoundary'
-    energyBoundary = 'energyBoundary'
-    countBoundary = 'countBoundary'
-
-
 class IncentiveValueTypeEnumType(str, Enum):
     value = 'value'
     averageValue = 'averageValue'
@@ -31,4 +20,15 @@ class IncentiveTypeEnumType(str, Enum):
     relativeCost = 'relativeCost'
     renewableEnergyPercentage = 'renewableEnergyPercentage'
     co2Emission = 'co2Emission'
+
+
+class TierTypeEnumType(str, Enum):
+    fixedCost = 'fixedCost'
+    dynamicCost = 'dynamicCost'
+
+
+class TierBoundaryTypeEnumType(str, Enum):
+    powerBoundary = 'powerBoundary'
+    energyBoundary = 'energyBoundary'
+    countBoundary = 'countBoundary'
 

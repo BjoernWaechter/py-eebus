@@ -6,7 +6,7 @@ from spine import array_2_dict
 {% if is_ship_msg_type %}
 {%- set base_type = 'ShipMessageType' if folder == 'ship' else 'SpineMessageType' %}{% endif %}
 {%- for class_type in types %}
-class {{ class_type.class_name }}{% if is_ship_msg_type %}({{ base_type }}){% endif %}:
+class {{ class_type.class_name }}{% if is_ship_msg_type %}({{ base_type }}){% endif %}: # {{ class_type.info_comment }}
     def __init__(
             self,
 {% for m in class_type.members %}            {{ m.snake_case_name }}{% if m.class_name %}: {{ m.class_name }}{% endif %}{% if m.has_default_or_optional %} = None{% endif %},
@@ -20,7 +20,7 @@ class {{ class_type.class_name }}{% if is_ship_msg_type %}({{ base_type }}){% en
         if not isinstance(self.{{ m.snake_case_name }}, {{ m.class_check }}{% if m.has_default_or_optional %} | NoneType{% endif %}):
             raise TypeError("{{ m.snake_case_name }} is not of type {{ m.class_name }}")
         {% endfor %}
-    def get_data(self): # {{ class_type.info_comment }}
+    def get_data(self):
 {% if class_type.return_type == 'value' %}
         return self.{{ class_type.members[0].snake_case_name }}
 {%  else %}

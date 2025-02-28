@@ -3,7 +3,7 @@ from types import NoneType
 from spine import array_2_dict
 
 
-class TimeTableIdType:
+class TimeSlotIdType: # EEBus_SPINE_TS_TimeTable.xsd: AliasType
     def __init__(
             self,
             value: int,
@@ -15,7 +15,7 @@ class TimeTableIdType:
         if not isinstance(self.value, int):
             raise TypeError("value is not of type int")
         
-    def get_data(self): # AliasType
+    def get_data(self):
 
         return self.value
 
@@ -41,45 +41,7 @@ class TimeTableIdType:
             return cls()
 
 
-class TimeSlotIdType:
-    def __init__(
-            self,
-            value: int,
-    ):
-        super().__init__()
-        
-        self.value = value
-
-        if not isinstance(self.value, int):
-            raise TypeError("value is not of type int")
-        
-    def get_data(self): # AliasType
-
-        return self.value
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        if self.value is not None:
-            result_str += f"{sep}value: {self.value}"
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
-                value=data_dict.get('value'),
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class TimeSlotCountType:
+class TimeSlotCountType: # EEBus_SPINE_TS_TimeTable.xsd: AliasType
     def __init__(
             self,
             value: TimeSlotIdType,
@@ -91,7 +53,45 @@ class TimeSlotCountType:
         if not isinstance(self.value, TimeSlotIdType):
             raise TypeError("value is not of type TimeSlotIdType")
         
-    def get_data(self): # AliasType
+    def get_data(self):
+
+        return self.value
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        if self.value is not None:
+            result_str += f"{sep}value: {self.value}"
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+                value=data_dict.get('value'),
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class TimeTableIdType: # EEBus_SPINE_TS_TimeTable.xsd: AliasType
+    def __init__(
+            self,
+            value: int,
+    ):
+        super().__init__()
+        
+        self.value = value
+
+        if not isinstance(self.value, int):
+            raise TypeError("value is not of type int")
+        
+    def get_data(self):
 
         return self.value
 

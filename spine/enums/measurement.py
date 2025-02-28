@@ -8,12 +8,10 @@ class MessageType(bytes, Enum):
     MSG_TYPE_END = b'\x03'
 
 
-class MeasurementValueTypeEnumType(str, Enum):
-    value = 'value'
-    averageValue = 'averageValue'
-    minValue = 'minValue'
-    maxValue = 'maxValue'
-    standardDeviation = 'standardDeviation'
+class MeasurementValueStateEnumType(str, Enum):
+    normal = 'normal'
+    outOfRange = 'outOfRange'
+    error = 'error'
 
 
 class MeasurementValueTendencyEnumType(str, Enum):
@@ -22,16 +20,18 @@ class MeasurementValueTendencyEnumType(str, Enum):
     falling = 'falling'
 
 
-class MeasurementValueStateEnumType(str, Enum):
-    normal = 'normal'
-    outOfRange = 'outOfRange'
-    error = 'error'
-
-
 class MeasurementValueSourceEnumType(str, Enum):
     measuredValue = 'measuredValue'
     calculatedValue = 'calculatedValue'
     empiricalValue = 'empiricalValue'
+
+
+class MeasurementValueTypeEnumType(str, Enum):
+    value = 'value'
+    averageValue = 'averageValue'
+    minValue = 'minValue'
+    maxValue = 'maxValue'
+    standardDeviation = 'standardDeviation'
 
 
 class MeasurementTypeEnumType(str, Enum):

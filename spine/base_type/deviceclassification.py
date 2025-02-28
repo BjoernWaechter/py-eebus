@@ -1,14 +1,14 @@
 # Jinja Template message_type.py.jinja2
-from spine.simple_type.commondatatypes import LabelType
-from spine.simple_type.commondatatypes import DescriptionType
 from spine.base_type.commondatatypes import ElementTagType
+from spine.simple_type.commondatatypes import DescriptionType
+from spine.simple_type.commondatatypes import LabelType
 from spine.simple_type.deviceclassification import DeviceClassificationStringType
-from spine.union_type.commondatatypes import FunctionType
+from spine.union_type.deviceclassification import PowerSourceType
 from types import NoneType
 from spine import array_2_dict
 
 
-class DeviceClassificationUserDataType:
+class DeviceClassificationUserDataType: # EEBus_SPINE_TS_DeviceClassification.xsd: ComplexType
     def __init__(
             self,
             user_node_identification: DeviceClassificationStringType = None,
@@ -30,7 +30,7 @@ class DeviceClassificationUserDataType:
         if not isinstance(self.user_description, DescriptionType | NoneType):
             raise TypeError("user_description is not of type DescriptionType")
         
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
@@ -73,72 +73,7 @@ class DeviceClassificationUserDataType:
             return cls()
 
 
-class DeviceClassificationUserDataElementsType:
-    def __init__(
-            self,
-            user_node_identification: ElementTagType = None,
-            user_label: ElementTagType = None,
-            user_description: ElementTagType = None,
-    ):
-        super().__init__()
-        
-        self.user_node_identification = user_node_identification
-        self.user_label = user_label
-        self.user_description = user_description
-
-        if not isinstance(self.user_node_identification, ElementTagType | NoneType):
-            raise TypeError("user_node_identification is not of type ElementTagType")
-        
-        if not isinstance(self.user_label, ElementTagType | NoneType):
-            raise TypeError("user_label is not of type ElementTagType")
-        
-        if not isinstance(self.user_description, ElementTagType | NoneType):
-            raise TypeError("user_description is not of type ElementTagType")
-        
-    def get_data(self): # ComplexType
-
-        msg_data = []
-        
-        if self.user_node_identification is not None:
-            msg_data.append({"userNodeIdentification": self.user_node_identification.get_data()})
-        if self.user_label is not None:
-            msg_data.append({"userLabel": self.user_label.get_data()})
-        if self.user_description is not None:
-            msg_data.append({"userDescription": self.user_description.get_data()})
-        
-        return msg_data
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        if self.user_node_identification is not None:
-            result_str += f"{sep}userNodeIdentification: {self.user_node_identification}"
-            sep = ", "
-        if self.user_label is not None:
-            result_str += f"{sep}userLabel: {self.user_label}"
-            sep = ", "
-        if self.user_description is not None:
-            result_str += f"{sep}userDescription: {self.user_description}"
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
-                user_node_identification=data_dict.get('userNodeIdentification'),
-                user_label=data_dict.get('userLabel'),
-                user_description=data_dict.get('userDescription'),
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class DeviceClassificationManufacturerDataType:
+class DeviceClassificationManufacturerDataType: # EEBus_SPINE_TS_DeviceClassification.xsd: ComplexType
     def __init__(
             self,
             device_name: DeviceClassificationStringType = None,
@@ -149,7 +84,7 @@ class DeviceClassificationManufacturerDataType:
             vendor_name: DeviceClassificationStringType = None,
             vendor_code: DeviceClassificationStringType = None,
             brand_name: DeviceClassificationStringType = None,
-            power_source: FunctionType = None,
+            power_source: PowerSourceType = None,
             manufacturer_node_identification: DeviceClassificationStringType = None,
             manufacturer_label: LabelType = None,
             manufacturer_description: DescriptionType = None,
@@ -193,8 +128,8 @@ class DeviceClassificationManufacturerDataType:
         if not isinstance(self.brand_name, DeviceClassificationStringType | NoneType):
             raise TypeError("brand_name is not of type DeviceClassificationStringType")
         
-        if not isinstance(self.power_source, FunctionType | NoneType):
-            raise TypeError("power_source is not of type FunctionType")
+        if not isinstance(self.power_source, PowerSourceType | NoneType):
+            raise TypeError("power_source is not of type PowerSourceType")
         
         if not isinstance(self.manufacturer_node_identification, DeviceClassificationStringType | NoneType):
             raise TypeError("manufacturer_node_identification is not of type DeviceClassificationStringType")
@@ -205,7 +140,7 @@ class DeviceClassificationManufacturerDataType:
         if not isinstance(self.manufacturer_description, DescriptionType | NoneType):
             raise TypeError("manufacturer_description is not of type DescriptionType")
         
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
@@ -302,7 +237,72 @@ class DeviceClassificationManufacturerDataType:
             return cls()
 
 
-class DeviceClassificationManufacturerDataElementsType:
+class DeviceClassificationUserDataElementsType: # EEBus_SPINE_TS_DeviceClassification.xsd: ComplexType
+    def __init__(
+            self,
+            user_node_identification: ElementTagType = None,
+            user_label: ElementTagType = None,
+            user_description: ElementTagType = None,
+    ):
+        super().__init__()
+        
+        self.user_node_identification = user_node_identification
+        self.user_label = user_label
+        self.user_description = user_description
+
+        if not isinstance(self.user_node_identification, ElementTagType | NoneType):
+            raise TypeError("user_node_identification is not of type ElementTagType")
+        
+        if not isinstance(self.user_label, ElementTagType | NoneType):
+            raise TypeError("user_label is not of type ElementTagType")
+        
+        if not isinstance(self.user_description, ElementTagType | NoneType):
+            raise TypeError("user_description is not of type ElementTagType")
+        
+    def get_data(self):
+
+        msg_data = []
+        
+        if self.user_node_identification is not None:
+            msg_data.append({"userNodeIdentification": self.user_node_identification.get_data()})
+        if self.user_label is not None:
+            msg_data.append({"userLabel": self.user_label.get_data()})
+        if self.user_description is not None:
+            msg_data.append({"userDescription": self.user_description.get_data()})
+        
+        return msg_data
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        if self.user_node_identification is not None:
+            result_str += f"{sep}userNodeIdentification: {self.user_node_identification}"
+            sep = ", "
+        if self.user_label is not None:
+            result_str += f"{sep}userLabel: {self.user_label}"
+            sep = ", "
+        if self.user_description is not None:
+            result_str += f"{sep}userDescription: {self.user_description}"
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+                user_node_identification=data_dict.get('userNodeIdentification'),
+                user_label=data_dict.get('userLabel'),
+                user_description=data_dict.get('userDescription'),
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class DeviceClassificationManufacturerDataElementsType: # EEBus_SPINE_TS_DeviceClassification.xsd: ComplexType
     def __init__(
             self,
             device_name: ElementTagType = None,
@@ -369,7 +369,7 @@ class DeviceClassificationManufacturerDataElementsType:
         if not isinstance(self.manufacturer_description, ElementTagType | NoneType):
             raise TypeError("manufacturer_description is not of type ElementTagType")
         
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         

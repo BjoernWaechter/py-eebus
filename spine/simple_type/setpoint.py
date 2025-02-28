@@ -3,7 +3,7 @@ from types import NoneType
 from spine import array_2_dict
 
 
-class SetpointIdType:
+class SetpointIdType: # EEBus_SPINE_TS_Setpoint.xsd: AliasType
     def __init__(
             self,
             value: int,
@@ -15,7 +15,7 @@ class SetpointIdType:
         if not isinstance(self.value, int):
             raise TypeError("value is not of type int")
         
-    def get_data(self): # AliasType
+    def get_data(self):
 
         return self.value
 

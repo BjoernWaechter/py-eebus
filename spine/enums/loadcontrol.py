@@ -8,6 +8,12 @@ class MessageType(bytes, Enum):
     MSG_TYPE_END = b'\x03'
 
 
+class LoadControlCategoryEnumType(str, Enum):
+    obligation = 'obligation'
+    recommendation = 'recommendation'
+    optimization = 'optimization'
+
+
 class LoadControlLimitTypeEnumType(str, Enum):
     minValueLimit = 'minValueLimit'
     maxValueLimit = 'maxValueLimit'
@@ -30,10 +36,4 @@ class LoadControlEventActionEnumType(str, Enum):
     increase = 'increase'
     emergency = 'emergency'
     normal = 'normal'
-
-
-class LoadControlCategoryEnumType(str, Enum):
-    obligation = 'obligation'
-    recommendation = 'recommendation'
-    optimization = 'optimization'
 

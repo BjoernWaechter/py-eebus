@@ -1,5 +1,6 @@
 import os
 import re
+import time
 
 import xmlschema
 from jinja2 import Environment, FileSystemLoader
@@ -7,10 +8,11 @@ import networkx as nx
 from xmlschema import XsdElement
 from xmlschema.validators import XsdGroup
 
-from xsd2code import Member, ALL_TYPES
+#from xsd2code import Member, ALL_TYPES, AliasType, EnumType, ChoiceType, UnionType
 
-from xsd2code import ChoiceType, EnumType, create_type_from_xsd, ComplexType
-from xsd2code.types import UnionType, AliasType
+#from xsd2code import create_type_from_xsd
+
+import xsd2code
 
 schemas = [
    # {"file": 'xsd/EEBus_SHIP_TS_TransferProtocol.xsd', "folder": "ship"},
@@ -87,6 +89,9 @@ def msg_group_value(group_name):
 def to_class_name(name):
     return name[0].upper() + name[1:]
 
+
+start = time.time()
+
 for schema_cfg in schemas:
     schema = xmlschema.XMLSchema(schema_cfg["file"])
 
@@ -132,8 +137,8 @@ for schema_cfg in schemas:
     #     print(group)
 
     for ship_type in schema.types:
-        if ship_type not in ["CmdType"]:
-            continue
+        # if ship_type not in ["BillPositionCountType"]:
+        #     continue
 
         type_name = type(schema.types[ship_type]).__name__
         type_obj = schema.types[ship_type]
@@ -147,18 +152,18 @@ for schema_cfg in schemas:
 
         if type_name == "XsdAtomicRestriction" and type_obj.enumeration:
             enum_types[source_xsd][ship_type] = {"enums": type_obj.enumeration}
-            ALL_TYPES.get_or_create(create_type_from_xsd(type_obj))
+            xsd2code.ALL_TYPES.get_or_create(xsd2code.create_type_from_xsd(type_obj))
         elif type_name == "XsdComplexType":
 
-            ALL_TYPES.get_or_create(create_type_from_xsd(type_obj))
+            xsd2code.ALL_TYPES.get_or_create(xsd2code.create_type_from_xsd(type_obj))
 
         elif type_name == "XsdAtomicRestriction":
             #print(f"{ship_type} {type_obj.local_name} {type_obj.base_type.display_name}")
             #data_type = xsd_to_python_type(type_obj.base_type)
             members = [
-                Member(
+                xsd2code.Member(
                     fq_member_name=type_obj.display_name,
-                    data_type=ALL_TYPES.get_or_create(add_type=create_type_from_xsd(type_obj.base_type)),
+                    data_type=xsd2code.ALL_TYPES.get_or_create(add_type=xsd2code.create_type_from_xsd(type_obj.base_type)),
                     is_optional=False,
                     default_value=default_values.get(f"{ship_type}.{type_obj.local_name.lower()}")
                 )]
@@ -169,9 +174,9 @@ for schema_cfg in schemas:
             #print(f"XsdUnion: {ship_type} members: {type_obj.local_name}")
             #data_type = xsd_to_python_type(type_obj.base_type.display_name)
             members = [
-                Member(
+                xsd2code.Member(
                     fq_member_name=type_obj.display_name,
-                    data_type=ALL_TYPES.get_or_create(create_type_from_xsd(type_obj)),
+                    data_type=xsd2code.ALL_TYPES.get_or_create(xsd2code.create_type_from_xsd(type_obj)),
                     is_optional=False,
                     default_value=default_values.get(f"{ship_type}.{type_obj.local_name.lower()}")
                 )]
@@ -201,8 +206,8 @@ for schema_cfg in schemas:
         grp_obj = schema.groups[grp]
         print(f"{folder}-{grp_obj.display_name}")
 
-        ALL_TYPES.get_or_create(
-            create_type_from_xsd(grp_obj)
+        xsd2code.ALL_TYPES.get_or_create(
+            xsd2code.create_type_from_xsd(grp_obj)
         )
 
         # for ele in grp_obj.content:
@@ -241,45 +246,50 @@ for schema_cfg in schemas:
     #                 "type_name": type_name
     #             }
 
-    ALL_TYPES.set_template_options_by_type(
-        data_type=EnumType,
+    xsd2code.ALL_TYPES.set_template_options_by_type(
+        data_type=xsd2code.EnumType,
         module=f"{folder}.enums",
         file_name="{self.base_source.lower()}.py",
         jinja_template=template_enum
     )
 
-    ALL_TYPES.set_template_options_by_type(
-        data_type=ComplexType,
+    xsd2code.ALL_TYPES.set_template_options_by_type(
+        data_type=xsd2code.ComplexType,
         module=f"{folder}.base_type",
         file_name="{self.base_source.lower()}.py",
         jinja_template=template_message_type
     )
 
-    ALL_TYPES.set_template_options_by_type(
-        data_type=UnionType,
+    xsd2code.ALL_TYPES.set_template_options_by_type(
+        data_type=xsd2code.UnionType,
         module=f"{folder}.union_type",
         file_name="{self.base_source.lower()}.py",
         jinja_template=template_message_type
     )
 
-    ALL_TYPES.set_template_options_by_type(
-        data_type=AliasType,
+    xsd2code.ALL_TYPES.set_template_options_by_type(
+        data_type=xsd2code.AliasType,
         module=f"{folder}.simple_type",
         file_name="{self.base_source.lower()}.py",
         jinja_template=template_message_type
     )
 
-    ALL_TYPES.set_template_options_by_type(
-        data_type=ChoiceType,
+    xsd2code.ALL_TYPES.set_template_options_by_type(
+        data_type=xsd2code.ChoiceType,
         module=f"{folder}.choice_type",
         file_name="{self.base_source.lower()}.py",
         jinja_template=template_message_type
     )
 
-    ALL_TYPES.sort_by_name()
+    #xsd2code.ALL_TYPES.sort_by_name()
 
-    missing_dest = ALL_TYPES.get_types_without_template_options()
+    missing_dest = xsd2code.ALL_TYPES.get_types_without_template_options()
     for m in missing_dest:
         print(m)
 
-    ALL_TYPES.write_all_files()
+    xsd2code.ALL_TYPES.write_all_files()
+
+
+end = time.time()
+
+print(f"Duration: {round(end - start)} sec")

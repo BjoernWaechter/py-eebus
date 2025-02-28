@@ -3,7 +3,7 @@ from types import NoneType
 from spine import array_2_dict
 
 
-class ConditionIdType:
+class ConditionIdType: # EEBus_SPINE_TS_SupplyCondition.xsd: AliasType
     def __init__(
             self,
             value: int,
@@ -15,7 +15,7 @@ class ConditionIdType:
         if not isinstance(self.value, int):
             raise TypeError("value is not of type int")
         
-    def get_data(self): # AliasType
+    def get_data(self):
 
         return self.value
 

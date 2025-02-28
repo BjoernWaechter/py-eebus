@@ -1,6 +1,6 @@
 import re
 
-from xsd2code.types import DataType
+from xsd2code import DataType
 
 
 class Member:

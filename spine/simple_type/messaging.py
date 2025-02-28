@@ -3,19 +3,19 @@ from types import NoneType
 from spine import array_2_dict
 
 
-class MessagingNumberType:
+class MessagingDataTextType: # EEBus_SPINE_TS_Messaging.xsd: AliasType
     def __init__(
             self,
-            value: int,
+            value: str,
     ):
         super().__init__()
         
         self.value = value
 
-        if not isinstance(self.value, int):
-            raise TypeError("value is not of type int")
+        if not isinstance(self.value, str):
+            raise TypeError("value is not of type str")
         
-    def get_data(self): # AliasType
+    def get_data(self):
 
         return self.value
 
@@ -41,19 +41,19 @@ class MessagingNumberType:
             return cls()
 
 
-class MessagingDataTextType:
+class MessagingNumberType: # EEBus_SPINE_TS_Messaging.xsd: AliasType
     def __init__(
             self,
-            value: str,
+            value: int,
     ):
         super().__init__()
         
         self.value = value
 
-        if not isinstance(self.value, str):
-            raise TypeError("value is not of type str")
+        if not isinstance(self.value, int):
+            raise TypeError("value is not of type int")
         
-    def get_data(self): # AliasType
+    def get_data(self):
 
         return self.value
 

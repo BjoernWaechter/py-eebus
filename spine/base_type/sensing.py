@@ -1,20 +1,24 @@
 # Jinja Template message_type.py.jinja2
-from spine.simple_type.commondatatypes import LabelType
+from spine.base_type.commondatatypes import ElementTagType
+from spine.base_type.commondatatypes import ScaledNumberElementsType
+from spine.base_type.commondatatypes import ScaledNumberType
 from spine.base_type.commondatatypes import TimestampIntervalType
 from spine.simple_type.commondatatypes import DescriptionType
-from spine.base_type.commondatatypes import ScaledNumberElementsType
-from spine.base_type.commondatatypes import ElementTagType
-from spine.union_type.commondatatypes import FunctionType
-from spine.base_type.commondatatypes import ScaledNumberType
+from spine.simple_type.commondatatypes import LabelType
+from spine.union_type.commondatatypes import AbsoluteOrRelativeTimeType
+from spine.union_type.commondatatypes import ScopeTypeType
+from spine.union_type.commondatatypes import UnitOfMeasurementType
+from spine.union_type.sensing import SensingStateType
+from spine.union_type.sensing import SensingTypeType
 from types import NoneType
 from spine import array_2_dict
 
 
-class SensingDataType:
+class SensingDataType: # EEBus_SPINE_TS_Sensing.xsd: ComplexType
     def __init__(
             self,
-            timestamp: FunctionType = None,
-            state: FunctionType = None,
+            timestamp: AbsoluteOrRelativeTimeType = None,
+            state: SensingStateType = None,
             value: ScaledNumberType = None,
     ):
         super().__init__()
@@ -23,16 +27,16 @@ class SensingDataType:
         self.state = state
         self.value = value
 
-        if not isinstance(self.timestamp, FunctionType | NoneType):
-            raise TypeError("timestamp is not of type FunctionType")
+        if not isinstance(self.timestamp, AbsoluteOrRelativeTimeType | NoneType):
+            raise TypeError("timestamp is not of type AbsoluteOrRelativeTimeType")
         
-        if not isinstance(self.state, FunctionType | NoneType):
-            raise TypeError("state is not of type FunctionType")
+        if not isinstance(self.state, SensingStateType | NoneType):
+            raise TypeError("state is not of type SensingStateType")
         
         if not isinstance(self.value, ScaledNumberType | NoneType):
             raise TypeError("value is not of type ScaledNumberType")
         
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
@@ -75,98 +79,12 @@ class SensingDataType:
             return cls()
 
 
-class SensingListDataType:
+class SensingDescriptionDataType: # EEBus_SPINE_TS_Sensing.xsd: ComplexType
     def __init__(
             self,
-            sensing_data: list[SensingDataType] = None,
-    ):
-        super().__init__()
-        
-        self.sensing_data = sensing_data
-
-        if not isinstance(self.sensing_data, list | NoneType):
-            raise TypeError("sensing_data is not of type list[SensingDataType]")
-        
-    def get_data(self): # ComplexType
-
-        msg_data = []
-        
-        if self.sensing_data is not None:
-            msg_data.append({"sensingData": [d.get_data() for d in self.sensing_data]})
-        
-        return msg_data
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        if self.sensing_data is not None:
-            result_str += f"{sep}sensingData: {self.sensing_data}"
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
-                sensing_data=data_dict.get('sensingData'),
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class SensingListDataSelectorsType:
-    def __init__(
-            self,
-            timestamp_interval: TimestampIntervalType = None,
-    ):
-        super().__init__()
-        
-        self.timestamp_interval = timestamp_interval
-
-        if not isinstance(self.timestamp_interval, TimestampIntervalType | NoneType):
-            raise TypeError("timestamp_interval is not of type TimestampIntervalType")
-        
-    def get_data(self): # ComplexType
-
-        msg_data = []
-        
-        if self.timestamp_interval is not None:
-            msg_data.append({"timestampInterval": self.timestamp_interval.get_data()})
-        
-        return msg_data
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        if self.timestamp_interval is not None:
-            result_str += f"{sep}timestampInterval: {self.timestamp_interval}"
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
-                timestamp_interval=data_dict.get('timestampInterval'),
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class SensingDescriptionDataType:
-    def __init__(
-            self,
-            sensing_type: FunctionType = None,
-            unit: FunctionType = None,
-            scope_type: FunctionType = None,
+            sensing_type: SensingTypeType = None,
+            unit: UnitOfMeasurementType = None,
+            scope_type: ScopeTypeType = None,
             label: LabelType = None,
             description: DescriptionType = None,
     ):
@@ -178,14 +96,14 @@ class SensingDescriptionDataType:
         self.label = label
         self.description = description
 
-        if not isinstance(self.sensing_type, FunctionType | NoneType):
-            raise TypeError("sensing_type is not of type FunctionType")
+        if not isinstance(self.sensing_type, SensingTypeType | NoneType):
+            raise TypeError("sensing_type is not of type SensingTypeType")
         
-        if not isinstance(self.unit, FunctionType | NoneType):
-            raise TypeError("unit is not of type FunctionType")
+        if not isinstance(self.unit, UnitOfMeasurementType | NoneType):
+            raise TypeError("unit is not of type UnitOfMeasurementType")
         
-        if not isinstance(self.scope_type, FunctionType | NoneType):
-            raise TypeError("scope_type is not of type FunctionType")
+        if not isinstance(self.scope_type, ScopeTypeType | NoneType):
+            raise TypeError("scope_type is not of type ScopeTypeType")
         
         if not isinstance(self.label, LabelType | NoneType):
             raise TypeError("label is not of type LabelType")
@@ -193,7 +111,7 @@ class SensingDescriptionDataType:
         if not isinstance(self.description, DescriptionType | NoneType):
             raise TypeError("description is not of type DescriptionType")
         
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
@@ -248,7 +166,50 @@ class SensingDescriptionDataType:
             return cls()
 
 
-class SensingDescriptionDataElementsType:
+class SensingListDataType: # EEBus_SPINE_TS_Sensing.xsd: ComplexType
+    def __init__(
+            self,
+            sensing_data: list[SensingDataType] = None,
+    ):
+        super().__init__()
+        
+        self.sensing_data = sensing_data
+
+        if not isinstance(self.sensing_data, list | NoneType):
+            raise TypeError("sensing_data is not of type list[SensingDataType]")
+        
+    def get_data(self):
+
+        msg_data = []
+        
+        if self.sensing_data is not None:
+            msg_data.append({"sensingData": [d.get_data() for d in self.sensing_data]})
+        
+        return msg_data
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        if self.sensing_data is not None:
+            result_str += f"{sep}sensingData: {self.sensing_data}"
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+                sensing_data=data_dict.get('sensingData'),
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class SensingDescriptionDataElementsType: # EEBus_SPINE_TS_Sensing.xsd: ComplexType
     def __init__(
             self,
             sensing_type: ElementTagType = None,
@@ -280,7 +241,7 @@ class SensingDescriptionDataElementsType:
         if not isinstance(self.description, ElementTagType | NoneType):
             raise TypeError("description is not of type ElementTagType")
         
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
@@ -335,7 +296,7 @@ class SensingDescriptionDataElementsType:
             return cls()
 
 
-class SensingDataElementsType:
+class SensingDataElementsType: # EEBus_SPINE_TS_Sensing.xsd: ComplexType
     def __init__(
             self,
             timestamp: ElementTagType = None,
@@ -357,7 +318,7 @@ class SensingDataElementsType:
         if not isinstance(self.value, ScaledNumberElementsType | NoneType):
             raise TypeError("value is not of type ScaledNumberElementsType")
         
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
@@ -393,6 +354,49 @@ class SensingDataElementsType:
                 timestamp=data_dict.get('timestamp'),
                 state=data_dict.get('state'),
                 value=data_dict.get('value'),
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class SensingListDataSelectorsType: # EEBus_SPINE_TS_Sensing.xsd: ComplexType
+    def __init__(
+            self,
+            timestamp_interval: TimestampIntervalType = None,
+    ):
+        super().__init__()
+        
+        self.timestamp_interval = timestamp_interval
+
+        if not isinstance(self.timestamp_interval, TimestampIntervalType | NoneType):
+            raise TypeError("timestamp_interval is not of type TimestampIntervalType")
+        
+    def get_data(self):
+
+        msg_data = []
+        
+        if self.timestamp_interval is not None:
+            msg_data.append({"timestampInterval": self.timestamp_interval.get_data()})
+        
+        return msg_data
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        if self.timestamp_interval is not None:
+            result_str += f"{sep}timestampInterval: {self.timestamp_interval}"
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+                timestamp_interval=data_dict.get('timestampInterval'),
             )
         elif data:
             return cls(data)

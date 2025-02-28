@@ -3,7 +3,7 @@ from types import NoneType
 from spine import array_2_dict
 
 
-class VendorStateCodeType:
+class LastErrorCodeType: # EEBus_SPINE_TS_DeviceDiagnosis.xsd: AliasType
     def __init__(
             self,
             value: str,
@@ -15,7 +15,7 @@ class VendorStateCodeType:
         if not isinstance(self.value, str):
             raise TypeError("value is not of type str")
         
-    def get_data(self): # AliasType
+    def get_data(self):
 
         return self.value
 
@@ -41,7 +41,7 @@ class VendorStateCodeType:
             return cls()
 
 
-class LastErrorCodeType:
+class VendorStateCodeType: # EEBus_SPINE_TS_DeviceDiagnosis.xsd: AliasType
     def __init__(
             self,
             value: str,
@@ -53,7 +53,7 @@ class LastErrorCodeType:
         if not isinstance(self.value, str):
             raise TypeError("value is not of type str")
         
-    def get_data(self): # AliasType
+    def get_data(self):
 
         return self.value
 

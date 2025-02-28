@@ -1,26 +1,156 @@
 # Jinja Template message_type.py.jinja2
-from spine.simple_type.commondatatypes import LabelType
-from spine.simple_type.commondatatypes import DescriptionType
+from spine.base_type.commondatatypes import ElementTagType
 from spine.base_type.commondatatypes import ScaledNumberElementsType
+from spine.base_type.commondatatypes import ScaledNumberSetElementsType
+from spine.base_type.commondatatypes import ScaledNumberSetType
+from spine.base_type.commondatatypes import ScaledNumberType
+from spine.simple_type.commondatatypes import DescriptionType
+from spine.simple_type.commondatatypes import LabelType
 from spine.simple_type.electricalconnection import ElectricalConnectionCharacteristicIdType
 from spine.simple_type.electricalconnection import ElectricalConnectionIdType
-from spine.base_type.commondatatypes import ScaledNumberSetElementsType
-from spine.base_type.commondatatypes import ElementTagType
-from spine.simple_type.measurement import MeasurementIdType
-from spine.union_type.commondatatypes import FunctionType
 from spine.simple_type.electricalconnection import ElectricalConnectionParameterIdType
-from spine.base_type.commondatatypes import ScaledNumberType
-from spine.base_type.commondatatypes import ScaledNumberSetType
+from spine.simple_type.measurement import MeasurementIdType
+from spine.union_type.commondatatypes import AbsoluteOrRelativeTimeType
+from spine.union_type.commondatatypes import EnergyDirectionType
+from spine.union_type.commondatatypes import EnergyModeType
+from spine.union_type.commondatatypes import ScopeTypeType
+from spine.union_type.commondatatypes import UnitOfMeasurementType
+from spine.union_type.electricalconnection import ElectricalConnectionAcMeasurementTypeType
+from spine.union_type.electricalconnection import ElectricalConnectionCharacteristicContextType
+from spine.union_type.electricalconnection import ElectricalConnectionCharacteristicTypeType
+from spine.union_type.electricalconnection import ElectricalConnectionMeasurandVariantType
+from spine.union_type.electricalconnection import ElectricalConnectionPhaseNameType
+from spine.union_type.electricalconnection import ElectricalConnectionVoltageTypeType
 from types import NoneType
 from spine import array_2_dict
 
 
-class ElectricalConnectionStateDataType:
+class ElectricalConnectionDescriptionDataType: # EEBus_SPINE_TS_ElectricalConnection.xsd: ComplexType
     def __init__(
             self,
             electrical_connection_id: ElectricalConnectionIdType = None,
-            timestamp: FunctionType = None,
-            current_energy_mode: FunctionType = None,
+            power_supply_type: ElectricalConnectionVoltageTypeType = None,
+            ac_connected_phases: int = None,
+            ac_rms_period_duration: str = None,
+            positive_energy_direction: EnergyDirectionType = None,
+            scope_type: ScopeTypeType = None,
+            label: LabelType = None,
+            description: DescriptionType = None,
+    ):
+        super().__init__()
+        
+        self.electrical_connection_id = electrical_connection_id
+        self.power_supply_type = power_supply_type
+        self.ac_connected_phases = ac_connected_phases
+        self.ac_rms_period_duration = ac_rms_period_duration
+        self.positive_energy_direction = positive_energy_direction
+        self.scope_type = scope_type
+        self.label = label
+        self.description = description
+
+        if not isinstance(self.electrical_connection_id, ElectricalConnectionIdType | NoneType):
+            raise TypeError("electrical_connection_id is not of type ElectricalConnectionIdType")
+        
+        if not isinstance(self.power_supply_type, ElectricalConnectionVoltageTypeType | NoneType):
+            raise TypeError("power_supply_type is not of type ElectricalConnectionVoltageTypeType")
+        
+        if not isinstance(self.ac_connected_phases, int | NoneType):
+            raise TypeError("ac_connected_phases is not of type int")
+        
+        if not isinstance(self.ac_rms_period_duration, str | NoneType):
+            raise TypeError("ac_rms_period_duration is not of type str")
+        
+        if not isinstance(self.positive_energy_direction, EnergyDirectionType | NoneType):
+            raise TypeError("positive_energy_direction is not of type EnergyDirectionType")
+        
+        if not isinstance(self.scope_type, ScopeTypeType | NoneType):
+            raise TypeError("scope_type is not of type ScopeTypeType")
+        
+        if not isinstance(self.label, LabelType | NoneType):
+            raise TypeError("label is not of type LabelType")
+        
+        if not isinstance(self.description, DescriptionType | NoneType):
+            raise TypeError("description is not of type DescriptionType")
+        
+    def get_data(self):
+
+        msg_data = []
+        
+        if self.electrical_connection_id is not None:
+            msg_data.append({"electricalConnectionId": self.electrical_connection_id.get_data()})
+        if self.power_supply_type is not None:
+            msg_data.append({"powerSupplyType": self.power_supply_type.get_data()})
+        if self.ac_connected_phases is not None:
+            msg_data.append({"acConnectedPhases": self.ac_connected_phases})
+        if self.ac_rms_period_duration is not None:
+            msg_data.append({"acRmsPeriodDuration": self.ac_rms_period_duration})
+        if self.positive_energy_direction is not None:
+            msg_data.append({"positiveEnergyDirection": self.positive_energy_direction.get_data()})
+        if self.scope_type is not None:
+            msg_data.append({"scopeType": self.scope_type.get_data()})
+        if self.label is not None:
+            msg_data.append({"label": self.label.get_data()})
+        if self.description is not None:
+            msg_data.append({"description": self.description.get_data()})
+        
+        return msg_data
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        if self.electrical_connection_id is not None:
+            result_str += f"{sep}electricalConnectionId: {self.electrical_connection_id}"
+            sep = ", "
+        if self.power_supply_type is not None:
+            result_str += f"{sep}powerSupplyType: {self.power_supply_type}"
+            sep = ", "
+        if self.ac_connected_phases is not None:
+            result_str += f"{sep}acConnectedPhases: {self.ac_connected_phases}"
+            sep = ", "
+        if self.ac_rms_period_duration is not None:
+            result_str += f"{sep}acRmsPeriodDuration: {self.ac_rms_period_duration}"
+            sep = ", "
+        if self.positive_energy_direction is not None:
+            result_str += f"{sep}positiveEnergyDirection: {self.positive_energy_direction}"
+            sep = ", "
+        if self.scope_type is not None:
+            result_str += f"{sep}scopeType: {self.scope_type}"
+            sep = ", "
+        if self.label is not None:
+            result_str += f"{sep}label: {self.label}"
+            sep = ", "
+        if self.description is not None:
+            result_str += f"{sep}description: {self.description}"
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+                electrical_connection_id=data_dict.get('electricalConnectionId'),
+                power_supply_type=data_dict.get('powerSupplyType'),
+                ac_connected_phases=data_dict.get('acConnectedPhases'),
+                ac_rms_period_duration=data_dict.get('acRmsPeriodDuration'),
+                positive_energy_direction=data_dict.get('positiveEnergyDirection'),
+                scope_type=data_dict.get('scopeType'),
+                label=data_dict.get('label'),
+                description=data_dict.get('description'),
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class ElectricalConnectionStateDataType: # EEBus_SPINE_TS_ElectricalConnection.xsd: ComplexType
+    def __init__(
+            self,
+            electrical_connection_id: ElectricalConnectionIdType = None,
+            timestamp: AbsoluteOrRelativeTimeType = None,
+            current_energy_mode: EnergyModeType = None,
             consumption_time: str = None,
             production_time: str = None,
             total_consumption_time: str = None,
@@ -39,11 +169,11 @@ class ElectricalConnectionStateDataType:
         if not isinstance(self.electrical_connection_id, ElectricalConnectionIdType | NoneType):
             raise TypeError("electrical_connection_id is not of type ElectricalConnectionIdType")
         
-        if not isinstance(self.timestamp, FunctionType | NoneType):
-            raise TypeError("timestamp is not of type FunctionType")
+        if not isinstance(self.timestamp, AbsoluteOrRelativeTimeType | NoneType):
+            raise TypeError("timestamp is not of type AbsoluteOrRelativeTimeType")
         
-        if not isinstance(self.current_energy_mode, FunctionType | NoneType):
-            raise TypeError("current_energy_mode is not of type FunctionType")
+        if not isinstance(self.current_energy_mode, EnergyModeType | NoneType):
+            raise TypeError("current_energy_mode is not of type EnergyModeType")
         
         if not isinstance(self.consumption_time, str | NoneType):
             raise TypeError("consumption_time is not of type str")
@@ -57,7 +187,7 @@ class ElectricalConnectionStateDataType:
         if not isinstance(self.total_production_time, str | NoneType):
             raise TypeError("total_production_time is not of type str")
         
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
@@ -124,7 +254,116 @@ class ElectricalConnectionStateDataType:
             return cls()
 
 
-class ElectricalConnectionPermittedValueSetDataType:
+class ElectricalConnectionCharacteristicDataType: # EEBus_SPINE_TS_ElectricalConnection.xsd: ComplexType
+    def __init__(
+            self,
+            electrical_connection_id: ElectricalConnectionIdType = None,
+            parameter_id: ElectricalConnectionParameterIdType = None,
+            characteristic_id: ElectricalConnectionCharacteristicIdType = None,
+            characteristic_context: ElectricalConnectionCharacteristicContextType = None,
+            characteristic_type: ElectricalConnectionCharacteristicTypeType = None,
+            value: ScaledNumberType = None,
+            unit: UnitOfMeasurementType = None,
+    ):
+        super().__init__()
+        
+        self.electrical_connection_id = electrical_connection_id
+        self.parameter_id = parameter_id
+        self.characteristic_id = characteristic_id
+        self.characteristic_context = characteristic_context
+        self.characteristic_type = characteristic_type
+        self.value = value
+        self.unit = unit
+
+        if not isinstance(self.electrical_connection_id, ElectricalConnectionIdType | NoneType):
+            raise TypeError("electrical_connection_id is not of type ElectricalConnectionIdType")
+        
+        if not isinstance(self.parameter_id, ElectricalConnectionParameterIdType | NoneType):
+            raise TypeError("parameter_id is not of type ElectricalConnectionParameterIdType")
+        
+        if not isinstance(self.characteristic_id, ElectricalConnectionCharacteristicIdType | NoneType):
+            raise TypeError("characteristic_id is not of type ElectricalConnectionCharacteristicIdType")
+        
+        if not isinstance(self.characteristic_context, ElectricalConnectionCharacteristicContextType | NoneType):
+            raise TypeError("characteristic_context is not of type ElectricalConnectionCharacteristicContextType")
+        
+        if not isinstance(self.characteristic_type, ElectricalConnectionCharacteristicTypeType | NoneType):
+            raise TypeError("characteristic_type is not of type ElectricalConnectionCharacteristicTypeType")
+        
+        if not isinstance(self.value, ScaledNumberType | NoneType):
+            raise TypeError("value is not of type ScaledNumberType")
+        
+        if not isinstance(self.unit, UnitOfMeasurementType | NoneType):
+            raise TypeError("unit is not of type UnitOfMeasurementType")
+        
+    def get_data(self):
+
+        msg_data = []
+        
+        if self.electrical_connection_id is not None:
+            msg_data.append({"electricalConnectionId": self.electrical_connection_id.get_data()})
+        if self.parameter_id is not None:
+            msg_data.append({"parameterId": self.parameter_id.get_data()})
+        if self.characteristic_id is not None:
+            msg_data.append({"characteristicId": self.characteristic_id.get_data()})
+        if self.characteristic_context is not None:
+            msg_data.append({"characteristicContext": self.characteristic_context.get_data()})
+        if self.characteristic_type is not None:
+            msg_data.append({"characteristicType": self.characteristic_type.get_data()})
+        if self.value is not None:
+            msg_data.append({"value": self.value.get_data()})
+        if self.unit is not None:
+            msg_data.append({"unit": self.unit.get_data()})
+        
+        return msg_data
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        if self.electrical_connection_id is not None:
+            result_str += f"{sep}electricalConnectionId: {self.electrical_connection_id}"
+            sep = ", "
+        if self.parameter_id is not None:
+            result_str += f"{sep}parameterId: {self.parameter_id}"
+            sep = ", "
+        if self.characteristic_id is not None:
+            result_str += f"{sep}characteristicId: {self.characteristic_id}"
+            sep = ", "
+        if self.characteristic_context is not None:
+            result_str += f"{sep}characteristicContext: {self.characteristic_context}"
+            sep = ", "
+        if self.characteristic_type is not None:
+            result_str += f"{sep}characteristicType: {self.characteristic_type}"
+            sep = ", "
+        if self.value is not None:
+            result_str += f"{sep}value: {self.value}"
+            sep = ", "
+        if self.unit is not None:
+            result_str += f"{sep}unit: {self.unit}"
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+                electrical_connection_id=data_dict.get('electricalConnectionId'),
+                parameter_id=data_dict.get('parameterId'),
+                characteristic_id=data_dict.get('characteristicId'),
+                characteristic_context=data_dict.get('characteristicContext'),
+                characteristic_type=data_dict.get('characteristicType'),
+                value=data_dict.get('value'),
+                unit=data_dict.get('unit'),
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class ElectricalConnectionPermittedValueSetDataType: # EEBus_SPINE_TS_ElectricalConnection.xsd: ComplexType
     def __init__(
             self,
             electrical_connection_id: ElectricalConnectionIdType = None,
@@ -146,7 +385,7 @@ class ElectricalConnectionPermittedValueSetDataType:
         if not isinstance(self.permitted_value_set, list | NoneType):
             raise TypeError("permitted_value_set is not of type list[ScaledNumberSetType]")
         
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
@@ -189,19 +428,19 @@ class ElectricalConnectionPermittedValueSetDataType:
             return cls()
 
 
-class ElectricalConnectionParameterDescriptionDataType:
+class ElectricalConnectionParameterDescriptionDataType: # EEBus_SPINE_TS_ElectricalConnection.xsd: ComplexType
     def __init__(
             self,
             electrical_connection_id: ElectricalConnectionIdType = None,
             parameter_id: ElectricalConnectionParameterIdType = None,
             measurement_id: MeasurementIdType = None,
-            voltage_type: FunctionType = None,
-            ac_measured_phases: FunctionType = None,
-            ac_measured_in_reference_to: FunctionType = None,
-            ac_measurement_type: FunctionType = None,
-            ac_measurement_variant: FunctionType = None,
+            voltage_type: ElectricalConnectionVoltageTypeType = None,
+            ac_measured_phases: ElectricalConnectionPhaseNameType = None,
+            ac_measured_in_reference_to: ElectricalConnectionPhaseNameType = None,
+            ac_measurement_type: ElectricalConnectionAcMeasurementTypeType = None,
+            ac_measurement_variant: ElectricalConnectionMeasurandVariantType = None,
             ac_measured_harmonic: int = None,
-            scope_type: FunctionType = None,
+            scope_type: ScopeTypeType = None,
             label: LabelType = None,
             description: DescriptionType = None,
     ):
@@ -229,26 +468,26 @@ class ElectricalConnectionParameterDescriptionDataType:
         if not isinstance(self.measurement_id, MeasurementIdType | NoneType):
             raise TypeError("measurement_id is not of type MeasurementIdType")
         
-        if not isinstance(self.voltage_type, FunctionType | NoneType):
-            raise TypeError("voltage_type is not of type FunctionType")
+        if not isinstance(self.voltage_type, ElectricalConnectionVoltageTypeType | NoneType):
+            raise TypeError("voltage_type is not of type ElectricalConnectionVoltageTypeType")
         
-        if not isinstance(self.ac_measured_phases, FunctionType | NoneType):
-            raise TypeError("ac_measured_phases is not of type FunctionType")
+        if not isinstance(self.ac_measured_phases, ElectricalConnectionPhaseNameType | NoneType):
+            raise TypeError("ac_measured_phases is not of type ElectricalConnectionPhaseNameType")
         
-        if not isinstance(self.ac_measured_in_reference_to, FunctionType | NoneType):
-            raise TypeError("ac_measured_in_reference_to is not of type FunctionType")
+        if not isinstance(self.ac_measured_in_reference_to, ElectricalConnectionPhaseNameType | NoneType):
+            raise TypeError("ac_measured_in_reference_to is not of type ElectricalConnectionPhaseNameType")
         
-        if not isinstance(self.ac_measurement_type, FunctionType | NoneType):
-            raise TypeError("ac_measurement_type is not of type FunctionType")
+        if not isinstance(self.ac_measurement_type, ElectricalConnectionAcMeasurementTypeType | NoneType):
+            raise TypeError("ac_measurement_type is not of type ElectricalConnectionAcMeasurementTypeType")
         
-        if not isinstance(self.ac_measurement_variant, FunctionType | NoneType):
-            raise TypeError("ac_measurement_variant is not of type FunctionType")
+        if not isinstance(self.ac_measurement_variant, ElectricalConnectionMeasurandVariantType | NoneType):
+            raise TypeError("ac_measurement_variant is not of type ElectricalConnectionMeasurandVariantType")
         
         if not isinstance(self.ac_measured_harmonic, int | NoneType):
             raise TypeError("ac_measured_harmonic is not of type int")
         
-        if not isinstance(self.scope_type, FunctionType | NoneType):
-            raise TypeError("scope_type is not of type FunctionType")
+        if not isinstance(self.scope_type, ScopeTypeType | NoneType):
+            raise TypeError("scope_type is not of type ScopeTypeType")
         
         if not isinstance(self.label, LabelType | NoneType):
             raise TypeError("label is not of type LabelType")
@@ -256,7 +495,7 @@ class ElectricalConnectionParameterDescriptionDataType:
         if not isinstance(self.description, DescriptionType | NoneType):
             raise TypeError("description is not of type DescriptionType")
         
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
@@ -353,73 +592,24 @@ class ElectricalConnectionParameterDescriptionDataType:
             return cls()
 
 
-class ElectricalConnectionDescriptionDataType:
+class ElectricalConnectionDescriptionListDataType: # EEBus_SPINE_TS_ElectricalConnection.xsd: ComplexType
     def __init__(
             self,
-            electrical_connection_id: ElectricalConnectionIdType = None,
-            power_supply_type: FunctionType = None,
-            ac_connected_phases: int = None,
-            ac_rms_period_duration: str = None,
-            positive_energy_direction: FunctionType = None,
-            scope_type: FunctionType = None,
-            label: LabelType = None,
-            description: DescriptionType = None,
+            electrical_connection_description_data: list[ElectricalConnectionDescriptionDataType] = None,
     ):
         super().__init__()
         
-        self.electrical_connection_id = electrical_connection_id
-        self.power_supply_type = power_supply_type
-        self.ac_connected_phases = ac_connected_phases
-        self.ac_rms_period_duration = ac_rms_period_duration
-        self.positive_energy_direction = positive_energy_direction
-        self.scope_type = scope_type
-        self.label = label
-        self.description = description
+        self.electrical_connection_description_data = electrical_connection_description_data
 
-        if not isinstance(self.electrical_connection_id, ElectricalConnectionIdType | NoneType):
-            raise TypeError("electrical_connection_id is not of type ElectricalConnectionIdType")
+        if not isinstance(self.electrical_connection_description_data, list | NoneType):
+            raise TypeError("electrical_connection_description_data is not of type list[ElectricalConnectionDescriptionDataType]")
         
-        if not isinstance(self.power_supply_type, FunctionType | NoneType):
-            raise TypeError("power_supply_type is not of type FunctionType")
-        
-        if not isinstance(self.ac_connected_phases, int | NoneType):
-            raise TypeError("ac_connected_phases is not of type int")
-        
-        if not isinstance(self.ac_rms_period_duration, str | NoneType):
-            raise TypeError("ac_rms_period_duration is not of type str")
-        
-        if not isinstance(self.positive_energy_direction, FunctionType | NoneType):
-            raise TypeError("positive_energy_direction is not of type FunctionType")
-        
-        if not isinstance(self.scope_type, FunctionType | NoneType):
-            raise TypeError("scope_type is not of type FunctionType")
-        
-        if not isinstance(self.label, LabelType | NoneType):
-            raise TypeError("label is not of type LabelType")
-        
-        if not isinstance(self.description, DescriptionType | NoneType):
-            raise TypeError("description is not of type DescriptionType")
-        
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
-        if self.electrical_connection_id is not None:
-            msg_data.append({"electricalConnectionId": self.electrical_connection_id.get_data()})
-        if self.power_supply_type is not None:
-            msg_data.append({"powerSupplyType": self.power_supply_type.get_data()})
-        if self.ac_connected_phases is not None:
-            msg_data.append({"acConnectedPhases": self.ac_connected_phases})
-        if self.ac_rms_period_duration is not None:
-            msg_data.append({"acRmsPeriodDuration": self.ac_rms_period_duration})
-        if self.positive_energy_direction is not None:
-            msg_data.append({"positiveEnergyDirection": self.positive_energy_direction.get_data()})
-        if self.scope_type is not None:
-            msg_data.append({"scopeType": self.scope_type.get_data()})
-        if self.label is not None:
-            msg_data.append({"label": self.label.get_data()})
-        if self.description is not None:
-            msg_data.append({"description": self.description.get_data()})
+        if self.electrical_connection_description_data is not None:
+            msg_data.append({"electricalConnectionDescriptionData": [d.get_data() for d in self.electrical_connection_description_data]})
         
         return msg_data
 
@@ -427,29 +617,8 @@ class ElectricalConnectionDescriptionDataType:
     def __str__(self):
         result_str = ""
         sep = ""
-        if self.electrical_connection_id is not None:
-            result_str += f"{sep}electricalConnectionId: {self.electrical_connection_id}"
-            sep = ", "
-        if self.power_supply_type is not None:
-            result_str += f"{sep}powerSupplyType: {self.power_supply_type}"
-            sep = ", "
-        if self.ac_connected_phases is not None:
-            result_str += f"{sep}acConnectedPhases: {self.ac_connected_phases}"
-            sep = ", "
-        if self.ac_rms_period_duration is not None:
-            result_str += f"{sep}acRmsPeriodDuration: {self.ac_rms_period_duration}"
-            sep = ", "
-        if self.positive_energy_direction is not None:
-            result_str += f"{sep}positiveEnergyDirection: {self.positive_energy_direction}"
-            sep = ", "
-        if self.scope_type is not None:
-            result_str += f"{sep}scopeType: {self.scope_type}"
-            sep = ", "
-        if self.label is not None:
-            result_str += f"{sep}label: {self.label}"
-            sep = ", "
-        if self.description is not None:
-            result_str += f"{sep}description: {self.description}"
+        if self.electrical_connection_description_data is not None:
+            result_str += f"{sep}electricalConnectionDescriptionData: {self.electrical_connection_description_data}"
         
         return result_str
 
@@ -458,14 +627,7 @@ class ElectricalConnectionDescriptionDataType:
         if type(data) == list:
             data_dict = array_2_dict(data)
             return cls(
-                electrical_connection_id=data_dict.get('electricalConnectionId'),
-                power_supply_type=data_dict.get('powerSupplyType'),
-                ac_connected_phases=data_dict.get('acConnectedPhases'),
-                ac_rms_period_duration=data_dict.get('acRmsPeriodDuration'),
-                positive_energy_direction=data_dict.get('positiveEnergyDirection'),
-                scope_type=data_dict.get('scopeType'),
-                label=data_dict.get('label'),
-                description=data_dict.get('description'),
+                electrical_connection_description_data=data_dict.get('electricalConnectionDescriptionData'),
             )
         elif data:
             return cls(data)
@@ -473,116 +635,7 @@ class ElectricalConnectionDescriptionDataType:
             return cls()
 
 
-class ElectricalConnectionCharacteristicDataType:
-    def __init__(
-            self,
-            electrical_connection_id: ElectricalConnectionIdType = None,
-            parameter_id: ElectricalConnectionParameterIdType = None,
-            characteristic_id: ElectricalConnectionCharacteristicIdType = None,
-            characteristic_context: FunctionType = None,
-            characteristic_type: FunctionType = None,
-            value: ScaledNumberType = None,
-            unit: FunctionType = None,
-    ):
-        super().__init__()
-        
-        self.electrical_connection_id = electrical_connection_id
-        self.parameter_id = parameter_id
-        self.characteristic_id = characteristic_id
-        self.characteristic_context = characteristic_context
-        self.characteristic_type = characteristic_type
-        self.value = value
-        self.unit = unit
-
-        if not isinstance(self.electrical_connection_id, ElectricalConnectionIdType | NoneType):
-            raise TypeError("electrical_connection_id is not of type ElectricalConnectionIdType")
-        
-        if not isinstance(self.parameter_id, ElectricalConnectionParameterIdType | NoneType):
-            raise TypeError("parameter_id is not of type ElectricalConnectionParameterIdType")
-        
-        if not isinstance(self.characteristic_id, ElectricalConnectionCharacteristicIdType | NoneType):
-            raise TypeError("characteristic_id is not of type ElectricalConnectionCharacteristicIdType")
-        
-        if not isinstance(self.characteristic_context, FunctionType | NoneType):
-            raise TypeError("characteristic_context is not of type FunctionType")
-        
-        if not isinstance(self.characteristic_type, FunctionType | NoneType):
-            raise TypeError("characteristic_type is not of type FunctionType")
-        
-        if not isinstance(self.value, ScaledNumberType | NoneType):
-            raise TypeError("value is not of type ScaledNumberType")
-        
-        if not isinstance(self.unit, FunctionType | NoneType):
-            raise TypeError("unit is not of type FunctionType")
-        
-    def get_data(self): # ComplexType
-
-        msg_data = []
-        
-        if self.electrical_connection_id is not None:
-            msg_data.append({"electricalConnectionId": self.electrical_connection_id.get_data()})
-        if self.parameter_id is not None:
-            msg_data.append({"parameterId": self.parameter_id.get_data()})
-        if self.characteristic_id is not None:
-            msg_data.append({"characteristicId": self.characteristic_id.get_data()})
-        if self.characteristic_context is not None:
-            msg_data.append({"characteristicContext": self.characteristic_context.get_data()})
-        if self.characteristic_type is not None:
-            msg_data.append({"characteristicType": self.characteristic_type.get_data()})
-        if self.value is not None:
-            msg_data.append({"value": self.value.get_data()})
-        if self.unit is not None:
-            msg_data.append({"unit": self.unit.get_data()})
-        
-        return msg_data
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        if self.electrical_connection_id is not None:
-            result_str += f"{sep}electricalConnectionId: {self.electrical_connection_id}"
-            sep = ", "
-        if self.parameter_id is not None:
-            result_str += f"{sep}parameterId: {self.parameter_id}"
-            sep = ", "
-        if self.characteristic_id is not None:
-            result_str += f"{sep}characteristicId: {self.characteristic_id}"
-            sep = ", "
-        if self.characteristic_context is not None:
-            result_str += f"{sep}characteristicContext: {self.characteristic_context}"
-            sep = ", "
-        if self.characteristic_type is not None:
-            result_str += f"{sep}characteristicType: {self.characteristic_type}"
-            sep = ", "
-        if self.value is not None:
-            result_str += f"{sep}value: {self.value}"
-            sep = ", "
-        if self.unit is not None:
-            result_str += f"{sep}unit: {self.unit}"
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
-                electrical_connection_id=data_dict.get('electricalConnectionId'),
-                parameter_id=data_dict.get('parameterId'),
-                characteristic_id=data_dict.get('characteristicId'),
-                characteristic_context=data_dict.get('characteristicContext'),
-                characteristic_type=data_dict.get('characteristicType'),
-                value=data_dict.get('value'),
-                unit=data_dict.get('unit'),
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class ElectricalConnectionStateListDataType:
+class ElectricalConnectionStateListDataType: # EEBus_SPINE_TS_ElectricalConnection.xsd: ComplexType
     def __init__(
             self,
             electrical_connection_state_data: list[ElectricalConnectionStateDataType] = None,
@@ -594,7 +647,7 @@ class ElectricalConnectionStateListDataType:
         if not isinstance(self.electrical_connection_state_data, list | NoneType):
             raise TypeError("electrical_connection_state_data is not of type list[ElectricalConnectionStateDataType]")
         
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
@@ -625,24 +678,24 @@ class ElectricalConnectionStateListDataType:
             return cls()
 
 
-class ElectricalConnectionStateListDataSelectorsType:
+class ElectricalConnectionCharacteristicListDataType: # EEBus_SPINE_TS_ElectricalConnection.xsd: ComplexType
     def __init__(
             self,
-            electrical_connection_id: ElectricalConnectionIdType = None,
+            electrical_connection_characteristic_data: list[ElectricalConnectionCharacteristicDataType] = None,
     ):
         super().__init__()
         
-        self.electrical_connection_id = electrical_connection_id
+        self.electrical_connection_characteristic_data = electrical_connection_characteristic_data
 
-        if not isinstance(self.electrical_connection_id, ElectricalConnectionIdType | NoneType):
-            raise TypeError("electrical_connection_id is not of type ElectricalConnectionIdType")
+        if not isinstance(self.electrical_connection_characteristic_data, list | NoneType):
+            raise TypeError("electrical_connection_characteristic_data is not of type list[ElectricalConnectionCharacteristicDataType]")
         
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
-        if self.electrical_connection_id is not None:
-            msg_data.append({"electricalConnectionId": self.electrical_connection_id.get_data()})
+        if self.electrical_connection_characteristic_data is not None:
+            msg_data.append({"electricalConnectionCharacteristicData": [d.get_data() for d in self.electrical_connection_characteristic_data]})
         
         return msg_data
 
@@ -650,8 +703,8 @@ class ElectricalConnectionStateListDataSelectorsType:
     def __str__(self):
         result_str = ""
         sep = ""
-        if self.electrical_connection_id is not None:
-            result_str += f"{sep}electricalConnectionId: {self.electrical_connection_id}"
+        if self.electrical_connection_characteristic_data is not None:
+            result_str += f"{sep}electricalConnectionCharacteristicData: {self.electrical_connection_characteristic_data}"
         
         return result_str
 
@@ -660,7 +713,7 @@ class ElectricalConnectionStateListDataSelectorsType:
         if type(data) == list:
             data_dict = array_2_dict(data)
             return cls(
-                electrical_connection_id=data_dict.get('electricalConnectionId'),
+                electrical_connection_characteristic_data=data_dict.get('electricalConnectionCharacteristicData'),
             )
         elif data:
             return cls(data)
@@ -668,7 +721,93 @@ class ElectricalConnectionStateListDataSelectorsType:
             return cls()
 
 
-class ElectricalConnectionStateDataElementsType:
+class ElectricalConnectionPermittedValueSetListDataType: # EEBus_SPINE_TS_ElectricalConnection.xsd: ComplexType
+    def __init__(
+            self,
+            electrical_connection_permitted_value_set_data: list[ElectricalConnectionPermittedValueSetDataType] = None,
+    ):
+        super().__init__()
+        
+        self.electrical_connection_permitted_value_set_data = electrical_connection_permitted_value_set_data
+
+        if not isinstance(self.electrical_connection_permitted_value_set_data, list | NoneType):
+            raise TypeError("electrical_connection_permitted_value_set_data is not of type list[ElectricalConnectionPermittedValueSetDataType]")
+        
+    def get_data(self):
+
+        msg_data = []
+        
+        if self.electrical_connection_permitted_value_set_data is not None:
+            msg_data.append({"electricalConnectionPermittedValueSetData": [d.get_data() for d in self.electrical_connection_permitted_value_set_data]})
+        
+        return msg_data
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        if self.electrical_connection_permitted_value_set_data is not None:
+            result_str += f"{sep}electricalConnectionPermittedValueSetData: {self.electrical_connection_permitted_value_set_data}"
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+                electrical_connection_permitted_value_set_data=data_dict.get('electricalConnectionPermittedValueSetData'),
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class ElectricalConnectionParameterDescriptionListDataType: # EEBus_SPINE_TS_ElectricalConnection.xsd: ComplexType
+    def __init__(
+            self,
+            electrical_connection_parameter_description_data: list[ElectricalConnectionParameterDescriptionDataType] = None,
+    ):
+        super().__init__()
+        
+        self.electrical_connection_parameter_description_data = electrical_connection_parameter_description_data
+
+        if not isinstance(self.electrical_connection_parameter_description_data, list | NoneType):
+            raise TypeError("electrical_connection_parameter_description_data is not of type list[ElectricalConnectionParameterDescriptionDataType]")
+        
+    def get_data(self):
+
+        msg_data = []
+        
+        if self.electrical_connection_parameter_description_data is not None:
+            msg_data.append({"electricalConnectionParameterDescriptionData": [d.get_data() for d in self.electrical_connection_parameter_description_data]})
+        
+        return msg_data
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        if self.electrical_connection_parameter_description_data is not None:
+            result_str += f"{sep}electricalConnectionParameterDescriptionData: {self.electrical_connection_parameter_description_data}"
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+                electrical_connection_parameter_description_data=data_dict.get('electricalConnectionParameterDescriptionData'),
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class ElectricalConnectionStateDataElementsType: # EEBus_SPINE_TS_ElectricalConnection.xsd: ComplexType
     def __init__(
             self,
             electrical_connection_id: ElementTagType = None,
@@ -710,7 +849,7 @@ class ElectricalConnectionStateDataElementsType:
         if not isinstance(self.total_production_time, ElementTagType | NoneType):
             raise TypeError("total_production_time is not of type ElementTagType")
         
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
@@ -777,104 +916,7 @@ class ElectricalConnectionStateDataElementsType:
             return cls()
 
 
-class ElectricalConnectionPermittedValueSetListDataType:
-    def __init__(
-            self,
-            electrical_connection_permitted_value_set_data: list[ElectricalConnectionPermittedValueSetDataType] = None,
-    ):
-        super().__init__()
-        
-        self.electrical_connection_permitted_value_set_data = electrical_connection_permitted_value_set_data
-
-        if not isinstance(self.electrical_connection_permitted_value_set_data, list | NoneType):
-            raise TypeError("electrical_connection_permitted_value_set_data is not of type list[ElectricalConnectionPermittedValueSetDataType]")
-        
-    def get_data(self): # ComplexType
-
-        msg_data = []
-        
-        if self.electrical_connection_permitted_value_set_data is not None:
-            msg_data.append({"electricalConnectionPermittedValueSetData": [d.get_data() for d in self.electrical_connection_permitted_value_set_data]})
-        
-        return msg_data
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        if self.electrical_connection_permitted_value_set_data is not None:
-            result_str += f"{sep}electricalConnectionPermittedValueSetData: {self.electrical_connection_permitted_value_set_data}"
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
-                electrical_connection_permitted_value_set_data=data_dict.get('electricalConnectionPermittedValueSetData'),
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class ElectricalConnectionPermittedValueSetListDataSelectorsType:
-    def __init__(
-            self,
-            electrical_connection_id: ElectricalConnectionIdType = None,
-            parameter_id: ElectricalConnectionParameterIdType = None,
-    ):
-        super().__init__()
-        
-        self.electrical_connection_id = electrical_connection_id
-        self.parameter_id = parameter_id
-
-        if not isinstance(self.electrical_connection_id, ElectricalConnectionIdType | NoneType):
-            raise TypeError("electrical_connection_id is not of type ElectricalConnectionIdType")
-        
-        if not isinstance(self.parameter_id, ElectricalConnectionParameterIdType | NoneType):
-            raise TypeError("parameter_id is not of type ElectricalConnectionParameterIdType")
-        
-    def get_data(self): # ComplexType
-
-        msg_data = []
-        
-        if self.electrical_connection_id is not None:
-            msg_data.append({"electricalConnectionId": self.electrical_connection_id.get_data()})
-        if self.parameter_id is not None:
-            msg_data.append({"parameterId": self.parameter_id.get_data()})
-        
-        return msg_data
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        if self.electrical_connection_id is not None:
-            result_str += f"{sep}electricalConnectionId: {self.electrical_connection_id}"
-            sep = ", "
-        if self.parameter_id is not None:
-            result_str += f"{sep}parameterId: {self.parameter_id}"
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
-                electrical_connection_id=data_dict.get('electricalConnectionId'),
-                parameter_id=data_dict.get('parameterId'),
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class ElectricalConnectionPermittedValueSetDataElementsType:
+class ElectricalConnectionPermittedValueSetDataElementsType: # EEBus_SPINE_TS_ElectricalConnection.xsd: ComplexType
     def __init__(
             self,
             electrical_connection_id: ElementTagType = None,
@@ -896,7 +938,7 @@ class ElectricalConnectionPermittedValueSetDataElementsType:
         if not isinstance(self.permitted_value_set, ScaledNumberSetElementsType | NoneType):
             raise TypeError("permitted_value_set is not of type ScaledNumberSetElementsType")
         
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
@@ -939,126 +981,7 @@ class ElectricalConnectionPermittedValueSetDataElementsType:
             return cls()
 
 
-class ElectricalConnectionParameterDescriptionListDataType:
-    def __init__(
-            self,
-            electrical_connection_parameter_description_data: list[ElectricalConnectionParameterDescriptionDataType] = None,
-    ):
-        super().__init__()
-        
-        self.electrical_connection_parameter_description_data = electrical_connection_parameter_description_data
-
-        if not isinstance(self.electrical_connection_parameter_description_data, list | NoneType):
-            raise TypeError("electrical_connection_parameter_description_data is not of type list[ElectricalConnectionParameterDescriptionDataType]")
-        
-    def get_data(self): # ComplexType
-
-        msg_data = []
-        
-        if self.electrical_connection_parameter_description_data is not None:
-            msg_data.append({"electricalConnectionParameterDescriptionData": [d.get_data() for d in self.electrical_connection_parameter_description_data]})
-        
-        return msg_data
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        if self.electrical_connection_parameter_description_data is not None:
-            result_str += f"{sep}electricalConnectionParameterDescriptionData: {self.electrical_connection_parameter_description_data}"
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
-                electrical_connection_parameter_description_data=data_dict.get('electricalConnectionParameterDescriptionData'),
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class ElectricalConnectionParameterDescriptionListDataSelectorsType:
-    def __init__(
-            self,
-            electrical_connection_id: ElectricalConnectionIdType = None,
-            parameter_id: ElectricalConnectionParameterIdType = None,
-            measurement_id: MeasurementIdType = None,
-            scope_type: FunctionType = None,
-    ):
-        super().__init__()
-        
-        self.electrical_connection_id = electrical_connection_id
-        self.parameter_id = parameter_id
-        self.measurement_id = measurement_id
-        self.scope_type = scope_type
-
-        if not isinstance(self.electrical_connection_id, ElectricalConnectionIdType | NoneType):
-            raise TypeError("electrical_connection_id is not of type ElectricalConnectionIdType")
-        
-        if not isinstance(self.parameter_id, ElectricalConnectionParameterIdType | NoneType):
-            raise TypeError("parameter_id is not of type ElectricalConnectionParameterIdType")
-        
-        if not isinstance(self.measurement_id, MeasurementIdType | NoneType):
-            raise TypeError("measurement_id is not of type MeasurementIdType")
-        
-        if not isinstance(self.scope_type, FunctionType | NoneType):
-            raise TypeError("scope_type is not of type FunctionType")
-        
-    def get_data(self): # ComplexType
-
-        msg_data = []
-        
-        if self.electrical_connection_id is not None:
-            msg_data.append({"electricalConnectionId": self.electrical_connection_id.get_data()})
-        if self.parameter_id is not None:
-            msg_data.append({"parameterId": self.parameter_id.get_data()})
-        if self.measurement_id is not None:
-            msg_data.append({"measurementId": self.measurement_id.get_data()})
-        if self.scope_type is not None:
-            msg_data.append({"scopeType": self.scope_type.get_data()})
-        
-        return msg_data
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        if self.electrical_connection_id is not None:
-            result_str += f"{sep}electricalConnectionId: {self.electrical_connection_id}"
-            sep = ", "
-        if self.parameter_id is not None:
-            result_str += f"{sep}parameterId: {self.parameter_id}"
-            sep = ", "
-        if self.measurement_id is not None:
-            result_str += f"{sep}measurementId: {self.measurement_id}"
-            sep = ", "
-        if self.scope_type is not None:
-            result_str += f"{sep}scopeType: {self.scope_type}"
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
-                electrical_connection_id=data_dict.get('electricalConnectionId'),
-                parameter_id=data_dict.get('parameterId'),
-                measurement_id=data_dict.get('measurementId'),
-                scope_type=data_dict.get('scopeType'),
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class ElectricalConnectionParameterDescriptionDataElementsType:
+class ElectricalConnectionParameterDescriptionDataElementsType: # EEBus_SPINE_TS_ElectricalConnection.xsd: ComplexType
     def __init__(
             self,
             electrical_connection_id: ElementTagType = None,
@@ -1125,7 +1048,7 @@ class ElectricalConnectionParameterDescriptionDataElementsType:
         if not isinstance(self.description, ElementTagType | NoneType):
             raise TypeError("description is not of type ElementTagType")
         
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
@@ -1222,104 +1145,7 @@ class ElectricalConnectionParameterDescriptionDataElementsType:
             return cls()
 
 
-class ElectricalConnectionDescriptionListDataType:
-    def __init__(
-            self,
-            electrical_connection_description_data: list[ElectricalConnectionDescriptionDataType] = None,
-    ):
-        super().__init__()
-        
-        self.electrical_connection_description_data = electrical_connection_description_data
-
-        if not isinstance(self.electrical_connection_description_data, list | NoneType):
-            raise TypeError("electrical_connection_description_data is not of type list[ElectricalConnectionDescriptionDataType]")
-        
-    def get_data(self): # ComplexType
-
-        msg_data = []
-        
-        if self.electrical_connection_description_data is not None:
-            msg_data.append({"electricalConnectionDescriptionData": [d.get_data() for d in self.electrical_connection_description_data]})
-        
-        return msg_data
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        if self.electrical_connection_description_data is not None:
-            result_str += f"{sep}electricalConnectionDescriptionData: {self.electrical_connection_description_data}"
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
-                electrical_connection_description_data=data_dict.get('electricalConnectionDescriptionData'),
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class ElectricalConnectionDescriptionListDataSelectorsType:
-    def __init__(
-            self,
-            electrical_connection_id: ElectricalConnectionIdType = None,
-            scope_type: FunctionType = None,
-    ):
-        super().__init__()
-        
-        self.electrical_connection_id = electrical_connection_id
-        self.scope_type = scope_type
-
-        if not isinstance(self.electrical_connection_id, ElectricalConnectionIdType | NoneType):
-            raise TypeError("electrical_connection_id is not of type ElectricalConnectionIdType")
-        
-        if not isinstance(self.scope_type, FunctionType | NoneType):
-            raise TypeError("scope_type is not of type FunctionType")
-        
-    def get_data(self): # ComplexType
-
-        msg_data = []
-        
-        if self.electrical_connection_id is not None:
-            msg_data.append({"electricalConnectionId": self.electrical_connection_id.get_data()})
-        if self.scope_type is not None:
-            msg_data.append({"scopeType": self.scope_type.get_data()})
-        
-        return msg_data
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        if self.electrical_connection_id is not None:
-            result_str += f"{sep}electricalConnectionId: {self.electrical_connection_id}"
-            sep = ", "
-        if self.scope_type is not None:
-            result_str += f"{sep}scopeType: {self.scope_type}"
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
-                electrical_connection_id=data_dict.get('electricalConnectionId'),
-                scope_type=data_dict.get('scopeType'),
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class ElectricalConnectionDescriptionDataElementsType:
+class ElectricalConnectionDescriptionDataElementsType: # EEBus_SPINE_TS_ElectricalConnection.xsd: ComplexType
     def __init__(
             self,
             electrical_connection_id: ElementTagType = None,
@@ -1366,7 +1192,7 @@ class ElectricalConnectionDescriptionDataElementsType:
         if not isinstance(self.description, ElementTagType | NoneType):
             raise TypeError("description is not of type ElementTagType")
         
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
@@ -1439,137 +1265,7 @@ class ElectricalConnectionDescriptionDataElementsType:
             return cls()
 
 
-class ElectricalConnectionCharacteristicListDataType:
-    def __init__(
-            self,
-            electrical_connection_characteristic_data: list[ElectricalConnectionCharacteristicDataType] = None,
-    ):
-        super().__init__()
-        
-        self.electrical_connection_characteristic_data = electrical_connection_characteristic_data
-
-        if not isinstance(self.electrical_connection_characteristic_data, list | NoneType):
-            raise TypeError("electrical_connection_characteristic_data is not of type list[ElectricalConnectionCharacteristicDataType]")
-        
-    def get_data(self): # ComplexType
-
-        msg_data = []
-        
-        if self.electrical_connection_characteristic_data is not None:
-            msg_data.append({"electricalConnectionCharacteristicData": [d.get_data() for d in self.electrical_connection_characteristic_data]})
-        
-        return msg_data
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        if self.electrical_connection_characteristic_data is not None:
-            result_str += f"{sep}electricalConnectionCharacteristicData: {self.electrical_connection_characteristic_data}"
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
-                electrical_connection_characteristic_data=data_dict.get('electricalConnectionCharacteristicData'),
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class ElectricalConnectionCharacteristicListDataSelectorsType:
-    def __init__(
-            self,
-            electrical_connection_id: ElectricalConnectionIdType = None,
-            parameter_id: ElectricalConnectionParameterIdType = None,
-            characteristic_id: ElectricalConnectionCharacteristicIdType = None,
-            characteristic_context: FunctionType = None,
-            characteristic_type: FunctionType = None,
-    ):
-        super().__init__()
-        
-        self.electrical_connection_id = electrical_connection_id
-        self.parameter_id = parameter_id
-        self.characteristic_id = characteristic_id
-        self.characteristic_context = characteristic_context
-        self.characteristic_type = characteristic_type
-
-        if not isinstance(self.electrical_connection_id, ElectricalConnectionIdType | NoneType):
-            raise TypeError("electrical_connection_id is not of type ElectricalConnectionIdType")
-        
-        if not isinstance(self.parameter_id, ElectricalConnectionParameterIdType | NoneType):
-            raise TypeError("parameter_id is not of type ElectricalConnectionParameterIdType")
-        
-        if not isinstance(self.characteristic_id, ElectricalConnectionCharacteristicIdType | NoneType):
-            raise TypeError("characteristic_id is not of type ElectricalConnectionCharacteristicIdType")
-        
-        if not isinstance(self.characteristic_context, FunctionType | NoneType):
-            raise TypeError("characteristic_context is not of type FunctionType")
-        
-        if not isinstance(self.characteristic_type, FunctionType | NoneType):
-            raise TypeError("characteristic_type is not of type FunctionType")
-        
-    def get_data(self): # ComplexType
-
-        msg_data = []
-        
-        if self.electrical_connection_id is not None:
-            msg_data.append({"electricalConnectionId": self.electrical_connection_id.get_data()})
-        if self.parameter_id is not None:
-            msg_data.append({"parameterId": self.parameter_id.get_data()})
-        if self.characteristic_id is not None:
-            msg_data.append({"characteristicId": self.characteristic_id.get_data()})
-        if self.characteristic_context is not None:
-            msg_data.append({"characteristicContext": self.characteristic_context.get_data()})
-        if self.characteristic_type is not None:
-            msg_data.append({"characteristicType": self.characteristic_type.get_data()})
-        
-        return msg_data
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        if self.electrical_connection_id is not None:
-            result_str += f"{sep}electricalConnectionId: {self.electrical_connection_id}"
-            sep = ", "
-        if self.parameter_id is not None:
-            result_str += f"{sep}parameterId: {self.parameter_id}"
-            sep = ", "
-        if self.characteristic_id is not None:
-            result_str += f"{sep}characteristicId: {self.characteristic_id}"
-            sep = ", "
-        if self.characteristic_context is not None:
-            result_str += f"{sep}characteristicContext: {self.characteristic_context}"
-            sep = ", "
-        if self.characteristic_type is not None:
-            result_str += f"{sep}characteristicType: {self.characteristic_type}"
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
-                electrical_connection_id=data_dict.get('electricalConnectionId'),
-                parameter_id=data_dict.get('parameterId'),
-                characteristic_id=data_dict.get('characteristicId'),
-                characteristic_context=data_dict.get('characteristicContext'),
-                characteristic_type=data_dict.get('characteristicType'),
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class ElectricalConnectionCharacteristicDataElementsType:
+class ElectricalConnectionCharacteristicDataElementsType: # EEBus_SPINE_TS_ElectricalConnection.xsd: ComplexType
     def __init__(
             self,
             electrical_connection_id: ElementTagType = None,
@@ -1611,7 +1307,7 @@ class ElectricalConnectionCharacteristicDataElementsType:
         if not isinstance(self.unit, ElementTagType | NoneType):
             raise TypeError("unit is not of type ElementTagType")
         
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
@@ -1671,6 +1367,320 @@ class ElectricalConnectionCharacteristicDataElementsType:
                 characteristic_type=data_dict.get('characteristicType'),
                 value=data_dict.get('value'),
                 unit=data_dict.get('unit'),
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class ElectricalConnectionStateListDataSelectorsType: # EEBus_SPINE_TS_ElectricalConnection.xsd: ComplexType
+    def __init__(
+            self,
+            electrical_connection_id: ElectricalConnectionIdType = None,
+    ):
+        super().__init__()
+        
+        self.electrical_connection_id = electrical_connection_id
+
+        if not isinstance(self.electrical_connection_id, ElectricalConnectionIdType | NoneType):
+            raise TypeError("electrical_connection_id is not of type ElectricalConnectionIdType")
+        
+    def get_data(self):
+
+        msg_data = []
+        
+        if self.electrical_connection_id is not None:
+            msg_data.append({"electricalConnectionId": self.electrical_connection_id.get_data()})
+        
+        return msg_data
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        if self.electrical_connection_id is not None:
+            result_str += f"{sep}electricalConnectionId: {self.electrical_connection_id}"
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+                electrical_connection_id=data_dict.get('electricalConnectionId'),
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class ElectricalConnectionPermittedValueSetListDataSelectorsType: # EEBus_SPINE_TS_ElectricalConnection.xsd: ComplexType
+    def __init__(
+            self,
+            electrical_connection_id: ElectricalConnectionIdType = None,
+            parameter_id: ElectricalConnectionParameterIdType = None,
+    ):
+        super().__init__()
+        
+        self.electrical_connection_id = electrical_connection_id
+        self.parameter_id = parameter_id
+
+        if not isinstance(self.electrical_connection_id, ElectricalConnectionIdType | NoneType):
+            raise TypeError("electrical_connection_id is not of type ElectricalConnectionIdType")
+        
+        if not isinstance(self.parameter_id, ElectricalConnectionParameterIdType | NoneType):
+            raise TypeError("parameter_id is not of type ElectricalConnectionParameterIdType")
+        
+    def get_data(self):
+
+        msg_data = []
+        
+        if self.electrical_connection_id is not None:
+            msg_data.append({"electricalConnectionId": self.electrical_connection_id.get_data()})
+        if self.parameter_id is not None:
+            msg_data.append({"parameterId": self.parameter_id.get_data()})
+        
+        return msg_data
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        if self.electrical_connection_id is not None:
+            result_str += f"{sep}electricalConnectionId: {self.electrical_connection_id}"
+            sep = ", "
+        if self.parameter_id is not None:
+            result_str += f"{sep}parameterId: {self.parameter_id}"
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+                electrical_connection_id=data_dict.get('electricalConnectionId'),
+                parameter_id=data_dict.get('parameterId'),
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class ElectricalConnectionParameterDescriptionListDataSelectorsType: # EEBus_SPINE_TS_ElectricalConnection.xsd: ComplexType
+    def __init__(
+            self,
+            electrical_connection_id: ElectricalConnectionIdType = None,
+            parameter_id: ElectricalConnectionParameterIdType = None,
+            measurement_id: MeasurementIdType = None,
+            scope_type: ScopeTypeType = None,
+    ):
+        super().__init__()
+        
+        self.electrical_connection_id = electrical_connection_id
+        self.parameter_id = parameter_id
+        self.measurement_id = measurement_id
+        self.scope_type = scope_type
+
+        if not isinstance(self.electrical_connection_id, ElectricalConnectionIdType | NoneType):
+            raise TypeError("electrical_connection_id is not of type ElectricalConnectionIdType")
+        
+        if not isinstance(self.parameter_id, ElectricalConnectionParameterIdType | NoneType):
+            raise TypeError("parameter_id is not of type ElectricalConnectionParameterIdType")
+        
+        if not isinstance(self.measurement_id, MeasurementIdType | NoneType):
+            raise TypeError("measurement_id is not of type MeasurementIdType")
+        
+        if not isinstance(self.scope_type, ScopeTypeType | NoneType):
+            raise TypeError("scope_type is not of type ScopeTypeType")
+        
+    def get_data(self):
+
+        msg_data = []
+        
+        if self.electrical_connection_id is not None:
+            msg_data.append({"electricalConnectionId": self.electrical_connection_id.get_data()})
+        if self.parameter_id is not None:
+            msg_data.append({"parameterId": self.parameter_id.get_data()})
+        if self.measurement_id is not None:
+            msg_data.append({"measurementId": self.measurement_id.get_data()})
+        if self.scope_type is not None:
+            msg_data.append({"scopeType": self.scope_type.get_data()})
+        
+        return msg_data
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        if self.electrical_connection_id is not None:
+            result_str += f"{sep}electricalConnectionId: {self.electrical_connection_id}"
+            sep = ", "
+        if self.parameter_id is not None:
+            result_str += f"{sep}parameterId: {self.parameter_id}"
+            sep = ", "
+        if self.measurement_id is not None:
+            result_str += f"{sep}measurementId: {self.measurement_id}"
+            sep = ", "
+        if self.scope_type is not None:
+            result_str += f"{sep}scopeType: {self.scope_type}"
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+                electrical_connection_id=data_dict.get('electricalConnectionId'),
+                parameter_id=data_dict.get('parameterId'),
+                measurement_id=data_dict.get('measurementId'),
+                scope_type=data_dict.get('scopeType'),
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class ElectricalConnectionDescriptionListDataSelectorsType: # EEBus_SPINE_TS_ElectricalConnection.xsd: ComplexType
+    def __init__(
+            self,
+            electrical_connection_id: ElectricalConnectionIdType = None,
+            scope_type: ScopeTypeType = None,
+    ):
+        super().__init__()
+        
+        self.electrical_connection_id = electrical_connection_id
+        self.scope_type = scope_type
+
+        if not isinstance(self.electrical_connection_id, ElectricalConnectionIdType | NoneType):
+            raise TypeError("electrical_connection_id is not of type ElectricalConnectionIdType")
+        
+        if not isinstance(self.scope_type, ScopeTypeType | NoneType):
+            raise TypeError("scope_type is not of type ScopeTypeType")
+        
+    def get_data(self):
+
+        msg_data = []
+        
+        if self.electrical_connection_id is not None:
+            msg_data.append({"electricalConnectionId": self.electrical_connection_id.get_data()})
+        if self.scope_type is not None:
+            msg_data.append({"scopeType": self.scope_type.get_data()})
+        
+        return msg_data
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        if self.electrical_connection_id is not None:
+            result_str += f"{sep}electricalConnectionId: {self.electrical_connection_id}"
+            sep = ", "
+        if self.scope_type is not None:
+            result_str += f"{sep}scopeType: {self.scope_type}"
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+                electrical_connection_id=data_dict.get('electricalConnectionId'),
+                scope_type=data_dict.get('scopeType'),
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class ElectricalConnectionCharacteristicListDataSelectorsType: # EEBus_SPINE_TS_ElectricalConnection.xsd: ComplexType
+    def __init__(
+            self,
+            electrical_connection_id: ElectricalConnectionIdType = None,
+            parameter_id: ElectricalConnectionParameterIdType = None,
+            characteristic_id: ElectricalConnectionCharacteristicIdType = None,
+            characteristic_context: ElectricalConnectionCharacteristicContextType = None,
+            characteristic_type: ElectricalConnectionCharacteristicTypeType = None,
+    ):
+        super().__init__()
+        
+        self.electrical_connection_id = electrical_connection_id
+        self.parameter_id = parameter_id
+        self.characteristic_id = characteristic_id
+        self.characteristic_context = characteristic_context
+        self.characteristic_type = characteristic_type
+
+        if not isinstance(self.electrical_connection_id, ElectricalConnectionIdType | NoneType):
+            raise TypeError("electrical_connection_id is not of type ElectricalConnectionIdType")
+        
+        if not isinstance(self.parameter_id, ElectricalConnectionParameterIdType | NoneType):
+            raise TypeError("parameter_id is not of type ElectricalConnectionParameterIdType")
+        
+        if not isinstance(self.characteristic_id, ElectricalConnectionCharacteristicIdType | NoneType):
+            raise TypeError("characteristic_id is not of type ElectricalConnectionCharacteristicIdType")
+        
+        if not isinstance(self.characteristic_context, ElectricalConnectionCharacteristicContextType | NoneType):
+            raise TypeError("characteristic_context is not of type ElectricalConnectionCharacteristicContextType")
+        
+        if not isinstance(self.characteristic_type, ElectricalConnectionCharacteristicTypeType | NoneType):
+            raise TypeError("characteristic_type is not of type ElectricalConnectionCharacteristicTypeType")
+        
+    def get_data(self):
+
+        msg_data = []
+        
+        if self.electrical_connection_id is not None:
+            msg_data.append({"electricalConnectionId": self.electrical_connection_id.get_data()})
+        if self.parameter_id is not None:
+            msg_data.append({"parameterId": self.parameter_id.get_data()})
+        if self.characteristic_id is not None:
+            msg_data.append({"characteristicId": self.characteristic_id.get_data()})
+        if self.characteristic_context is not None:
+            msg_data.append({"characteristicContext": self.characteristic_context.get_data()})
+        if self.characteristic_type is not None:
+            msg_data.append({"characteristicType": self.characteristic_type.get_data()})
+        
+        return msg_data
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        if self.electrical_connection_id is not None:
+            result_str += f"{sep}electricalConnectionId: {self.electrical_connection_id}"
+            sep = ", "
+        if self.parameter_id is not None:
+            result_str += f"{sep}parameterId: {self.parameter_id}"
+            sep = ", "
+        if self.characteristic_id is not None:
+            result_str += f"{sep}characteristicId: {self.characteristic_id}"
+            sep = ", "
+        if self.characteristic_context is not None:
+            result_str += f"{sep}characteristicContext: {self.characteristic_context}"
+            sep = ", "
+        if self.characteristic_type is not None:
+            result_str += f"{sep}characteristicType: {self.characteristic_type}"
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+                electrical_connection_id=data_dict.get('electricalConnectionId'),
+                parameter_id=data_dict.get('parameterId'),
+                characteristic_id=data_dict.get('characteristicId'),
+                characteristic_context=data_dict.get('characteristicContext'),
+                characteristic_type=data_dict.get('characteristicType'),
             )
         elif data:
             return cls(data)

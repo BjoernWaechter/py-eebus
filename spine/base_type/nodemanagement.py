@@ -4,14 +4,14 @@ from types import NoneType
 from spine import array_2_dict
 
 
-class NodeManagementDetailedDiscoveryFeatureInformationType:
+class NodeManagementDestinationDataType: # EEBus_SPINE_TS_NodeManagement.xsd: ComplexType
     def __init__(
             self,
     ):
         super().__init__()
         
 
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
@@ -37,14 +37,14 @@ class NodeManagementDetailedDiscoveryFeatureInformationType:
             return cls()
 
 
-class NodeManagementDetailedDiscoveryEntityInformationType:
+class NodeManagementDetailedDiscoveryFeatureInformationType: # EEBus_SPINE_TS_NodeManagement.xsd: ComplexType
     def __init__(
             self,
     ):
         super().__init__()
         
 
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
@@ -70,14 +70,14 @@ class NodeManagementDetailedDiscoveryEntityInformationType:
             return cls()
 
 
-class NodeManagementDetailedDiscoveryDeviceInformationType:
+class NodeManagementDetailedDiscoveryEntityInformationType: # EEBus_SPINE_TS_NodeManagement.xsd: ComplexType
     def __init__(
             self,
     ):
         super().__init__()
         
 
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
@@ -103,7 +103,40 @@ class NodeManagementDetailedDiscoveryDeviceInformationType:
             return cls()
 
 
-class NodeManagementSpecificationVersionListType:
+class NodeManagementDetailedDiscoveryDeviceInformationType: # EEBus_SPINE_TS_NodeManagement.xsd: ComplexType
+    def __init__(
+            self,
+    ):
+        super().__init__()
+        
+
+    def get_data(self):
+
+        msg_data = []
+        
+        
+        return msg_data
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class NodeManagementSpecificationVersionListType: # EEBus_SPINE_TS_NodeManagement.xsd: ComplexType
     def __init__(
             self,
             specification_version: list[SpecificationVersionDataType] = None,
@@ -115,7 +148,7 @@ class NodeManagementSpecificationVersionListType:
         if not isinstance(self.specification_version, list | NoneType):
             raise TypeError("specification_version is not of type list[SpecificationVersionDataType]")
         
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
@@ -146,14 +179,14 @@ class NodeManagementSpecificationVersionListType:
             return cls()
 
 
-class NodeManagementDetailedDiscoveryFeatureInformationElementsType:
+class NodeManagementDetailedDiscoveryFeatureInformationElementsType: # EEBus_SPINE_TS_NodeManagement.xsd: ComplexType
     def __init__(
             self,
     ):
         super().__init__()
         
 
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
@@ -179,14 +212,14 @@ class NodeManagementDetailedDiscoveryFeatureInformationElementsType:
             return cls()
 
 
-class NodeManagementDetailedDiscoveryEntityInformationElementsType:
+class NodeManagementDetailedDiscoveryEntityInformationElementsType: # EEBus_SPINE_TS_NodeManagement.xsd: ComplexType
     def __init__(
             self,
     ):
         super().__init__()
         
 
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
@@ -212,14 +245,14 @@ class NodeManagementDetailedDiscoveryEntityInformationElementsType:
             return cls()
 
 
-class NodeManagementDetailedDiscoveryDeviceInformationElementsType:
+class NodeManagementDetailedDiscoveryDeviceInformationElementsType: # EEBus_SPINE_TS_NodeManagement.xsd: ComplexType
     def __init__(
             self,
     ):
         super().__init__()
         
 
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
@@ -245,14 +278,14 @@ class NodeManagementDetailedDiscoveryDeviceInformationElementsType:
             return cls()
 
 
-class NodeManagementSpecificationVersionListElementsType:
+class NodeManagementSpecificationVersionListElementsType: # EEBus_SPINE_TS_NodeManagement.xsd: ComplexType
     def __init__(
             self,
     ):
         super().__init__()
         
 
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
@@ -278,14 +311,14 @@ class NodeManagementSpecificationVersionListElementsType:
             return cls()
 
 
-class NodeManagementDestinationDataType:
+class NodeManagementUseCaseDataType: # EEBus_SPINE_TS_NodeManagement.xsd: ComplexType
     def __init__(
             self,
     ):
         super().__init__()
         
 
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
@@ -311,14 +344,57 @@ class NodeManagementDestinationDataType:
             return cls()
 
 
-class NodeManagementUseCaseDataType:
+class NodeManagementDestinationListDataType: # EEBus_SPINE_TS_NodeManagement.xsd: ComplexType
+    def __init__(
+            self,
+            node_management_destination_data: list[NodeManagementDestinationDataType] = None,
+    ):
+        super().__init__()
+        
+        self.node_management_destination_data = node_management_destination_data
+
+        if not isinstance(self.node_management_destination_data, list | NoneType):
+            raise TypeError("node_management_destination_data is not of type list[NodeManagementDestinationDataType]")
+        
+    def get_data(self):
+
+        msg_data = []
+        
+        if self.node_management_destination_data is not None:
+            msg_data.append({"nodeManagementDestinationData": [d.get_data() for d in self.node_management_destination_data]})
+        
+        return msg_data
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        if self.node_management_destination_data is not None:
+            result_str += f"{sep}nodeManagementDestinationData: {self.node_management_destination_data}"
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+                node_management_destination_data=data_dict.get('nodeManagementDestinationData'),
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class NodeManagementSubscriptionDeleteCallType: # EEBus_SPINE_TS_NodeManagement.xsd: ComplexType
     def __init__(
             self,
     ):
         super().__init__()
         
 
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
@@ -344,14 +420,14 @@ class NodeManagementUseCaseDataType:
             return cls()
 
 
-class NodeManagementUseCaseDataSelectorsType:
+class NodeManagementSubscriptionRequestCallType: # EEBus_SPINE_TS_NodeManagement.xsd: ComplexType
     def __init__(
             self,
     ):
         super().__init__()
         
 
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
@@ -377,14 +453,14 @@ class NodeManagementUseCaseDataSelectorsType:
             return cls()
 
 
-class NodeManagementUseCaseDataElementsType:
+class NodeManagementSubscriptionDataType: # EEBus_SPINE_TS_NodeManagement.xsd: ComplexType
     def __init__(
             self,
     ):
         super().__init__()
         
 
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
@@ -410,14 +486,14 @@ class NodeManagementUseCaseDataElementsType:
             return cls()
 
 
-class NodeManagementSubscriptionRequestCallType:
+class NodeManagementBindingDeleteCallType: # EEBus_SPINE_TS_NodeManagement.xsd: ComplexType
     def __init__(
             self,
     ):
         super().__init__()
         
 
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
@@ -443,14 +519,14 @@ class NodeManagementSubscriptionRequestCallType:
             return cls()
 
 
-class NodeManagementSubscriptionRequestCallElementsType:
+class NodeManagementBindingRequestCallType: # EEBus_SPINE_TS_NodeManagement.xsd: ComplexType
     def __init__(
             self,
     ):
         super().__init__()
         
 
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
@@ -476,14 +552,14 @@ class NodeManagementSubscriptionRequestCallElementsType:
             return cls()
 
 
-class NodeManagementSubscriptionDeleteCallType:
+class NodeManagementBindingDataType: # EEBus_SPINE_TS_NodeManagement.xsd: ComplexType
     def __init__(
             self,
     ):
         super().__init__()
         
 
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
@@ -509,139 +585,7 @@ class NodeManagementSubscriptionDeleteCallType:
             return cls()
 
 
-class NodeManagementSubscriptionDeleteCallElementsType:
-    def __init__(
-            self,
-    ):
-        super().__init__()
-        
-
-    def get_data(self): # ComplexType
-
-        msg_data = []
-        
-        
-        return msg_data
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class NodeManagementSubscriptionDataType:
-    def __init__(
-            self,
-    ):
-        super().__init__()
-        
-
-    def get_data(self): # ComplexType
-
-        msg_data = []
-        
-        
-        return msg_data
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class NodeManagementSubscriptionDataSelectorsType:
-    def __init__(
-            self,
-    ):
-        super().__init__()
-        
-
-    def get_data(self): # ComplexType
-
-        msg_data = []
-        
-        
-        return msg_data
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class NodeManagementSubscriptionDataElementsType:
-    def __init__(
-            self,
-    ):
-        super().__init__()
-        
-
-    def get_data(self): # ComplexType
-
-        msg_data = []
-        
-        
-        return msg_data
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class NodeManagementDetailedDiscoveryDataType:
+class NodeManagementDetailedDiscoveryDataType: # EEBus_SPINE_TS_NodeManagement.xsd: ComplexType
     def __init__(
             self,
             specification_version_list: NodeManagementSpecificationVersionListType = None,
@@ -668,7 +612,7 @@ class NodeManagementDetailedDiscoveryDataType:
         if not isinstance(self.feature_information, list | NoneType):
             raise TypeError("feature_information is not of type list[NodeManagementDetailedDiscoveryFeatureInformationType]")
         
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
@@ -717,14 +661,14 @@ class NodeManagementDetailedDiscoveryDataType:
             return cls()
 
 
-class NodeManagementDetailedDiscoveryDataSelectorsType:
+class NodeManagementUseCaseDataElementsType: # EEBus_SPINE_TS_NodeManagement.xsd: ComplexType
     def __init__(
             self,
     ):
         super().__init__()
         
 
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
@@ -750,7 +694,106 @@ class NodeManagementDetailedDiscoveryDataSelectorsType:
             return cls()
 
 
-class NodeManagementDetailedDiscoveryDataElementsType:
+class NodeManagementSubscriptionRequestCallElementsType: # EEBus_SPINE_TS_NodeManagement.xsd: ComplexType
+    def __init__(
+            self,
+    ):
+        super().__init__()
+        
+
+    def get_data(self):
+
+        msg_data = []
+        
+        
+        return msg_data
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class NodeManagementSubscriptionDeleteCallElementsType: # EEBus_SPINE_TS_NodeManagement.xsd: ComplexType
+    def __init__(
+            self,
+    ):
+        super().__init__()
+        
+
+    def get_data(self):
+
+        msg_data = []
+        
+        
+        return msg_data
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class NodeManagementSubscriptionDataElementsType: # EEBus_SPINE_TS_NodeManagement.xsd: ComplexType
+    def __init__(
+            self,
+    ):
+        super().__init__()
+        
+
+    def get_data(self):
+
+        msg_data = []
+        
+        
+        return msg_data
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class NodeManagementDetailedDiscoveryDataElementsType: # EEBus_SPINE_TS_NodeManagement.xsd: ComplexType
     def __init__(
             self,
             specification_version_list: NodeManagementSpecificationVersionListElementsType = None,
@@ -777,7 +820,7 @@ class NodeManagementDetailedDiscoveryDataElementsType:
         if not isinstance(self.feature_information, NodeManagementDetailedDiscoveryFeatureInformationElementsType | NoneType):
             raise TypeError("feature_information is not of type NodeManagementDetailedDiscoveryFeatureInformationElementsType")
         
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
@@ -826,57 +869,14 @@ class NodeManagementDetailedDiscoveryDataElementsType:
             return cls()
 
 
-class NodeManagementDestinationListDataType:
-    def __init__(
-            self,
-            node_management_destination_data: list[NodeManagementDestinationDataType] = None,
-    ):
-        super().__init__()
-        
-        self.node_management_destination_data = node_management_destination_data
-
-        if not isinstance(self.node_management_destination_data, list | NoneType):
-            raise TypeError("node_management_destination_data is not of type list[NodeManagementDestinationDataType]")
-        
-    def get_data(self): # ComplexType
-
-        msg_data = []
-        
-        if self.node_management_destination_data is not None:
-            msg_data.append({"nodeManagementDestinationData": [d.get_data() for d in self.node_management_destination_data]})
-        
-        return msg_data
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        if self.node_management_destination_data is not None:
-            result_str += f"{sep}nodeManagementDestinationData: {self.node_management_destination_data}"
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
-                node_management_destination_data=data_dict.get('nodeManagementDestinationData'),
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class NodeManagementDestinationListDataSelectorsType:
+class NodeManagementDestinationDataElementsType: # EEBus_SPINE_TS_NodeManagement.xsd: ComplexType
     def __init__(
             self,
     ):
         super().__init__()
         
 
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
@@ -902,14 +902,14 @@ class NodeManagementDestinationListDataSelectorsType:
             return cls()
 
 
-class NodeManagementDestinationDataElementsType:
+class NodeManagementBindingRequestCallElementsType: # EEBus_SPINE_TS_NodeManagement.xsd: ComplexType
     def __init__(
             self,
     ):
         super().__init__()
         
 
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
@@ -935,14 +935,14 @@ class NodeManagementDestinationDataElementsType:
             return cls()
 
 
-class NodeManagementBindingRequestCallType:
+class NodeManagementBindingDeleteCallElementsType: # EEBus_SPINE_TS_NodeManagement.xsd: ComplexType
     def __init__(
             self,
     ):
         super().__init__()
         
 
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
@@ -968,14 +968,14 @@ class NodeManagementBindingRequestCallType:
             return cls()
 
 
-class NodeManagementBindingRequestCallElementsType:
+class NodeManagementBindingDataElementsType: # EEBus_SPINE_TS_NodeManagement.xsd: ComplexType
     def __init__(
             self,
     ):
         super().__init__()
         
 
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
@@ -1001,14 +1001,14 @@ class NodeManagementBindingRequestCallElementsType:
             return cls()
 
 
-class NodeManagementBindingDeleteCallType:
+class NodeManagementUseCaseDataSelectorsType: # EEBus_SPINE_TS_NodeManagement.xsd: ComplexType
     def __init__(
             self,
     ):
         super().__init__()
         
 
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
@@ -1034,14 +1034,14 @@ class NodeManagementBindingDeleteCallType:
             return cls()
 
 
-class NodeManagementBindingDeleteCallElementsType:
+class NodeManagementSubscriptionDataSelectorsType: # EEBus_SPINE_TS_NodeManagement.xsd: ComplexType
     def __init__(
             self,
     ):
         super().__init__()
         
 
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
@@ -1067,14 +1067,14 @@ class NodeManagementBindingDeleteCallElementsType:
             return cls()
 
 
-class NodeManagementBindingDataType:
+class NodeManagementDetailedDiscoveryDataSelectorsType: # EEBus_SPINE_TS_NodeManagement.xsd: ComplexType
     def __init__(
             self,
     ):
         super().__init__()
         
 
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
@@ -1100,14 +1100,14 @@ class NodeManagementBindingDataType:
             return cls()
 
 
-class NodeManagementBindingDataSelectorsType:
+class NodeManagementDestinationListDataSelectorsType: # EEBus_SPINE_TS_NodeManagement.xsd: ComplexType
     def __init__(
             self,
     ):
         super().__init__()
         
 
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         
@@ -1133,14 +1133,14 @@ class NodeManagementBindingDataSelectorsType:
             return cls()
 
 
-class NodeManagementBindingDataElementsType:
+class NodeManagementBindingDataSelectorsType: # EEBus_SPINE_TS_NodeManagement.xsd: ComplexType
     def __init__(
             self,
     ):
         super().__init__()
         
 
-    def get_data(self): # ComplexType
+    def get_data(self):
 
         msg_data = []
         

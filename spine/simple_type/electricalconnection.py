@@ -3,7 +3,7 @@ from types import NoneType
 from spine import array_2_dict
 
 
-class ElectricalConnectionParameterIdType:
+class ElectricalConnectionCharacteristicIdType: # EEBus_SPINE_TS_ElectricalConnection.xsd: AliasType
     def __init__(
             self,
             value: int,
@@ -15,7 +15,7 @@ class ElectricalConnectionParameterIdType:
         if not isinstance(self.value, int):
             raise TypeError("value is not of type int")
         
-    def get_data(self): # AliasType
+    def get_data(self):
 
         return self.value
 
@@ -41,7 +41,7 @@ class ElectricalConnectionParameterIdType:
             return cls()
 
 
-class ElectricalConnectionIdType:
+class ElectricalConnectionParameterIdType: # EEBus_SPINE_TS_ElectricalConnection.xsd: AliasType
     def __init__(
             self,
             value: int,
@@ -53,7 +53,7 @@ class ElectricalConnectionIdType:
         if not isinstance(self.value, int):
             raise TypeError("value is not of type int")
         
-    def get_data(self): # AliasType
+    def get_data(self):
 
         return self.value
 
@@ -79,7 +79,7 @@ class ElectricalConnectionIdType:
             return cls()
 
 
-class ElectricalConnectionCharacteristicIdType:
+class ElectricalConnectionIdType: # EEBus_SPINE_TS_ElectricalConnection.xsd: AliasType
     def __init__(
             self,
             value: int,
@@ -91,7 +91,7 @@ class ElectricalConnectionCharacteristicIdType:
         if not isinstance(self.value, int):
             raise TypeError("value is not of type int")
         
-    def get_data(self): # AliasType
+    def get_data(self):
 
         return self.value
 
