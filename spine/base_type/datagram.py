@@ -9,7 +9,7 @@ from types import NoneType
 from spine import array_2_dict
 
 
-class PayloadType: # EEBus_SPINE_TS_Datagram.xsd: ComplexType
+class PayloadType: # EEBus_SPINE_TS_Datagram.xsd:ns_p:PayloadType -> ComplexType
     def __init__(
             self,
             cmd: list[CmdType] = None,
@@ -52,7 +52,7 @@ class PayloadType: # EEBus_SPINE_TS_Datagram.xsd: ComplexType
             return cls()
 
 
-class HeaderType: # EEBus_SPINE_TS_Datagram.xsd: ComplexType
+class HeaderType: # EEBus_SPINE_TS_Datagram.xsd:ns_p:HeaderType -> ComplexType
     def __init__(
             self,
             specification_version: SpecificationVersionType = None,
@@ -183,7 +183,7 @@ class HeaderType: # EEBus_SPINE_TS_Datagram.xsd: ComplexType
             return cls()
 
 
-class DatagramType: # EEBus_SPINE_TS_Datagram.xsd: ComplexType
+class DatagramType: # EEBus_SPINE_TS_Datagram.xsd:ns_p:DatagramType -> ComplexType
     def __init__(
             self,
             header: HeaderType,

@@ -3,7 +3,7 @@ from types import NoneType
 from spine import array_2_dict
 
 
-class IncentiveIdType: # EEBus_SPINE_TS_TariffInformation.xsd: AliasType
+class IncentiveIdType: # EEBus_SPINE_TS_TariffInformation.xsd:ns_p:IncentiveIdType -> AliasType
     def __init__(
             self,
             value: int,
@@ -41,7 +41,7 @@ class IncentiveIdType: # EEBus_SPINE_TS_TariffInformation.xsd: AliasType
             return cls()
 
 
-class TierIdType: # EEBus_SPINE_TS_TariffInformation.xsd: AliasType
+class TierIdType: # EEBus_SPINE_TS_TariffInformation.xsd:ns_p:TierIdType -> AliasType
     def __init__(
             self,
             value: int,
@@ -79,7 +79,7 @@ class TierIdType: # EEBus_SPINE_TS_TariffInformation.xsd: AliasType
             return cls()
 
 
-class TierBoundaryIdType: # EEBus_SPINE_TS_TariffInformation.xsd: AliasType
+class TierBoundaryIdType: # EEBus_SPINE_TS_TariffInformation.xsd:ns_p:TierBoundaryIdType -> AliasType
     def __init__(
             self,
             value: int,
@@ -117,7 +117,7 @@ class TierBoundaryIdType: # EEBus_SPINE_TS_TariffInformation.xsd: AliasType
             return cls()
 
 
-class TariffIdType: # EEBus_SPINE_TS_TariffInformation.xsd: AliasType
+class TariffIdType: # EEBus_SPINE_TS_TariffInformation.xsd:ns_p:TariffIdType -> AliasType
     def __init__(
             self,
             value: int,
@@ -155,45 +155,7 @@ class TariffIdType: # EEBus_SPINE_TS_TariffInformation.xsd: AliasType
             return cls()
 
 
-class IncentivePriorityType: # EEBus_SPINE_TS_TariffInformation.xsd: AliasType
-    def __init__(
-            self,
-            value: int,
-    ):
-        super().__init__()
-        
-        self.value = value
-
-        if not isinstance(self.value, int):
-            raise TypeError("value is not of type int")
-        
-    def get_data(self):
-
-        return self.value
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        if self.value is not None:
-            result_str += f"{sep}value: {self.value}"
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
-                value=data_dict.get('value'),
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class IncentiveCountType: # EEBus_SPINE_TS_TariffInformation.xsd: AliasType
+class IncentiveCountType: # EEBus_SPINE_TS_TariffInformation.xsd:ns_p:IncentiveCountType -> AliasType
     def __init__(
             self,
             value: IncentiveIdType,
@@ -231,7 +193,7 @@ class IncentiveCountType: # EEBus_SPINE_TS_TariffInformation.xsd: AliasType
             return cls()
 
 
-class TierCountType: # EEBus_SPINE_TS_TariffInformation.xsd: AliasType
+class TierCountType: # EEBus_SPINE_TS_TariffInformation.xsd:ns_p:TierCountType -> AliasType
     def __init__(
             self,
             value: TierIdType,
@@ -269,7 +231,7 @@ class TierCountType: # EEBus_SPINE_TS_TariffInformation.xsd: AliasType
             return cls()
 
 
-class TierBoundaryCountType: # EEBus_SPINE_TS_TariffInformation.xsd: AliasType
+class TierBoundaryCountType: # EEBus_SPINE_TS_TariffInformation.xsd:ns_p:TierBoundaryCountType -> AliasType
     def __init__(
             self,
             value: TierBoundaryIdType,
@@ -307,7 +269,7 @@ class TierBoundaryCountType: # EEBus_SPINE_TS_TariffInformation.xsd: AliasType
             return cls()
 
 
-class TariffCountType: # EEBus_SPINE_TS_TariffInformation.xsd: AliasType
+class TariffCountType: # EEBus_SPINE_TS_TariffInformation.xsd:ns_p:TariffCountType -> AliasType
     def __init__(
             self,
             value: TariffIdType,
@@ -345,7 +307,45 @@ class TariffCountType: # EEBus_SPINE_TS_TariffInformation.xsd: AliasType
             return cls()
 
 
-class CommodityIdType: # EEBus_SPINE_TS_TariffInformation.xsd: AliasType
+class IncentivePriorityType: # EEBus_SPINE_TS_TariffInformation.xsd:ns_p:IncentivePriorityType -> AliasType
+    def __init__(
+            self,
+            value: int,
+    ):
+        super().__init__()
+        
+        self.value = value
+
+        if not isinstance(self.value, int):
+            raise TypeError("value is not of type int")
+        
+    def get_data(self):
+
+        return self.value
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        if self.value is not None:
+            result_str += f"{sep}value: {self.value}"
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+                value=data_dict.get('value'),
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class CommodityIdType: # EEBus_SPINE_TS_TariffInformation.xsd:ns_p:CommodityIdType -> AliasType
     def __init__(
             self,
             value: int,

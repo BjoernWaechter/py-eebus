@@ -16,376 +16,7 @@ from types import NoneType
 from spine import array_2_dict
 
 
-class HvacOverrunDescriptionDataType: # EEBus_SPINE_TS_HVAC.xsd: ComplexType
-    def __init__(
-            self,
-            overrun_id: HvacOverrunIdType = None,
-            overrun_type: HvacOverrunTypeType = None,
-            affected_system_function_id: list[HvacSystemFunctionIdType] = None,
-            label: LabelType = None,
-            description: DescriptionType = None,
-    ):
-        super().__init__()
-        
-        self.overrun_id = overrun_id
-        self.overrun_type = overrun_type
-        self.affected_system_function_id = affected_system_function_id
-        self.label = label
-        self.description = description
-
-        if not isinstance(self.overrun_id, HvacOverrunIdType | NoneType):
-            raise TypeError("overrun_id is not of type HvacOverrunIdType")
-        
-        if not isinstance(self.overrun_type, HvacOverrunTypeType | NoneType):
-            raise TypeError("overrun_type is not of type HvacOverrunTypeType")
-        
-        if not isinstance(self.affected_system_function_id, list | NoneType):
-            raise TypeError("affected_system_function_id is not of type list[HvacSystemFunctionIdType]")
-        
-        if not isinstance(self.label, LabelType | NoneType):
-            raise TypeError("label is not of type LabelType")
-        
-        if not isinstance(self.description, DescriptionType | NoneType):
-            raise TypeError("description is not of type DescriptionType")
-        
-    def get_data(self):
-
-        msg_data = []
-        
-        if self.overrun_id is not None:
-            msg_data.append({"overrunId": self.overrun_id.get_data()})
-        if self.overrun_type is not None:
-            msg_data.append({"overrunType": self.overrun_type.get_data()})
-        if self.affected_system_function_id is not None:
-            msg_data.append({"affectedSystemFunctionId": [d.get_data() for d in self.affected_system_function_id]})
-        if self.label is not None:
-            msg_data.append({"label": self.label.get_data()})
-        if self.description is not None:
-            msg_data.append({"description": self.description.get_data()})
-        
-        return msg_data
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        if self.overrun_id is not None:
-            result_str += f"{sep}overrunId: {self.overrun_id}"
-            sep = ", "
-        if self.overrun_type is not None:
-            result_str += f"{sep}overrunType: {self.overrun_type}"
-            sep = ", "
-        if self.affected_system_function_id is not None:
-            result_str += f"{sep}affectedSystemFunctionId: {self.affected_system_function_id}"
-            sep = ", "
-        if self.label is not None:
-            result_str += f"{sep}label: {self.label}"
-            sep = ", "
-        if self.description is not None:
-            result_str += f"{sep}description: {self.description}"
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
-                overrun_id=data_dict.get('overrunId'),
-                overrun_type=data_dict.get('overrunType'),
-                affected_system_function_id=data_dict.get('affectedSystemFunctionId'),
-                label=data_dict.get('label'),
-                description=data_dict.get('description'),
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class HvacOverrunDataType: # EEBus_SPINE_TS_HVAC.xsd: ComplexType
-    def __init__(
-            self,
-            overrun_id: HvacOverrunIdType = None,
-            overrun_status: HvacOverrunStatusType = None,
-            time_table_id: TimeTableIdType = None,
-            is_overrun_status_changeable: bool = None,
-    ):
-        super().__init__()
-        
-        self.overrun_id = overrun_id
-        self.overrun_status = overrun_status
-        self.time_table_id = time_table_id
-        self.is_overrun_status_changeable = is_overrun_status_changeable
-
-        if not isinstance(self.overrun_id, HvacOverrunIdType | NoneType):
-            raise TypeError("overrun_id is not of type HvacOverrunIdType")
-        
-        if not isinstance(self.overrun_status, HvacOverrunStatusType | NoneType):
-            raise TypeError("overrun_status is not of type HvacOverrunStatusType")
-        
-        if not isinstance(self.time_table_id, TimeTableIdType | NoneType):
-            raise TypeError("time_table_id is not of type TimeTableIdType")
-        
-        if not isinstance(self.is_overrun_status_changeable, bool | NoneType):
-            raise TypeError("is_overrun_status_changeable is not of type bool")
-        
-    def get_data(self):
-
-        msg_data = []
-        
-        if self.overrun_id is not None:
-            msg_data.append({"overrunId": self.overrun_id.get_data()})
-        if self.overrun_status is not None:
-            msg_data.append({"overrunStatus": self.overrun_status.get_data()})
-        if self.time_table_id is not None:
-            msg_data.append({"timeTableId": self.time_table_id.get_data()})
-        if self.is_overrun_status_changeable is not None:
-            msg_data.append({"isOverrunStatusChangeable": self.is_overrun_status_changeable})
-        
-        return msg_data
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        if self.overrun_id is not None:
-            result_str += f"{sep}overrunId: {self.overrun_id}"
-            sep = ", "
-        if self.overrun_status is not None:
-            result_str += f"{sep}overrunStatus: {self.overrun_status}"
-            sep = ", "
-        if self.time_table_id is not None:
-            result_str += f"{sep}timeTableId: {self.time_table_id}"
-            sep = ", "
-        if self.is_overrun_status_changeable is not None:
-            result_str += f"{sep}isOverrunStatusChangeable: {self.is_overrun_status_changeable}"
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
-                overrun_id=data_dict.get('overrunId'),
-                overrun_status=data_dict.get('overrunStatus'),
-                time_table_id=data_dict.get('timeTableId'),
-                is_overrun_status_changeable=data_dict.get('isOverrunStatusChangeable'),
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class HvacOperationModeDescriptionDataType: # EEBus_SPINE_TS_HVAC.xsd: ComplexType
-    def __init__(
-            self,
-            operation_mode_id: HvacOperationModeIdType = None,
-            operation_mode_type: HvacOperationModeTypeType = None,
-            label: LabelType = None,
-            description: DescriptionType = None,
-    ):
-        super().__init__()
-        
-        self.operation_mode_id = operation_mode_id
-        self.operation_mode_type = operation_mode_type
-        self.label = label
-        self.description = description
-
-        if not isinstance(self.operation_mode_id, HvacOperationModeIdType | NoneType):
-            raise TypeError("operation_mode_id is not of type HvacOperationModeIdType")
-        
-        if not isinstance(self.operation_mode_type, HvacOperationModeTypeType | NoneType):
-            raise TypeError("operation_mode_type is not of type HvacOperationModeTypeType")
-        
-        if not isinstance(self.label, LabelType | NoneType):
-            raise TypeError("label is not of type LabelType")
-        
-        if not isinstance(self.description, DescriptionType | NoneType):
-            raise TypeError("description is not of type DescriptionType")
-        
-    def get_data(self):
-
-        msg_data = []
-        
-        if self.operation_mode_id is not None:
-            msg_data.append({"operationModeId": self.operation_mode_id.get_data()})
-        if self.operation_mode_type is not None:
-            msg_data.append({"operationModeType": self.operation_mode_type.get_data()})
-        if self.label is not None:
-            msg_data.append({"label": self.label.get_data()})
-        if self.description is not None:
-            msg_data.append({"description": self.description.get_data()})
-        
-        return msg_data
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        if self.operation_mode_id is not None:
-            result_str += f"{sep}operationModeId: {self.operation_mode_id}"
-            sep = ", "
-        if self.operation_mode_type is not None:
-            result_str += f"{sep}operationModeType: {self.operation_mode_type}"
-            sep = ", "
-        if self.label is not None:
-            result_str += f"{sep}label: {self.label}"
-            sep = ", "
-        if self.description is not None:
-            result_str += f"{sep}description: {self.description}"
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
-                operation_mode_id=data_dict.get('operationModeId'),
-                operation_mode_type=data_dict.get('operationModeType'),
-                label=data_dict.get('label'),
-                description=data_dict.get('description'),
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class HvacSystemFunctionDescriptionDataType: # EEBus_SPINE_TS_HVAC.xsd: ComplexType
-    def __init__(
-            self,
-            system_function_id: HvacSystemFunctionIdType = None,
-            system_function_type: HvacSystemFunctionTypeType = None,
-            label: LabelType = None,
-            description: DescriptionType = None,
-    ):
-        super().__init__()
-        
-        self.system_function_id = system_function_id
-        self.system_function_type = system_function_type
-        self.label = label
-        self.description = description
-
-        if not isinstance(self.system_function_id, HvacSystemFunctionIdType | NoneType):
-            raise TypeError("system_function_id is not of type HvacSystemFunctionIdType")
-        
-        if not isinstance(self.system_function_type, HvacSystemFunctionTypeType | NoneType):
-            raise TypeError("system_function_type is not of type HvacSystemFunctionTypeType")
-        
-        if not isinstance(self.label, LabelType | NoneType):
-            raise TypeError("label is not of type LabelType")
-        
-        if not isinstance(self.description, DescriptionType | NoneType):
-            raise TypeError("description is not of type DescriptionType")
-        
-    def get_data(self):
-
-        msg_data = []
-        
-        if self.system_function_id is not None:
-            msg_data.append({"systemFunctionId": self.system_function_id.get_data()})
-        if self.system_function_type is not None:
-            msg_data.append({"systemFunctionType": self.system_function_type.get_data()})
-        if self.label is not None:
-            msg_data.append({"label": self.label.get_data()})
-        if self.description is not None:
-            msg_data.append({"description": self.description.get_data()})
-        
-        return msg_data
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        if self.system_function_id is not None:
-            result_str += f"{sep}systemFunctionId: {self.system_function_id}"
-            sep = ", "
-        if self.system_function_type is not None:
-            result_str += f"{sep}systemFunctionType: {self.system_function_type}"
-            sep = ", "
-        if self.label is not None:
-            result_str += f"{sep}label: {self.label}"
-            sep = ", "
-        if self.description is not None:
-            result_str += f"{sep}description: {self.description}"
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
-                system_function_id=data_dict.get('systemFunctionId'),
-                system_function_type=data_dict.get('systemFunctionType'),
-                label=data_dict.get('label'),
-                description=data_dict.get('description'),
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class HvacSystemFunctionPowerSequenceRelationDataType: # EEBus_SPINE_TS_HVAC.xsd: ComplexType
-    def __init__(
-            self,
-            system_function_id: HvacSystemFunctionIdType = None,
-            sequence_id: list[PowerSequenceIdType] = None,
-    ):
-        super().__init__()
-        
-        self.system_function_id = system_function_id
-        self.sequence_id = sequence_id
-
-        if not isinstance(self.system_function_id, HvacSystemFunctionIdType | NoneType):
-            raise TypeError("system_function_id is not of type HvacSystemFunctionIdType")
-        
-        if not isinstance(self.sequence_id, list | NoneType):
-            raise TypeError("sequence_id is not of type list[PowerSequenceIdType]")
-        
-    def get_data(self):
-
-        msg_data = []
-        
-        if self.system_function_id is not None:
-            msg_data.append({"systemFunctionId": self.system_function_id.get_data()})
-        if self.sequence_id is not None:
-            msg_data.append({"sequenceId": [d.get_data() for d in self.sequence_id]})
-        
-        return msg_data
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        if self.system_function_id is not None:
-            result_str += f"{sep}systemFunctionId: {self.system_function_id}"
-            sep = ", "
-        if self.sequence_id is not None:
-            result_str += f"{sep}sequenceId: {self.sequence_id}"
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
-                system_function_id=data_dict.get('systemFunctionId'),
-                sequence_id=data_dict.get('sequenceId'),
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class HvacSystemFunctionSetpointRelationDataType: # EEBus_SPINE_TS_HVAC.xsd: ComplexType
+class HvacSystemFunctionSetpointRelationDataType: # EEBus_SPINE_TS_HVAC.xsd:ns_p:HvacSystemFunctionSetpointRelationDataType -> ComplexType
     def __init__(
             self,
             system_function_id: HvacSystemFunctionIdType = None,
@@ -450,7 +81,61 @@ class HvacSystemFunctionSetpointRelationDataType: # EEBus_SPINE_TS_HVAC.xsd: Com
             return cls()
 
 
-class HvacSystemFunctionOperationModeRelationDataType: # EEBus_SPINE_TS_HVAC.xsd: ComplexType
+class HvacSystemFunctionPowerSequenceRelationDataType: # EEBus_SPINE_TS_HVAC.xsd:ns_p:HvacSystemFunctionPowerSequenceRelationDataType -> ComplexType
+    def __init__(
+            self,
+            system_function_id: HvacSystemFunctionIdType = None,
+            sequence_id: list[PowerSequenceIdType] = None,
+    ):
+        super().__init__()
+        
+        self.system_function_id = system_function_id
+        self.sequence_id = sequence_id
+
+        if not isinstance(self.system_function_id, HvacSystemFunctionIdType | NoneType):
+            raise TypeError("system_function_id is not of type HvacSystemFunctionIdType")
+        
+        if not isinstance(self.sequence_id, list | NoneType):
+            raise TypeError("sequence_id is not of type list[PowerSequenceIdType]")
+        
+    def get_data(self):
+
+        msg_data = []
+        
+        if self.system_function_id is not None:
+            msg_data.append({"systemFunctionId": self.system_function_id.get_data()})
+        if self.sequence_id is not None:
+            msg_data.append({"sequenceId": [d.get_data() for d in self.sequence_id]})
+        
+        return msg_data
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        if self.system_function_id is not None:
+            result_str += f"{sep}systemFunctionId: {self.system_function_id}"
+            sep = ", "
+        if self.sequence_id is not None:
+            result_str += f"{sep}sequenceId: {self.sequence_id}"
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+                system_function_id=data_dict.get('systemFunctionId'),
+                sequence_id=data_dict.get('sequenceId'),
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class HvacSystemFunctionOperationModeRelationDataType: # EEBus_SPINE_TS_HVAC.xsd:ns_p:HvacSystemFunctionOperationModeRelationDataType -> ComplexType
     def __init__(
             self,
             system_function_id: HvacSystemFunctionIdType = None,
@@ -504,7 +189,7 @@ class HvacSystemFunctionOperationModeRelationDataType: # EEBus_SPINE_TS_HVAC.xsd
             return cls()
 
 
-class HvacSystemFunctionDataType: # EEBus_SPINE_TS_HVAC.xsd: ComplexType
+class HvacSystemFunctionDataType: # EEBus_SPINE_TS_HVAC.xsd:ns_p:HvacSystemFunctionDataType -> ComplexType
     def __init__(
             self,
             system_function_id: HvacSystemFunctionIdType = None,
@@ -602,24 +287,45 @@ class HvacSystemFunctionDataType: # EEBus_SPINE_TS_HVAC.xsd: ComplexType
             return cls()
 
 
-class HvacOverrunDescriptionListDataType: # EEBus_SPINE_TS_HVAC.xsd: ComplexType
+class HvacSystemFunctionDescriptionDataType: # EEBus_SPINE_TS_HVAC.xsd:ns_p:HvacSystemFunctionDescriptionDataType -> ComplexType
     def __init__(
             self,
-            hvac_overrun_description_data: list[HvacOverrunDescriptionDataType] = None,
+            system_function_id: HvacSystemFunctionIdType = None,
+            system_function_type: HvacSystemFunctionTypeType = None,
+            label: LabelType = None,
+            description: DescriptionType = None,
     ):
         super().__init__()
         
-        self.hvac_overrun_description_data = hvac_overrun_description_data
+        self.system_function_id = system_function_id
+        self.system_function_type = system_function_type
+        self.label = label
+        self.description = description
 
-        if not isinstance(self.hvac_overrun_description_data, list | NoneType):
-            raise TypeError("hvac_overrun_description_data is not of type list[HvacOverrunDescriptionDataType]")
+        if not isinstance(self.system_function_id, HvacSystemFunctionIdType | NoneType):
+            raise TypeError("system_function_id is not of type HvacSystemFunctionIdType")
+        
+        if not isinstance(self.system_function_type, HvacSystemFunctionTypeType | NoneType):
+            raise TypeError("system_function_type is not of type HvacSystemFunctionTypeType")
+        
+        if not isinstance(self.label, LabelType | NoneType):
+            raise TypeError("label is not of type LabelType")
+        
+        if not isinstance(self.description, DescriptionType | NoneType):
+            raise TypeError("description is not of type DescriptionType")
         
     def get_data(self):
 
         msg_data = []
         
-        if self.hvac_overrun_description_data is not None:
-            msg_data.append({"hvacOverrunDescriptionData": [d.get_data() for d in self.hvac_overrun_description_data]})
+        if self.system_function_id is not None:
+            msg_data.append({"systemFunctionId": self.system_function_id.get_data()})
+        if self.system_function_type is not None:
+            msg_data.append({"systemFunctionType": self.system_function_type.get_data()})
+        if self.label is not None:
+            msg_data.append({"label": self.label.get_data()})
+        if self.description is not None:
+            msg_data.append({"description": self.description.get_data()})
         
         return msg_data
 
@@ -627,8 +333,17 @@ class HvacOverrunDescriptionListDataType: # EEBus_SPINE_TS_HVAC.xsd: ComplexType
     def __str__(self):
         result_str = ""
         sep = ""
-        if self.hvac_overrun_description_data is not None:
-            result_str += f"{sep}hvacOverrunDescriptionData: {self.hvac_overrun_description_data}"
+        if self.system_function_id is not None:
+            result_str += f"{sep}systemFunctionId: {self.system_function_id}"
+            sep = ", "
+        if self.system_function_type is not None:
+            result_str += f"{sep}systemFunctionType: {self.system_function_type}"
+            sep = ", "
+        if self.label is not None:
+            result_str += f"{sep}label: {self.label}"
+            sep = ", "
+        if self.description is not None:
+            result_str += f"{sep}description: {self.description}"
         
         return result_str
 
@@ -637,7 +352,10 @@ class HvacOverrunDescriptionListDataType: # EEBus_SPINE_TS_HVAC.xsd: ComplexType
         if type(data) == list:
             data_dict = array_2_dict(data)
             return cls(
-                hvac_overrun_description_data=data_dict.get('hvacOverrunDescriptionData'),
+                system_function_id=data_dict.get('systemFunctionId'),
+                system_function_type=data_dict.get('systemFunctionType'),
+                label=data_dict.get('label'),
+                description=data_dict.get('description'),
             )
         elif data:
             return cls(data)
@@ -645,24 +363,45 @@ class HvacOverrunDescriptionListDataType: # EEBus_SPINE_TS_HVAC.xsd: ComplexType
             return cls()
 
 
-class HvacOverrunListDataType: # EEBus_SPINE_TS_HVAC.xsd: ComplexType
+class HvacOverrunDataType: # EEBus_SPINE_TS_HVAC.xsd:ns_p:HvacOverrunDataType -> ComplexType
     def __init__(
             self,
-            hvac_overrun_data: list[HvacOverrunDataType] = None,
+            overrun_id: HvacOverrunIdType = None,
+            overrun_status: HvacOverrunStatusType = None,
+            time_table_id: TimeTableIdType = None,
+            is_overrun_status_changeable: bool = None,
     ):
         super().__init__()
         
-        self.hvac_overrun_data = hvac_overrun_data
+        self.overrun_id = overrun_id
+        self.overrun_status = overrun_status
+        self.time_table_id = time_table_id
+        self.is_overrun_status_changeable = is_overrun_status_changeable
 
-        if not isinstance(self.hvac_overrun_data, list | NoneType):
-            raise TypeError("hvac_overrun_data is not of type list[HvacOverrunDataType]")
+        if not isinstance(self.overrun_id, HvacOverrunIdType | NoneType):
+            raise TypeError("overrun_id is not of type HvacOverrunIdType")
+        
+        if not isinstance(self.overrun_status, HvacOverrunStatusType | NoneType):
+            raise TypeError("overrun_status is not of type HvacOverrunStatusType")
+        
+        if not isinstance(self.time_table_id, TimeTableIdType | NoneType):
+            raise TypeError("time_table_id is not of type TimeTableIdType")
+        
+        if not isinstance(self.is_overrun_status_changeable, bool | NoneType):
+            raise TypeError("is_overrun_status_changeable is not of type bool")
         
     def get_data(self):
 
         msg_data = []
         
-        if self.hvac_overrun_data is not None:
-            msg_data.append({"hvacOverrunData": [d.get_data() for d in self.hvac_overrun_data]})
+        if self.overrun_id is not None:
+            msg_data.append({"overrunId": self.overrun_id.get_data()})
+        if self.overrun_status is not None:
+            msg_data.append({"overrunStatus": self.overrun_status.get_data()})
+        if self.time_table_id is not None:
+            msg_data.append({"timeTableId": self.time_table_id.get_data()})
+        if self.is_overrun_status_changeable is not None:
+            msg_data.append({"isOverrunStatusChangeable": self.is_overrun_status_changeable})
         
         return msg_data
 
@@ -670,8 +409,17 @@ class HvacOverrunListDataType: # EEBus_SPINE_TS_HVAC.xsd: ComplexType
     def __str__(self):
         result_str = ""
         sep = ""
-        if self.hvac_overrun_data is not None:
-            result_str += f"{sep}hvacOverrunData: {self.hvac_overrun_data}"
+        if self.overrun_id is not None:
+            result_str += f"{sep}overrunId: {self.overrun_id}"
+            sep = ", "
+        if self.overrun_status is not None:
+            result_str += f"{sep}overrunStatus: {self.overrun_status}"
+            sep = ", "
+        if self.time_table_id is not None:
+            result_str += f"{sep}timeTableId: {self.time_table_id}"
+            sep = ", "
+        if self.is_overrun_status_changeable is not None:
+            result_str += f"{sep}isOverrunStatusChangeable: {self.is_overrun_status_changeable}"
         
         return result_str
 
@@ -680,7 +428,10 @@ class HvacOverrunListDataType: # EEBus_SPINE_TS_HVAC.xsd: ComplexType
         if type(data) == list:
             data_dict = array_2_dict(data)
             return cls(
-                hvac_overrun_data=data_dict.get('hvacOverrunData'),
+                overrun_id=data_dict.get('overrunId'),
+                overrun_status=data_dict.get('overrunStatus'),
+                time_table_id=data_dict.get('timeTableId'),
+                is_overrun_status_changeable=data_dict.get('isOverrunStatusChangeable'),
             )
         elif data:
             return cls(data)
@@ -688,24 +439,52 @@ class HvacOverrunListDataType: # EEBus_SPINE_TS_HVAC.xsd: ComplexType
             return cls()
 
 
-class HvacOperationModeDescriptionListDataType: # EEBus_SPINE_TS_HVAC.xsd: ComplexType
+class HvacOverrunDescriptionDataType: # EEBus_SPINE_TS_HVAC.xsd:ns_p:HvacOverrunDescriptionDataType -> ComplexType
     def __init__(
             self,
-            hvac_operation_mode_description_data: list[HvacOperationModeDescriptionDataType] = None,
+            overrun_id: HvacOverrunIdType = None,
+            overrun_type: HvacOverrunTypeType = None,
+            affected_system_function_id: list[HvacSystemFunctionIdType] = None,
+            label: LabelType = None,
+            description: DescriptionType = None,
     ):
         super().__init__()
         
-        self.hvac_operation_mode_description_data = hvac_operation_mode_description_data
+        self.overrun_id = overrun_id
+        self.overrun_type = overrun_type
+        self.affected_system_function_id = affected_system_function_id
+        self.label = label
+        self.description = description
 
-        if not isinstance(self.hvac_operation_mode_description_data, list | NoneType):
-            raise TypeError("hvac_operation_mode_description_data is not of type list[HvacOperationModeDescriptionDataType]")
+        if not isinstance(self.overrun_id, HvacOverrunIdType | NoneType):
+            raise TypeError("overrun_id is not of type HvacOverrunIdType")
+        
+        if not isinstance(self.overrun_type, HvacOverrunTypeType | NoneType):
+            raise TypeError("overrun_type is not of type HvacOverrunTypeType")
+        
+        if not isinstance(self.affected_system_function_id, list | NoneType):
+            raise TypeError("affected_system_function_id is not of type list[HvacSystemFunctionIdType]")
+        
+        if not isinstance(self.label, LabelType | NoneType):
+            raise TypeError("label is not of type LabelType")
+        
+        if not isinstance(self.description, DescriptionType | NoneType):
+            raise TypeError("description is not of type DescriptionType")
         
     def get_data(self):
 
         msg_data = []
         
-        if self.hvac_operation_mode_description_data is not None:
-            msg_data.append({"hvacOperationModeDescriptionData": [d.get_data() for d in self.hvac_operation_mode_description_data]})
+        if self.overrun_id is not None:
+            msg_data.append({"overrunId": self.overrun_id.get_data()})
+        if self.overrun_type is not None:
+            msg_data.append({"overrunType": self.overrun_type.get_data()})
+        if self.affected_system_function_id is not None:
+            msg_data.append({"affectedSystemFunctionId": [d.get_data() for d in self.affected_system_function_id]})
+        if self.label is not None:
+            msg_data.append({"label": self.label.get_data()})
+        if self.description is not None:
+            msg_data.append({"description": self.description.get_data()})
         
         return msg_data
 
@@ -713,8 +492,20 @@ class HvacOperationModeDescriptionListDataType: # EEBus_SPINE_TS_HVAC.xsd: Compl
     def __str__(self):
         result_str = ""
         sep = ""
-        if self.hvac_operation_mode_description_data is not None:
-            result_str += f"{sep}hvacOperationModeDescriptionData: {self.hvac_operation_mode_description_data}"
+        if self.overrun_id is not None:
+            result_str += f"{sep}overrunId: {self.overrun_id}"
+            sep = ", "
+        if self.overrun_type is not None:
+            result_str += f"{sep}overrunType: {self.overrun_type}"
+            sep = ", "
+        if self.affected_system_function_id is not None:
+            result_str += f"{sep}affectedSystemFunctionId: {self.affected_system_function_id}"
+            sep = ", "
+        if self.label is not None:
+            result_str += f"{sep}label: {self.label}"
+            sep = ", "
+        if self.description is not None:
+            result_str += f"{sep}description: {self.description}"
         
         return result_str
 
@@ -723,7 +514,11 @@ class HvacOperationModeDescriptionListDataType: # EEBus_SPINE_TS_HVAC.xsd: Compl
         if type(data) == list:
             data_dict = array_2_dict(data)
             return cls(
-                hvac_operation_mode_description_data=data_dict.get('hvacOperationModeDescriptionData'),
+                overrun_id=data_dict.get('overrunId'),
+                overrun_type=data_dict.get('overrunType'),
+                affected_system_function_id=data_dict.get('affectedSystemFunctionId'),
+                label=data_dict.get('label'),
+                description=data_dict.get('description'),
             )
         elif data:
             return cls(data)
@@ -731,24 +526,45 @@ class HvacOperationModeDescriptionListDataType: # EEBus_SPINE_TS_HVAC.xsd: Compl
             return cls()
 
 
-class HvacSystemFunctionDescriptionListDataType: # EEBus_SPINE_TS_HVAC.xsd: ComplexType
+class HvacOperationModeDescriptionDataType: # EEBus_SPINE_TS_HVAC.xsd:ns_p:HvacOperationModeDescriptionDataType -> ComplexType
     def __init__(
             self,
-            hvac_system_function_description_data: list[HvacSystemFunctionDescriptionDataType] = None,
+            operation_mode_id: HvacOperationModeIdType = None,
+            operation_mode_type: HvacOperationModeTypeType = None,
+            label: LabelType = None,
+            description: DescriptionType = None,
     ):
         super().__init__()
         
-        self.hvac_system_function_description_data = hvac_system_function_description_data
+        self.operation_mode_id = operation_mode_id
+        self.operation_mode_type = operation_mode_type
+        self.label = label
+        self.description = description
 
-        if not isinstance(self.hvac_system_function_description_data, list | NoneType):
-            raise TypeError("hvac_system_function_description_data is not of type list[HvacSystemFunctionDescriptionDataType]")
+        if not isinstance(self.operation_mode_id, HvacOperationModeIdType | NoneType):
+            raise TypeError("operation_mode_id is not of type HvacOperationModeIdType")
+        
+        if not isinstance(self.operation_mode_type, HvacOperationModeTypeType | NoneType):
+            raise TypeError("operation_mode_type is not of type HvacOperationModeTypeType")
+        
+        if not isinstance(self.label, LabelType | NoneType):
+            raise TypeError("label is not of type LabelType")
+        
+        if not isinstance(self.description, DescriptionType | NoneType):
+            raise TypeError("description is not of type DescriptionType")
         
     def get_data(self):
 
         msg_data = []
         
-        if self.hvac_system_function_description_data is not None:
-            msg_data.append({"hvacSystemFunctionDescriptionData": [d.get_data() for d in self.hvac_system_function_description_data]})
+        if self.operation_mode_id is not None:
+            msg_data.append({"operationModeId": self.operation_mode_id.get_data()})
+        if self.operation_mode_type is not None:
+            msg_data.append({"operationModeType": self.operation_mode_type.get_data()})
+        if self.label is not None:
+            msg_data.append({"label": self.label.get_data()})
+        if self.description is not None:
+            msg_data.append({"description": self.description.get_data()})
         
         return msg_data
 
@@ -756,8 +572,17 @@ class HvacSystemFunctionDescriptionListDataType: # EEBus_SPINE_TS_HVAC.xsd: Comp
     def __str__(self):
         result_str = ""
         sep = ""
-        if self.hvac_system_function_description_data is not None:
-            result_str += f"{sep}hvacSystemFunctionDescriptionData: {self.hvac_system_function_description_data}"
+        if self.operation_mode_id is not None:
+            result_str += f"{sep}operationModeId: {self.operation_mode_id}"
+            sep = ", "
+        if self.operation_mode_type is not None:
+            result_str += f"{sep}operationModeType: {self.operation_mode_type}"
+            sep = ", "
+        if self.label is not None:
+            result_str += f"{sep}label: {self.label}"
+            sep = ", "
+        if self.description is not None:
+            result_str += f"{sep}description: {self.description}"
         
         return result_str
 
@@ -766,7 +591,10 @@ class HvacSystemFunctionDescriptionListDataType: # EEBus_SPINE_TS_HVAC.xsd: Comp
         if type(data) == list:
             data_dict = array_2_dict(data)
             return cls(
-                hvac_system_function_description_data=data_dict.get('hvacSystemFunctionDescriptionData'),
+                operation_mode_id=data_dict.get('operationModeId'),
+                operation_mode_type=data_dict.get('operationModeType'),
+                label=data_dict.get('label'),
+                description=data_dict.get('description'),
             )
         elif data:
             return cls(data)
@@ -774,50 +602,7 @@ class HvacSystemFunctionDescriptionListDataType: # EEBus_SPINE_TS_HVAC.xsd: Comp
             return cls()
 
 
-class HvacSystemFunctionPowerSequenceRelationListDataType: # EEBus_SPINE_TS_HVAC.xsd: ComplexType
-    def __init__(
-            self,
-            hvac_system_function_power_sequence_relation_data: list[HvacSystemFunctionPowerSequenceRelationDataType] = None,
-    ):
-        super().__init__()
-        
-        self.hvac_system_function_power_sequence_relation_data = hvac_system_function_power_sequence_relation_data
-
-        if not isinstance(self.hvac_system_function_power_sequence_relation_data, list | NoneType):
-            raise TypeError("hvac_system_function_power_sequence_relation_data is not of type list[HvacSystemFunctionPowerSequenceRelationDataType]")
-        
-    def get_data(self):
-
-        msg_data = []
-        
-        if self.hvac_system_function_power_sequence_relation_data is not None:
-            msg_data.append({"hvacSystemFunctionPowerSequenceRelationData": [d.get_data() for d in self.hvac_system_function_power_sequence_relation_data]})
-        
-        return msg_data
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        if self.hvac_system_function_power_sequence_relation_data is not None:
-            result_str += f"{sep}hvacSystemFunctionPowerSequenceRelationData: {self.hvac_system_function_power_sequence_relation_data}"
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
-                hvac_system_function_power_sequence_relation_data=data_dict.get('hvacSystemFunctionPowerSequenceRelationData'),
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class HvacSystemFunctionSetpointRelationListDataType: # EEBus_SPINE_TS_HVAC.xsd: ComplexType
+class HvacSystemFunctionSetpointRelationListDataType: # EEBus_SPINE_TS_HVAC.xsd:ns_p:HvacSystemFunctionSetpointRelationListDataType -> ComplexType
     def __init__(
             self,
             hvac_system_function_setpoint_relation_data: list[HvacSystemFunctionSetpointRelationDataType] = None,
@@ -860,7 +645,50 @@ class HvacSystemFunctionSetpointRelationListDataType: # EEBus_SPINE_TS_HVAC.xsd:
             return cls()
 
 
-class HvacSystemFunctionOperationModeRelationListDataType: # EEBus_SPINE_TS_HVAC.xsd: ComplexType
+class HvacSystemFunctionPowerSequenceRelationListDataType: # EEBus_SPINE_TS_HVAC.xsd:ns_p:HvacSystemFunctionPowerSequenceRelationListDataType -> ComplexType
+    def __init__(
+            self,
+            hvac_system_function_power_sequence_relation_data: list[HvacSystemFunctionPowerSequenceRelationDataType] = None,
+    ):
+        super().__init__()
+        
+        self.hvac_system_function_power_sequence_relation_data = hvac_system_function_power_sequence_relation_data
+
+        if not isinstance(self.hvac_system_function_power_sequence_relation_data, list | NoneType):
+            raise TypeError("hvac_system_function_power_sequence_relation_data is not of type list[HvacSystemFunctionPowerSequenceRelationDataType]")
+        
+    def get_data(self):
+
+        msg_data = []
+        
+        if self.hvac_system_function_power_sequence_relation_data is not None:
+            msg_data.append({"hvacSystemFunctionPowerSequenceRelationData": [d.get_data() for d in self.hvac_system_function_power_sequence_relation_data]})
+        
+        return msg_data
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        if self.hvac_system_function_power_sequence_relation_data is not None:
+            result_str += f"{sep}hvacSystemFunctionPowerSequenceRelationData: {self.hvac_system_function_power_sequence_relation_data}"
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+                hvac_system_function_power_sequence_relation_data=data_dict.get('hvacSystemFunctionPowerSequenceRelationData'),
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class HvacSystemFunctionOperationModeRelationListDataType: # EEBus_SPINE_TS_HVAC.xsd:ns_p:HvacSystemFunctionOperationModeRelationListDataType -> ComplexType
     def __init__(
             self,
             hvac_system_function_operation_mode_relation_data: list[HvacSystemFunctionOperationModeRelationDataType] = None,
@@ -903,7 +731,7 @@ class HvacSystemFunctionOperationModeRelationListDataType: # EEBus_SPINE_TS_HVAC
             return cls()
 
 
-class HvacSystemFunctionListDataType: # EEBus_SPINE_TS_HVAC.xsd: ComplexType
+class HvacSystemFunctionListDataType: # EEBus_SPINE_TS_HVAC.xsd:ns_p:HvacSystemFunctionListDataType -> ComplexType
     def __init__(
             self,
             hvac_system_function_data: list[HvacSystemFunctionDataType] = None,
@@ -946,7 +774,179 @@ class HvacSystemFunctionListDataType: # EEBus_SPINE_TS_HVAC.xsd: ComplexType
             return cls()
 
 
-class HvacSystemFunctionSetpointRelationDataElementsType: # EEBus_SPINE_TS_HVAC.xsd: ComplexType
+class HvacSystemFunctionDescriptionListDataType: # EEBus_SPINE_TS_HVAC.xsd:ns_p:HvacSystemFunctionDescriptionListDataType -> ComplexType
+    def __init__(
+            self,
+            hvac_system_function_description_data: list[HvacSystemFunctionDescriptionDataType] = None,
+    ):
+        super().__init__()
+        
+        self.hvac_system_function_description_data = hvac_system_function_description_data
+
+        if not isinstance(self.hvac_system_function_description_data, list | NoneType):
+            raise TypeError("hvac_system_function_description_data is not of type list[HvacSystemFunctionDescriptionDataType]")
+        
+    def get_data(self):
+
+        msg_data = []
+        
+        if self.hvac_system_function_description_data is not None:
+            msg_data.append({"hvacSystemFunctionDescriptionData": [d.get_data() for d in self.hvac_system_function_description_data]})
+        
+        return msg_data
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        if self.hvac_system_function_description_data is not None:
+            result_str += f"{sep}hvacSystemFunctionDescriptionData: {self.hvac_system_function_description_data}"
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+                hvac_system_function_description_data=data_dict.get('hvacSystemFunctionDescriptionData'),
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class HvacOverrunListDataType: # EEBus_SPINE_TS_HVAC.xsd:ns_p:HvacOverrunListDataType -> ComplexType
+    def __init__(
+            self,
+            hvac_overrun_data: list[HvacOverrunDataType] = None,
+    ):
+        super().__init__()
+        
+        self.hvac_overrun_data = hvac_overrun_data
+
+        if not isinstance(self.hvac_overrun_data, list | NoneType):
+            raise TypeError("hvac_overrun_data is not of type list[HvacOverrunDataType]")
+        
+    def get_data(self):
+
+        msg_data = []
+        
+        if self.hvac_overrun_data is not None:
+            msg_data.append({"hvacOverrunData": [d.get_data() for d in self.hvac_overrun_data]})
+        
+        return msg_data
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        if self.hvac_overrun_data is not None:
+            result_str += f"{sep}hvacOverrunData: {self.hvac_overrun_data}"
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+                hvac_overrun_data=data_dict.get('hvacOverrunData'),
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class HvacOverrunDescriptionListDataType: # EEBus_SPINE_TS_HVAC.xsd:ns_p:HvacOverrunDescriptionListDataType -> ComplexType
+    def __init__(
+            self,
+            hvac_overrun_description_data: list[HvacOverrunDescriptionDataType] = None,
+    ):
+        super().__init__()
+        
+        self.hvac_overrun_description_data = hvac_overrun_description_data
+
+        if not isinstance(self.hvac_overrun_description_data, list | NoneType):
+            raise TypeError("hvac_overrun_description_data is not of type list[HvacOverrunDescriptionDataType]")
+        
+    def get_data(self):
+
+        msg_data = []
+        
+        if self.hvac_overrun_description_data is not None:
+            msg_data.append({"hvacOverrunDescriptionData": [d.get_data() for d in self.hvac_overrun_description_data]})
+        
+        return msg_data
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        if self.hvac_overrun_description_data is not None:
+            result_str += f"{sep}hvacOverrunDescriptionData: {self.hvac_overrun_description_data}"
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+                hvac_overrun_description_data=data_dict.get('hvacOverrunDescriptionData'),
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class HvacOperationModeDescriptionListDataType: # EEBus_SPINE_TS_HVAC.xsd:ns_p:HvacOperationModeDescriptionListDataType -> ComplexType
+    def __init__(
+            self,
+            hvac_operation_mode_description_data: list[HvacOperationModeDescriptionDataType] = None,
+    ):
+        super().__init__()
+        
+        self.hvac_operation_mode_description_data = hvac_operation_mode_description_data
+
+        if not isinstance(self.hvac_operation_mode_description_data, list | NoneType):
+            raise TypeError("hvac_operation_mode_description_data is not of type list[HvacOperationModeDescriptionDataType]")
+        
+    def get_data(self):
+
+        msg_data = []
+        
+        if self.hvac_operation_mode_description_data is not None:
+            msg_data.append({"hvacOperationModeDescriptionData": [d.get_data() for d in self.hvac_operation_mode_description_data]})
+        
+        return msg_data
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        if self.hvac_operation_mode_description_data is not None:
+            result_str += f"{sep}hvacOperationModeDescriptionData: {self.hvac_operation_mode_description_data}"
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+                hvac_operation_mode_description_data=data_dict.get('hvacOperationModeDescriptionData'),
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class HvacSystemFunctionSetpointRelationDataElementsType: # EEBus_SPINE_TS_HVAC.xsd:ns_p:HvacSystemFunctionSetpointRelationDataElementsType -> ComplexType
     def __init__(
             self,
             system_function_id: ElementTagType = None,
@@ -1011,7 +1011,7 @@ class HvacSystemFunctionSetpointRelationDataElementsType: # EEBus_SPINE_TS_HVAC.
             return cls()
 
 
-class HvacSystemFunctionPowerSequenceRelationDataElementsType: # EEBus_SPINE_TS_HVAC.xsd: ComplexType
+class HvacSystemFunctionPowerSequenceRelationDataElementsType: # EEBus_SPINE_TS_HVAC.xsd:ns_p:HvacSystemFunctionPowerSequenceRelationDataElementsType -> ComplexType
     def __init__(
             self,
             system_function_id: ElementTagType = None,
@@ -1065,7 +1065,7 @@ class HvacSystemFunctionPowerSequenceRelationDataElementsType: # EEBus_SPINE_TS_
             return cls()
 
 
-class HvacSystemFunctionOperationModeRelationDataElementsType: # EEBus_SPINE_TS_HVAC.xsd: ComplexType
+class HvacSystemFunctionOperationModeRelationDataElementsType: # EEBus_SPINE_TS_HVAC.xsd:ns_p:HvacSystemFunctionOperationModeRelationDataElementsType -> ComplexType
     def __init__(
             self,
             system_function_id: ElementTagType = None,
@@ -1119,7 +1119,7 @@ class HvacSystemFunctionOperationModeRelationDataElementsType: # EEBus_SPINE_TS_
             return cls()
 
 
-class HvacSystemFunctionDescriptionDataElementsType: # EEBus_SPINE_TS_HVAC.xsd: ComplexType
+class HvacSystemFunctionDescriptionDataElementsType: # EEBus_SPINE_TS_HVAC.xsd:ns_p:HvacSystemFunctionDescriptionDataElementsType -> ComplexType
     def __init__(
             self,
             system_function_id: ElementTagType = None,
@@ -1195,7 +1195,7 @@ class HvacSystemFunctionDescriptionDataElementsType: # EEBus_SPINE_TS_HVAC.xsd: 
             return cls()
 
 
-class HvacSystemFunctionDataElementsType: # EEBus_SPINE_TS_HVAC.xsd: ComplexType
+class HvacSystemFunctionDataElementsType: # EEBus_SPINE_TS_HVAC.xsd:ns_p:HvacSystemFunctionDataElementsType -> ComplexType
     def __init__(
             self,
             system_function_id: ElementTagType = None,
@@ -1293,7 +1293,7 @@ class HvacSystemFunctionDataElementsType: # EEBus_SPINE_TS_HVAC.xsd: ComplexType
             return cls()
 
 
-class HvacOverrunDescriptionDataElementsType: # EEBus_SPINE_TS_HVAC.xsd: ComplexType
+class HvacOverrunDescriptionDataElementsType: # EEBus_SPINE_TS_HVAC.xsd:ns_p:HvacOverrunDescriptionDataElementsType -> ComplexType
     def __init__(
             self,
             overrun_id: ElementTagType = None,
@@ -1380,7 +1380,7 @@ class HvacOverrunDescriptionDataElementsType: # EEBus_SPINE_TS_HVAC.xsd: Complex
             return cls()
 
 
-class HvacOverrunDataElementsType: # EEBus_SPINE_TS_HVAC.xsd: ComplexType
+class HvacOverrunDataElementsType: # EEBus_SPINE_TS_HVAC.xsd:ns_p:HvacOverrunDataElementsType -> ComplexType
     def __init__(
             self,
             overrun_id: ElementTagType = None,
@@ -1456,7 +1456,7 @@ class HvacOverrunDataElementsType: # EEBus_SPINE_TS_HVAC.xsd: ComplexType
             return cls()
 
 
-class HvacOperationModeDescriptionDataElementsType: # EEBus_SPINE_TS_HVAC.xsd: ComplexType
+class HvacOperationModeDescriptionDataElementsType: # EEBus_SPINE_TS_HVAC.xsd:ns_p:HvacOperationModeDescriptionDataElementsType -> ComplexType
     def __init__(
             self,
             operation_mode_id: ElementTagType = None,
@@ -1532,7 +1532,7 @@ class HvacOperationModeDescriptionDataElementsType: # EEBus_SPINE_TS_HVAC.xsd: C
             return cls()
 
 
-class HvacSystemFunctionSetpointRelationListDataSelectorsType: # EEBus_SPINE_TS_HVAC.xsd: ComplexType
+class HvacSystemFunctionSetpointRelationListDataSelectorsType: # EEBus_SPINE_TS_HVAC.xsd:ns_p:HvacSystemFunctionSetpointRelationListDataSelectorsType -> ComplexType
     def __init__(
             self,
             system_function_id: HvacSystemFunctionIdType = None,
@@ -1586,7 +1586,7 @@ class HvacSystemFunctionSetpointRelationListDataSelectorsType: # EEBus_SPINE_TS_
             return cls()
 
 
-class HvacSystemFunctionPowerSequenceRelationListDataSelectorsType: # EEBus_SPINE_TS_HVAC.xsd: ComplexType
+class HvacSystemFunctionPowerSequenceRelationListDataSelectorsType: # EEBus_SPINE_TS_HVAC.xsd:ns_p:HvacSystemFunctionPowerSequenceRelationListDataSelectorsType -> ComplexType
     def __init__(
             self,
             system_function_id: HvacSystemFunctionIdType = None,
@@ -1629,7 +1629,7 @@ class HvacSystemFunctionPowerSequenceRelationListDataSelectorsType: # EEBus_SPIN
             return cls()
 
 
-class HvacSystemFunctionOperationModeRelationListDataSelectorsType: # EEBus_SPINE_TS_HVAC.xsd: ComplexType
+class HvacSystemFunctionOperationModeRelationListDataSelectorsType: # EEBus_SPINE_TS_HVAC.xsd:ns_p:HvacSystemFunctionOperationModeRelationListDataSelectorsType -> ComplexType
     def __init__(
             self,
             system_function_id: HvacSystemFunctionIdType = None,
@@ -1672,7 +1672,7 @@ class HvacSystemFunctionOperationModeRelationListDataSelectorsType: # EEBus_SPIN
             return cls()
 
 
-class HvacSystemFunctionListDataSelectorsType: # EEBus_SPINE_TS_HVAC.xsd: ComplexType
+class HvacSystemFunctionListDataSelectorsType: # EEBus_SPINE_TS_HVAC.xsd:ns_p:HvacSystemFunctionListDataSelectorsType -> ComplexType
     def __init__(
             self,
             system_function_id: HvacSystemFunctionIdType = None,
@@ -1715,7 +1715,7 @@ class HvacSystemFunctionListDataSelectorsType: # EEBus_SPINE_TS_HVAC.xsd: Comple
             return cls()
 
 
-class HvacSystemFunctionDescriptionListDataSelectorsType: # EEBus_SPINE_TS_HVAC.xsd: ComplexType
+class HvacSystemFunctionDescriptionListDataSelectorsType: # EEBus_SPINE_TS_HVAC.xsd:ns_p:HvacSystemFunctionDescriptionListDataSelectorsType -> ComplexType
     def __init__(
             self,
             system_function_id: HvacSystemFunctionIdType = None,
@@ -1758,7 +1758,7 @@ class HvacSystemFunctionDescriptionListDataSelectorsType: # EEBus_SPINE_TS_HVAC.
             return cls()
 
 
-class HvacOverrunListDataSelectorsType: # EEBus_SPINE_TS_HVAC.xsd: ComplexType
+class HvacOverrunListDataSelectorsType: # EEBus_SPINE_TS_HVAC.xsd:ns_p:HvacOverrunListDataSelectorsType -> ComplexType
     def __init__(
             self,
             overrun_id: HvacOverrunIdType = None,
@@ -1801,7 +1801,7 @@ class HvacOverrunListDataSelectorsType: # EEBus_SPINE_TS_HVAC.xsd: ComplexType
             return cls()
 
 
-class HvacOverrunDescriptionListDataSelectorsType: # EEBus_SPINE_TS_HVAC.xsd: ComplexType
+class HvacOverrunDescriptionListDataSelectorsType: # EEBus_SPINE_TS_HVAC.xsd:ns_p:HvacOverrunDescriptionListDataSelectorsType -> ComplexType
     def __init__(
             self,
             overrun_id: HvacOverrunIdType = None,
@@ -1844,7 +1844,7 @@ class HvacOverrunDescriptionListDataSelectorsType: # EEBus_SPINE_TS_HVAC.xsd: Co
             return cls()
 
 
-class HvacOperationModeDescriptionListDataSelectorsType: # EEBus_SPINE_TS_HVAC.xsd: ComplexType
+class HvacOperationModeDescriptionListDataSelectorsType: # EEBus_SPINE_TS_HVAC.xsd:ns_p:HvacOperationModeDescriptionListDataSelectorsType -> ComplexType
     def __init__(
             self,
             operation_mode_id: HvacOperationModeIdType = None,

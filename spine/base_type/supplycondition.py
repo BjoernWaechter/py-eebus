@@ -19,7 +19,7 @@ from types import NoneType
 from spine import array_2_dict
 
 
-class SupplyConditionThresholdRelationDataType: # EEBus_SPINE_TS_SupplyCondition.xsd: ComplexType
+class SupplyConditionThresholdRelationDataType: # EEBus_SPINE_TS_SupplyCondition.xsd:ns_p:SupplyConditionThresholdRelationDataType -> ComplexType
     def __init__(
             self,
             condition_id: ConditionIdType = None,
@@ -73,94 +73,7 @@ class SupplyConditionThresholdRelationDataType: # EEBus_SPINE_TS_SupplyCondition
             return cls()
 
 
-class SupplyConditionDescriptionDataType: # EEBus_SPINE_TS_SupplyCondition.xsd: ComplexType
-    def __init__(
-            self,
-            condition_id: ConditionIdType = None,
-            commodity_type: CommodityTypeType = None,
-            positive_energy_direction: EnergyDirectionType = None,
-            label: LabelType = None,
-            description: DescriptionType = None,
-    ):
-        super().__init__()
-        
-        self.condition_id = condition_id
-        self.commodity_type = commodity_type
-        self.positive_energy_direction = positive_energy_direction
-        self.label = label
-        self.description = description
-
-        if not isinstance(self.condition_id, ConditionIdType | NoneType):
-            raise TypeError("condition_id is not of type ConditionIdType")
-        
-        if not isinstance(self.commodity_type, CommodityTypeType | NoneType):
-            raise TypeError("commodity_type is not of type CommodityTypeType")
-        
-        if not isinstance(self.positive_energy_direction, EnergyDirectionType | NoneType):
-            raise TypeError("positive_energy_direction is not of type EnergyDirectionType")
-        
-        if not isinstance(self.label, LabelType | NoneType):
-            raise TypeError("label is not of type LabelType")
-        
-        if not isinstance(self.description, DescriptionType | NoneType):
-            raise TypeError("description is not of type DescriptionType")
-        
-    def get_data(self):
-
-        msg_data = []
-        
-        if self.condition_id is not None:
-            msg_data.append({"conditionId": self.condition_id.get_data()})
-        if self.commodity_type is not None:
-            msg_data.append({"commodityType": self.commodity_type.get_data()})
-        if self.positive_energy_direction is not None:
-            msg_data.append({"positiveEnergyDirection": self.positive_energy_direction.get_data()})
-        if self.label is not None:
-            msg_data.append({"label": self.label.get_data()})
-        if self.description is not None:
-            msg_data.append({"description": self.description.get_data()})
-        
-        return msg_data
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        if self.condition_id is not None:
-            result_str += f"{sep}conditionId: {self.condition_id}"
-            sep = ", "
-        if self.commodity_type is not None:
-            result_str += f"{sep}commodityType: {self.commodity_type}"
-            sep = ", "
-        if self.positive_energy_direction is not None:
-            result_str += f"{sep}positiveEnergyDirection: {self.positive_energy_direction}"
-            sep = ", "
-        if self.label is not None:
-            result_str += f"{sep}label: {self.label}"
-            sep = ", "
-        if self.description is not None:
-            result_str += f"{sep}description: {self.description}"
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
-                condition_id=data_dict.get('conditionId'),
-                commodity_type=data_dict.get('commodityType'),
-                positive_energy_direction=data_dict.get('positiveEnergyDirection'),
-                label=data_dict.get('label'),
-                description=data_dict.get('description'),
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class SupplyConditionDataType: # EEBus_SPINE_TS_SupplyCondition.xsd: ComplexType
+class SupplyConditionDataType: # EEBus_SPINE_TS_SupplyCondition.xsd:ns_p:SupplyConditionDataType -> ComplexType
     def __init__(
             self,
             condition_id: ConditionIdType = None,
@@ -291,7 +204,94 @@ class SupplyConditionDataType: # EEBus_SPINE_TS_SupplyCondition.xsd: ComplexType
             return cls()
 
 
-class SupplyConditionThresholdRelationListDataType: # EEBus_SPINE_TS_SupplyCondition.xsd: ComplexType
+class SupplyConditionDescriptionDataType: # EEBus_SPINE_TS_SupplyCondition.xsd:ns_p:SupplyConditionDescriptionDataType -> ComplexType
+    def __init__(
+            self,
+            condition_id: ConditionIdType = None,
+            commodity_type: CommodityTypeType = None,
+            positive_energy_direction: EnergyDirectionType = None,
+            label: LabelType = None,
+            description: DescriptionType = None,
+    ):
+        super().__init__()
+        
+        self.condition_id = condition_id
+        self.commodity_type = commodity_type
+        self.positive_energy_direction = positive_energy_direction
+        self.label = label
+        self.description = description
+
+        if not isinstance(self.condition_id, ConditionIdType | NoneType):
+            raise TypeError("condition_id is not of type ConditionIdType")
+        
+        if not isinstance(self.commodity_type, CommodityTypeType | NoneType):
+            raise TypeError("commodity_type is not of type CommodityTypeType")
+        
+        if not isinstance(self.positive_energy_direction, EnergyDirectionType | NoneType):
+            raise TypeError("positive_energy_direction is not of type EnergyDirectionType")
+        
+        if not isinstance(self.label, LabelType | NoneType):
+            raise TypeError("label is not of type LabelType")
+        
+        if not isinstance(self.description, DescriptionType | NoneType):
+            raise TypeError("description is not of type DescriptionType")
+        
+    def get_data(self):
+
+        msg_data = []
+        
+        if self.condition_id is not None:
+            msg_data.append({"conditionId": self.condition_id.get_data()})
+        if self.commodity_type is not None:
+            msg_data.append({"commodityType": self.commodity_type.get_data()})
+        if self.positive_energy_direction is not None:
+            msg_data.append({"positiveEnergyDirection": self.positive_energy_direction.get_data()})
+        if self.label is not None:
+            msg_data.append({"label": self.label.get_data()})
+        if self.description is not None:
+            msg_data.append({"description": self.description.get_data()})
+        
+        return msg_data
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        if self.condition_id is not None:
+            result_str += f"{sep}conditionId: {self.condition_id}"
+            sep = ", "
+        if self.commodity_type is not None:
+            result_str += f"{sep}commodityType: {self.commodity_type}"
+            sep = ", "
+        if self.positive_energy_direction is not None:
+            result_str += f"{sep}positiveEnergyDirection: {self.positive_energy_direction}"
+            sep = ", "
+        if self.label is not None:
+            result_str += f"{sep}label: {self.label}"
+            sep = ", "
+        if self.description is not None:
+            result_str += f"{sep}description: {self.description}"
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+                condition_id=data_dict.get('conditionId'),
+                commodity_type=data_dict.get('commodityType'),
+                positive_energy_direction=data_dict.get('positiveEnergyDirection'),
+                label=data_dict.get('label'),
+                description=data_dict.get('description'),
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class SupplyConditionThresholdRelationListDataType: # EEBus_SPINE_TS_SupplyCondition.xsd:ns_p:SupplyConditionThresholdRelationListDataType -> ComplexType
     def __init__(
             self,
             supply_condition_threshold_relation_data: list[SupplyConditionThresholdRelationDataType] = None,
@@ -334,50 +334,7 @@ class SupplyConditionThresholdRelationListDataType: # EEBus_SPINE_TS_SupplyCondi
             return cls()
 
 
-class SupplyConditionDescriptionListDataType: # EEBus_SPINE_TS_SupplyCondition.xsd: ComplexType
-    def __init__(
-            self,
-            supply_condition_description_data: list[SupplyConditionDescriptionDataType] = None,
-    ):
-        super().__init__()
-        
-        self.supply_condition_description_data = supply_condition_description_data
-
-        if not isinstance(self.supply_condition_description_data, list | NoneType):
-            raise TypeError("supply_condition_description_data is not of type list[SupplyConditionDescriptionDataType]")
-        
-    def get_data(self):
-
-        msg_data = []
-        
-        if self.supply_condition_description_data is not None:
-            msg_data.append({"supplyConditionDescriptionData": [d.get_data() for d in self.supply_condition_description_data]})
-        
-        return msg_data
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        if self.supply_condition_description_data is not None:
-            result_str += f"{sep}supplyConditionDescriptionData: {self.supply_condition_description_data}"
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
-                supply_condition_description_data=data_dict.get('supplyConditionDescriptionData'),
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class SupplyConditionListDataType: # EEBus_SPINE_TS_SupplyCondition.xsd: ComplexType
+class SupplyConditionListDataType: # EEBus_SPINE_TS_SupplyCondition.xsd:ns_p:SupplyConditionListDataType -> ComplexType
     def __init__(
             self,
             supply_condition_data: list[SupplyConditionDataType] = None,
@@ -420,7 +377,50 @@ class SupplyConditionListDataType: # EEBus_SPINE_TS_SupplyCondition.xsd: Complex
             return cls()
 
 
-class SupplyConditionThresholdRelationDataElementsType: # EEBus_SPINE_TS_SupplyCondition.xsd: ComplexType
+class SupplyConditionDescriptionListDataType: # EEBus_SPINE_TS_SupplyCondition.xsd:ns_p:SupplyConditionDescriptionListDataType -> ComplexType
+    def __init__(
+            self,
+            supply_condition_description_data: list[SupplyConditionDescriptionDataType] = None,
+    ):
+        super().__init__()
+        
+        self.supply_condition_description_data = supply_condition_description_data
+
+        if not isinstance(self.supply_condition_description_data, list | NoneType):
+            raise TypeError("supply_condition_description_data is not of type list[SupplyConditionDescriptionDataType]")
+        
+    def get_data(self):
+
+        msg_data = []
+        
+        if self.supply_condition_description_data is not None:
+            msg_data.append({"supplyConditionDescriptionData": [d.get_data() for d in self.supply_condition_description_data]})
+        
+        return msg_data
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        if self.supply_condition_description_data is not None:
+            result_str += f"{sep}supplyConditionDescriptionData: {self.supply_condition_description_data}"
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+                supply_condition_description_data=data_dict.get('supplyConditionDescriptionData'),
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class SupplyConditionThresholdRelationDataElementsType: # EEBus_SPINE_TS_SupplyCondition.xsd:ns_p:SupplyConditionThresholdRelationDataElementsType -> ComplexType
     def __init__(
             self,
             condition_id: ElementTagType = None,
@@ -474,7 +474,7 @@ class SupplyConditionThresholdRelationDataElementsType: # EEBus_SPINE_TS_SupplyC
             return cls()
 
 
-class SupplyConditionDescriptionDataElementsType: # EEBus_SPINE_TS_SupplyCondition.xsd: ComplexType
+class SupplyConditionDescriptionDataElementsType: # EEBus_SPINE_TS_SupplyCondition.xsd:ns_p:SupplyConditionDescriptionDataElementsType -> ComplexType
     def __init__(
             self,
             condition_id: ElementTagType = None,
@@ -561,7 +561,7 @@ class SupplyConditionDescriptionDataElementsType: # EEBus_SPINE_TS_SupplyConditi
             return cls()
 
 
-class SupplyConditionDataElementsType: # EEBus_SPINE_TS_SupplyCondition.xsd: ComplexType
+class SupplyConditionDataElementsType: # EEBus_SPINE_TS_SupplyCondition.xsd:ns_p:SupplyConditionDataElementsType -> ComplexType
     def __init__(
             self,
             condition_id: ElementTagType = None,
@@ -692,7 +692,7 @@ class SupplyConditionDataElementsType: # EEBus_SPINE_TS_SupplyCondition.xsd: Com
             return cls()
 
 
-class SupplyConditionThresholdRelationListDataSelectorsType: # EEBus_SPINE_TS_SupplyCondition.xsd: ComplexType
+class SupplyConditionThresholdRelationListDataSelectorsType: # EEBus_SPINE_TS_SupplyCondition.xsd:ns_p:SupplyConditionThresholdRelationListDataSelectorsType -> ComplexType
     def __init__(
             self,
             condition_id: ConditionIdType = None,
@@ -746,7 +746,7 @@ class SupplyConditionThresholdRelationListDataSelectorsType: # EEBus_SPINE_TS_Su
             return cls()
 
 
-class SupplyConditionListDataSelectorsType: # EEBus_SPINE_TS_SupplyCondition.xsd: ComplexType
+class SupplyConditionListDataSelectorsType: # EEBus_SPINE_TS_SupplyCondition.xsd:ns_p:SupplyConditionListDataSelectorsType -> ComplexType
     def __init__(
             self,
             condition_id: ConditionIdType = None,
@@ -822,7 +822,7 @@ class SupplyConditionListDataSelectorsType: # EEBus_SPINE_TS_SupplyCondition.xsd
             return cls()
 
 
-class SupplyConditionDescriptionListDataSelectorsType: # EEBus_SPINE_TS_SupplyCondition.xsd: ComplexType
+class SupplyConditionDescriptionListDataSelectorsType: # EEBus_SPINE_TS_SupplyCondition.xsd:ns_p:SupplyConditionDescriptionListDataSelectorsType -> ComplexType
     def __init__(
             self,
             condition_id: ConditionIdType = None,

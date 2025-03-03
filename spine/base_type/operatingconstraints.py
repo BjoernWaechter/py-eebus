@@ -11,7 +11,7 @@ from types import NoneType
 from spine import array_2_dict
 
 
-class OperatingConstraintsResumeImplicationDataType: # EEBus_SPINE_TS_OperatingConstraints.xsd: ComplexType
+class OperatingConstraintsResumeImplicationDataType: # EEBus_SPINE_TS_OperatingConstraints.xsd:ns_p:OperatingConstraintsResumeImplicationDataType -> ComplexType
     def __init__(
             self,
             sequence_id: PowerSequenceIdType = None,
@@ -98,61 +98,7 @@ class OperatingConstraintsResumeImplicationDataType: # EEBus_SPINE_TS_OperatingC
             return cls()
 
 
-class OperatingConstraintsPowerLevelDataType: # EEBus_SPINE_TS_OperatingConstraints.xsd: ComplexType
-    def __init__(
-            self,
-            sequence_id: PowerSequenceIdType = None,
-            power: list[ScaledNumberType] = None,
-    ):
-        super().__init__()
-        
-        self.sequence_id = sequence_id
-        self.power = power
-
-        if not isinstance(self.sequence_id, PowerSequenceIdType | NoneType):
-            raise TypeError("sequence_id is not of type PowerSequenceIdType")
-        
-        if not isinstance(self.power, list | NoneType):
-            raise TypeError("power is not of type list[ScaledNumberType]")
-        
-    def get_data(self):
-
-        msg_data = []
-        
-        if self.sequence_id is not None:
-            msg_data.append({"sequenceId": self.sequence_id.get_data()})
-        if self.power is not None:
-            msg_data.append({"power": [d.get_data() for d in self.power]})
-        
-        return msg_data
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        if self.sequence_id is not None:
-            result_str += f"{sep}sequenceId: {self.sequence_id}"
-            sep = ", "
-        if self.power is not None:
-            result_str += f"{sep}power: {self.power}"
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
-                sequence_id=data_dict.get('sequenceId'),
-                power=data_dict.get('power'),
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class OperatingConstraintsPowerRangeDataType: # EEBus_SPINE_TS_OperatingConstraints.xsd: ComplexType
+class OperatingConstraintsPowerRangeDataType: # EEBus_SPINE_TS_OperatingConstraints.xsd:ns_p:OperatingConstraintsPowerRangeDataType -> ComplexType
     def __init__(
             self,
             sequence_id: PowerSequenceIdType = None,
@@ -239,7 +185,61 @@ class OperatingConstraintsPowerRangeDataType: # EEBus_SPINE_TS_OperatingConstrai
             return cls()
 
 
-class OperatingConstraintsPowerDescriptionDataType: # EEBus_SPINE_TS_OperatingConstraints.xsd: ComplexType
+class OperatingConstraintsPowerLevelDataType: # EEBus_SPINE_TS_OperatingConstraints.xsd:ns_p:OperatingConstraintsPowerLevelDataType -> ComplexType
+    def __init__(
+            self,
+            sequence_id: PowerSequenceIdType = None,
+            power: list[ScaledNumberType] = None,
+    ):
+        super().__init__()
+        
+        self.sequence_id = sequence_id
+        self.power = power
+
+        if not isinstance(self.sequence_id, PowerSequenceIdType | NoneType):
+            raise TypeError("sequence_id is not of type PowerSequenceIdType")
+        
+        if not isinstance(self.power, list | NoneType):
+            raise TypeError("power is not of type list[ScaledNumberType]")
+        
+    def get_data(self):
+
+        msg_data = []
+        
+        if self.sequence_id is not None:
+            msg_data.append({"sequenceId": self.sequence_id.get_data()})
+        if self.power is not None:
+            msg_data.append({"power": [d.get_data() for d in self.power]})
+        
+        return msg_data
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        if self.sequence_id is not None:
+            result_str += f"{sep}sequenceId: {self.sequence_id}"
+            sep = ", "
+        if self.power is not None:
+            result_str += f"{sep}power: {self.power}"
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+                sequence_id=data_dict.get('sequenceId'),
+                power=data_dict.get('power'),
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class OperatingConstraintsPowerDescriptionDataType: # EEBus_SPINE_TS_OperatingConstraints.xsd:ns_p:OperatingConstraintsPowerDescriptionDataType -> ComplexType
     def __init__(
             self,
             sequence_id: PowerSequenceIdType = None,
@@ -326,7 +326,94 @@ class OperatingConstraintsPowerDescriptionDataType: # EEBus_SPINE_TS_OperatingCo
             return cls()
 
 
-class OperatingConstraintsDurationDataType: # EEBus_SPINE_TS_OperatingConstraints.xsd: ComplexType
+class OperatingConstraintsInterruptDataType: # EEBus_SPINE_TS_OperatingConstraints.xsd:ns_p:OperatingConstraintsInterruptDataType -> ComplexType
+    def __init__(
+            self,
+            sequence_id: PowerSequenceIdType = None,
+            is_pausable: bool = None,
+            is_stoppable: bool = None,
+            not_interruptible_at_high_power: bool = None,
+            max_cycles_per_day: int = None,
+    ):
+        super().__init__()
+        
+        self.sequence_id = sequence_id
+        self.is_pausable = is_pausable
+        self.is_stoppable = is_stoppable
+        self.not_interruptible_at_high_power = not_interruptible_at_high_power
+        self.max_cycles_per_day = max_cycles_per_day
+
+        if not isinstance(self.sequence_id, PowerSequenceIdType | NoneType):
+            raise TypeError("sequence_id is not of type PowerSequenceIdType")
+        
+        if not isinstance(self.is_pausable, bool | NoneType):
+            raise TypeError("is_pausable is not of type bool")
+        
+        if not isinstance(self.is_stoppable, bool | NoneType):
+            raise TypeError("is_stoppable is not of type bool")
+        
+        if not isinstance(self.not_interruptible_at_high_power, bool | NoneType):
+            raise TypeError("not_interruptible_at_high_power is not of type bool")
+        
+        if not isinstance(self.max_cycles_per_day, int | NoneType):
+            raise TypeError("max_cycles_per_day is not of type int")
+        
+    def get_data(self):
+
+        msg_data = []
+        
+        if self.sequence_id is not None:
+            msg_data.append({"sequenceId": self.sequence_id.get_data()})
+        if self.is_pausable is not None:
+            msg_data.append({"isPausable": self.is_pausable})
+        if self.is_stoppable is not None:
+            msg_data.append({"isStoppable": self.is_stoppable})
+        if self.not_interruptible_at_high_power is not None:
+            msg_data.append({"notInterruptibleAtHighPower": self.not_interruptible_at_high_power})
+        if self.max_cycles_per_day is not None:
+            msg_data.append({"maxCyclesPerDay": self.max_cycles_per_day})
+        
+        return msg_data
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        if self.sequence_id is not None:
+            result_str += f"{sep}sequenceId: {self.sequence_id}"
+            sep = ", "
+        if self.is_pausable is not None:
+            result_str += f"{sep}isPausable: {self.is_pausable}"
+            sep = ", "
+        if self.is_stoppable is not None:
+            result_str += f"{sep}isStoppable: {self.is_stoppable}"
+            sep = ", "
+        if self.not_interruptible_at_high_power is not None:
+            result_str += f"{sep}notInterruptibleAtHighPower: {self.not_interruptible_at_high_power}"
+            sep = ", "
+        if self.max_cycles_per_day is not None:
+            result_str += f"{sep}maxCyclesPerDay: {self.max_cycles_per_day}"
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+                sequence_id=data_dict.get('sequenceId'),
+                is_pausable=data_dict.get('isPausable'),
+                is_stoppable=data_dict.get('isStoppable'),
+                not_interruptible_at_high_power=data_dict.get('notInterruptibleAtHighPower'),
+                max_cycles_per_day=data_dict.get('maxCyclesPerDay'),
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class OperatingConstraintsDurationDataType: # EEBus_SPINE_TS_OperatingConstraints.xsd:ns_p:OperatingConstraintsDurationDataType -> ComplexType
     def __init__(
             self,
             sequence_id: PowerSequenceIdType = None,
@@ -435,94 +522,7 @@ class OperatingConstraintsDurationDataType: # EEBus_SPINE_TS_OperatingConstraint
             return cls()
 
 
-class OperatingConstraintsInterruptDataType: # EEBus_SPINE_TS_OperatingConstraints.xsd: ComplexType
-    def __init__(
-            self,
-            sequence_id: PowerSequenceIdType = None,
-            is_pausable: bool = None,
-            is_stoppable: bool = None,
-            not_interruptible_at_high_power: bool = None,
-            max_cycles_per_day: int = None,
-    ):
-        super().__init__()
-        
-        self.sequence_id = sequence_id
-        self.is_pausable = is_pausable
-        self.is_stoppable = is_stoppable
-        self.not_interruptible_at_high_power = not_interruptible_at_high_power
-        self.max_cycles_per_day = max_cycles_per_day
-
-        if not isinstance(self.sequence_id, PowerSequenceIdType | NoneType):
-            raise TypeError("sequence_id is not of type PowerSequenceIdType")
-        
-        if not isinstance(self.is_pausable, bool | NoneType):
-            raise TypeError("is_pausable is not of type bool")
-        
-        if not isinstance(self.is_stoppable, bool | NoneType):
-            raise TypeError("is_stoppable is not of type bool")
-        
-        if not isinstance(self.not_interruptible_at_high_power, bool | NoneType):
-            raise TypeError("not_interruptible_at_high_power is not of type bool")
-        
-        if not isinstance(self.max_cycles_per_day, int | NoneType):
-            raise TypeError("max_cycles_per_day is not of type int")
-        
-    def get_data(self):
-
-        msg_data = []
-        
-        if self.sequence_id is not None:
-            msg_data.append({"sequenceId": self.sequence_id.get_data()})
-        if self.is_pausable is not None:
-            msg_data.append({"isPausable": self.is_pausable})
-        if self.is_stoppable is not None:
-            msg_data.append({"isStoppable": self.is_stoppable})
-        if self.not_interruptible_at_high_power is not None:
-            msg_data.append({"notInterruptibleAtHighPower": self.not_interruptible_at_high_power})
-        if self.max_cycles_per_day is not None:
-            msg_data.append({"maxCyclesPerDay": self.max_cycles_per_day})
-        
-        return msg_data
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        if self.sequence_id is not None:
-            result_str += f"{sep}sequenceId: {self.sequence_id}"
-            sep = ", "
-        if self.is_pausable is not None:
-            result_str += f"{sep}isPausable: {self.is_pausable}"
-            sep = ", "
-        if self.is_stoppable is not None:
-            result_str += f"{sep}isStoppable: {self.is_stoppable}"
-            sep = ", "
-        if self.not_interruptible_at_high_power is not None:
-            result_str += f"{sep}notInterruptibleAtHighPower: {self.not_interruptible_at_high_power}"
-            sep = ", "
-        if self.max_cycles_per_day is not None:
-            result_str += f"{sep}maxCyclesPerDay: {self.max_cycles_per_day}"
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
-                sequence_id=data_dict.get('sequenceId'),
-                is_pausable=data_dict.get('isPausable'),
-                is_stoppable=data_dict.get('isStoppable'),
-                not_interruptible_at_high_power=data_dict.get('notInterruptibleAtHighPower'),
-                max_cycles_per_day=data_dict.get('maxCyclesPerDay'),
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class OperatingConstraintsResumeImplicationListDataType: # EEBus_SPINE_TS_OperatingConstraints.xsd: ComplexType
+class OperatingConstraintsResumeImplicationListDataType: # EEBus_SPINE_TS_OperatingConstraints.xsd:ns_p:OperatingConstraintsResumeImplicationListDataType -> ComplexType
     def __init__(
             self,
             operating_constraints_resume_implication_data: list[OperatingConstraintsResumeImplicationDataType] = None,
@@ -565,50 +565,7 @@ class OperatingConstraintsResumeImplicationListDataType: # EEBus_SPINE_TS_Operat
             return cls()
 
 
-class OperatingConstraintsPowerLevelListDataType: # EEBus_SPINE_TS_OperatingConstraints.xsd: ComplexType
-    def __init__(
-            self,
-            operating_constraints_power_level_data: list[OperatingConstraintsPowerLevelDataType] = None,
-    ):
-        super().__init__()
-        
-        self.operating_constraints_power_level_data = operating_constraints_power_level_data
-
-        if not isinstance(self.operating_constraints_power_level_data, list | NoneType):
-            raise TypeError("operating_constraints_power_level_data is not of type list[OperatingConstraintsPowerLevelDataType]")
-        
-    def get_data(self):
-
-        msg_data = []
-        
-        if self.operating_constraints_power_level_data is not None:
-            msg_data.append({"operatingConstraintsPowerLevelData": [d.get_data() for d in self.operating_constraints_power_level_data]})
-        
-        return msg_data
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        if self.operating_constraints_power_level_data is not None:
-            result_str += f"{sep}operatingConstraintsPowerLevelData: {self.operating_constraints_power_level_data}"
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
-                operating_constraints_power_level_data=data_dict.get('operatingConstraintsPowerLevelData'),
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class OperatingConstraintsPowerRangeListDataType: # EEBus_SPINE_TS_OperatingConstraints.xsd: ComplexType
+class OperatingConstraintsPowerRangeListDataType: # EEBus_SPINE_TS_OperatingConstraints.xsd:ns_p:OperatingConstraintsPowerRangeListDataType -> ComplexType
     def __init__(
             self,
             operating_constraints_power_range_data: list[OperatingConstraintsPowerRangeDataType] = None,
@@ -651,7 +608,50 @@ class OperatingConstraintsPowerRangeListDataType: # EEBus_SPINE_TS_OperatingCons
             return cls()
 
 
-class OperatingConstraintsPowerDescriptionListDataType: # EEBus_SPINE_TS_OperatingConstraints.xsd: ComplexType
+class OperatingConstraintsPowerLevelListDataType: # EEBus_SPINE_TS_OperatingConstraints.xsd:ns_p:OperatingConstraintsPowerLevelListDataType -> ComplexType
+    def __init__(
+            self,
+            operating_constraints_power_level_data: list[OperatingConstraintsPowerLevelDataType] = None,
+    ):
+        super().__init__()
+        
+        self.operating_constraints_power_level_data = operating_constraints_power_level_data
+
+        if not isinstance(self.operating_constraints_power_level_data, list | NoneType):
+            raise TypeError("operating_constraints_power_level_data is not of type list[OperatingConstraintsPowerLevelDataType]")
+        
+    def get_data(self):
+
+        msg_data = []
+        
+        if self.operating_constraints_power_level_data is not None:
+            msg_data.append({"operatingConstraintsPowerLevelData": [d.get_data() for d in self.operating_constraints_power_level_data]})
+        
+        return msg_data
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        if self.operating_constraints_power_level_data is not None:
+            result_str += f"{sep}operatingConstraintsPowerLevelData: {self.operating_constraints_power_level_data}"
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+                operating_constraints_power_level_data=data_dict.get('operatingConstraintsPowerLevelData'),
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class OperatingConstraintsPowerDescriptionListDataType: # EEBus_SPINE_TS_OperatingConstraints.xsd:ns_p:OperatingConstraintsPowerDescriptionListDataType -> ComplexType
     def __init__(
             self,
             operating_constraints_power_description_data: list[OperatingConstraintsPowerDescriptionDataType] = None,
@@ -694,50 +694,7 @@ class OperatingConstraintsPowerDescriptionListDataType: # EEBus_SPINE_TS_Operati
             return cls()
 
 
-class OperatingConstraintsDurationListDataType: # EEBus_SPINE_TS_OperatingConstraints.xsd: ComplexType
-    def __init__(
-            self,
-            operating_constraints_duration_data: list[OperatingConstraintsDurationDataType] = None,
-    ):
-        super().__init__()
-        
-        self.operating_constraints_duration_data = operating_constraints_duration_data
-
-        if not isinstance(self.operating_constraints_duration_data, list | NoneType):
-            raise TypeError("operating_constraints_duration_data is not of type list[OperatingConstraintsDurationDataType]")
-        
-    def get_data(self):
-
-        msg_data = []
-        
-        if self.operating_constraints_duration_data is not None:
-            msg_data.append({"operatingConstraintsDurationData": [d.get_data() for d in self.operating_constraints_duration_data]})
-        
-        return msg_data
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        if self.operating_constraints_duration_data is not None:
-            result_str += f"{sep}operatingConstraintsDurationData: {self.operating_constraints_duration_data}"
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
-                operating_constraints_duration_data=data_dict.get('operatingConstraintsDurationData'),
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class OperatingConstraintsInterruptListDataType: # EEBus_SPINE_TS_OperatingConstraints.xsd: ComplexType
+class OperatingConstraintsInterruptListDataType: # EEBus_SPINE_TS_OperatingConstraints.xsd:ns_p:OperatingConstraintsInterruptListDataType -> ComplexType
     def __init__(
             self,
             operating_constraints_interrupt_data: list[OperatingConstraintsInterruptDataType] = None,
@@ -780,7 +737,50 @@ class OperatingConstraintsInterruptListDataType: # EEBus_SPINE_TS_OperatingConst
             return cls()
 
 
-class OperatingConstraintsResumeImplicationDataElementsType: # EEBus_SPINE_TS_OperatingConstraints.xsd: ComplexType
+class OperatingConstraintsDurationListDataType: # EEBus_SPINE_TS_OperatingConstraints.xsd:ns_p:OperatingConstraintsDurationListDataType -> ComplexType
+    def __init__(
+            self,
+            operating_constraints_duration_data: list[OperatingConstraintsDurationDataType] = None,
+    ):
+        super().__init__()
+        
+        self.operating_constraints_duration_data = operating_constraints_duration_data
+
+        if not isinstance(self.operating_constraints_duration_data, list | NoneType):
+            raise TypeError("operating_constraints_duration_data is not of type list[OperatingConstraintsDurationDataType]")
+        
+    def get_data(self):
+
+        msg_data = []
+        
+        if self.operating_constraints_duration_data is not None:
+            msg_data.append({"operatingConstraintsDurationData": [d.get_data() for d in self.operating_constraints_duration_data]})
+        
+        return msg_data
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        if self.operating_constraints_duration_data is not None:
+            result_str += f"{sep}operatingConstraintsDurationData: {self.operating_constraints_duration_data}"
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+                operating_constraints_duration_data=data_dict.get('operatingConstraintsDurationData'),
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class OperatingConstraintsResumeImplicationDataElementsType: # EEBus_SPINE_TS_OperatingConstraints.xsd:ns_p:OperatingConstraintsResumeImplicationDataElementsType -> ComplexType
     def __init__(
             self,
             sequence_id: ElementTagType = None,
@@ -867,7 +867,7 @@ class OperatingConstraintsResumeImplicationDataElementsType: # EEBus_SPINE_TS_Op
             return cls()
 
 
-class OperatingConstraintsPowerRangeDataElementsType: # EEBus_SPINE_TS_OperatingConstraints.xsd: ComplexType
+class OperatingConstraintsPowerRangeDataElementsType: # EEBus_SPINE_TS_OperatingConstraints.xsd:ns_p:OperatingConstraintsPowerRangeDataElementsType -> ComplexType
     def __init__(
             self,
             sequence_id: ElementTagType = None,
@@ -954,7 +954,7 @@ class OperatingConstraintsPowerRangeDataElementsType: # EEBus_SPINE_TS_Operating
             return cls()
 
 
-class OperatingConstraintsPowerLevelDataElementsType: # EEBus_SPINE_TS_OperatingConstraints.xsd: ComplexType
+class OperatingConstraintsPowerLevelDataElementsType: # EEBus_SPINE_TS_OperatingConstraints.xsd:ns_p:OperatingConstraintsPowerLevelDataElementsType -> ComplexType
     def __init__(
             self,
             sequence_id: ElementTagType = None,
@@ -1008,7 +1008,7 @@ class OperatingConstraintsPowerLevelDataElementsType: # EEBus_SPINE_TS_Operating
             return cls()
 
 
-class OperatingConstraintsPowerDescriptionDataElementsType: # EEBus_SPINE_TS_OperatingConstraints.xsd: ComplexType
+class OperatingConstraintsPowerDescriptionDataElementsType: # EEBus_SPINE_TS_OperatingConstraints.xsd:ns_p:OperatingConstraintsPowerDescriptionDataElementsType -> ComplexType
     def __init__(
             self,
             sequence_id: ElementTagType = None,
@@ -1095,7 +1095,7 @@ class OperatingConstraintsPowerDescriptionDataElementsType: # EEBus_SPINE_TS_Ope
             return cls()
 
 
-class OperatingConstraintsInterruptDataElementsType: # EEBus_SPINE_TS_OperatingConstraints.xsd: ComplexType
+class OperatingConstraintsInterruptDataElementsType: # EEBus_SPINE_TS_OperatingConstraints.xsd:ns_p:OperatingConstraintsInterruptDataElementsType -> ComplexType
     def __init__(
             self,
             sequence_id: ElementTagType = None,
@@ -1182,7 +1182,7 @@ class OperatingConstraintsInterruptDataElementsType: # EEBus_SPINE_TS_OperatingC
             return cls()
 
 
-class OperatingConstraintsDurationDataElementsType: # EEBus_SPINE_TS_OperatingConstraints.xsd: ComplexType
+class OperatingConstraintsDurationDataElementsType: # EEBus_SPINE_TS_OperatingConstraints.xsd:ns_p:OperatingConstraintsDurationDataElementsType -> ComplexType
     def __init__(
             self,
             sequence_id: ElementTagType = None,
@@ -1291,7 +1291,7 @@ class OperatingConstraintsDurationDataElementsType: # EEBus_SPINE_TS_OperatingCo
             return cls()
 
 
-class OperatingConstraintsResumeImplicationListDataSelectorsType: # EEBus_SPINE_TS_OperatingConstraints.xsd: ComplexType
+class OperatingConstraintsResumeImplicationListDataSelectorsType: # EEBus_SPINE_TS_OperatingConstraints.xsd:ns_p:OperatingConstraintsResumeImplicationListDataSelectorsType -> ComplexType
     def __init__(
             self,
             sequence_id: PowerSequenceIdType = None,
@@ -1334,7 +1334,7 @@ class OperatingConstraintsResumeImplicationListDataSelectorsType: # EEBus_SPINE_
             return cls()
 
 
-class OperatingConstraintsPowerRangeListDataSelectorsType: # EEBus_SPINE_TS_OperatingConstraints.xsd: ComplexType
+class OperatingConstraintsPowerRangeListDataSelectorsType: # EEBus_SPINE_TS_OperatingConstraints.xsd:ns_p:OperatingConstraintsPowerRangeListDataSelectorsType -> ComplexType
     def __init__(
             self,
             sequence_id: PowerSequenceIdType = None,
@@ -1377,7 +1377,7 @@ class OperatingConstraintsPowerRangeListDataSelectorsType: # EEBus_SPINE_TS_Oper
             return cls()
 
 
-class OperatingConstraintsPowerLevelListDataSelectorsType: # EEBus_SPINE_TS_OperatingConstraints.xsd: ComplexType
+class OperatingConstraintsPowerLevelListDataSelectorsType: # EEBus_SPINE_TS_OperatingConstraints.xsd:ns_p:OperatingConstraintsPowerLevelListDataSelectorsType -> ComplexType
     def __init__(
             self,
             sequence_id: PowerSequenceIdType = None,
@@ -1420,7 +1420,7 @@ class OperatingConstraintsPowerLevelListDataSelectorsType: # EEBus_SPINE_TS_Oper
             return cls()
 
 
-class OperatingConstraintsPowerDescriptionListDataSelectorsType: # EEBus_SPINE_TS_OperatingConstraints.xsd: ComplexType
+class OperatingConstraintsPowerDescriptionListDataSelectorsType: # EEBus_SPINE_TS_OperatingConstraints.xsd:ns_p:OperatingConstraintsPowerDescriptionListDataSelectorsType -> ComplexType
     def __init__(
             self,
             sequence_id: PowerSequenceIdType = None,
@@ -1463,7 +1463,7 @@ class OperatingConstraintsPowerDescriptionListDataSelectorsType: # EEBus_SPINE_T
             return cls()
 
 
-class OperatingConstraintsInterruptListDataSelectorsType: # EEBus_SPINE_TS_OperatingConstraints.xsd: ComplexType
+class OperatingConstraintsInterruptListDataSelectorsType: # EEBus_SPINE_TS_OperatingConstraints.xsd:ns_p:OperatingConstraintsInterruptListDataSelectorsType -> ComplexType
     def __init__(
             self,
             sequence_id: PowerSequenceIdType = None,
@@ -1506,7 +1506,7 @@ class OperatingConstraintsInterruptListDataSelectorsType: # EEBus_SPINE_TS_Opera
             return cls()
 
 
-class OperatingConstraintsDurationListDataSelectorsType: # EEBus_SPINE_TS_OperatingConstraints.xsd: ComplexType
+class OperatingConstraintsDurationListDataSelectorsType: # EEBus_SPINE_TS_OperatingConstraints.xsd:ns_p:OperatingConstraintsDurationListDataSelectorsType -> ComplexType
     def __init__(
             self,
             sequence_id: PowerSequenceIdType = None,

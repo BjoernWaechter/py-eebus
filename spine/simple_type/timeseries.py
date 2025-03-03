@@ -3,7 +3,7 @@ from types import NoneType
 from spine import array_2_dict
 
 
-class TimeSeriesSlotIdType: # EEBus_SPINE_TS_TimeSeries.xsd: AliasType
+class TimeSeriesSlotIdType: # EEBus_SPINE_TS_TimeSeries.xsd:ns_p:TimeSeriesSlotIdType -> AliasType
     def __init__(
             self,
             value: int,
@@ -41,7 +41,7 @@ class TimeSeriesSlotIdType: # EEBus_SPINE_TS_TimeSeries.xsd: AliasType
             return cls()
 
 
-class TimeSeriesSlotCountType: # EEBus_SPINE_TS_TimeSeries.xsd: AliasType
+class TimeSeriesSlotCountType: # EEBus_SPINE_TS_TimeSeries.xsd:ns_p:TimeSeriesSlotCountType -> AliasType
     def __init__(
             self,
             value: TimeSeriesSlotIdType,
@@ -79,7 +79,7 @@ class TimeSeriesSlotCountType: # EEBus_SPINE_TS_TimeSeries.xsd: AliasType
             return cls()
 
 
-class TimeSeriesIdType: # EEBus_SPINE_TS_TimeSeries.xsd: AliasType
+class TimeSeriesIdType: # EEBus_SPINE_TS_TimeSeries.xsd:ns_p:TimeSeriesIdType -> AliasType
     def __init__(
             self,
             value: int,

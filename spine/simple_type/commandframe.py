@@ -3,7 +3,7 @@ from types import NoneType
 from spine import array_2_dict
 
 
-class FilterIdType: # EEBus_SPINE_TS_CommandFrame.xsd: AliasType
+class FilterIdType: # EEBus_SPINE_TS_CommandFrame.xsd:ns_p:FilterIdType -> AliasType
     def __init__(
             self,
             value: int,
@@ -41,7 +41,7 @@ class FilterIdType: # EEBus_SPINE_TS_CommandFrame.xsd: AliasType
             return cls()
 
 
-class MsgCounterType: # EEBus_SPINE_TS_CommandFrame.xsd: AliasType
+class MsgCounterType: # EEBus_SPINE_TS_CommandFrame.xsd:ns_p:MsgCounterType -> AliasType
     def __init__(
             self,
             value: int,

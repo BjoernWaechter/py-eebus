@@ -3,7 +3,7 @@ from types import NoneType
 from spine import array_2_dict
 
 
-class ChannelIdType: # EEBus_SPINE_TS_DataTunneling.xsd: AliasType
+class ChannelIdType: # EEBus_SPINE_TS_DataTunneling.xsd:ns_p:ChannelIdType -> AliasType
     def __init__(
             self,
             value: int,
@@ -41,7 +41,7 @@ class ChannelIdType: # EEBus_SPINE_TS_DataTunneling.xsd: AliasType
             return cls()
 
 
-class PurposeIdType: # EEBus_SPINE_TS_DataTunneling.xsd: AliasType
+class PurposeIdType: # EEBus_SPINE_TS_DataTunneling.xsd:ns_p:PurposeIdType -> AliasType
     def __init__(
             self,
             value: str,

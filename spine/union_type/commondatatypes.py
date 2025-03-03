@@ -3,7 +3,7 @@ from types import NoneType
 from spine import array_2_dict
 
 
-class FunctionType: # EEBus_SPINE_TS_CommonDataTypes.xsd: UnionType
+class FunctionType: # EEBus_SPINE_TS_CommonDataTypes.xsd:ns_p:FunctionType -> UnionType
     def __init__(
             self,
     ):
@@ -36,7 +36,7 @@ class FunctionType: # EEBus_SPINE_TS_CommonDataTypes.xsd: UnionType
             return cls()
 
 
-class FeatureSpecificUsageEnumType: # EEBus_SPINE_TS_CommonDataTypes.xsd: UnionType
+class FeatureSpecificUsageEnumType: # EEBus_SPINE_TS_CommonDataTypes.xsd:ns_p:FeatureSpecificUsageEnumType -> UnionType
     def __init__(
             self,
     ):
@@ -69,7 +69,7 @@ class FeatureSpecificUsageEnumType: # EEBus_SPINE_TS_CommonDataTypes.xsd: UnionT
             return cls()
 
 
-class FeatureSpecificUsageType: # EEBus_SPINE_TS_CommonDataTypes.xsd: UnionType
+class FeatureSpecificUsageType: # EEBus_SPINE_TS_CommonDataTypes.xsd:ns_p:FeatureSpecificUsageType -> UnionType
     def __init__(
             self,
     ):
@@ -102,7 +102,7 @@ class FeatureSpecificUsageType: # EEBus_SPINE_TS_CommonDataTypes.xsd: UnionType
             return cls()
 
 
-class FeatureTypeType: # EEBus_SPINE_TS_CommonDataTypes.xsd: UnionType
+class FeatureTypeType: # EEBus_SPINE_TS_CommonDataTypes.xsd:ns_p:FeatureTypeType -> UnionType
     def __init__(
             self,
     ):
@@ -135,7 +135,7 @@ class FeatureTypeType: # EEBus_SPINE_TS_CommonDataTypes.xsd: UnionType
             return cls()
 
 
-class EntityTypeType: # EEBus_SPINE_TS_CommonDataTypes.xsd: UnionType
+class EntityTypeType: # EEBus_SPINE_TS_CommonDataTypes.xsd:ns_p:EntityTypeType -> UnionType
     def __init__(
             self,
     ):
@@ -168,7 +168,7 @@ class EntityTypeType: # EEBus_SPINE_TS_CommonDataTypes.xsd: UnionType
             return cls()
 
 
-class DeviceTypeType: # EEBus_SPINE_TS_CommonDataTypes.xsd: UnionType
+class DeviceTypeType: # EEBus_SPINE_TS_CommonDataTypes.xsd:ns_p:DeviceTypeType -> UnionType
     def __init__(
             self,
     ):
@@ -201,7 +201,7 @@ class DeviceTypeType: # EEBus_SPINE_TS_CommonDataTypes.xsd: UnionType
             return cls()
 
 
-class ScopeTypeType: # EEBus_SPINE_TS_CommonDataTypes.xsd: UnionType
+class ScopeTypeType: # EEBus_SPINE_TS_CommonDataTypes.xsd:ns_p:ScopeTypeType -> UnionType
     def __init__(
             self,
     ):
@@ -234,7 +234,7 @@ class ScopeTypeType: # EEBus_SPINE_TS_CommonDataTypes.xsd: UnionType
             return cls()
 
 
-class CurrencyType: # EEBus_SPINE_TS_CommonDataTypes.xsd: UnionType
+class CurrencyType: # EEBus_SPINE_TS_CommonDataTypes.xsd:ns_p:CurrencyType -> UnionType
     def __init__(
             self,
     ):
@@ -267,7 +267,7 @@ class CurrencyType: # EEBus_SPINE_TS_CommonDataTypes.xsd: UnionType
             return cls()
 
 
-class UnitOfMeasurementType: # EEBus_SPINE_TS_CommonDataTypes.xsd: UnionType
+class UnitOfMeasurementType: # EEBus_SPINE_TS_CommonDataTypes.xsd:ns_p:UnitOfMeasurementType -> UnionType
     def __init__(
             self,
     ):
@@ -300,7 +300,7 @@ class UnitOfMeasurementType: # EEBus_SPINE_TS_CommonDataTypes.xsd: UnionType
             return cls()
 
 
-class EnergyModeType: # EEBus_SPINE_TS_CommonDataTypes.xsd: UnionType
+class EnergyModeType: # EEBus_SPINE_TS_CommonDataTypes.xsd:ns_p:EnergyModeType -> UnionType
     def __init__(
             self,
     ):
@@ -333,7 +333,7 @@ class EnergyModeType: # EEBus_SPINE_TS_CommonDataTypes.xsd: UnionType
             return cls()
 
 
-class EnergyDirectionType: # EEBus_SPINE_TS_CommonDataTypes.xsd: UnionType
+class EnergyDirectionType: # EEBus_SPINE_TS_CommonDataTypes.xsd:ns_p:EnergyDirectionType -> UnionType
     def __init__(
             self,
     ):
@@ -366,7 +366,7 @@ class EnergyDirectionType: # EEBus_SPINE_TS_CommonDataTypes.xsd: UnionType
             return cls()
 
 
-class CommodityTypeType: # EEBus_SPINE_TS_CommonDataTypes.xsd: UnionType
+class CommodityTypeType: # EEBus_SPINE_TS_CommonDataTypes.xsd:ns_p:CommodityTypeType -> UnionType
     def __init__(
             self,
     ):
@@ -399,7 +399,7 @@ class CommodityTypeType: # EEBus_SPINE_TS_CommonDataTypes.xsd: UnionType
             return cls()
 
 
-class OccurrenceType: # EEBus_SPINE_TS_CommonDataTypes.xsd: UnionType
+class OccurrenceType: # EEBus_SPINE_TS_CommonDataTypes.xsd:ns_p:OccurrenceType -> UnionType
     def __init__(
             self,
     ):
@@ -432,7 +432,7 @@ class OccurrenceType: # EEBus_SPINE_TS_CommonDataTypes.xsd: UnionType
             return cls()
 
 
-class RecurringIntervalType: # EEBus_SPINE_TS_CommonDataTypes.xsd: UnionType
+class RecurringIntervalType: # EEBus_SPINE_TS_CommonDataTypes.xsd:ns_p:RecurringIntervalType -> UnionType
     def __init__(
             self,
     ):
@@ -465,7 +465,7 @@ class RecurringIntervalType: # EEBus_SPINE_TS_CommonDataTypes.xsd: UnionType
             return cls()
 
 
-class AbsoluteOrRelativeTimeType: # EEBus_SPINE_TS_CommonDataTypes.xsd: UnionType
+class AbsoluteOrRelativeTimeType: # EEBus_SPINE_TS_CommonDataTypes.xsd:ns_p:AbsoluteOrRelativeTimeType -> UnionType
     def __init__(
             self,
     ):

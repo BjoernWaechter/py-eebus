@@ -112,4 +112,4 @@ class DataType:
 
     @property
     def info_comment(self):
-        return f"{self.source_file}: {type(self).__name__}"
+        return f"{self.source_file}:{self.fq_name} -> {type(self).__name__}"

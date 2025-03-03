@@ -3,7 +3,7 @@ from types import NoneType
 from spine import array_2_dict
 
 
-class HvacSystemFunctionIdType: # EEBus_SPINE_TS_HVAC.xsd: AliasType
+class HvacSystemFunctionIdType: # EEBus_SPINE_TS_HVAC.xsd:ns_p:HvacSystemFunctionIdType -> AliasType
     def __init__(
             self,
             value: int,
@@ -41,7 +41,7 @@ class HvacSystemFunctionIdType: # EEBus_SPINE_TS_HVAC.xsd: AliasType
             return cls()
 
 
-class HvacOverrunIdType: # EEBus_SPINE_TS_HVAC.xsd: AliasType
+class HvacOverrunIdType: # EEBus_SPINE_TS_HVAC.xsd:ns_p:HvacOverrunIdType -> AliasType
     def __init__(
             self,
             value: int,
@@ -79,7 +79,7 @@ class HvacOverrunIdType: # EEBus_SPINE_TS_HVAC.xsd: AliasType
             return cls()
 
 
-class HvacOperationModeIdType: # EEBus_SPINE_TS_HVAC.xsd: AliasType
+class HvacOperationModeIdType: # EEBus_SPINE_TS_HVAC.xsd:ns_p:HvacOperationModeIdType -> AliasType
     def __init__(
             self,
             value: int,

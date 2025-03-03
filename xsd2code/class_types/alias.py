@@ -40,7 +40,7 @@ class AliasType(xsd2code.DataType):
 
     @property
     def depend_on_types(self):
-        return [t._data_type for t in self._members]
+        return [t._data_type for t in self.members]
 
     def get_as_code(self):
         return self.type_name

@@ -14,7 +14,7 @@ from types import NoneType
 from spine import array_2_dict
 
 
-class SensingDataType: # EEBus_SPINE_TS_Sensing.xsd: ComplexType
+class SensingDataType: # EEBus_SPINE_TS_Sensing.xsd:ns_p:SensingDataType -> ComplexType
     def __init__(
             self,
             timestamp: AbsoluteOrRelativeTimeType = None,
@@ -79,7 +79,50 @@ class SensingDataType: # EEBus_SPINE_TS_Sensing.xsd: ComplexType
             return cls()
 
 
-class SensingDescriptionDataType: # EEBus_SPINE_TS_Sensing.xsd: ComplexType
+class SensingListDataType: # EEBus_SPINE_TS_Sensing.xsd:ns_p:SensingListDataType -> ComplexType
+    def __init__(
+            self,
+            sensing_data: list[SensingDataType] = None,
+    ):
+        super().__init__()
+        
+        self.sensing_data = sensing_data
+
+        if not isinstance(self.sensing_data, list | NoneType):
+            raise TypeError("sensing_data is not of type list[SensingDataType]")
+        
+    def get_data(self):
+
+        msg_data = []
+        
+        if self.sensing_data is not None:
+            msg_data.append({"sensingData": [d.get_data() for d in self.sensing_data]})
+        
+        return msg_data
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        if self.sensing_data is not None:
+            result_str += f"{sep}sensingData: {self.sensing_data}"
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+                sensing_data=data_dict.get('sensingData'),
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class SensingDescriptionDataType: # EEBus_SPINE_TS_Sensing.xsd:ns_p:SensingDescriptionDataType -> ComplexType
     def __init__(
             self,
             sensing_type: SensingTypeType = None,
@@ -166,50 +209,7 @@ class SensingDescriptionDataType: # EEBus_SPINE_TS_Sensing.xsd: ComplexType
             return cls()
 
 
-class SensingListDataType: # EEBus_SPINE_TS_Sensing.xsd: ComplexType
-    def __init__(
-            self,
-            sensing_data: list[SensingDataType] = None,
-    ):
-        super().__init__()
-        
-        self.sensing_data = sensing_data
-
-        if not isinstance(self.sensing_data, list | NoneType):
-            raise TypeError("sensing_data is not of type list[SensingDataType]")
-        
-    def get_data(self):
-
-        msg_data = []
-        
-        if self.sensing_data is not None:
-            msg_data.append({"sensingData": [d.get_data() for d in self.sensing_data]})
-        
-        return msg_data
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        if self.sensing_data is not None:
-            result_str += f"{sep}sensingData: {self.sensing_data}"
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
-                sensing_data=data_dict.get('sensingData'),
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class SensingDescriptionDataElementsType: # EEBus_SPINE_TS_Sensing.xsd: ComplexType
+class SensingDescriptionDataElementsType: # EEBus_SPINE_TS_Sensing.xsd:ns_p:SensingDescriptionDataElementsType -> ComplexType
     def __init__(
             self,
             sensing_type: ElementTagType = None,
@@ -296,7 +296,7 @@ class SensingDescriptionDataElementsType: # EEBus_SPINE_TS_Sensing.xsd: ComplexT
             return cls()
 
 
-class SensingDataElementsType: # EEBus_SPINE_TS_Sensing.xsd: ComplexType
+class SensingDataElementsType: # EEBus_SPINE_TS_Sensing.xsd:ns_p:SensingDataElementsType -> ComplexType
     def __init__(
             self,
             timestamp: ElementTagType = None,
@@ -361,7 +361,7 @@ class SensingDataElementsType: # EEBus_SPINE_TS_Sensing.xsd: ComplexType
             return cls()
 
 
-class SensingListDataSelectorsType: # EEBus_SPINE_TS_Sensing.xsd: ComplexType
+class SensingListDataSelectorsType: # EEBus_SPINE_TS_Sensing.xsd:ns_p:SensingListDataSelectorsType -> ComplexType
     def __init__(
             self,
             timestamp_interval: TimestampIntervalType = None,

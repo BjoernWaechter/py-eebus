@@ -1,11 +1,11 @@
-import re
 
-from xsd2code import DataType
+#from xsd2code import DataType, to_snake_case
+import xsd2code
 
 
 class Member:
 
-    def __init__(self, fq_member_name, data_type: DataType, is_optional=False, default_value=None, is_array=False):
+    def __init__(self, fq_member_name, data_type: xsd2code.DataType, is_optional=False, default_value=None, is_array=False):
         self._fq_member_name = fq_member_name
 
         self._namespace, self._member_name = fq_member_name.split(":")
@@ -22,8 +22,8 @@ class Member:
 
     @property
     def snake_case_name(self):
-        name = re.sub('(.)([A-Z][a-z]+)', r'\1_\2', self._member_name)
-        return re.sub('([a-z0-9])([A-Z])', r'\1_\2', name).lower()
+        return xsd2code.to_snake_case(self._member_name)
+
 
     @property
     def data_type(self):

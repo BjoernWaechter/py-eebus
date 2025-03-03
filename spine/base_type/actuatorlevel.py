@@ -10,7 +10,7 @@ from types import NoneType
 from spine import array_2_dict
 
 
-class ActuatorLevelDescriptionDataType: # EEBus_SPINE_TS_ActuatorLevel.xsd: ComplexType
+class ActuatorLevelDescriptionDataType: # EEBus_SPINE_TS_ActuatorLevel.xsd:ns_p:ActuatorLevelDescriptionDataType -> ComplexType
     def __init__(
             self,
             label: LabelType = None,
@@ -75,7 +75,7 @@ class ActuatorLevelDescriptionDataType: # EEBus_SPINE_TS_ActuatorLevel.xsd: Comp
             return cls()
 
 
-class ActuatorLevelDataType: # EEBus_SPINE_TS_ActuatorLevel.xsd: ComplexType
+class ActuatorLevelDataType: # EEBus_SPINE_TS_ActuatorLevel.xsd:ns_p:ActuatorLevelDataType -> ComplexType
     def __init__(
             self,
             function: ActuatorLevelFctType = None,
@@ -129,7 +129,7 @@ class ActuatorLevelDataType: # EEBus_SPINE_TS_ActuatorLevel.xsd: ComplexType
             return cls()
 
 
-class ActuatorLevelDescriptionDataElementsType: # EEBus_SPINE_TS_ActuatorLevel.xsd: ComplexType
+class ActuatorLevelDescriptionDataElementsType: # EEBus_SPINE_TS_ActuatorLevel.xsd:ns_p:ActuatorLevelDescriptionDataElementsType -> ComplexType
     def __init__(
             self,
             label: ElementTagType = None,
@@ -194,7 +194,7 @@ class ActuatorLevelDescriptionDataElementsType: # EEBus_SPINE_TS_ActuatorLevel.x
             return cls()
 
 
-class ActuatorLevelDataElementsType: # EEBus_SPINE_TS_ActuatorLevel.xsd: ComplexType
+class ActuatorLevelDataElementsType: # EEBus_SPINE_TS_ActuatorLevel.xsd:ns_p:ActuatorLevelDataElementsType -> ComplexType
     def __init__(
             self,
             function: ElementTagType = None,

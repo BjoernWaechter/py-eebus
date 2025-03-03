@@ -10,7 +10,7 @@ from types import NoneType
 from spine import array_2_dict
 
 
-class UseCaseSupportType: # EEBus_SPINE_TS_UseCaseInformation.xsd: ComplexType
+class UseCaseSupportType: # EEBus_SPINE_TS_UseCaseInformation.xsd:ns_p:UseCaseSupportType -> ComplexType
     def __init__(
             self,
             use_case_name: UseCaseNameType = None,
@@ -97,7 +97,7 @@ class UseCaseSupportType: # EEBus_SPINE_TS_UseCaseInformation.xsd: ComplexType
             return cls()
 
 
-class UseCaseInformationDataType: # EEBus_SPINE_TS_UseCaseInformation.xsd: ComplexType
+class UseCaseInformationDataType: # EEBus_SPINE_TS_UseCaseInformation.xsd:ns_p:UseCaseInformationDataType -> ComplexType
     def __init__(
             self,
             address: FeatureAddressType = None,
@@ -162,7 +162,7 @@ class UseCaseInformationDataType: # EEBus_SPINE_TS_UseCaseInformation.xsd: Compl
             return cls()
 
 
-class UseCaseSupportElementsType: # EEBus_SPINE_TS_UseCaseInformation.xsd: ComplexType
+class UseCaseSupportElementsType: # EEBus_SPINE_TS_UseCaseInformation.xsd:ns_p:UseCaseSupportElementsType -> ComplexType
     def __init__(
             self,
             use_case_name: ElementTagType = None,
@@ -249,7 +249,7 @@ class UseCaseSupportElementsType: # EEBus_SPINE_TS_UseCaseInformation.xsd: Compl
             return cls()
 
 
-class UseCaseSupportSelectorsType: # EEBus_SPINE_TS_UseCaseInformation.xsd: ComplexType
+class UseCaseSupportSelectorsType: # EEBus_SPINE_TS_UseCaseInformation.xsd:ns_p:UseCaseSupportSelectorsType -> ComplexType
     def __init__(
             self,
             use_case_name: UseCaseNameType = None,
@@ -314,7 +314,7 @@ class UseCaseSupportSelectorsType: # EEBus_SPINE_TS_UseCaseInformation.xsd: Comp
             return cls()
 
 
-class UseCaseInformationListDataType: # EEBus_SPINE_TS_UseCaseInformation.xsd: ComplexType
+class UseCaseInformationListDataType: # EEBus_SPINE_TS_UseCaseInformation.xsd:ns_p:UseCaseInformationListDataType -> ComplexType
     def __init__(
             self,
             use_case_information_data: list[UseCaseInformationDataType] = None,
@@ -357,7 +357,7 @@ class UseCaseInformationListDataType: # EEBus_SPINE_TS_UseCaseInformation.xsd: C
             return cls()
 
 
-class UseCaseInformationDataElementsType: # EEBus_SPINE_TS_UseCaseInformation.xsd: ComplexType
+class UseCaseInformationDataElementsType: # EEBus_SPINE_TS_UseCaseInformation.xsd:ns_p:UseCaseInformationDataElementsType -> ComplexType
     def __init__(
             self,
             address: FeatureAddressElementsType = None,
@@ -422,7 +422,7 @@ class UseCaseInformationDataElementsType: # EEBus_SPINE_TS_UseCaseInformation.xs
             return cls()
 
 
-class UseCaseInformationListDataSelectorsType: # EEBus_SPINE_TS_UseCaseInformation.xsd: ComplexType
+class UseCaseInformationListDataSelectorsType: # EEBus_SPINE_TS_UseCaseInformation.xsd:ns_p:UseCaseInformationListDataSelectorsType -> ComplexType
     def __init__(
             self,
             address: FeatureAddressType = None,

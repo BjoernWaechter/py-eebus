@@ -6,40 +6,7 @@ from types import NoneType
 from spine import array_2_dict
 
 
-class TimeDistributorEnquiryCallType: # EEBus_SPINE_TS_TimeInformation.xsd: ComplexType
-    def __init__(
-            self,
-    ):
-        super().__init__()
-        
-
-    def get_data(self):
-
-        msg_data = []
-        
-        
-        return msg_data
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class TimePrecisionDataType: # EEBus_SPINE_TS_TimeInformation.xsd: ComplexType
+class TimePrecisionDataType: # EEBus_SPINE_TS_TimeInformation.xsd:ns_p:TimePrecisionDataType -> ComplexType
     def __init__(
             self,
             is_synchronised: bool = None,
@@ -104,61 +71,7 @@ class TimePrecisionDataType: # EEBus_SPINE_TS_TimeInformation.xsd: ComplexType
             return cls()
 
 
-class TimeDistributorDataType: # EEBus_SPINE_TS_TimeInformation.xsd: ComplexType
-    def __init__(
-            self,
-            is_time_distributor: bool = None,
-            distributor_priority: int = None,
-    ):
-        super().__init__()
-        
-        self.is_time_distributor = is_time_distributor
-        self.distributor_priority = distributor_priority
-
-        if not isinstance(self.is_time_distributor, bool | NoneType):
-            raise TypeError("is_time_distributor is not of type bool")
-        
-        if not isinstance(self.distributor_priority, int | NoneType):
-            raise TypeError("distributor_priority is not of type int")
-        
-    def get_data(self):
-
-        msg_data = []
-        
-        if self.is_time_distributor is not None:
-            msg_data.append({"isTimeDistributor": self.is_time_distributor})
-        if self.distributor_priority is not None:
-            msg_data.append({"distributorPriority": self.distributor_priority})
-        
-        return msg_data
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        if self.is_time_distributor is not None:
-            result_str += f"{sep}isTimeDistributor: {self.is_time_distributor}"
-            sep = ", "
-        if self.distributor_priority is not None:
-            result_str += f"{sep}distributorPriority: {self.distributor_priority}"
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
-                is_time_distributor=data_dict.get('isTimeDistributor'),
-                distributor_priority=data_dict.get('distributorPriority'),
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class TimeInformationDataType: # EEBus_SPINE_TS_TimeInformation.xsd: ComplexType
+class TimeInformationDataType: # EEBus_SPINE_TS_TimeInformation.xsd:ns_p:TimeInformationDataType -> ComplexType
     def __init__(
             self,
             utc: str = None,
@@ -234,7 +147,94 @@ class TimeInformationDataType: # EEBus_SPINE_TS_TimeInformation.xsd: ComplexType
             return cls()
 
 
-class TimePrecisionDataElementsType: # EEBus_SPINE_TS_TimeInformation.xsd: ComplexType
+class TimeDistributorEnquiryCallType: # EEBus_SPINE_TS_TimeInformation.xsd:ns_p:TimeDistributorEnquiryCallType -> ComplexType
+    def __init__(
+            self,
+    ):
+        super().__init__()
+        
+
+    def get_data(self):
+
+        msg_data = []
+        
+        
+        return msg_data
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class TimeDistributorDataType: # EEBus_SPINE_TS_TimeInformation.xsd:ns_p:TimeDistributorDataType -> ComplexType
+    def __init__(
+            self,
+            is_time_distributor: bool = None,
+            distributor_priority: int = None,
+    ):
+        super().__init__()
+        
+        self.is_time_distributor = is_time_distributor
+        self.distributor_priority = distributor_priority
+
+        if not isinstance(self.is_time_distributor, bool | NoneType):
+            raise TypeError("is_time_distributor is not of type bool")
+        
+        if not isinstance(self.distributor_priority, int | NoneType):
+            raise TypeError("distributor_priority is not of type int")
+        
+    def get_data(self):
+
+        msg_data = []
+        
+        if self.is_time_distributor is not None:
+            msg_data.append({"isTimeDistributor": self.is_time_distributor})
+        if self.distributor_priority is not None:
+            msg_data.append({"distributorPriority": self.distributor_priority})
+        
+        return msg_data
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        if self.is_time_distributor is not None:
+            result_str += f"{sep}isTimeDistributor: {self.is_time_distributor}"
+            sep = ", "
+        if self.distributor_priority is not None:
+            result_str += f"{sep}distributorPriority: {self.distributor_priority}"
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+                is_time_distributor=data_dict.get('isTimeDistributor'),
+                distributor_priority=data_dict.get('distributorPriority'),
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class TimePrecisionDataElementsType: # EEBus_SPINE_TS_TimeInformation.xsd:ns_p:TimePrecisionDataElementsType -> ComplexType
     def __init__(
             self,
             is_synchronised: ElementTagType = None,
@@ -299,7 +299,7 @@ class TimePrecisionDataElementsType: # EEBus_SPINE_TS_TimeInformation.xsd: Compl
             return cls()
 
 
-class TimeInformationDataElementsType: # EEBus_SPINE_TS_TimeInformation.xsd: ComplexType
+class TimeInformationDataElementsType: # EEBus_SPINE_TS_TimeInformation.xsd:ns_p:TimeInformationDataElementsType -> ComplexType
     def __init__(
             self,
             utc: ElementTagType = None,
@@ -375,7 +375,7 @@ class TimeInformationDataElementsType: # EEBus_SPINE_TS_TimeInformation.xsd: Com
             return cls()
 
 
-class TimeDistributorEnquiryCallElementsType: # EEBus_SPINE_TS_TimeInformation.xsd: ComplexType
+class TimeDistributorEnquiryCallElementsType: # EEBus_SPINE_TS_TimeInformation.xsd:ns_p:TimeDistributorEnquiryCallElementsType -> ComplexType
     def __init__(
             self,
     ):
@@ -408,7 +408,7 @@ class TimeDistributorEnquiryCallElementsType: # EEBus_SPINE_TS_TimeInformation.x
             return cls()
 
 
-class TimeDistributorDataElementsType: # EEBus_SPINE_TS_TimeInformation.xsd: ComplexType
+class TimeDistributorDataElementsType: # EEBus_SPINE_TS_TimeInformation.xsd:ns_p:TimeDistributorDataElementsType -> ComplexType
     def __init__(
             self,
             is_time_distributor: ElementTagType = None,

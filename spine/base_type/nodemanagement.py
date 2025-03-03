@@ -4,7 +4,7 @@ from types import NoneType
 from spine import array_2_dict
 
 
-class NodeManagementDestinationDataType: # EEBus_SPINE_TS_NodeManagement.xsd: ComplexType
+class NodeManagementDetailedDiscoveryFeatureInformationType: # EEBus_SPINE_TS_NodeManagement.xsd:ns_p:NodeManagementDetailedDiscoveryFeatureInformationType -> ComplexType
     def __init__(
             self,
     ):
@@ -37,7 +37,7 @@ class NodeManagementDestinationDataType: # EEBus_SPINE_TS_NodeManagement.xsd: Co
             return cls()
 
 
-class NodeManagementDetailedDiscoveryFeatureInformationType: # EEBus_SPINE_TS_NodeManagement.xsd: ComplexType
+class NodeManagementDetailedDiscoveryEntityInformationType: # EEBus_SPINE_TS_NodeManagement.xsd:ns_p:NodeManagementDetailedDiscoveryEntityInformationType -> ComplexType
     def __init__(
             self,
     ):
@@ -70,7 +70,7 @@ class NodeManagementDetailedDiscoveryFeatureInformationType: # EEBus_SPINE_TS_No
             return cls()
 
 
-class NodeManagementDetailedDiscoveryEntityInformationType: # EEBus_SPINE_TS_NodeManagement.xsd: ComplexType
+class NodeManagementDetailedDiscoveryDeviceInformationType: # EEBus_SPINE_TS_NodeManagement.xsd:ns_p:NodeManagementDetailedDiscoveryDeviceInformationType -> ComplexType
     def __init__(
             self,
     ):
@@ -103,40 +103,7 @@ class NodeManagementDetailedDiscoveryEntityInformationType: # EEBus_SPINE_TS_Nod
             return cls()
 
 
-class NodeManagementDetailedDiscoveryDeviceInformationType: # EEBus_SPINE_TS_NodeManagement.xsd: ComplexType
-    def __init__(
-            self,
-    ):
-        super().__init__()
-        
-
-    def get_data(self):
-
-        msg_data = []
-        
-        
-        return msg_data
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class NodeManagementSpecificationVersionListType: # EEBus_SPINE_TS_NodeManagement.xsd: ComplexType
+class NodeManagementSpecificationVersionListType: # EEBus_SPINE_TS_NodeManagement.xsd:ns_p:NodeManagementSpecificationVersionListType -> ComplexType
     def __init__(
             self,
             specification_version: list[SpecificationVersionDataType] = None,
@@ -179,7 +146,7 @@ class NodeManagementSpecificationVersionListType: # EEBus_SPINE_TS_NodeManagemen
             return cls()
 
 
-class NodeManagementDetailedDiscoveryFeatureInformationElementsType: # EEBus_SPINE_TS_NodeManagement.xsd: ComplexType
+class NodeManagementDestinationDataType: # EEBus_SPINE_TS_NodeManagement.xsd:ns_p:NodeManagementDestinationDataType -> ComplexType
     def __init__(
             self,
     ):
@@ -212,7 +179,7 @@ class NodeManagementDetailedDiscoveryFeatureInformationElementsType: # EEBus_SPI
             return cls()
 
 
-class NodeManagementDetailedDiscoveryEntityInformationElementsType: # EEBus_SPINE_TS_NodeManagement.xsd: ComplexType
+class NodeManagementDetailedDiscoveryFeatureInformationElementsType: # EEBus_SPINE_TS_NodeManagement.xsd:ns_p:NodeManagementDetailedDiscoveryFeatureInformationElementsType -> ComplexType
     def __init__(
             self,
     ):
@@ -245,7 +212,7 @@ class NodeManagementDetailedDiscoveryEntityInformationElementsType: # EEBus_SPIN
             return cls()
 
 
-class NodeManagementDetailedDiscoveryDeviceInformationElementsType: # EEBus_SPINE_TS_NodeManagement.xsd: ComplexType
+class NodeManagementDetailedDiscoveryEntityInformationElementsType: # EEBus_SPINE_TS_NodeManagement.xsd:ns_p:NodeManagementDetailedDiscoveryEntityInformationElementsType -> ComplexType
     def __init__(
             self,
     ):
@@ -278,7 +245,7 @@ class NodeManagementDetailedDiscoveryDeviceInformationElementsType: # EEBus_SPIN
             return cls()
 
 
-class NodeManagementSpecificationVersionListElementsType: # EEBus_SPINE_TS_NodeManagement.xsd: ComplexType
+class NodeManagementDetailedDiscoveryDeviceInformationElementsType: # EEBus_SPINE_TS_NodeManagement.xsd:ns_p:NodeManagementDetailedDiscoveryDeviceInformationElementsType -> ComplexType
     def __init__(
             self,
     ):
@@ -311,7 +278,7 @@ class NodeManagementSpecificationVersionListElementsType: # EEBus_SPINE_TS_NodeM
             return cls()
 
 
-class NodeManagementUseCaseDataType: # EEBus_SPINE_TS_NodeManagement.xsd: ComplexType
+class NodeManagementSpecificationVersionListElementsType: # EEBus_SPINE_TS_NodeManagement.xsd:ns_p:NodeManagementSpecificationVersionListElementsType -> ComplexType
     def __init__(
             self,
     ):
@@ -344,50 +311,7 @@ class NodeManagementUseCaseDataType: # EEBus_SPINE_TS_NodeManagement.xsd: Comple
             return cls()
 
 
-class NodeManagementDestinationListDataType: # EEBus_SPINE_TS_NodeManagement.xsd: ComplexType
-    def __init__(
-            self,
-            node_management_destination_data: list[NodeManagementDestinationDataType] = None,
-    ):
-        super().__init__()
-        
-        self.node_management_destination_data = node_management_destination_data
-
-        if not isinstance(self.node_management_destination_data, list | NoneType):
-            raise TypeError("node_management_destination_data is not of type list[NodeManagementDestinationDataType]")
-        
-    def get_data(self):
-
-        msg_data = []
-        
-        if self.node_management_destination_data is not None:
-            msg_data.append({"nodeManagementDestinationData": [d.get_data() for d in self.node_management_destination_data]})
-        
-        return msg_data
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        if self.node_management_destination_data is not None:
-            result_str += f"{sep}nodeManagementDestinationData: {self.node_management_destination_data}"
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
-                node_management_destination_data=data_dict.get('nodeManagementDestinationData'),
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class NodeManagementSubscriptionDeleteCallType: # EEBus_SPINE_TS_NodeManagement.xsd: ComplexType
+class NodeManagementUseCaseDataType: # EEBus_SPINE_TS_NodeManagement.xsd:ns_p:NodeManagementUseCaseDataType -> ComplexType
     def __init__(
             self,
     ):
@@ -420,7 +344,7 @@ class NodeManagementSubscriptionDeleteCallType: # EEBus_SPINE_TS_NodeManagement.
             return cls()
 
 
-class NodeManagementSubscriptionRequestCallType: # EEBus_SPINE_TS_NodeManagement.xsd: ComplexType
+class NodeManagementSubscriptionRequestCallType: # EEBus_SPINE_TS_NodeManagement.xsd:ns_p:NodeManagementSubscriptionRequestCallType -> ComplexType
     def __init__(
             self,
     ):
@@ -453,7 +377,7 @@ class NodeManagementSubscriptionRequestCallType: # EEBus_SPINE_TS_NodeManagement
             return cls()
 
 
-class NodeManagementSubscriptionDataType: # EEBus_SPINE_TS_NodeManagement.xsd: ComplexType
+class NodeManagementSubscriptionDeleteCallType: # EEBus_SPINE_TS_NodeManagement.xsd:ns_p:NodeManagementSubscriptionDeleteCallType -> ComplexType
     def __init__(
             self,
     ):
@@ -486,7 +410,7 @@ class NodeManagementSubscriptionDataType: # EEBus_SPINE_TS_NodeManagement.xsd: C
             return cls()
 
 
-class NodeManagementBindingDeleteCallType: # EEBus_SPINE_TS_NodeManagement.xsd: ComplexType
+class NodeManagementSubscriptionDataType: # EEBus_SPINE_TS_NodeManagement.xsd:ns_p:NodeManagementSubscriptionDataType -> ComplexType
     def __init__(
             self,
     ):
@@ -519,73 +443,7 @@ class NodeManagementBindingDeleteCallType: # EEBus_SPINE_TS_NodeManagement.xsd: 
             return cls()
 
 
-class NodeManagementBindingRequestCallType: # EEBus_SPINE_TS_NodeManagement.xsd: ComplexType
-    def __init__(
-            self,
-    ):
-        super().__init__()
-        
-
-    def get_data(self):
-
-        msg_data = []
-        
-        
-        return msg_data
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class NodeManagementBindingDataType: # EEBus_SPINE_TS_NodeManagement.xsd: ComplexType
-    def __init__(
-            self,
-    ):
-        super().__init__()
-        
-
-    def get_data(self):
-
-        msg_data = []
-        
-        
-        return msg_data
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class NodeManagementDetailedDiscoveryDataType: # EEBus_SPINE_TS_NodeManagement.xsd: ComplexType
+class NodeManagementDetailedDiscoveryDataType: # EEBus_SPINE_TS_NodeManagement.xsd:ns_p:NodeManagementDetailedDiscoveryDataType -> ComplexType
     def __init__(
             self,
             specification_version_list: NodeManagementSpecificationVersionListType = None,
@@ -661,7 +519,50 @@ class NodeManagementDetailedDiscoveryDataType: # EEBus_SPINE_TS_NodeManagement.x
             return cls()
 
 
-class NodeManagementUseCaseDataElementsType: # EEBus_SPINE_TS_NodeManagement.xsd: ComplexType
+class NodeManagementDestinationListDataType: # EEBus_SPINE_TS_NodeManagement.xsd:ns_p:NodeManagementDestinationListDataType -> ComplexType
+    def __init__(
+            self,
+            node_management_destination_data: list[NodeManagementDestinationDataType] = None,
+    ):
+        super().__init__()
+        
+        self.node_management_destination_data = node_management_destination_data
+
+        if not isinstance(self.node_management_destination_data, list | NoneType):
+            raise TypeError("node_management_destination_data is not of type list[NodeManagementDestinationDataType]")
+        
+    def get_data(self):
+
+        msg_data = []
+        
+        if self.node_management_destination_data is not None:
+            msg_data.append({"nodeManagementDestinationData": [d.get_data() for d in self.node_management_destination_data]})
+        
+        return msg_data
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        if self.node_management_destination_data is not None:
+            result_str += f"{sep}nodeManagementDestinationData: {self.node_management_destination_data}"
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+                node_management_destination_data=data_dict.get('nodeManagementDestinationData'),
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class NodeManagementBindingRequestCallType: # EEBus_SPINE_TS_NodeManagement.xsd:ns_p:NodeManagementBindingRequestCallType -> ComplexType
     def __init__(
             self,
     ):
@@ -694,7 +595,7 @@ class NodeManagementUseCaseDataElementsType: # EEBus_SPINE_TS_NodeManagement.xsd
             return cls()
 
 
-class NodeManagementSubscriptionRequestCallElementsType: # EEBus_SPINE_TS_NodeManagement.xsd: ComplexType
+class NodeManagementBindingDeleteCallType: # EEBus_SPINE_TS_NodeManagement.xsd:ns_p:NodeManagementBindingDeleteCallType -> ComplexType
     def __init__(
             self,
     ):
@@ -727,7 +628,7 @@ class NodeManagementSubscriptionRequestCallElementsType: # EEBus_SPINE_TS_NodeMa
             return cls()
 
 
-class NodeManagementSubscriptionDeleteCallElementsType: # EEBus_SPINE_TS_NodeManagement.xsd: ComplexType
+class NodeManagementBindingDataType: # EEBus_SPINE_TS_NodeManagement.xsd:ns_p:NodeManagementBindingDataType -> ComplexType
     def __init__(
             self,
     ):
@@ -760,7 +661,7 @@ class NodeManagementSubscriptionDeleteCallElementsType: # EEBus_SPINE_TS_NodeMan
             return cls()
 
 
-class NodeManagementSubscriptionDataElementsType: # EEBus_SPINE_TS_NodeManagement.xsd: ComplexType
+class NodeManagementUseCaseDataElementsType: # EEBus_SPINE_TS_NodeManagement.xsd:ns_p:NodeManagementUseCaseDataElementsType -> ComplexType
     def __init__(
             self,
     ):
@@ -793,7 +694,106 @@ class NodeManagementSubscriptionDataElementsType: # EEBus_SPINE_TS_NodeManagemen
             return cls()
 
 
-class NodeManagementDetailedDiscoveryDataElementsType: # EEBus_SPINE_TS_NodeManagement.xsd: ComplexType
+class NodeManagementSubscriptionRequestCallElementsType: # EEBus_SPINE_TS_NodeManagement.xsd:ns_p:NodeManagementSubscriptionRequestCallElementsType -> ComplexType
+    def __init__(
+            self,
+    ):
+        super().__init__()
+        
+
+    def get_data(self):
+
+        msg_data = []
+        
+        
+        return msg_data
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class NodeManagementSubscriptionDeleteCallElementsType: # EEBus_SPINE_TS_NodeManagement.xsd:ns_p:NodeManagementSubscriptionDeleteCallElementsType -> ComplexType
+    def __init__(
+            self,
+    ):
+        super().__init__()
+        
+
+    def get_data(self):
+
+        msg_data = []
+        
+        
+        return msg_data
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class NodeManagementSubscriptionDataElementsType: # EEBus_SPINE_TS_NodeManagement.xsd:ns_p:NodeManagementSubscriptionDataElementsType -> ComplexType
+    def __init__(
+            self,
+    ):
+        super().__init__()
+        
+
+    def get_data(self):
+
+        msg_data = []
+        
+        
+        return msg_data
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class NodeManagementDetailedDiscoveryDataElementsType: # EEBus_SPINE_TS_NodeManagement.xsd:ns_p:NodeManagementDetailedDiscoveryDataElementsType -> ComplexType
     def __init__(
             self,
             specification_version_list: NodeManagementSpecificationVersionListElementsType = None,
@@ -869,7 +869,7 @@ class NodeManagementDetailedDiscoveryDataElementsType: # EEBus_SPINE_TS_NodeMana
             return cls()
 
 
-class NodeManagementDestinationDataElementsType: # EEBus_SPINE_TS_NodeManagement.xsd: ComplexType
+class NodeManagementDestinationDataElementsType: # EEBus_SPINE_TS_NodeManagement.xsd:ns_p:NodeManagementDestinationDataElementsType -> ComplexType
     def __init__(
             self,
     ):
@@ -902,7 +902,7 @@ class NodeManagementDestinationDataElementsType: # EEBus_SPINE_TS_NodeManagement
             return cls()
 
 
-class NodeManagementBindingRequestCallElementsType: # EEBus_SPINE_TS_NodeManagement.xsd: ComplexType
+class NodeManagementBindingRequestCallElementsType: # EEBus_SPINE_TS_NodeManagement.xsd:ns_p:NodeManagementBindingRequestCallElementsType -> ComplexType
     def __init__(
             self,
     ):
@@ -935,7 +935,7 @@ class NodeManagementBindingRequestCallElementsType: # EEBus_SPINE_TS_NodeManagem
             return cls()
 
 
-class NodeManagementBindingDeleteCallElementsType: # EEBus_SPINE_TS_NodeManagement.xsd: ComplexType
+class NodeManagementBindingDeleteCallElementsType: # EEBus_SPINE_TS_NodeManagement.xsd:ns_p:NodeManagementBindingDeleteCallElementsType -> ComplexType
     def __init__(
             self,
     ):
@@ -968,7 +968,7 @@ class NodeManagementBindingDeleteCallElementsType: # EEBus_SPINE_TS_NodeManageme
             return cls()
 
 
-class NodeManagementBindingDataElementsType: # EEBus_SPINE_TS_NodeManagement.xsd: ComplexType
+class NodeManagementBindingDataElementsType: # EEBus_SPINE_TS_NodeManagement.xsd:ns_p:NodeManagementBindingDataElementsType -> ComplexType
     def __init__(
             self,
     ):
@@ -1001,7 +1001,7 @@ class NodeManagementBindingDataElementsType: # EEBus_SPINE_TS_NodeManagement.xsd
             return cls()
 
 
-class NodeManagementUseCaseDataSelectorsType: # EEBus_SPINE_TS_NodeManagement.xsd: ComplexType
+class NodeManagementUseCaseDataSelectorsType: # EEBus_SPINE_TS_NodeManagement.xsd:ns_p:NodeManagementUseCaseDataSelectorsType -> ComplexType
     def __init__(
             self,
     ):
@@ -1034,7 +1034,7 @@ class NodeManagementUseCaseDataSelectorsType: # EEBus_SPINE_TS_NodeManagement.xs
             return cls()
 
 
-class NodeManagementSubscriptionDataSelectorsType: # EEBus_SPINE_TS_NodeManagement.xsd: ComplexType
+class NodeManagementSubscriptionDataSelectorsType: # EEBus_SPINE_TS_NodeManagement.xsd:ns_p:NodeManagementSubscriptionDataSelectorsType -> ComplexType
     def __init__(
             self,
     ):
@@ -1067,7 +1067,7 @@ class NodeManagementSubscriptionDataSelectorsType: # EEBus_SPINE_TS_NodeManageme
             return cls()
 
 
-class NodeManagementDetailedDiscoveryDataSelectorsType: # EEBus_SPINE_TS_NodeManagement.xsd: ComplexType
+class NodeManagementDetailedDiscoveryDataSelectorsType: # EEBus_SPINE_TS_NodeManagement.xsd:ns_p:NodeManagementDetailedDiscoveryDataSelectorsType -> ComplexType
     def __init__(
             self,
     ):
@@ -1100,7 +1100,7 @@ class NodeManagementDetailedDiscoveryDataSelectorsType: # EEBus_SPINE_TS_NodeMan
             return cls()
 
 
-class NodeManagementDestinationListDataSelectorsType: # EEBus_SPINE_TS_NodeManagement.xsd: ComplexType
+class NodeManagementDestinationListDataSelectorsType: # EEBus_SPINE_TS_NodeManagement.xsd:ns_p:NodeManagementDestinationListDataSelectorsType -> ComplexType
     def __init__(
             self,
     ):
@@ -1133,7 +1133,7 @@ class NodeManagementDestinationListDataSelectorsType: # EEBus_SPINE_TS_NodeManag
             return cls()
 
 
-class NodeManagementBindingDataSelectorsType: # EEBus_SPINE_TS_NodeManagement.xsd: ComplexType
+class NodeManagementBindingDataSelectorsType: # EEBus_SPINE_TS_NodeManagement.xsd:ns_p:NodeManagementBindingDataSelectorsType -> ComplexType
     def __init__(
             self,
     ):

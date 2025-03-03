@@ -32,7 +32,7 @@ from types import NoneType
 from spine import array_2_dict
 
 
-class NetworkManagementFeatureDescriptionDataType: # EEBus_SPINE_TS_NetworkManagement.xsd: ComplexType
+class NetworkManagementFeatureDescriptionDataType: # EEBus_SPINE_TS_NetworkManagement.xsd:ns_p:NetworkManagementFeatureDescriptionDataType -> ComplexType
     def __init__(
             self,
             feature_address: FeatureAddressType = None,
@@ -185,7 +185,7 @@ class NetworkManagementFeatureDescriptionDataType: # EEBus_SPINE_TS_NetworkManag
             return cls()
 
 
-class NetworkManagementEntityDescriptionDataType: # EEBus_SPINE_TS_NetworkManagement.xsd: ComplexType
+class NetworkManagementEntityDescriptionDataType: # EEBus_SPINE_TS_NetworkManagement.xsd:ns_p:NetworkManagementEntityDescriptionDataType -> ComplexType
     def __init__(
             self,
             entity_address: EntityAddressType = None,
@@ -283,7 +283,7 @@ class NetworkManagementEntityDescriptionDataType: # EEBus_SPINE_TS_NetworkManage
             return cls()
 
 
-class NetworkManagementDeviceDescriptionDataType: # EEBus_SPINE_TS_NetworkManagement.xsd: ComplexType
+class NetworkManagementDeviceDescriptionDataType: # EEBus_SPINE_TS_NetworkManagement.xsd:ns_p:NetworkManagementDeviceDescriptionDataType -> ComplexType
     def __init__(
             self,
             device_address: DeviceAddressType = None,
@@ -436,24 +436,31 @@ class NetworkManagementDeviceDescriptionDataType: # EEBus_SPINE_TS_NetworkManage
             return cls()
 
 
-class NetworkManagementFeatureDescriptionListDataType: # EEBus_SPINE_TS_NetworkManagement.xsd: ComplexType
+class NetworkManagementScanNetworkCallType: # EEBus_SPINE_TS_NetworkManagement.xsd:ns_p:NetworkManagementScanNetworkCallType -> ComplexType
     def __init__(
             self,
-            network_management_feature_description_data: list[NetworkManagementFeatureDescriptionDataType] = None,
+            scan_setup: NetworkManagementScanSetupType = None,
+            timeout: NetworkManagementProcessTimeoutType = None,
     ):
         super().__init__()
         
-        self.network_management_feature_description_data = network_management_feature_description_data
+        self.scan_setup = scan_setup
+        self.timeout = timeout
 
-        if not isinstance(self.network_management_feature_description_data, list | NoneType):
-            raise TypeError("network_management_feature_description_data is not of type list[NetworkManagementFeatureDescriptionDataType]")
+        if not isinstance(self.scan_setup, NetworkManagementScanSetupType | NoneType):
+            raise TypeError("scan_setup is not of type NetworkManagementScanSetupType")
+        
+        if not isinstance(self.timeout, NetworkManagementProcessTimeoutType | NoneType):
+            raise TypeError("timeout is not of type NetworkManagementProcessTimeoutType")
         
     def get_data(self):
 
         msg_data = []
         
-        if self.network_management_feature_description_data is not None:
-            msg_data.append({"networkManagementFeatureDescriptionData": [d.get_data() for d in self.network_management_feature_description_data]})
+        if self.scan_setup is not None:
+            msg_data.append({"scanSetup": self.scan_setup.get_data()})
+        if self.timeout is not None:
+            msg_data.append({"timeout": self.timeout.get_data()})
         
         return msg_data
 
@@ -461,8 +468,11 @@ class NetworkManagementFeatureDescriptionListDataType: # EEBus_SPINE_TS_NetworkM
     def __str__(self):
         result_str = ""
         sep = ""
-        if self.network_management_feature_description_data is not None:
-            result_str += f"{sep}networkManagementFeatureDescriptionData: {self.network_management_feature_description_data}"
+        if self.scan_setup is not None:
+            result_str += f"{sep}scanSetup: {self.scan_setup}"
+            sep = ", "
+        if self.timeout is not None:
+            result_str += f"{sep}timeout: {self.timeout}"
         
         return result_str
 
@@ -471,7 +481,8 @@ class NetworkManagementFeatureDescriptionListDataType: # EEBus_SPINE_TS_NetworkM
         if type(data) == list:
             data_dict = array_2_dict(data)
             return cls(
-                network_management_feature_description_data=data_dict.get('networkManagementFeatureDescriptionData'),
+                scan_setup=data_dict.get('scanSetup'),
+                timeout=data_dict.get('timeout'),
             )
         elif data:
             return cls(data)
@@ -479,93 +490,7 @@ class NetworkManagementFeatureDescriptionListDataType: # EEBus_SPINE_TS_NetworkM
             return cls()
 
 
-class NetworkManagementEntityDescriptionListDataType: # EEBus_SPINE_TS_NetworkManagement.xsd: ComplexType
-    def __init__(
-            self,
-            network_management_entity_description_data: list[NetworkManagementEntityDescriptionDataType] = None,
-    ):
-        super().__init__()
-        
-        self.network_management_entity_description_data = network_management_entity_description_data
-
-        if not isinstance(self.network_management_entity_description_data, list | NoneType):
-            raise TypeError("network_management_entity_description_data is not of type list[NetworkManagementEntityDescriptionDataType]")
-        
-    def get_data(self):
-
-        msg_data = []
-        
-        if self.network_management_entity_description_data is not None:
-            msg_data.append({"networkManagementEntityDescriptionData": [d.get_data() for d in self.network_management_entity_description_data]})
-        
-        return msg_data
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        if self.network_management_entity_description_data is not None:
-            result_str += f"{sep}networkManagementEntityDescriptionData: {self.network_management_entity_description_data}"
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
-                network_management_entity_description_data=data_dict.get('networkManagementEntityDescriptionData'),
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class NetworkManagementDeviceDescriptionListDataType: # EEBus_SPINE_TS_NetworkManagement.xsd: ComplexType
-    def __init__(
-            self,
-            network_management_device_description_data: list[NetworkManagementDeviceDescriptionDataType] = None,
-    ):
-        super().__init__()
-        
-        self.network_management_device_description_data = network_management_device_description_data
-
-        if not isinstance(self.network_management_device_description_data, list | NoneType):
-            raise TypeError("network_management_device_description_data is not of type list[NetworkManagementDeviceDescriptionDataType]")
-        
-    def get_data(self):
-
-        msg_data = []
-        
-        if self.network_management_device_description_data is not None:
-            msg_data.append({"networkManagementDeviceDescriptionData": [d.get_data() for d in self.network_management_device_description_data]})
-        
-        return msg_data
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        if self.network_management_device_description_data is not None:
-            result_str += f"{sep}networkManagementDeviceDescriptionData: {self.network_management_device_description_data}"
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
-                network_management_device_description_data=data_dict.get('networkManagementDeviceDescriptionData'),
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class NetworkManagementReportCandidateDataType: # EEBus_SPINE_TS_NetworkManagement.xsd: ComplexType
+class NetworkManagementReportCandidateDataType: # EEBus_SPINE_TS_NetworkManagement.xsd:ns_p:NetworkManagementReportCandidateDataType -> ComplexType
     def __init__(
             self,
             candidate_setup: NetworkManagementCandidateSetupType = None,
@@ -641,24 +566,31 @@ class NetworkManagementReportCandidateDataType: # EEBus_SPINE_TS_NetworkManageme
             return cls()
 
 
-class NetworkManagementJoiningModeDataType: # EEBus_SPINE_TS_NetworkManagement.xsd: ComplexType
+class NetworkManagementRemoveNodeCallType: # EEBus_SPINE_TS_NetworkManagement.xsd:ns_p:NetworkManagementRemoveNodeCallType -> ComplexType
     def __init__(
             self,
-            setup: NetworkManagementSetupType = None,
+            node_address: FeatureAddressType = None,
+            timeout: NetworkManagementProcessTimeoutType = None,
     ):
         super().__init__()
         
-        self.setup = setup
+        self.node_address = node_address
+        self.timeout = timeout
 
-        if not isinstance(self.setup, NetworkManagementSetupType | NoneType):
-            raise TypeError("setup is not of type NetworkManagementSetupType")
+        if not isinstance(self.node_address, FeatureAddressType | NoneType):
+            raise TypeError("node_address is not of type FeatureAddressType")
+        
+        if not isinstance(self.timeout, NetworkManagementProcessTimeoutType | NoneType):
+            raise TypeError("timeout is not of type NetworkManagementProcessTimeoutType")
         
     def get_data(self):
 
         msg_data = []
         
-        if self.setup is not None:
-            msg_data.append({"setup": self.setup.get_data()})
+        if self.node_address is not None:
+            msg_data.append({"nodeAddress": self.node_address.get_data()})
+        if self.timeout is not None:
+            msg_data.append({"timeout": self.timeout.get_data()})
         
         return msg_data
 
@@ -666,8 +598,11 @@ class NetworkManagementJoiningModeDataType: # EEBus_SPINE_TS_NetworkManagement.x
     def __str__(self):
         result_str = ""
         sep = ""
-        if self.setup is not None:
-            result_str += f"{sep}setup: {self.setup}"
+        if self.node_address is not None:
+            result_str += f"{sep}nodeAddress: {self.node_address}"
+            sep = ", "
+        if self.timeout is not None:
+            result_str += f"{sep}timeout: {self.timeout}"
         
         return result_str
 
@@ -676,7 +611,8 @@ class NetworkManagementJoiningModeDataType: # EEBus_SPINE_TS_NetworkManagement.x
         if type(data) == list:
             data_dict = array_2_dict(data)
             return cls(
-                setup=data_dict.get('setup'),
+                node_address=data_dict.get('nodeAddress'),
+                timeout=data_dict.get('timeout'),
             )
         elif data:
             return cls(data)
@@ -684,7 +620,7 @@ class NetworkManagementJoiningModeDataType: # EEBus_SPINE_TS_NetworkManagement.x
             return cls()
 
 
-class NetworkManagementProcessStateDataType: # EEBus_SPINE_TS_NetworkManagement.xsd: ComplexType
+class NetworkManagementProcessStateDataType: # EEBus_SPINE_TS_NetworkManagement.xsd:ns_p:NetworkManagementProcessStateDataType -> ComplexType
     def __init__(
             self,
             state: NetworkManagementProcessStateStateType = None,
@@ -738,17 +674,52 @@ class NetworkManagementProcessStateDataType: # EEBus_SPINE_TS_NetworkManagement.
             return cls()
 
 
-class NetworkManagementAbortCallType: # EEBus_SPINE_TS_NetworkManagement.xsd: ComplexType
+class NetworkManagementModifyNodeCallType: # EEBus_SPINE_TS_NetworkManagement.xsd:ns_p:NetworkManagementModifyNodeCallType -> ComplexType
     def __init__(
             self,
+            node_address: FeatureAddressType = None,
+            native_setup: NetworkManagementNativeSetupType = None,
+            timeout: NetworkManagementProcessTimeoutType = None,
+            label: LabelType = None,
+            description: DescriptionType = None,
     ):
         super().__init__()
         
+        self.node_address = node_address
+        self.native_setup = native_setup
+        self.timeout = timeout
+        self.label = label
+        self.description = description
 
+        if not isinstance(self.node_address, FeatureAddressType | NoneType):
+            raise TypeError("node_address is not of type FeatureAddressType")
+        
+        if not isinstance(self.native_setup, NetworkManagementNativeSetupType | NoneType):
+            raise TypeError("native_setup is not of type NetworkManagementNativeSetupType")
+        
+        if not isinstance(self.timeout, NetworkManagementProcessTimeoutType | NoneType):
+            raise TypeError("timeout is not of type NetworkManagementProcessTimeoutType")
+        
+        if not isinstance(self.label, LabelType | NoneType):
+            raise TypeError("label is not of type LabelType")
+        
+        if not isinstance(self.description, DescriptionType | NoneType):
+            raise TypeError("description is not of type DescriptionType")
+        
     def get_data(self):
 
         msg_data = []
         
+        if self.node_address is not None:
+            msg_data.append({"nodeAddress": self.node_address.get_data()})
+        if self.native_setup is not None:
+            msg_data.append({"nativeSetup": self.native_setup.get_data()})
+        if self.timeout is not None:
+            msg_data.append({"timeout": self.timeout.get_data()})
+        if self.label is not None:
+            msg_data.append({"label": self.label.get_data()})
+        if self.description is not None:
+            msg_data.append({"description": self.description.get_data()})
         
         return msg_data
 
@@ -756,6 +727,20 @@ class NetworkManagementAbortCallType: # EEBus_SPINE_TS_NetworkManagement.xsd: Co
     def __str__(self):
         result_str = ""
         sep = ""
+        if self.node_address is not None:
+            result_str += f"{sep}nodeAddress: {self.node_address}"
+            sep = ", "
+        if self.native_setup is not None:
+            result_str += f"{sep}nativeSetup: {self.native_setup}"
+            sep = ", "
+        if self.timeout is not None:
+            result_str += f"{sep}timeout: {self.timeout}"
+            sep = ", "
+        if self.label is not None:
+            result_str += f"{sep}label: {self.label}"
+            sep = ", "
+        if self.description is not None:
+            result_str += f"{sep}description: {self.description}"
         
         return result_str
 
@@ -764,6 +749,11 @@ class NetworkManagementAbortCallType: # EEBus_SPINE_TS_NetworkManagement.xsd: Co
         if type(data) == list:
             data_dict = array_2_dict(data)
             return cls(
+                node_address=data_dict.get('nodeAddress'),
+                native_setup=data_dict.get('nativeSetup'),
+                timeout=data_dict.get('timeout'),
+                label=data_dict.get('label'),
+                description=data_dict.get('description'),
             )
         elif data:
             return cls(data)
@@ -771,7 +761,136 @@ class NetworkManagementAbortCallType: # EEBus_SPINE_TS_NetworkManagement.xsd: Co
             return cls()
 
 
-class NetworkManagementDiscoverCallType: # EEBus_SPINE_TS_NetworkManagement.xsd: ComplexType
+class NetworkManagementJoiningModeDataType: # EEBus_SPINE_TS_NetworkManagement.xsd:ns_p:NetworkManagementJoiningModeDataType -> ComplexType
+    def __init__(
+            self,
+            setup: NetworkManagementSetupType = None,
+    ):
+        super().__init__()
+        
+        self.setup = setup
+
+        if not isinstance(self.setup, NetworkManagementSetupType | NoneType):
+            raise TypeError("setup is not of type NetworkManagementSetupType")
+        
+    def get_data(self):
+
+        msg_data = []
+        
+        if self.setup is not None:
+            msg_data.append({"setup": self.setup.get_data()})
+        
+        return msg_data
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        if self.setup is not None:
+            result_str += f"{sep}setup: {self.setup}"
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+                setup=data_dict.get('setup'),
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class NetworkManagementFeatureDescriptionListDataType: # EEBus_SPINE_TS_NetworkManagement.xsd:ns_p:NetworkManagementFeatureDescriptionListDataType -> ComplexType
+    def __init__(
+            self,
+            network_management_feature_description_data: list[NetworkManagementFeatureDescriptionDataType] = None,
+    ):
+        super().__init__()
+        
+        self.network_management_feature_description_data = network_management_feature_description_data
+
+        if not isinstance(self.network_management_feature_description_data, list | NoneType):
+            raise TypeError("network_management_feature_description_data is not of type list[NetworkManagementFeatureDescriptionDataType]")
+        
+    def get_data(self):
+
+        msg_data = []
+        
+        if self.network_management_feature_description_data is not None:
+            msg_data.append({"networkManagementFeatureDescriptionData": [d.get_data() for d in self.network_management_feature_description_data]})
+        
+        return msg_data
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        if self.network_management_feature_description_data is not None:
+            result_str += f"{sep}networkManagementFeatureDescriptionData: {self.network_management_feature_description_data}"
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+                network_management_feature_description_data=data_dict.get('networkManagementFeatureDescriptionData'),
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class NetworkManagementEntityDescriptionListDataType: # EEBus_SPINE_TS_NetworkManagement.xsd:ns_p:NetworkManagementEntityDescriptionListDataType -> ComplexType
+    def __init__(
+            self,
+            network_management_entity_description_data: list[NetworkManagementEntityDescriptionDataType] = None,
+    ):
+        super().__init__()
+        
+        self.network_management_entity_description_data = network_management_entity_description_data
+
+        if not isinstance(self.network_management_entity_description_data, list | NoneType):
+            raise TypeError("network_management_entity_description_data is not of type list[NetworkManagementEntityDescriptionDataType]")
+        
+    def get_data(self):
+
+        msg_data = []
+        
+        if self.network_management_entity_description_data is not None:
+            msg_data.append({"networkManagementEntityDescriptionData": [d.get_data() for d in self.network_management_entity_description_data]})
+        
+        return msg_data
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        if self.network_management_entity_description_data is not None:
+            result_str += f"{sep}networkManagementEntityDescriptionData: {self.network_management_entity_description_data}"
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+                network_management_entity_description_data=data_dict.get('networkManagementEntityDescriptionData'),
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class NetworkManagementDiscoverCallType: # EEBus_SPINE_TS_NetworkManagement.xsd:ns_p:NetworkManagementDiscoverCallType -> ComplexType
     def __init__(
             self,
             discover_address: FeatureAddressType = None,
@@ -814,31 +933,24 @@ class NetworkManagementDiscoverCallType: # EEBus_SPINE_TS_NetworkManagement.xsd:
             return cls()
 
 
-class NetworkManagementScanNetworkCallType: # EEBus_SPINE_TS_NetworkManagement.xsd: ComplexType
+class NetworkManagementDeviceDescriptionListDataType: # EEBus_SPINE_TS_NetworkManagement.xsd:ns_p:NetworkManagementDeviceDescriptionListDataType -> ComplexType
     def __init__(
             self,
-            scan_setup: NetworkManagementScanSetupType = None,
-            timeout: NetworkManagementProcessTimeoutType = None,
+            network_management_device_description_data: list[NetworkManagementDeviceDescriptionDataType] = None,
     ):
         super().__init__()
         
-        self.scan_setup = scan_setup
-        self.timeout = timeout
+        self.network_management_device_description_data = network_management_device_description_data
 
-        if not isinstance(self.scan_setup, NetworkManagementScanSetupType | NoneType):
-            raise TypeError("scan_setup is not of type NetworkManagementScanSetupType")
-        
-        if not isinstance(self.timeout, NetworkManagementProcessTimeoutType | NoneType):
-            raise TypeError("timeout is not of type NetworkManagementProcessTimeoutType")
+        if not isinstance(self.network_management_device_description_data, list | NoneType):
+            raise TypeError("network_management_device_description_data is not of type list[NetworkManagementDeviceDescriptionDataType]")
         
     def get_data(self):
 
         msg_data = []
         
-        if self.scan_setup is not None:
-            msg_data.append({"scanSetup": self.scan_setup.get_data()})
-        if self.timeout is not None:
-            msg_data.append({"timeout": self.timeout.get_data()})
+        if self.network_management_device_description_data is not None:
+            msg_data.append({"networkManagementDeviceDescriptionData": [d.get_data() for d in self.network_management_device_description_data]})
         
         return msg_data
 
@@ -846,11 +958,8 @@ class NetworkManagementScanNetworkCallType: # EEBus_SPINE_TS_NetworkManagement.x
     def __str__(self):
         result_str = ""
         sep = ""
-        if self.scan_setup is not None:
-            result_str += f"{sep}scanSetup: {self.scan_setup}"
-            sep = ", "
-        if self.timeout is not None:
-            result_str += f"{sep}timeout: {self.timeout}"
+        if self.network_management_device_description_data is not None:
+            result_str += f"{sep}networkManagementDeviceDescriptionData: {self.network_management_device_description_data}"
         
         return result_str
 
@@ -859,8 +968,7 @@ class NetworkManagementScanNetworkCallType: # EEBus_SPINE_TS_NetworkManagement.x
         if type(data) == list:
             data_dict = array_2_dict(data)
             return cls(
-                scan_setup=data_dict.get('scanSetup'),
-                timeout=data_dict.get('timeout'),
+                network_management_device_description_data=data_dict.get('networkManagementDeviceDescriptionData'),
             )
         elif data:
             return cls(data)
@@ -868,7 +976,7 @@ class NetworkManagementScanNetworkCallType: # EEBus_SPINE_TS_NetworkManagement.x
             return cls()
 
 
-class NetworkManagementModifyNodeCallType: # EEBus_SPINE_TS_NetworkManagement.xsd: ComplexType
+class NetworkManagementAddNodeCallType: # EEBus_SPINE_TS_NetworkManagement.xsd:ns_p:NetworkManagementAddNodeCallType -> ComplexType
     def __init__(
             self,
             node_address: FeatureAddressType = None,
@@ -955,31 +1063,17 @@ class NetworkManagementModifyNodeCallType: # EEBus_SPINE_TS_NetworkManagement.xs
             return cls()
 
 
-class NetworkManagementRemoveNodeCallType: # EEBus_SPINE_TS_NetworkManagement.xsd: ComplexType
+class NetworkManagementAbortCallType: # EEBus_SPINE_TS_NetworkManagement.xsd:ns_p:NetworkManagementAbortCallType -> ComplexType
     def __init__(
             self,
-            node_address: FeatureAddressType = None,
-            timeout: NetworkManagementProcessTimeoutType = None,
     ):
         super().__init__()
         
-        self.node_address = node_address
-        self.timeout = timeout
 
-        if not isinstance(self.node_address, FeatureAddressType | NoneType):
-            raise TypeError("node_address is not of type FeatureAddressType")
-        
-        if not isinstance(self.timeout, NetworkManagementProcessTimeoutType | NoneType):
-            raise TypeError("timeout is not of type NetworkManagementProcessTimeoutType")
-        
     def get_data(self):
 
         msg_data = []
         
-        if self.node_address is not None:
-            msg_data.append({"nodeAddress": self.node_address.get_data()})
-        if self.timeout is not None:
-            msg_data.append({"timeout": self.timeout.get_data()})
         
         return msg_data
 
@@ -987,11 +1081,6 @@ class NetworkManagementRemoveNodeCallType: # EEBus_SPINE_TS_NetworkManagement.xs
     def __str__(self):
         result_str = ""
         sep = ""
-        if self.node_address is not None:
-            result_str += f"{sep}nodeAddress: {self.node_address}"
-            sep = ", "
-        if self.timeout is not None:
-            result_str += f"{sep}timeout: {self.timeout}"
         
         return result_str
 
@@ -1000,8 +1089,6 @@ class NetworkManagementRemoveNodeCallType: # EEBus_SPINE_TS_NetworkManagement.xs
         if type(data) == list:
             data_dict = array_2_dict(data)
             return cls(
-                node_address=data_dict.get('nodeAddress'),
-                timeout=data_dict.get('timeout'),
             )
         elif data:
             return cls(data)
@@ -1009,94 +1096,7 @@ class NetworkManagementRemoveNodeCallType: # EEBus_SPINE_TS_NetworkManagement.xs
             return cls()
 
 
-class NetworkManagementAddNodeCallType: # EEBus_SPINE_TS_NetworkManagement.xsd: ComplexType
-    def __init__(
-            self,
-            node_address: FeatureAddressType = None,
-            native_setup: NetworkManagementNativeSetupType = None,
-            timeout: NetworkManagementProcessTimeoutType = None,
-            label: LabelType = None,
-            description: DescriptionType = None,
-    ):
-        super().__init__()
-        
-        self.node_address = node_address
-        self.native_setup = native_setup
-        self.timeout = timeout
-        self.label = label
-        self.description = description
-
-        if not isinstance(self.node_address, FeatureAddressType | NoneType):
-            raise TypeError("node_address is not of type FeatureAddressType")
-        
-        if not isinstance(self.native_setup, NetworkManagementNativeSetupType | NoneType):
-            raise TypeError("native_setup is not of type NetworkManagementNativeSetupType")
-        
-        if not isinstance(self.timeout, NetworkManagementProcessTimeoutType | NoneType):
-            raise TypeError("timeout is not of type NetworkManagementProcessTimeoutType")
-        
-        if not isinstance(self.label, LabelType | NoneType):
-            raise TypeError("label is not of type LabelType")
-        
-        if not isinstance(self.description, DescriptionType | NoneType):
-            raise TypeError("description is not of type DescriptionType")
-        
-    def get_data(self):
-
-        msg_data = []
-        
-        if self.node_address is not None:
-            msg_data.append({"nodeAddress": self.node_address.get_data()})
-        if self.native_setup is not None:
-            msg_data.append({"nativeSetup": self.native_setup.get_data()})
-        if self.timeout is not None:
-            msg_data.append({"timeout": self.timeout.get_data()})
-        if self.label is not None:
-            msg_data.append({"label": self.label.get_data()})
-        if self.description is not None:
-            msg_data.append({"description": self.description.get_data()})
-        
-        return msg_data
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        if self.node_address is not None:
-            result_str += f"{sep}nodeAddress: {self.node_address}"
-            sep = ", "
-        if self.native_setup is not None:
-            result_str += f"{sep}nativeSetup: {self.native_setup}"
-            sep = ", "
-        if self.timeout is not None:
-            result_str += f"{sep}timeout: {self.timeout}"
-            sep = ", "
-        if self.label is not None:
-            result_str += f"{sep}label: {self.label}"
-            sep = ", "
-        if self.description is not None:
-            result_str += f"{sep}description: {self.description}"
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
-                node_address=data_dict.get('nodeAddress'),
-                native_setup=data_dict.get('nativeSetup'),
-                timeout=data_dict.get('timeout'),
-                label=data_dict.get('label'),
-                description=data_dict.get('description'),
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class NetworkManagementScanNetworkCallElementsType: # EEBus_SPINE_TS_NetworkManagement.xsd: ComplexType
+class NetworkManagementScanNetworkCallElementsType: # EEBus_SPINE_TS_NetworkManagement.xsd:ns_p:NetworkManagementScanNetworkCallElementsType -> ComplexType
     def __init__(
             self,
             scan_setup: ElementTagType = None,
@@ -1150,7 +1150,7 @@ class NetworkManagementScanNetworkCallElementsType: # EEBus_SPINE_TS_NetworkMana
             return cls()
 
 
-class NetworkManagementReportCandidateDataElementsType: # EEBus_SPINE_TS_NetworkManagement.xsd: ComplexType
+class NetworkManagementReportCandidateDataElementsType: # EEBus_SPINE_TS_NetworkManagement.xsd:ns_p:NetworkManagementReportCandidateDataElementsType -> ComplexType
     def __init__(
             self,
             candidate_setup: ElementTagType = None,
@@ -1226,7 +1226,7 @@ class NetworkManagementReportCandidateDataElementsType: # EEBus_SPINE_TS_Network
             return cls()
 
 
-class NetworkManagementRemoveNodeCallElementsType: # EEBus_SPINE_TS_NetworkManagement.xsd: ComplexType
+class NetworkManagementRemoveNodeCallElementsType: # EEBus_SPINE_TS_NetworkManagement.xsd:ns_p:NetworkManagementRemoveNodeCallElementsType -> ComplexType
     def __init__(
             self,
             node_address: FeatureAddressElementsType = None,
@@ -1280,7 +1280,7 @@ class NetworkManagementRemoveNodeCallElementsType: # EEBus_SPINE_TS_NetworkManag
             return cls()
 
 
-class NetworkManagementProcessStateDataElementsType: # EEBus_SPINE_TS_NetworkManagement.xsd: ComplexType
+class NetworkManagementProcessStateDataElementsType: # EEBus_SPINE_TS_NetworkManagement.xsd:ns_p:NetworkManagementProcessStateDataElementsType -> ComplexType
     def __init__(
             self,
             state: ElementTagType = None,
@@ -1334,7 +1334,7 @@ class NetworkManagementProcessStateDataElementsType: # EEBus_SPINE_TS_NetworkMan
             return cls()
 
 
-class NetworkManagementModifyNodeCallElementsType: # EEBus_SPINE_TS_NetworkManagement.xsd: ComplexType
+class NetworkManagementModifyNodeCallElementsType: # EEBus_SPINE_TS_NetworkManagement.xsd:ns_p:NetworkManagementModifyNodeCallElementsType -> ComplexType
     def __init__(
             self,
             node_address: FeatureAddressElementsType = None,
@@ -1421,7 +1421,7 @@ class NetworkManagementModifyNodeCallElementsType: # EEBus_SPINE_TS_NetworkManag
             return cls()
 
 
-class NetworkManagementJoiningModeDataElementsType: # EEBus_SPINE_TS_NetworkManagement.xsd: ComplexType
+class NetworkManagementJoiningModeDataElementsType: # EEBus_SPINE_TS_NetworkManagement.xsd:ns_p:NetworkManagementJoiningModeDataElementsType -> ComplexType
     def __init__(
             self,
             setup: ElementTagType = None,
@@ -1464,7 +1464,7 @@ class NetworkManagementJoiningModeDataElementsType: # EEBus_SPINE_TS_NetworkMana
             return cls()
 
 
-class NetworkManagementFeatureDescriptionDataElementsType: # EEBus_SPINE_TS_NetworkManagement.xsd: ComplexType
+class NetworkManagementFeatureDescriptionDataElementsType: # EEBus_SPINE_TS_NetworkManagement.xsd:ns_p:NetworkManagementFeatureDescriptionDataElementsType -> ComplexType
     def __init__(
             self,
             feature_address: FeatureAddressElementsType = None,
@@ -1617,7 +1617,7 @@ class NetworkManagementFeatureDescriptionDataElementsType: # EEBus_SPINE_TS_Netw
             return cls()
 
 
-class NetworkManagementEntityDescriptionDataElementsType: # EEBus_SPINE_TS_NetworkManagement.xsd: ComplexType
+class NetworkManagementEntityDescriptionDataElementsType: # EEBus_SPINE_TS_NetworkManagement.xsd:ns_p:NetworkManagementEntityDescriptionDataElementsType -> ComplexType
     def __init__(
             self,
             entity_address: EntityAddressElementsType = None,
@@ -1715,7 +1715,7 @@ class NetworkManagementEntityDescriptionDataElementsType: # EEBus_SPINE_TS_Netwo
             return cls()
 
 
-class NetworkManagementDiscoverCallElementsType: # EEBus_SPINE_TS_NetworkManagement.xsd: ComplexType
+class NetworkManagementDiscoverCallElementsType: # EEBus_SPINE_TS_NetworkManagement.xsd:ns_p:NetworkManagementDiscoverCallElementsType -> ComplexType
     def __init__(
             self,
             discover_address: FeatureAddressElementsType = None,
@@ -1758,7 +1758,7 @@ class NetworkManagementDiscoverCallElementsType: # EEBus_SPINE_TS_NetworkManagem
             return cls()
 
 
-class NetworkManagementDeviceDescriptionDataElementsType: # EEBus_SPINE_TS_NetworkManagement.xsd: ComplexType
+class NetworkManagementDeviceDescriptionDataElementsType: # EEBus_SPINE_TS_NetworkManagement.xsd:ns_p:NetworkManagementDeviceDescriptionDataElementsType -> ComplexType
     def __init__(
             self,
             device_address: DeviceAddressElementsType = None,
@@ -1911,7 +1911,7 @@ class NetworkManagementDeviceDescriptionDataElementsType: # EEBus_SPINE_TS_Netwo
             return cls()
 
 
-class NetworkManagementAddNodeCallElementsType: # EEBus_SPINE_TS_NetworkManagement.xsd: ComplexType
+class NetworkManagementAddNodeCallElementsType: # EEBus_SPINE_TS_NetworkManagement.xsd:ns_p:NetworkManagementAddNodeCallElementsType -> ComplexType
     def __init__(
             self,
             node_address: FeatureAddressElementsType = None,
@@ -1998,7 +1998,7 @@ class NetworkManagementAddNodeCallElementsType: # EEBus_SPINE_TS_NetworkManageme
             return cls()
 
 
-class NetworkManagementAbortCallElementsType: # EEBus_SPINE_TS_NetworkManagement.xsd: ComplexType
+class NetworkManagementAbortCallElementsType: # EEBus_SPINE_TS_NetworkManagement.xsd:ns_p:NetworkManagementAbortCallElementsType -> ComplexType
     def __init__(
             self,
     ):
@@ -2031,7 +2031,7 @@ class NetworkManagementAbortCallElementsType: # EEBus_SPINE_TS_NetworkManagement
             return cls()
 
 
-class NetworkManagementFeatureDescriptionListDataSelectorsType: # EEBus_SPINE_TS_NetworkManagement.xsd: ComplexType
+class NetworkManagementFeatureDescriptionListDataSelectorsType: # EEBus_SPINE_TS_NetworkManagement.xsd:ns_p:NetworkManagementFeatureDescriptionListDataSelectorsType -> ComplexType
     def __init__(
             self,
             feature_address: FeatureAddressType = None,
@@ -2085,7 +2085,7 @@ class NetworkManagementFeatureDescriptionListDataSelectorsType: # EEBus_SPINE_TS
             return cls()
 
 
-class NetworkManagementEntityDescriptionListDataSelectorsType: # EEBus_SPINE_TS_NetworkManagement.xsd: ComplexType
+class NetworkManagementEntityDescriptionListDataSelectorsType: # EEBus_SPINE_TS_NetworkManagement.xsd:ns_p:NetworkManagementEntityDescriptionListDataSelectorsType -> ComplexType
     def __init__(
             self,
             entity_address: EntityAddressType = None,
@@ -2139,7 +2139,7 @@ class NetworkManagementEntityDescriptionListDataSelectorsType: # EEBus_SPINE_TS_
             return cls()
 
 
-class NetworkManagementDeviceDescriptionListDataSelectorsType: # EEBus_SPINE_TS_NetworkManagement.xsd: ComplexType
+class NetworkManagementDeviceDescriptionListDataSelectorsType: # EEBus_SPINE_TS_NetworkManagement.xsd:ns_p:NetworkManagementDeviceDescriptionListDataSelectorsType -> ComplexType
     def __init__(
             self,
             device_address: DeviceAddressType = None,

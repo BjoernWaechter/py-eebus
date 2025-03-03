@@ -1,250 +1,3735 @@
 # Jinja Template message_type.py.jinja2
 from spine.base_type.actuatorlevel import ActuatorLevelDataElementsType
+from spine.base_type.actuatorlevel import ActuatorLevelDataType
 from spine.base_type.actuatorlevel import ActuatorLevelDescriptionDataElementsType
+from spine.base_type.actuatorlevel import ActuatorLevelDescriptionDataType
 from spine.base_type.actuatorswitch import ActuatorSwitchDataElementsType
+from spine.base_type.actuatorswitch import ActuatorSwitchDataType
 from spine.base_type.actuatorswitch import ActuatorSwitchDescriptionDataElementsType
+from spine.base_type.actuatorswitch import ActuatorSwitchDescriptionDataType
 from spine.base_type.alarm import AlarmDataElementsType
 from spine.base_type.alarm import AlarmListDataSelectorsType
+from spine.base_type.alarm import AlarmListDataType
 from spine.base_type.bill import BillConstraintsDataElementsType
 from spine.base_type.bill import BillConstraintsListDataSelectorsType
+from spine.base_type.bill import BillConstraintsListDataType
 from spine.base_type.bill import BillDataElementsType
 from spine.base_type.bill import BillDescriptionDataElementsType
 from spine.base_type.bill import BillDescriptionListDataSelectorsType
+from spine.base_type.bill import BillDescriptionListDataType
 from spine.base_type.bill import BillListDataSelectorsType
+from spine.base_type.bill import BillListDataType
 from spine.base_type.bindingmanagement import BindingManagementDeleteCallElementsType
+from spine.base_type.bindingmanagement import BindingManagementDeleteCallType
 from spine.base_type.bindingmanagement import BindingManagementEntryDataElementsType
 from spine.base_type.bindingmanagement import BindingManagementEntryListDataSelectorsType
+from spine.base_type.bindingmanagement import BindingManagementEntryListDataType
 from spine.base_type.bindingmanagement import BindingManagementRequestCallElementsType
+from spine.base_type.bindingmanagement import BindingManagementRequestCallType
+from spine.base_type.commandframe import FilterType
 from spine.base_type.datatunneling import DataTunnelingCallElementsType
+from spine.base_type.datatunneling import DataTunnelingCallType
 from spine.base_type.deviceclassification import DeviceClassificationManufacturerDataElementsType
+from spine.base_type.deviceclassification import DeviceClassificationManufacturerDataType
 from spine.base_type.deviceclassification import DeviceClassificationUserDataElementsType
+from spine.base_type.deviceclassification import DeviceClassificationUserDataType
 from spine.base_type.deviceconfiguration import DeviceConfigurationKeyValueConstraintsDataElementsType
 from spine.base_type.deviceconfiguration import DeviceConfigurationKeyValueConstraintsListDataSelectorsType
+from spine.base_type.deviceconfiguration import DeviceConfigurationKeyValueConstraintsListDataType
 from spine.base_type.deviceconfiguration import DeviceConfigurationKeyValueDataElementsType
 from spine.base_type.deviceconfiguration import DeviceConfigurationKeyValueDescriptionDataElementsType
 from spine.base_type.deviceconfiguration import DeviceConfigurationKeyValueDescriptionListDataSelectorsType
+from spine.base_type.deviceconfiguration import DeviceConfigurationKeyValueDescriptionListDataType
 from spine.base_type.deviceconfiguration import DeviceConfigurationKeyValueListDataSelectorsType
+from spine.base_type.deviceconfiguration import DeviceConfigurationKeyValueListDataType
 from spine.base_type.devicediagnosis import DeviceDiagnosisHeartbeatDataElementsType
+from spine.base_type.devicediagnosis import DeviceDiagnosisHeartbeatDataType
 from spine.base_type.devicediagnosis import DeviceDiagnosisServiceDataElementsType
+from spine.base_type.devicediagnosis import DeviceDiagnosisServiceDataType
 from spine.base_type.devicediagnosis import DeviceDiagnosisStateDataElementsType
+from spine.base_type.devicediagnosis import DeviceDiagnosisStateDataType
 from spine.base_type.directcontrol import DirectControlActivityDataElementsType
 from spine.base_type.directcontrol import DirectControlActivityListDataSelectorsType
+from spine.base_type.directcontrol import DirectControlActivityListDataType
 from spine.base_type.directcontrol import DirectControlDescriptionDataElementsType
+from spine.base_type.directcontrol import DirectControlDescriptionDataType
 from spine.base_type.electricalconnection import ElectricalConnectionCharacteristicDataElementsType
 from spine.base_type.electricalconnection import ElectricalConnectionCharacteristicListDataSelectorsType
+from spine.base_type.electricalconnection import ElectricalConnectionCharacteristicListDataType
 from spine.base_type.electricalconnection import ElectricalConnectionDescriptionDataElementsType
 from spine.base_type.electricalconnection import ElectricalConnectionDescriptionListDataSelectorsType
+from spine.base_type.electricalconnection import ElectricalConnectionDescriptionListDataType
 from spine.base_type.electricalconnection import ElectricalConnectionParameterDescriptionDataElementsType
 from spine.base_type.electricalconnection import ElectricalConnectionParameterDescriptionListDataSelectorsType
+from spine.base_type.electricalconnection import ElectricalConnectionParameterDescriptionListDataType
 from spine.base_type.electricalconnection import ElectricalConnectionPermittedValueSetDataElementsType
 from spine.base_type.electricalconnection import ElectricalConnectionPermittedValueSetListDataSelectorsType
+from spine.base_type.electricalconnection import ElectricalConnectionPermittedValueSetListDataType
 from spine.base_type.electricalconnection import ElectricalConnectionStateDataElementsType
 from spine.base_type.electricalconnection import ElectricalConnectionStateListDataSelectorsType
+from spine.base_type.electricalconnection import ElectricalConnectionStateListDataType
 from spine.base_type.hvac import HvacOperationModeDescriptionDataElementsType
 from spine.base_type.hvac import HvacOperationModeDescriptionListDataSelectorsType
+from spine.base_type.hvac import HvacOperationModeDescriptionListDataType
 from spine.base_type.hvac import HvacOverrunDataElementsType
 from spine.base_type.hvac import HvacOverrunDescriptionDataElementsType
 from spine.base_type.hvac import HvacOverrunDescriptionListDataSelectorsType
+from spine.base_type.hvac import HvacOverrunDescriptionListDataType
 from spine.base_type.hvac import HvacOverrunListDataSelectorsType
+from spine.base_type.hvac import HvacOverrunListDataType
 from spine.base_type.hvac import HvacSystemFunctionDataElementsType
 from spine.base_type.hvac import HvacSystemFunctionDescriptionDataElementsType
 from spine.base_type.hvac import HvacSystemFunctionDescriptionListDataSelectorsType
+from spine.base_type.hvac import HvacSystemFunctionDescriptionListDataType
 from spine.base_type.hvac import HvacSystemFunctionListDataSelectorsType
+from spine.base_type.hvac import HvacSystemFunctionListDataType
 from spine.base_type.hvac import HvacSystemFunctionOperationModeRelationDataElementsType
 from spine.base_type.hvac import HvacSystemFunctionOperationModeRelationListDataSelectorsType
+from spine.base_type.hvac import HvacSystemFunctionOperationModeRelationListDataType
 from spine.base_type.hvac import HvacSystemFunctionPowerSequenceRelationDataElementsType
 from spine.base_type.hvac import HvacSystemFunctionPowerSequenceRelationListDataSelectorsType
+from spine.base_type.hvac import HvacSystemFunctionPowerSequenceRelationListDataType
 from spine.base_type.hvac import HvacSystemFunctionSetpointRelationDataElementsType
 from spine.base_type.hvac import HvacSystemFunctionSetpointRelationListDataSelectorsType
+from spine.base_type.hvac import HvacSystemFunctionSetpointRelationListDataType
 from spine.base_type.identification import IdentificationDataElementsType
 from spine.base_type.identification import IdentificationListDataSelectorsType
+from spine.base_type.identification import IdentificationListDataType
 from spine.base_type.identification import SessionIdentificationDataElementsType
 from spine.base_type.identification import SessionIdentificationListDataSelectorsType
+from spine.base_type.identification import SessionIdentificationListDataType
 from spine.base_type.identification import SessionMeasurementRelationDataElementsType
 from spine.base_type.identification import SessionMeasurementRelationListDataSelectorsType
+from spine.base_type.identification import SessionMeasurementRelationListDataType
 from spine.base_type.incentivetable import IncentiveTableConstraintsDataElementsType
 from spine.base_type.incentivetable import IncentiveTableConstraintsDataSelectorsType
+from spine.base_type.incentivetable import IncentiveTableConstraintsDataType
 from spine.base_type.incentivetable import IncentiveTableDataElementsType
 from spine.base_type.incentivetable import IncentiveTableDataSelectorsType
+from spine.base_type.incentivetable import IncentiveTableDataType
 from spine.base_type.incentivetable import IncentiveTableDescriptionDataElementsType
 from spine.base_type.incentivetable import IncentiveTableDescriptionDataSelectorsType
+from spine.base_type.incentivetable import IncentiveTableDescriptionDataType
 from spine.base_type.loadcontrol import LoadControlEventDataElementsType
 from spine.base_type.loadcontrol import LoadControlEventListDataSelectorsType
+from spine.base_type.loadcontrol import LoadControlEventListDataType
 from spine.base_type.loadcontrol import LoadControlLimitConstraintsDataElementsType
 from spine.base_type.loadcontrol import LoadControlLimitConstraintsListDataSelectorsType
+from spine.base_type.loadcontrol import LoadControlLimitConstraintsListDataType
 from spine.base_type.loadcontrol import LoadControlLimitDataElementsType
 from spine.base_type.loadcontrol import LoadControlLimitDescriptionDataElementsType
 from spine.base_type.loadcontrol import LoadControlLimitDescriptionListDataSelectorsType
+from spine.base_type.loadcontrol import LoadControlLimitDescriptionListDataType
 from spine.base_type.loadcontrol import LoadControlLimitListDataSelectorsType
+from spine.base_type.loadcontrol import LoadControlLimitListDataType
 from spine.base_type.loadcontrol import LoadControlNodeDataElementsType
+from spine.base_type.loadcontrol import LoadControlNodeDataType
 from spine.base_type.loadcontrol import LoadControlStateDataElementsType
 from spine.base_type.loadcontrol import LoadControlStateListDataSelectorsType
+from spine.base_type.loadcontrol import LoadControlStateListDataType
 from spine.base_type.measurement import MeasurementConstraintsDataElementsType
 from spine.base_type.measurement import MeasurementConstraintsListDataSelectorsType
+from spine.base_type.measurement import MeasurementConstraintsListDataType
 from spine.base_type.measurement import MeasurementDataElementsType
 from spine.base_type.measurement import MeasurementDescriptionDataElementsType
 from spine.base_type.measurement import MeasurementDescriptionListDataSelectorsType
+from spine.base_type.measurement import MeasurementDescriptionListDataType
 from spine.base_type.measurement import MeasurementListDataSelectorsType
+from spine.base_type.measurement import MeasurementListDataType
 from spine.base_type.measurement import MeasurementSeriesDataElementsType
 from spine.base_type.measurement import MeasurementSeriesListDataSelectorsType
+from spine.base_type.measurement import MeasurementSeriesListDataType
 from spine.base_type.measurement import MeasurementThresholdRelationDataElementsType
 from spine.base_type.measurement import MeasurementThresholdRelationListDataSelectorsType
+from spine.base_type.measurement import MeasurementThresholdRelationListDataType
 from spine.base_type.messaging import MessagingDataElementsType
 from spine.base_type.messaging import MessagingListDataSelectorsType
+from spine.base_type.messaging import MessagingListDataType
 from spine.base_type.networkmanagement import NetworkManagementAbortCallElementsType
+from spine.base_type.networkmanagement import NetworkManagementAbortCallType
 from spine.base_type.networkmanagement import NetworkManagementAddNodeCallElementsType
+from spine.base_type.networkmanagement import NetworkManagementAddNodeCallType
 from spine.base_type.networkmanagement import NetworkManagementDeviceDescriptionDataElementsType
 from spine.base_type.networkmanagement import NetworkManagementDeviceDescriptionListDataSelectorsType
+from spine.base_type.networkmanagement import NetworkManagementDeviceDescriptionListDataType
 from spine.base_type.networkmanagement import NetworkManagementDiscoverCallElementsType
+from spine.base_type.networkmanagement import NetworkManagementDiscoverCallType
 from spine.base_type.networkmanagement import NetworkManagementEntityDescriptionDataElementsType
 from spine.base_type.networkmanagement import NetworkManagementEntityDescriptionListDataSelectorsType
+from spine.base_type.networkmanagement import NetworkManagementEntityDescriptionListDataType
 from spine.base_type.networkmanagement import NetworkManagementFeatureDescriptionDataElementsType
 from spine.base_type.networkmanagement import NetworkManagementFeatureDescriptionListDataSelectorsType
+from spine.base_type.networkmanagement import NetworkManagementFeatureDescriptionListDataType
 from spine.base_type.networkmanagement import NetworkManagementJoiningModeDataElementsType
+from spine.base_type.networkmanagement import NetworkManagementJoiningModeDataType
 from spine.base_type.networkmanagement import NetworkManagementModifyNodeCallElementsType
+from spine.base_type.networkmanagement import NetworkManagementModifyNodeCallType
 from spine.base_type.networkmanagement import NetworkManagementProcessStateDataElementsType
+from spine.base_type.networkmanagement import NetworkManagementProcessStateDataType
 from spine.base_type.networkmanagement import NetworkManagementRemoveNodeCallElementsType
+from spine.base_type.networkmanagement import NetworkManagementRemoveNodeCallType
 from spine.base_type.networkmanagement import NetworkManagementReportCandidateDataElementsType
+from spine.base_type.networkmanagement import NetworkManagementReportCandidateDataType
 from spine.base_type.networkmanagement import NetworkManagementScanNetworkCallElementsType
+from spine.base_type.networkmanagement import NetworkManagementScanNetworkCallType
 from spine.base_type.nodemanagement import NodeManagementBindingDataElementsType
 from spine.base_type.nodemanagement import NodeManagementBindingDataSelectorsType
+from spine.base_type.nodemanagement import NodeManagementBindingDataType
 from spine.base_type.nodemanagement import NodeManagementBindingDeleteCallElementsType
+from spine.base_type.nodemanagement import NodeManagementBindingDeleteCallType
 from spine.base_type.nodemanagement import NodeManagementBindingRequestCallElementsType
+from spine.base_type.nodemanagement import NodeManagementBindingRequestCallType
 from spine.base_type.nodemanagement import NodeManagementDestinationDataElementsType
 from spine.base_type.nodemanagement import NodeManagementDestinationListDataSelectorsType
+from spine.base_type.nodemanagement import NodeManagementDestinationListDataType
 from spine.base_type.nodemanagement import NodeManagementDetailedDiscoveryDataElementsType
 from spine.base_type.nodemanagement import NodeManagementDetailedDiscoveryDataSelectorsType
+from spine.base_type.nodemanagement import NodeManagementDetailedDiscoveryDataType
 from spine.base_type.nodemanagement import NodeManagementSubscriptionDataElementsType
 from spine.base_type.nodemanagement import NodeManagementSubscriptionDataSelectorsType
+from spine.base_type.nodemanagement import NodeManagementSubscriptionDataType
 from spine.base_type.nodemanagement import NodeManagementSubscriptionDeleteCallElementsType
+from spine.base_type.nodemanagement import NodeManagementSubscriptionDeleteCallType
 from spine.base_type.nodemanagement import NodeManagementSubscriptionRequestCallElementsType
+from spine.base_type.nodemanagement import NodeManagementSubscriptionRequestCallType
 from spine.base_type.nodemanagement import NodeManagementUseCaseDataElementsType
 from spine.base_type.nodemanagement import NodeManagementUseCaseDataSelectorsType
+from spine.base_type.nodemanagement import NodeManagementUseCaseDataType
 from spine.base_type.operatingconstraints import OperatingConstraintsDurationDataElementsType
 from spine.base_type.operatingconstraints import OperatingConstraintsDurationListDataSelectorsType
+from spine.base_type.operatingconstraints import OperatingConstraintsDurationListDataType
 from spine.base_type.operatingconstraints import OperatingConstraintsInterruptDataElementsType
 from spine.base_type.operatingconstraints import OperatingConstraintsInterruptListDataSelectorsType
+from spine.base_type.operatingconstraints import OperatingConstraintsInterruptListDataType
 from spine.base_type.operatingconstraints import OperatingConstraintsPowerDescriptionDataElementsType
 from spine.base_type.operatingconstraints import OperatingConstraintsPowerDescriptionListDataSelectorsType
+from spine.base_type.operatingconstraints import OperatingConstraintsPowerDescriptionListDataType
 from spine.base_type.operatingconstraints import OperatingConstraintsPowerLevelDataElementsType
 from spine.base_type.operatingconstraints import OperatingConstraintsPowerLevelListDataSelectorsType
+from spine.base_type.operatingconstraints import OperatingConstraintsPowerLevelListDataType
 from spine.base_type.operatingconstraints import OperatingConstraintsPowerRangeDataElementsType
 from spine.base_type.operatingconstraints import OperatingConstraintsPowerRangeListDataSelectorsType
+from spine.base_type.operatingconstraints import OperatingConstraintsPowerRangeListDataType
 from spine.base_type.operatingconstraints import OperatingConstraintsResumeImplicationDataElementsType
 from spine.base_type.operatingconstraints import OperatingConstraintsResumeImplicationListDataSelectorsType
+from spine.base_type.operatingconstraints import OperatingConstraintsResumeImplicationListDataType
 from spine.base_type.powersequences import PowerSequenceAlternativesRelationDataElementsType
 from spine.base_type.powersequences import PowerSequenceAlternativesRelationListDataSelectorsType
+from spine.base_type.powersequences import PowerSequenceAlternativesRelationListDataType
 from spine.base_type.powersequences import PowerSequenceDescriptionDataElementsType
 from spine.base_type.powersequences import PowerSequenceDescriptionListDataSelectorsType
+from spine.base_type.powersequences import PowerSequenceDescriptionListDataType
 from spine.base_type.powersequences import PowerSequenceNodeScheduleInformationDataElementsType
+from spine.base_type.powersequences import PowerSequenceNodeScheduleInformationDataType
 from spine.base_type.powersequences import PowerSequencePriceCalculationRequestCallElementsType
+from spine.base_type.powersequences import PowerSequencePriceCalculationRequestCallType
 from spine.base_type.powersequences import PowerSequencePriceDataElementsType
 from spine.base_type.powersequences import PowerSequencePriceListDataSelectorsType
+from spine.base_type.powersequences import PowerSequencePriceListDataType
 from spine.base_type.powersequences import PowerSequenceScheduleConfigurationRequestCallElementsType
+from spine.base_type.powersequences import PowerSequenceScheduleConfigurationRequestCallType
 from spine.base_type.powersequences import PowerSequenceScheduleConstraintsDataElementsType
 from spine.base_type.powersequences import PowerSequenceScheduleConstraintsListDataSelectorsType
+from spine.base_type.powersequences import PowerSequenceScheduleConstraintsListDataType
 from spine.base_type.powersequences import PowerSequenceScheduleDataElementsType
 from spine.base_type.powersequences import PowerSequenceScheduleListDataSelectorsType
+from spine.base_type.powersequences import PowerSequenceScheduleListDataType
 from spine.base_type.powersequences import PowerSequenceSchedulePreferenceDataElementsType
 from spine.base_type.powersequences import PowerSequenceSchedulePreferenceListDataSelectorsType
+from spine.base_type.powersequences import PowerSequenceSchedulePreferenceListDataType
 from spine.base_type.powersequences import PowerSequenceStateDataElementsType
 from spine.base_type.powersequences import PowerSequenceStateListDataSelectorsType
+from spine.base_type.powersequences import PowerSequenceStateListDataType
 from spine.base_type.powersequences import PowerTimeSlotScheduleConstraintsDataElementsType
 from spine.base_type.powersequences import PowerTimeSlotScheduleConstraintsListDataSelectorsType
+from spine.base_type.powersequences import PowerTimeSlotScheduleConstraintsListDataType
 from spine.base_type.powersequences import PowerTimeSlotScheduleDataElementsType
 from spine.base_type.powersequences import PowerTimeSlotScheduleListDataSelectorsType
+from spine.base_type.powersequences import PowerTimeSlotScheduleListDataType
 from spine.base_type.powersequences import PowerTimeSlotValueDataElementsType
 from spine.base_type.powersequences import PowerTimeSlotValueListDataSelectorsType
+from spine.base_type.powersequences import PowerTimeSlotValueListDataType
+from spine.base_type.result import ResultDataType
 from spine.base_type.sensing import SensingDataElementsType
 from spine.base_type.sensing import SensingDescriptionDataElementsType
+from spine.base_type.sensing import SensingDescriptionDataType
 from spine.base_type.sensing import SensingListDataSelectorsType
+from spine.base_type.sensing import SensingListDataType
 from spine.base_type.setpoint import SetpointConstraintsDataElementsType
 from spine.base_type.setpoint import SetpointConstraintsListDataSelectorsType
+from spine.base_type.setpoint import SetpointConstraintsListDataType
 from spine.base_type.setpoint import SetpointDataElementsType
 from spine.base_type.setpoint import SetpointDescriptionDataElementsType
 from spine.base_type.setpoint import SetpointDescriptionListDataSelectorsType
+from spine.base_type.setpoint import SetpointDescriptionListDataType
 from spine.base_type.setpoint import SetpointListDataSelectorsType
+from spine.base_type.setpoint import SetpointListDataType
 from spine.base_type.smartenergymanagementps import SmartEnergyManagementPsConfigurationRequestCallElementsType
+from spine.base_type.smartenergymanagementps import SmartEnergyManagementPsConfigurationRequestCallType
 from spine.base_type.smartenergymanagementps import SmartEnergyManagementPsDataElementsType
 from spine.base_type.smartenergymanagementps import SmartEnergyManagementPsDataSelectorsType
+from spine.base_type.smartenergymanagementps import SmartEnergyManagementPsDataType
 from spine.base_type.smartenergymanagementps import SmartEnergyManagementPsPriceCalculationRequestCallElementsType
+from spine.base_type.smartenergymanagementps import SmartEnergyManagementPsPriceCalculationRequestCallType
 from spine.base_type.smartenergymanagementps import SmartEnergyManagementPsPriceDataElementsType
 from spine.base_type.smartenergymanagementps import SmartEnergyManagementPsPriceDataSelectorsType
+from spine.base_type.smartenergymanagementps import SmartEnergyManagementPsPriceDataType
 from spine.base_type.stateinformation import StateInformationDataElementsType
 from spine.base_type.stateinformation import StateInformationListDataSelectorsType
+from spine.base_type.stateinformation import StateInformationListDataType
 from spine.base_type.subscriptionmanagement import SubscriptionManagementDeleteCallElementsType
+from spine.base_type.subscriptionmanagement import SubscriptionManagementDeleteCallType
 from spine.base_type.subscriptionmanagement import SubscriptionManagementEntryDataElementsType
 from spine.base_type.subscriptionmanagement import SubscriptionManagementEntryListDataSelectorsType
+from spine.base_type.subscriptionmanagement import SubscriptionManagementEntryListDataType
 from spine.base_type.subscriptionmanagement import SubscriptionManagementRequestCallElementsType
+from spine.base_type.subscriptionmanagement import SubscriptionManagementRequestCallType
 from spine.base_type.supplycondition import SupplyConditionDataElementsType
 from spine.base_type.supplycondition import SupplyConditionDescriptionDataElementsType
 from spine.base_type.supplycondition import SupplyConditionDescriptionListDataSelectorsType
+from spine.base_type.supplycondition import SupplyConditionDescriptionListDataType
 from spine.base_type.supplycondition import SupplyConditionListDataSelectorsType
+from spine.base_type.supplycondition import SupplyConditionListDataType
 from spine.base_type.supplycondition import SupplyConditionThresholdRelationDataElementsType
 from spine.base_type.supplycondition import SupplyConditionThresholdRelationListDataSelectorsType
+from spine.base_type.supplycondition import SupplyConditionThresholdRelationListDataType
 from spine.base_type.tariffinformation import CommodityDataElementsType
 from spine.base_type.tariffinformation import CommodityListDataSelectorsType
+from spine.base_type.tariffinformation import CommodityListDataType
 from spine.base_type.tariffinformation import IncentiveDataElementsType
 from spine.base_type.tariffinformation import IncentiveDescriptionDataElementsType
 from spine.base_type.tariffinformation import IncentiveDescriptionListDataSelectorsType
+from spine.base_type.tariffinformation import IncentiveDescriptionListDataType
 from spine.base_type.tariffinformation import IncentiveListDataSelectorsType
+from spine.base_type.tariffinformation import IncentiveListDataType
 from spine.base_type.tariffinformation import TariffBoundaryRelationDataElementsType
 from spine.base_type.tariffinformation import TariffBoundaryRelationListDataSelectorsType
+from spine.base_type.tariffinformation import TariffBoundaryRelationListDataType
 from spine.base_type.tariffinformation import TariffDataElementsType
 from spine.base_type.tariffinformation import TariffDescriptionDataElementsType
 from spine.base_type.tariffinformation import TariffDescriptionListDataSelectorsType
+from spine.base_type.tariffinformation import TariffDescriptionListDataType
 from spine.base_type.tariffinformation import TariffListDataSelectorsType
+from spine.base_type.tariffinformation import TariffListDataType
 from spine.base_type.tariffinformation import TariffOverallConstraintsDataElementsType
+from spine.base_type.tariffinformation import TariffOverallConstraintsDataType
 from spine.base_type.tariffinformation import TariffTierRelationDataElementsType
 from spine.base_type.tariffinformation import TariffTierRelationListDataSelectorsType
+from spine.base_type.tariffinformation import TariffTierRelationListDataType
 from spine.base_type.tariffinformation import TierBoundaryDataElementsType
 from spine.base_type.tariffinformation import TierBoundaryDescriptionDataElementsType
 from spine.base_type.tariffinformation import TierBoundaryDescriptionListDataSelectorsType
+from spine.base_type.tariffinformation import TierBoundaryDescriptionListDataType
 from spine.base_type.tariffinformation import TierBoundaryListDataSelectorsType
+from spine.base_type.tariffinformation import TierBoundaryListDataType
 from spine.base_type.tariffinformation import TierDataElementsType
 from spine.base_type.tariffinformation import TierDescriptionDataElementsType
 from spine.base_type.tariffinformation import TierDescriptionListDataSelectorsType
+from spine.base_type.tariffinformation import TierDescriptionListDataType
 from spine.base_type.tariffinformation import TierIncentiveRelationDataElementsType
 from spine.base_type.tariffinformation import TierIncentiveRelationListDataSelectorsType
+from spine.base_type.tariffinformation import TierIncentiveRelationListDataType
 from spine.base_type.tariffinformation import TierListDataSelectorsType
+from spine.base_type.tariffinformation import TierListDataType
 from spine.base_type.taskmanagement import TaskManagementJobDataElementsType
 from spine.base_type.taskmanagement import TaskManagementJobDescriptionDataElementsType
 from spine.base_type.taskmanagement import TaskManagementJobDescriptionListDataSelectorsType
+from spine.base_type.taskmanagement import TaskManagementJobDescriptionListDataType
 from spine.base_type.taskmanagement import TaskManagementJobListDataSelectorsType
+from spine.base_type.taskmanagement import TaskManagementJobListDataType
 from spine.base_type.taskmanagement import TaskManagementJobRelationDataElementsType
 from spine.base_type.taskmanagement import TaskManagementJobRelationListDataSelectorsType
+from spine.base_type.taskmanagement import TaskManagementJobRelationListDataType
 from spine.base_type.taskmanagement import TaskManagementOverviewDataElementsType
+from spine.base_type.taskmanagement import TaskManagementOverviewDataType
 from spine.base_type.threshold import ThresholdConstraintsDataElementsType
 from spine.base_type.threshold import ThresholdConstraintsListDataSelectorsType
+from spine.base_type.threshold import ThresholdConstraintsListDataType
 from spine.base_type.threshold import ThresholdDataElementsType
 from spine.base_type.threshold import ThresholdDescriptionDataElementsType
 from spine.base_type.threshold import ThresholdDescriptionListDataSelectorsType
+from spine.base_type.threshold import ThresholdDescriptionListDataType
 from spine.base_type.threshold import ThresholdListDataSelectorsType
+from spine.base_type.threshold import ThresholdListDataType
 from spine.base_type.timeinformation import TimeDistributorDataElementsType
+from spine.base_type.timeinformation import TimeDistributorDataType
 from spine.base_type.timeinformation import TimeDistributorEnquiryCallElementsType
+from spine.base_type.timeinformation import TimeDistributorEnquiryCallType
 from spine.base_type.timeinformation import TimeInformationDataElementsType
+from spine.base_type.timeinformation import TimeInformationDataType
 from spine.base_type.timeinformation import TimePrecisionDataElementsType
+from spine.base_type.timeinformation import TimePrecisionDataType
 from spine.base_type.timeseries import TimeSeriesConstraintsDataElementsType
 from spine.base_type.timeseries import TimeSeriesConstraintsListDataSelectorsType
+from spine.base_type.timeseries import TimeSeriesConstraintsListDataType
 from spine.base_type.timeseries import TimeSeriesDataElementsType
 from spine.base_type.timeseries import TimeSeriesDescriptionDataElementsType
 from spine.base_type.timeseries import TimeSeriesDescriptionListDataSelectorsType
+from spine.base_type.timeseries import TimeSeriesDescriptionListDataType
 from spine.base_type.timeseries import TimeSeriesListDataSelectorsType
+from spine.base_type.timeseries import TimeSeriesListDataType
 from spine.base_type.timetable import TimeTableConstraintsDataElementsType
 from spine.base_type.timetable import TimeTableConstraintsListDataSelectorsType
+from spine.base_type.timetable import TimeTableConstraintsListDataType
 from spine.base_type.timetable import TimeTableDataElementsType
 from spine.base_type.timetable import TimeTableDescriptionDataElementsType
 from spine.base_type.timetable import TimeTableDescriptionListDataSelectorsType
+from spine.base_type.timetable import TimeTableDescriptionListDataType
 from spine.base_type.timetable import TimeTableListDataSelectorsType
+from spine.base_type.timetable import TimeTableListDataType
 from spine.base_type.usecaseinformation import UseCaseInformationDataElementsType
 from spine.base_type.usecaseinformation import UseCaseInformationListDataSelectorsType
+from spine.base_type.usecaseinformation import UseCaseInformationListDataType
 from spine.base_type.version import SpecificationVersionDataElementsType
 from spine.base_type.version import SpecificationVersionListDataSelectorsType
+from spine.base_type.version import SpecificationVersionListDataType
+from spine.union_type.commondatatypes import AbsoluteOrRelativeTimeType
+from spine.union_type.commondatatypes import FunctionType
 from types import NoneType
 from spine import array_2_dict
 
 
-class DataElementsChoiceGroup: # EEBus_SPINE_TS_CommandFrame.xsd: ChoiceType
+class PayloadContributionGroup: # EEBus_SPINE_TS_CommandFrame.xsd:ns_p:PayloadContributionGroup -> ChoiceType
+    def __init__(
+            self,
+            function: FunctionType = None,
+            filter: list[FilterType] = None,
+            actuator_level_data: ActuatorLevelDataType,
+            actuator_level_description_data: ActuatorLevelDescriptionDataType,
+            actuator_switch_data: ActuatorSwitchDataType,
+            actuator_switch_description_data: ActuatorSwitchDescriptionDataType,
+            alarm_list_data: AlarmListDataType,
+            bill_constraints_list_data: BillConstraintsListDataType,
+            bill_description_list_data: BillDescriptionListDataType,
+            bill_list_data: BillListDataType,
+            binding_management_delete_call: BindingManagementDeleteCallType,
+            binding_management_entry_list_data: BindingManagementEntryListDataType,
+            binding_management_request_call: BindingManagementRequestCallType,
+            commodity_list_data: CommodityListDataType,
+            data_tunneling_call: DataTunnelingCallType,
+            device_classification_manufacturer_data: DeviceClassificationManufacturerDataType,
+            device_classification_user_data: DeviceClassificationUserDataType,
+            device_configuration_key_value_constraints_list_data: DeviceConfigurationKeyValueConstraintsListDataType,
+            device_configuration_key_value_description_list_data: DeviceConfigurationKeyValueDescriptionListDataType,
+            device_configuration_key_value_list_data: DeviceConfigurationKeyValueListDataType,
+            device_diagnosis_heartbeat_data: DeviceDiagnosisHeartbeatDataType,
+            device_diagnosis_service_data: DeviceDiagnosisServiceDataType,
+            device_diagnosis_state_data: DeviceDiagnosisStateDataType,
+            direct_control_activity_list_data: DirectControlActivityListDataType,
+            direct_control_description_data: DirectControlDescriptionDataType,
+            electrical_connection_characteristic_list_data: ElectricalConnectionCharacteristicListDataType,
+            electrical_connection_description_list_data: ElectricalConnectionDescriptionListDataType,
+            electrical_connection_parameter_description_list_data: ElectricalConnectionParameterDescriptionListDataType,
+            electrical_connection_permitted_value_set_list_data: ElectricalConnectionPermittedValueSetListDataType,
+            electrical_connection_state_list_data: ElectricalConnectionStateListDataType,
+            hvac_operation_mode_description_list_data: HvacOperationModeDescriptionListDataType,
+            hvac_overrun_description_list_data: HvacOverrunDescriptionListDataType,
+            hvac_overrun_list_data: HvacOverrunListDataType,
+            hvac_system_function_description_list_data: HvacSystemFunctionDescriptionListDataType,
+            hvac_system_function_list_data: HvacSystemFunctionListDataType,
+            hvac_system_function_operation_mode_relation_list_data: HvacSystemFunctionOperationModeRelationListDataType,
+            hvac_system_function_power_sequence_relation_list_data: HvacSystemFunctionPowerSequenceRelationListDataType,
+            hvac_system_function_setpoint_relation_list_data: HvacSystemFunctionSetpointRelationListDataType,
+            identification_list_data: IdentificationListDataType,
+            incentive_description_list_data: IncentiveDescriptionListDataType,
+            incentive_list_data: IncentiveListDataType,
+            incentive_table_constraints_data: IncentiveTableConstraintsDataType,
+            incentive_table_data: IncentiveTableDataType,
+            incentive_table_description_data: IncentiveTableDescriptionDataType,
+            load_control_event_list_data: LoadControlEventListDataType,
+            load_control_limit_constraints_list_data: LoadControlLimitConstraintsListDataType,
+            load_control_limit_description_list_data: LoadControlLimitDescriptionListDataType,
+            load_control_limit_list_data: LoadControlLimitListDataType,
+            load_control_node_data: LoadControlNodeDataType,
+            load_control_state_list_data: LoadControlStateListDataType,
+            measurement_constraints_list_data: MeasurementConstraintsListDataType,
+            measurement_description_list_data: MeasurementDescriptionListDataType,
+            measurement_list_data: MeasurementListDataType,
+            measurement_series_list_data: MeasurementSeriesListDataType,
+            measurement_threshold_relation_list_data: MeasurementThresholdRelationListDataType,
+            messaging_list_data: MessagingListDataType,
+            network_management_abort_call: NetworkManagementAbortCallType,
+            network_management_add_node_call: NetworkManagementAddNodeCallType,
+            network_management_device_description_list_data: NetworkManagementDeviceDescriptionListDataType,
+            network_management_discover_call: NetworkManagementDiscoverCallType,
+            network_management_entity_description_list_data: NetworkManagementEntityDescriptionListDataType,
+            network_management_feature_description_list_data: NetworkManagementFeatureDescriptionListDataType,
+            network_management_joining_mode_data: NetworkManagementJoiningModeDataType,
+            network_management_modify_node_call: NetworkManagementModifyNodeCallType,
+            network_management_process_state_data: NetworkManagementProcessStateDataType,
+            network_management_remove_node_call: NetworkManagementRemoveNodeCallType,
+            network_management_report_candidate_data: NetworkManagementReportCandidateDataType,
+            network_management_scan_network_call: NetworkManagementScanNetworkCallType,
+            node_management_binding_data: NodeManagementBindingDataType,
+            node_management_binding_delete_call: NodeManagementBindingDeleteCallType,
+            node_management_binding_request_call: NodeManagementBindingRequestCallType,
+            node_management_destination_list_data: NodeManagementDestinationListDataType,
+            node_management_detailed_discovery_data: NodeManagementDetailedDiscoveryDataType,
+            node_management_subscription_data: NodeManagementSubscriptionDataType,
+            node_management_subscription_delete_call: NodeManagementSubscriptionDeleteCallType,
+            node_management_subscription_request_call: NodeManagementSubscriptionRequestCallType,
+            node_management_use_case_data: NodeManagementUseCaseDataType,
+            operating_constraints_duration_list_data: OperatingConstraintsDurationListDataType,
+            operating_constraints_interrupt_list_data: OperatingConstraintsInterruptListDataType,
+            operating_constraints_power_description_list_data: OperatingConstraintsPowerDescriptionListDataType,
+            operating_constraints_power_level_list_data: OperatingConstraintsPowerLevelListDataType,
+            operating_constraints_power_range_list_data: OperatingConstraintsPowerRangeListDataType,
+            operating_constraints_resume_implication_list_data: OperatingConstraintsResumeImplicationListDataType,
+            power_sequence_alternatives_relation_list_data: PowerSequenceAlternativesRelationListDataType,
+            power_sequence_description_list_data: PowerSequenceDescriptionListDataType,
+            power_sequence_node_schedule_information_data: PowerSequenceNodeScheduleInformationDataType,
+            power_sequence_price_calculation_request_call: PowerSequencePriceCalculationRequestCallType,
+            power_sequence_price_list_data: PowerSequencePriceListDataType,
+            power_sequence_schedule_configuration_request_call: PowerSequenceScheduleConfigurationRequestCallType,
+            power_sequence_schedule_constraints_list_data: PowerSequenceScheduleConstraintsListDataType,
+            power_sequence_schedule_list_data: PowerSequenceScheduleListDataType,
+            power_sequence_schedule_preference_list_data: PowerSequenceSchedulePreferenceListDataType,
+            power_sequence_state_list_data: PowerSequenceStateListDataType,
+            power_time_slot_schedule_constraints_list_data: PowerTimeSlotScheduleConstraintsListDataType,
+            power_time_slot_schedule_list_data: PowerTimeSlotScheduleListDataType,
+            power_time_slot_value_list_data: PowerTimeSlotValueListDataType,
+            result_data: ResultDataType,
+            sensing_description_data: SensingDescriptionDataType,
+            sensing_list_data: SensingListDataType,
+            session_identification_list_data: SessionIdentificationListDataType,
+            session_measurement_relation_list_data: SessionMeasurementRelationListDataType,
+            setpoint_constraints_list_data: SetpointConstraintsListDataType,
+            setpoint_description_list_data: SetpointDescriptionListDataType,
+            setpoint_list_data: SetpointListDataType,
+            smart_energy_management_ps_configuration_request_call: SmartEnergyManagementPsConfigurationRequestCallType,
+            smart_energy_management_ps_data: SmartEnergyManagementPsDataType,
+            smart_energy_management_ps_price_calculation_request_call: SmartEnergyManagementPsPriceCalculationRequestCallType,
+            smart_energy_management_ps_price_data: SmartEnergyManagementPsPriceDataType,
+            specification_version_list_data: SpecificationVersionListDataType,
+            state_information_list_data: StateInformationListDataType,
+            subscription_management_delete_call: SubscriptionManagementDeleteCallType,
+            subscription_management_entry_list_data: SubscriptionManagementEntryListDataType,
+            subscription_management_request_call: SubscriptionManagementRequestCallType,
+            supply_condition_description_list_data: SupplyConditionDescriptionListDataType,
+            supply_condition_list_data: SupplyConditionListDataType,
+            supply_condition_threshold_relation_list_data: SupplyConditionThresholdRelationListDataType,
+            tariff_boundary_relation_list_data: TariffBoundaryRelationListDataType,
+            tariff_description_list_data: TariffDescriptionListDataType,
+            tariff_list_data: TariffListDataType,
+            tariff_overall_constraints_data: TariffOverallConstraintsDataType,
+            tariff_tier_relation_list_data: TariffTierRelationListDataType,
+            task_management_job_description_list_data: TaskManagementJobDescriptionListDataType,
+            task_management_job_list_data: TaskManagementJobListDataType,
+            task_management_job_relation_list_data: TaskManagementJobRelationListDataType,
+            task_management_overview_data: TaskManagementOverviewDataType,
+            threshold_constraints_list_data: ThresholdConstraintsListDataType,
+            threshold_description_list_data: ThresholdDescriptionListDataType,
+            threshold_list_data: ThresholdListDataType,
+            tier_boundary_description_list_data: TierBoundaryDescriptionListDataType,
+            tier_boundary_list_data: TierBoundaryListDataType,
+            tier_description_list_data: TierDescriptionListDataType,
+            tier_incentive_relation_list_data: TierIncentiveRelationListDataType,
+            tier_list_data: TierListDataType,
+            time_distributor_data: TimeDistributorDataType,
+            time_distributor_enquiry_call: TimeDistributorEnquiryCallType,
+            time_information_data: TimeInformationDataType,
+            time_precision_data: TimePrecisionDataType,
+            time_series_constraints_list_data: TimeSeriesConstraintsListDataType,
+            time_series_description_list_data: TimeSeriesDescriptionListDataType,
+            time_series_list_data: TimeSeriesListDataType,
+            time_table_constraints_list_data: TimeTableConstraintsListDataType,
+            time_table_description_list_data: TimeTableDescriptionListDataType,
+            time_table_list_data: TimeTableListDataType,
+            use_case_information_list_data: UseCaseInformationListDataType,
+            manufacturer_specific_extension: str = None,
+            last_update_at: AbsoluteOrRelativeTimeType = None,
+    ):
+        super().__init__()
+        
+        self.function = function
+        self.filter = filter
+        self.actuator_level_data = actuator_level_data
+        self.actuator_level_description_data = actuator_level_description_data
+        self.actuator_switch_data = actuator_switch_data
+        self.actuator_switch_description_data = actuator_switch_description_data
+        self.alarm_list_data = alarm_list_data
+        self.bill_constraints_list_data = bill_constraints_list_data
+        self.bill_description_list_data = bill_description_list_data
+        self.bill_list_data = bill_list_data
+        self.binding_management_delete_call = binding_management_delete_call
+        self.binding_management_entry_list_data = binding_management_entry_list_data
+        self.binding_management_request_call = binding_management_request_call
+        self.commodity_list_data = commodity_list_data
+        self.data_tunneling_call = data_tunneling_call
+        self.device_classification_manufacturer_data = device_classification_manufacturer_data
+        self.device_classification_user_data = device_classification_user_data
+        self.device_configuration_key_value_constraints_list_data = device_configuration_key_value_constraints_list_data
+        self.device_configuration_key_value_description_list_data = device_configuration_key_value_description_list_data
+        self.device_configuration_key_value_list_data = device_configuration_key_value_list_data
+        self.device_diagnosis_heartbeat_data = device_diagnosis_heartbeat_data
+        self.device_diagnosis_service_data = device_diagnosis_service_data
+        self.device_diagnosis_state_data = device_diagnosis_state_data
+        self.direct_control_activity_list_data = direct_control_activity_list_data
+        self.direct_control_description_data = direct_control_description_data
+        self.electrical_connection_characteristic_list_data = electrical_connection_characteristic_list_data
+        self.electrical_connection_description_list_data = electrical_connection_description_list_data
+        self.electrical_connection_parameter_description_list_data = electrical_connection_parameter_description_list_data
+        self.electrical_connection_permitted_value_set_list_data = electrical_connection_permitted_value_set_list_data
+        self.electrical_connection_state_list_data = electrical_connection_state_list_data
+        self.hvac_operation_mode_description_list_data = hvac_operation_mode_description_list_data
+        self.hvac_overrun_description_list_data = hvac_overrun_description_list_data
+        self.hvac_overrun_list_data = hvac_overrun_list_data
+        self.hvac_system_function_description_list_data = hvac_system_function_description_list_data
+        self.hvac_system_function_list_data = hvac_system_function_list_data
+        self.hvac_system_function_operation_mode_relation_list_data = hvac_system_function_operation_mode_relation_list_data
+        self.hvac_system_function_power_sequence_relation_list_data = hvac_system_function_power_sequence_relation_list_data
+        self.hvac_system_function_setpoint_relation_list_data = hvac_system_function_setpoint_relation_list_data
+        self.identification_list_data = identification_list_data
+        self.incentive_description_list_data = incentive_description_list_data
+        self.incentive_list_data = incentive_list_data
+        self.incentive_table_constraints_data = incentive_table_constraints_data
+        self.incentive_table_data = incentive_table_data
+        self.incentive_table_description_data = incentive_table_description_data
+        self.load_control_event_list_data = load_control_event_list_data
+        self.load_control_limit_constraints_list_data = load_control_limit_constraints_list_data
+        self.load_control_limit_description_list_data = load_control_limit_description_list_data
+        self.load_control_limit_list_data = load_control_limit_list_data
+        self.load_control_node_data = load_control_node_data
+        self.load_control_state_list_data = load_control_state_list_data
+        self.measurement_constraints_list_data = measurement_constraints_list_data
+        self.measurement_description_list_data = measurement_description_list_data
+        self.measurement_list_data = measurement_list_data
+        self.measurement_series_list_data = measurement_series_list_data
+        self.measurement_threshold_relation_list_data = measurement_threshold_relation_list_data
+        self.messaging_list_data = messaging_list_data
+        self.network_management_abort_call = network_management_abort_call
+        self.network_management_add_node_call = network_management_add_node_call
+        self.network_management_device_description_list_data = network_management_device_description_list_data
+        self.network_management_discover_call = network_management_discover_call
+        self.network_management_entity_description_list_data = network_management_entity_description_list_data
+        self.network_management_feature_description_list_data = network_management_feature_description_list_data
+        self.network_management_joining_mode_data = network_management_joining_mode_data
+        self.network_management_modify_node_call = network_management_modify_node_call
+        self.network_management_process_state_data = network_management_process_state_data
+        self.network_management_remove_node_call = network_management_remove_node_call
+        self.network_management_report_candidate_data = network_management_report_candidate_data
+        self.network_management_scan_network_call = network_management_scan_network_call
+        self.node_management_binding_data = node_management_binding_data
+        self.node_management_binding_delete_call = node_management_binding_delete_call
+        self.node_management_binding_request_call = node_management_binding_request_call
+        self.node_management_destination_list_data = node_management_destination_list_data
+        self.node_management_detailed_discovery_data = node_management_detailed_discovery_data
+        self.node_management_subscription_data = node_management_subscription_data
+        self.node_management_subscription_delete_call = node_management_subscription_delete_call
+        self.node_management_subscription_request_call = node_management_subscription_request_call
+        self.node_management_use_case_data = node_management_use_case_data
+        self.operating_constraints_duration_list_data = operating_constraints_duration_list_data
+        self.operating_constraints_interrupt_list_data = operating_constraints_interrupt_list_data
+        self.operating_constraints_power_description_list_data = operating_constraints_power_description_list_data
+        self.operating_constraints_power_level_list_data = operating_constraints_power_level_list_data
+        self.operating_constraints_power_range_list_data = operating_constraints_power_range_list_data
+        self.operating_constraints_resume_implication_list_data = operating_constraints_resume_implication_list_data
+        self.power_sequence_alternatives_relation_list_data = power_sequence_alternatives_relation_list_data
+        self.power_sequence_description_list_data = power_sequence_description_list_data
+        self.power_sequence_node_schedule_information_data = power_sequence_node_schedule_information_data
+        self.power_sequence_price_calculation_request_call = power_sequence_price_calculation_request_call
+        self.power_sequence_price_list_data = power_sequence_price_list_data
+        self.power_sequence_schedule_configuration_request_call = power_sequence_schedule_configuration_request_call
+        self.power_sequence_schedule_constraints_list_data = power_sequence_schedule_constraints_list_data
+        self.power_sequence_schedule_list_data = power_sequence_schedule_list_data
+        self.power_sequence_schedule_preference_list_data = power_sequence_schedule_preference_list_data
+        self.power_sequence_state_list_data = power_sequence_state_list_data
+        self.power_time_slot_schedule_constraints_list_data = power_time_slot_schedule_constraints_list_data
+        self.power_time_slot_schedule_list_data = power_time_slot_schedule_list_data
+        self.power_time_slot_value_list_data = power_time_slot_value_list_data
+        self.result_data = result_data
+        self.sensing_description_data = sensing_description_data
+        self.sensing_list_data = sensing_list_data
+        self.session_identification_list_data = session_identification_list_data
+        self.session_measurement_relation_list_data = session_measurement_relation_list_data
+        self.setpoint_constraints_list_data = setpoint_constraints_list_data
+        self.setpoint_description_list_data = setpoint_description_list_data
+        self.setpoint_list_data = setpoint_list_data
+        self.smart_energy_management_ps_configuration_request_call = smart_energy_management_ps_configuration_request_call
+        self.smart_energy_management_ps_data = smart_energy_management_ps_data
+        self.smart_energy_management_ps_price_calculation_request_call = smart_energy_management_ps_price_calculation_request_call
+        self.smart_energy_management_ps_price_data = smart_energy_management_ps_price_data
+        self.specification_version_list_data = specification_version_list_data
+        self.state_information_list_data = state_information_list_data
+        self.subscription_management_delete_call = subscription_management_delete_call
+        self.subscription_management_entry_list_data = subscription_management_entry_list_data
+        self.subscription_management_request_call = subscription_management_request_call
+        self.supply_condition_description_list_data = supply_condition_description_list_data
+        self.supply_condition_list_data = supply_condition_list_data
+        self.supply_condition_threshold_relation_list_data = supply_condition_threshold_relation_list_data
+        self.tariff_boundary_relation_list_data = tariff_boundary_relation_list_data
+        self.tariff_description_list_data = tariff_description_list_data
+        self.tariff_list_data = tariff_list_data
+        self.tariff_overall_constraints_data = tariff_overall_constraints_data
+        self.tariff_tier_relation_list_data = tariff_tier_relation_list_data
+        self.task_management_job_description_list_data = task_management_job_description_list_data
+        self.task_management_job_list_data = task_management_job_list_data
+        self.task_management_job_relation_list_data = task_management_job_relation_list_data
+        self.task_management_overview_data = task_management_overview_data
+        self.threshold_constraints_list_data = threshold_constraints_list_data
+        self.threshold_description_list_data = threshold_description_list_data
+        self.threshold_list_data = threshold_list_data
+        self.tier_boundary_description_list_data = tier_boundary_description_list_data
+        self.tier_boundary_list_data = tier_boundary_list_data
+        self.tier_description_list_data = tier_description_list_data
+        self.tier_incentive_relation_list_data = tier_incentive_relation_list_data
+        self.tier_list_data = tier_list_data
+        self.time_distributor_data = time_distributor_data
+        self.time_distributor_enquiry_call = time_distributor_enquiry_call
+        self.time_information_data = time_information_data
+        self.time_precision_data = time_precision_data
+        self.time_series_constraints_list_data = time_series_constraints_list_data
+        self.time_series_description_list_data = time_series_description_list_data
+        self.time_series_list_data = time_series_list_data
+        self.time_table_constraints_list_data = time_table_constraints_list_data
+        self.time_table_description_list_data = time_table_description_list_data
+        self.time_table_list_data = time_table_list_data
+        self.use_case_information_list_data = use_case_information_list_data
+        self.manufacturer_specific_extension = manufacturer_specific_extension
+        self.last_update_at = last_update_at
+
+        if not isinstance(self.function, FunctionType | NoneType):
+            raise TypeError("function is not of type FunctionType")
+        
+        if not isinstance(self.filter, list | NoneType):
+            raise TypeError("filter is not of type list[FilterType]")
+        
+        if not isinstance(self.actuator_level_data, ActuatorLevelDataType):
+            raise TypeError("actuator_level_data is not of type ActuatorLevelDataType")
+        
+        if not isinstance(self.actuator_level_description_data, ActuatorLevelDescriptionDataType):
+            raise TypeError("actuator_level_description_data is not of type ActuatorLevelDescriptionDataType")
+        
+        if not isinstance(self.actuator_switch_data, ActuatorSwitchDataType):
+            raise TypeError("actuator_switch_data is not of type ActuatorSwitchDataType")
+        
+        if not isinstance(self.actuator_switch_description_data, ActuatorSwitchDescriptionDataType):
+            raise TypeError("actuator_switch_description_data is not of type ActuatorSwitchDescriptionDataType")
+        
+        if not isinstance(self.alarm_list_data, AlarmListDataType):
+            raise TypeError("alarm_list_data is not of type AlarmListDataType")
+        
+        if not isinstance(self.bill_constraints_list_data, BillConstraintsListDataType):
+            raise TypeError("bill_constraints_list_data is not of type BillConstraintsListDataType")
+        
+        if not isinstance(self.bill_description_list_data, BillDescriptionListDataType):
+            raise TypeError("bill_description_list_data is not of type BillDescriptionListDataType")
+        
+        if not isinstance(self.bill_list_data, BillListDataType):
+            raise TypeError("bill_list_data is not of type BillListDataType")
+        
+        if not isinstance(self.binding_management_delete_call, BindingManagementDeleteCallType):
+            raise TypeError("binding_management_delete_call is not of type BindingManagementDeleteCallType")
+        
+        if not isinstance(self.binding_management_entry_list_data, BindingManagementEntryListDataType):
+            raise TypeError("binding_management_entry_list_data is not of type BindingManagementEntryListDataType")
+        
+        if not isinstance(self.binding_management_request_call, BindingManagementRequestCallType):
+            raise TypeError("binding_management_request_call is not of type BindingManagementRequestCallType")
+        
+        if not isinstance(self.commodity_list_data, CommodityListDataType):
+            raise TypeError("commodity_list_data is not of type CommodityListDataType")
+        
+        if not isinstance(self.data_tunneling_call, DataTunnelingCallType):
+            raise TypeError("data_tunneling_call is not of type DataTunnelingCallType")
+        
+        if not isinstance(self.device_classification_manufacturer_data, DeviceClassificationManufacturerDataType):
+            raise TypeError("device_classification_manufacturer_data is not of type DeviceClassificationManufacturerDataType")
+        
+        if not isinstance(self.device_classification_user_data, DeviceClassificationUserDataType):
+            raise TypeError("device_classification_user_data is not of type DeviceClassificationUserDataType")
+        
+        if not isinstance(self.device_configuration_key_value_constraints_list_data, DeviceConfigurationKeyValueConstraintsListDataType):
+            raise TypeError("device_configuration_key_value_constraints_list_data is not of type DeviceConfigurationKeyValueConstraintsListDataType")
+        
+        if not isinstance(self.device_configuration_key_value_description_list_data, DeviceConfigurationKeyValueDescriptionListDataType):
+            raise TypeError("device_configuration_key_value_description_list_data is not of type DeviceConfigurationKeyValueDescriptionListDataType")
+        
+        if not isinstance(self.device_configuration_key_value_list_data, DeviceConfigurationKeyValueListDataType):
+            raise TypeError("device_configuration_key_value_list_data is not of type DeviceConfigurationKeyValueListDataType")
+        
+        if not isinstance(self.device_diagnosis_heartbeat_data, DeviceDiagnosisHeartbeatDataType):
+            raise TypeError("device_diagnosis_heartbeat_data is not of type DeviceDiagnosisHeartbeatDataType")
+        
+        if not isinstance(self.device_diagnosis_service_data, DeviceDiagnosisServiceDataType):
+            raise TypeError("device_diagnosis_service_data is not of type DeviceDiagnosisServiceDataType")
+        
+        if not isinstance(self.device_diagnosis_state_data, DeviceDiagnosisStateDataType):
+            raise TypeError("device_diagnosis_state_data is not of type DeviceDiagnosisStateDataType")
+        
+        if not isinstance(self.direct_control_activity_list_data, DirectControlActivityListDataType):
+            raise TypeError("direct_control_activity_list_data is not of type DirectControlActivityListDataType")
+        
+        if not isinstance(self.direct_control_description_data, DirectControlDescriptionDataType):
+            raise TypeError("direct_control_description_data is not of type DirectControlDescriptionDataType")
+        
+        if not isinstance(self.electrical_connection_characteristic_list_data, ElectricalConnectionCharacteristicListDataType):
+            raise TypeError("electrical_connection_characteristic_list_data is not of type ElectricalConnectionCharacteristicListDataType")
+        
+        if not isinstance(self.electrical_connection_description_list_data, ElectricalConnectionDescriptionListDataType):
+            raise TypeError("electrical_connection_description_list_data is not of type ElectricalConnectionDescriptionListDataType")
+        
+        if not isinstance(self.electrical_connection_parameter_description_list_data, ElectricalConnectionParameterDescriptionListDataType):
+            raise TypeError("electrical_connection_parameter_description_list_data is not of type ElectricalConnectionParameterDescriptionListDataType")
+        
+        if not isinstance(self.electrical_connection_permitted_value_set_list_data, ElectricalConnectionPermittedValueSetListDataType):
+            raise TypeError("electrical_connection_permitted_value_set_list_data is not of type ElectricalConnectionPermittedValueSetListDataType")
+        
+        if not isinstance(self.electrical_connection_state_list_data, ElectricalConnectionStateListDataType):
+            raise TypeError("electrical_connection_state_list_data is not of type ElectricalConnectionStateListDataType")
+        
+        if not isinstance(self.hvac_operation_mode_description_list_data, HvacOperationModeDescriptionListDataType):
+            raise TypeError("hvac_operation_mode_description_list_data is not of type HvacOperationModeDescriptionListDataType")
+        
+        if not isinstance(self.hvac_overrun_description_list_data, HvacOverrunDescriptionListDataType):
+            raise TypeError("hvac_overrun_description_list_data is not of type HvacOverrunDescriptionListDataType")
+        
+        if not isinstance(self.hvac_overrun_list_data, HvacOverrunListDataType):
+            raise TypeError("hvac_overrun_list_data is not of type HvacOverrunListDataType")
+        
+        if not isinstance(self.hvac_system_function_description_list_data, HvacSystemFunctionDescriptionListDataType):
+            raise TypeError("hvac_system_function_description_list_data is not of type HvacSystemFunctionDescriptionListDataType")
+        
+        if not isinstance(self.hvac_system_function_list_data, HvacSystemFunctionListDataType):
+            raise TypeError("hvac_system_function_list_data is not of type HvacSystemFunctionListDataType")
+        
+        if not isinstance(self.hvac_system_function_operation_mode_relation_list_data, HvacSystemFunctionOperationModeRelationListDataType):
+            raise TypeError("hvac_system_function_operation_mode_relation_list_data is not of type HvacSystemFunctionOperationModeRelationListDataType")
+        
+        if not isinstance(self.hvac_system_function_power_sequence_relation_list_data, HvacSystemFunctionPowerSequenceRelationListDataType):
+            raise TypeError("hvac_system_function_power_sequence_relation_list_data is not of type HvacSystemFunctionPowerSequenceRelationListDataType")
+        
+        if not isinstance(self.hvac_system_function_setpoint_relation_list_data, HvacSystemFunctionSetpointRelationListDataType):
+            raise TypeError("hvac_system_function_setpoint_relation_list_data is not of type HvacSystemFunctionSetpointRelationListDataType")
+        
+        if not isinstance(self.identification_list_data, IdentificationListDataType):
+            raise TypeError("identification_list_data is not of type IdentificationListDataType")
+        
+        if not isinstance(self.incentive_description_list_data, IncentiveDescriptionListDataType):
+            raise TypeError("incentive_description_list_data is not of type IncentiveDescriptionListDataType")
+        
+        if not isinstance(self.incentive_list_data, IncentiveListDataType):
+            raise TypeError("incentive_list_data is not of type IncentiveListDataType")
+        
+        if not isinstance(self.incentive_table_constraints_data, IncentiveTableConstraintsDataType):
+            raise TypeError("incentive_table_constraints_data is not of type IncentiveTableConstraintsDataType")
+        
+        if not isinstance(self.incentive_table_data, IncentiveTableDataType):
+            raise TypeError("incentive_table_data is not of type IncentiveTableDataType")
+        
+        if not isinstance(self.incentive_table_description_data, IncentiveTableDescriptionDataType):
+            raise TypeError("incentive_table_description_data is not of type IncentiveTableDescriptionDataType")
+        
+        if not isinstance(self.load_control_event_list_data, LoadControlEventListDataType):
+            raise TypeError("load_control_event_list_data is not of type LoadControlEventListDataType")
+        
+        if not isinstance(self.load_control_limit_constraints_list_data, LoadControlLimitConstraintsListDataType):
+            raise TypeError("load_control_limit_constraints_list_data is not of type LoadControlLimitConstraintsListDataType")
+        
+        if not isinstance(self.load_control_limit_description_list_data, LoadControlLimitDescriptionListDataType):
+            raise TypeError("load_control_limit_description_list_data is not of type LoadControlLimitDescriptionListDataType")
+        
+        if not isinstance(self.load_control_limit_list_data, LoadControlLimitListDataType):
+            raise TypeError("load_control_limit_list_data is not of type LoadControlLimitListDataType")
+        
+        if not isinstance(self.load_control_node_data, LoadControlNodeDataType):
+            raise TypeError("load_control_node_data is not of type LoadControlNodeDataType")
+        
+        if not isinstance(self.load_control_state_list_data, LoadControlStateListDataType):
+            raise TypeError("load_control_state_list_data is not of type LoadControlStateListDataType")
+        
+        if not isinstance(self.measurement_constraints_list_data, MeasurementConstraintsListDataType):
+            raise TypeError("measurement_constraints_list_data is not of type MeasurementConstraintsListDataType")
+        
+        if not isinstance(self.measurement_description_list_data, MeasurementDescriptionListDataType):
+            raise TypeError("measurement_description_list_data is not of type MeasurementDescriptionListDataType")
+        
+        if not isinstance(self.measurement_list_data, MeasurementListDataType):
+            raise TypeError("measurement_list_data is not of type MeasurementListDataType")
+        
+        if not isinstance(self.measurement_series_list_data, MeasurementSeriesListDataType):
+            raise TypeError("measurement_series_list_data is not of type MeasurementSeriesListDataType")
+        
+        if not isinstance(self.measurement_threshold_relation_list_data, MeasurementThresholdRelationListDataType):
+            raise TypeError("measurement_threshold_relation_list_data is not of type MeasurementThresholdRelationListDataType")
+        
+        if not isinstance(self.messaging_list_data, MessagingListDataType):
+            raise TypeError("messaging_list_data is not of type MessagingListDataType")
+        
+        if not isinstance(self.network_management_abort_call, NetworkManagementAbortCallType):
+            raise TypeError("network_management_abort_call is not of type NetworkManagementAbortCallType")
+        
+        if not isinstance(self.network_management_add_node_call, NetworkManagementAddNodeCallType):
+            raise TypeError("network_management_add_node_call is not of type NetworkManagementAddNodeCallType")
+        
+        if not isinstance(self.network_management_device_description_list_data, NetworkManagementDeviceDescriptionListDataType):
+            raise TypeError("network_management_device_description_list_data is not of type NetworkManagementDeviceDescriptionListDataType")
+        
+        if not isinstance(self.network_management_discover_call, NetworkManagementDiscoverCallType):
+            raise TypeError("network_management_discover_call is not of type NetworkManagementDiscoverCallType")
+        
+        if not isinstance(self.network_management_entity_description_list_data, NetworkManagementEntityDescriptionListDataType):
+            raise TypeError("network_management_entity_description_list_data is not of type NetworkManagementEntityDescriptionListDataType")
+        
+        if not isinstance(self.network_management_feature_description_list_data, NetworkManagementFeatureDescriptionListDataType):
+            raise TypeError("network_management_feature_description_list_data is not of type NetworkManagementFeatureDescriptionListDataType")
+        
+        if not isinstance(self.network_management_joining_mode_data, NetworkManagementJoiningModeDataType):
+            raise TypeError("network_management_joining_mode_data is not of type NetworkManagementJoiningModeDataType")
+        
+        if not isinstance(self.network_management_modify_node_call, NetworkManagementModifyNodeCallType):
+            raise TypeError("network_management_modify_node_call is not of type NetworkManagementModifyNodeCallType")
+        
+        if not isinstance(self.network_management_process_state_data, NetworkManagementProcessStateDataType):
+            raise TypeError("network_management_process_state_data is not of type NetworkManagementProcessStateDataType")
+        
+        if not isinstance(self.network_management_remove_node_call, NetworkManagementRemoveNodeCallType):
+            raise TypeError("network_management_remove_node_call is not of type NetworkManagementRemoveNodeCallType")
+        
+        if not isinstance(self.network_management_report_candidate_data, NetworkManagementReportCandidateDataType):
+            raise TypeError("network_management_report_candidate_data is not of type NetworkManagementReportCandidateDataType")
+        
+        if not isinstance(self.network_management_scan_network_call, NetworkManagementScanNetworkCallType):
+            raise TypeError("network_management_scan_network_call is not of type NetworkManagementScanNetworkCallType")
+        
+        if not isinstance(self.node_management_binding_data, NodeManagementBindingDataType):
+            raise TypeError("node_management_binding_data is not of type NodeManagementBindingDataType")
+        
+        if not isinstance(self.node_management_binding_delete_call, NodeManagementBindingDeleteCallType):
+            raise TypeError("node_management_binding_delete_call is not of type NodeManagementBindingDeleteCallType")
+        
+        if not isinstance(self.node_management_binding_request_call, NodeManagementBindingRequestCallType):
+            raise TypeError("node_management_binding_request_call is not of type NodeManagementBindingRequestCallType")
+        
+        if not isinstance(self.node_management_destination_list_data, NodeManagementDestinationListDataType):
+            raise TypeError("node_management_destination_list_data is not of type NodeManagementDestinationListDataType")
+        
+        if not isinstance(self.node_management_detailed_discovery_data, NodeManagementDetailedDiscoveryDataType):
+            raise TypeError("node_management_detailed_discovery_data is not of type NodeManagementDetailedDiscoveryDataType")
+        
+        if not isinstance(self.node_management_subscription_data, NodeManagementSubscriptionDataType):
+            raise TypeError("node_management_subscription_data is not of type NodeManagementSubscriptionDataType")
+        
+        if not isinstance(self.node_management_subscription_delete_call, NodeManagementSubscriptionDeleteCallType):
+            raise TypeError("node_management_subscription_delete_call is not of type NodeManagementSubscriptionDeleteCallType")
+        
+        if not isinstance(self.node_management_subscription_request_call, NodeManagementSubscriptionRequestCallType):
+            raise TypeError("node_management_subscription_request_call is not of type NodeManagementSubscriptionRequestCallType")
+        
+        if not isinstance(self.node_management_use_case_data, NodeManagementUseCaseDataType):
+            raise TypeError("node_management_use_case_data is not of type NodeManagementUseCaseDataType")
+        
+        if not isinstance(self.operating_constraints_duration_list_data, OperatingConstraintsDurationListDataType):
+            raise TypeError("operating_constraints_duration_list_data is not of type OperatingConstraintsDurationListDataType")
+        
+        if not isinstance(self.operating_constraints_interrupt_list_data, OperatingConstraintsInterruptListDataType):
+            raise TypeError("operating_constraints_interrupt_list_data is not of type OperatingConstraintsInterruptListDataType")
+        
+        if not isinstance(self.operating_constraints_power_description_list_data, OperatingConstraintsPowerDescriptionListDataType):
+            raise TypeError("operating_constraints_power_description_list_data is not of type OperatingConstraintsPowerDescriptionListDataType")
+        
+        if not isinstance(self.operating_constraints_power_level_list_data, OperatingConstraintsPowerLevelListDataType):
+            raise TypeError("operating_constraints_power_level_list_data is not of type OperatingConstraintsPowerLevelListDataType")
+        
+        if not isinstance(self.operating_constraints_power_range_list_data, OperatingConstraintsPowerRangeListDataType):
+            raise TypeError("operating_constraints_power_range_list_data is not of type OperatingConstraintsPowerRangeListDataType")
+        
+        if not isinstance(self.operating_constraints_resume_implication_list_data, OperatingConstraintsResumeImplicationListDataType):
+            raise TypeError("operating_constraints_resume_implication_list_data is not of type OperatingConstraintsResumeImplicationListDataType")
+        
+        if not isinstance(self.power_sequence_alternatives_relation_list_data, PowerSequenceAlternativesRelationListDataType):
+            raise TypeError("power_sequence_alternatives_relation_list_data is not of type PowerSequenceAlternativesRelationListDataType")
+        
+        if not isinstance(self.power_sequence_description_list_data, PowerSequenceDescriptionListDataType):
+            raise TypeError("power_sequence_description_list_data is not of type PowerSequenceDescriptionListDataType")
+        
+        if not isinstance(self.power_sequence_node_schedule_information_data, PowerSequenceNodeScheduleInformationDataType):
+            raise TypeError("power_sequence_node_schedule_information_data is not of type PowerSequenceNodeScheduleInformationDataType")
+        
+        if not isinstance(self.power_sequence_price_calculation_request_call, PowerSequencePriceCalculationRequestCallType):
+            raise TypeError("power_sequence_price_calculation_request_call is not of type PowerSequencePriceCalculationRequestCallType")
+        
+        if not isinstance(self.power_sequence_price_list_data, PowerSequencePriceListDataType):
+            raise TypeError("power_sequence_price_list_data is not of type PowerSequencePriceListDataType")
+        
+        if not isinstance(self.power_sequence_schedule_configuration_request_call, PowerSequenceScheduleConfigurationRequestCallType):
+            raise TypeError("power_sequence_schedule_configuration_request_call is not of type PowerSequenceScheduleConfigurationRequestCallType")
+        
+        if not isinstance(self.power_sequence_schedule_constraints_list_data, PowerSequenceScheduleConstraintsListDataType):
+            raise TypeError("power_sequence_schedule_constraints_list_data is not of type PowerSequenceScheduleConstraintsListDataType")
+        
+        if not isinstance(self.power_sequence_schedule_list_data, PowerSequenceScheduleListDataType):
+            raise TypeError("power_sequence_schedule_list_data is not of type PowerSequenceScheduleListDataType")
+        
+        if not isinstance(self.power_sequence_schedule_preference_list_data, PowerSequenceSchedulePreferenceListDataType):
+            raise TypeError("power_sequence_schedule_preference_list_data is not of type PowerSequenceSchedulePreferenceListDataType")
+        
+        if not isinstance(self.power_sequence_state_list_data, PowerSequenceStateListDataType):
+            raise TypeError("power_sequence_state_list_data is not of type PowerSequenceStateListDataType")
+        
+        if not isinstance(self.power_time_slot_schedule_constraints_list_data, PowerTimeSlotScheduleConstraintsListDataType):
+            raise TypeError("power_time_slot_schedule_constraints_list_data is not of type PowerTimeSlotScheduleConstraintsListDataType")
+        
+        if not isinstance(self.power_time_slot_schedule_list_data, PowerTimeSlotScheduleListDataType):
+            raise TypeError("power_time_slot_schedule_list_data is not of type PowerTimeSlotScheduleListDataType")
+        
+        if not isinstance(self.power_time_slot_value_list_data, PowerTimeSlotValueListDataType):
+            raise TypeError("power_time_slot_value_list_data is not of type PowerTimeSlotValueListDataType")
+        
+        if not isinstance(self.result_data, ResultDataType):
+            raise TypeError("result_data is not of type ResultDataType")
+        
+        if not isinstance(self.sensing_description_data, SensingDescriptionDataType):
+            raise TypeError("sensing_description_data is not of type SensingDescriptionDataType")
+        
+        if not isinstance(self.sensing_list_data, SensingListDataType):
+            raise TypeError("sensing_list_data is not of type SensingListDataType")
+        
+        if not isinstance(self.session_identification_list_data, SessionIdentificationListDataType):
+            raise TypeError("session_identification_list_data is not of type SessionIdentificationListDataType")
+        
+        if not isinstance(self.session_measurement_relation_list_data, SessionMeasurementRelationListDataType):
+            raise TypeError("session_measurement_relation_list_data is not of type SessionMeasurementRelationListDataType")
+        
+        if not isinstance(self.setpoint_constraints_list_data, SetpointConstraintsListDataType):
+            raise TypeError("setpoint_constraints_list_data is not of type SetpointConstraintsListDataType")
+        
+        if not isinstance(self.setpoint_description_list_data, SetpointDescriptionListDataType):
+            raise TypeError("setpoint_description_list_data is not of type SetpointDescriptionListDataType")
+        
+        if not isinstance(self.setpoint_list_data, SetpointListDataType):
+            raise TypeError("setpoint_list_data is not of type SetpointListDataType")
+        
+        if not isinstance(self.smart_energy_management_ps_configuration_request_call, SmartEnergyManagementPsConfigurationRequestCallType):
+            raise TypeError("smart_energy_management_ps_configuration_request_call is not of type SmartEnergyManagementPsConfigurationRequestCallType")
+        
+        if not isinstance(self.smart_energy_management_ps_data, SmartEnergyManagementPsDataType):
+            raise TypeError("smart_energy_management_ps_data is not of type SmartEnergyManagementPsDataType")
+        
+        if not isinstance(self.smart_energy_management_ps_price_calculation_request_call, SmartEnergyManagementPsPriceCalculationRequestCallType):
+            raise TypeError("smart_energy_management_ps_price_calculation_request_call is not of type SmartEnergyManagementPsPriceCalculationRequestCallType")
+        
+        if not isinstance(self.smart_energy_management_ps_price_data, SmartEnergyManagementPsPriceDataType):
+            raise TypeError("smart_energy_management_ps_price_data is not of type SmartEnergyManagementPsPriceDataType")
+        
+        if not isinstance(self.specification_version_list_data, SpecificationVersionListDataType):
+            raise TypeError("specification_version_list_data is not of type SpecificationVersionListDataType")
+        
+        if not isinstance(self.state_information_list_data, StateInformationListDataType):
+            raise TypeError("state_information_list_data is not of type StateInformationListDataType")
+        
+        if not isinstance(self.subscription_management_delete_call, SubscriptionManagementDeleteCallType):
+            raise TypeError("subscription_management_delete_call is not of type SubscriptionManagementDeleteCallType")
+        
+        if not isinstance(self.subscription_management_entry_list_data, SubscriptionManagementEntryListDataType):
+            raise TypeError("subscription_management_entry_list_data is not of type SubscriptionManagementEntryListDataType")
+        
+        if not isinstance(self.subscription_management_request_call, SubscriptionManagementRequestCallType):
+            raise TypeError("subscription_management_request_call is not of type SubscriptionManagementRequestCallType")
+        
+        if not isinstance(self.supply_condition_description_list_data, SupplyConditionDescriptionListDataType):
+            raise TypeError("supply_condition_description_list_data is not of type SupplyConditionDescriptionListDataType")
+        
+        if not isinstance(self.supply_condition_list_data, SupplyConditionListDataType):
+            raise TypeError("supply_condition_list_data is not of type SupplyConditionListDataType")
+        
+        if not isinstance(self.supply_condition_threshold_relation_list_data, SupplyConditionThresholdRelationListDataType):
+            raise TypeError("supply_condition_threshold_relation_list_data is not of type SupplyConditionThresholdRelationListDataType")
+        
+        if not isinstance(self.tariff_boundary_relation_list_data, TariffBoundaryRelationListDataType):
+            raise TypeError("tariff_boundary_relation_list_data is not of type TariffBoundaryRelationListDataType")
+        
+        if not isinstance(self.tariff_description_list_data, TariffDescriptionListDataType):
+            raise TypeError("tariff_description_list_data is not of type TariffDescriptionListDataType")
+        
+        if not isinstance(self.tariff_list_data, TariffListDataType):
+            raise TypeError("tariff_list_data is not of type TariffListDataType")
+        
+        if not isinstance(self.tariff_overall_constraints_data, TariffOverallConstraintsDataType):
+            raise TypeError("tariff_overall_constraints_data is not of type TariffOverallConstraintsDataType")
+        
+        if not isinstance(self.tariff_tier_relation_list_data, TariffTierRelationListDataType):
+            raise TypeError("tariff_tier_relation_list_data is not of type TariffTierRelationListDataType")
+        
+        if not isinstance(self.task_management_job_description_list_data, TaskManagementJobDescriptionListDataType):
+            raise TypeError("task_management_job_description_list_data is not of type TaskManagementJobDescriptionListDataType")
+        
+        if not isinstance(self.task_management_job_list_data, TaskManagementJobListDataType):
+            raise TypeError("task_management_job_list_data is not of type TaskManagementJobListDataType")
+        
+        if not isinstance(self.task_management_job_relation_list_data, TaskManagementJobRelationListDataType):
+            raise TypeError("task_management_job_relation_list_data is not of type TaskManagementJobRelationListDataType")
+        
+        if not isinstance(self.task_management_overview_data, TaskManagementOverviewDataType):
+            raise TypeError("task_management_overview_data is not of type TaskManagementOverviewDataType")
+        
+        if not isinstance(self.threshold_constraints_list_data, ThresholdConstraintsListDataType):
+            raise TypeError("threshold_constraints_list_data is not of type ThresholdConstraintsListDataType")
+        
+        if not isinstance(self.threshold_description_list_data, ThresholdDescriptionListDataType):
+            raise TypeError("threshold_description_list_data is not of type ThresholdDescriptionListDataType")
+        
+        if not isinstance(self.threshold_list_data, ThresholdListDataType):
+            raise TypeError("threshold_list_data is not of type ThresholdListDataType")
+        
+        if not isinstance(self.tier_boundary_description_list_data, TierBoundaryDescriptionListDataType):
+            raise TypeError("tier_boundary_description_list_data is not of type TierBoundaryDescriptionListDataType")
+        
+        if not isinstance(self.tier_boundary_list_data, TierBoundaryListDataType):
+            raise TypeError("tier_boundary_list_data is not of type TierBoundaryListDataType")
+        
+        if not isinstance(self.tier_description_list_data, TierDescriptionListDataType):
+            raise TypeError("tier_description_list_data is not of type TierDescriptionListDataType")
+        
+        if not isinstance(self.tier_incentive_relation_list_data, TierIncentiveRelationListDataType):
+            raise TypeError("tier_incentive_relation_list_data is not of type TierIncentiveRelationListDataType")
+        
+        if not isinstance(self.tier_list_data, TierListDataType):
+            raise TypeError("tier_list_data is not of type TierListDataType")
+        
+        if not isinstance(self.time_distributor_data, TimeDistributorDataType):
+            raise TypeError("time_distributor_data is not of type TimeDistributorDataType")
+        
+        if not isinstance(self.time_distributor_enquiry_call, TimeDistributorEnquiryCallType):
+            raise TypeError("time_distributor_enquiry_call is not of type TimeDistributorEnquiryCallType")
+        
+        if not isinstance(self.time_information_data, TimeInformationDataType):
+            raise TypeError("time_information_data is not of type TimeInformationDataType")
+        
+        if not isinstance(self.time_precision_data, TimePrecisionDataType):
+            raise TypeError("time_precision_data is not of type TimePrecisionDataType")
+        
+        if not isinstance(self.time_series_constraints_list_data, TimeSeriesConstraintsListDataType):
+            raise TypeError("time_series_constraints_list_data is not of type TimeSeriesConstraintsListDataType")
+        
+        if not isinstance(self.time_series_description_list_data, TimeSeriesDescriptionListDataType):
+            raise TypeError("time_series_description_list_data is not of type TimeSeriesDescriptionListDataType")
+        
+        if not isinstance(self.time_series_list_data, TimeSeriesListDataType):
+            raise TypeError("time_series_list_data is not of type TimeSeriesListDataType")
+        
+        if not isinstance(self.time_table_constraints_list_data, TimeTableConstraintsListDataType):
+            raise TypeError("time_table_constraints_list_data is not of type TimeTableConstraintsListDataType")
+        
+        if not isinstance(self.time_table_description_list_data, TimeTableDescriptionListDataType):
+            raise TypeError("time_table_description_list_data is not of type TimeTableDescriptionListDataType")
+        
+        if not isinstance(self.time_table_list_data, TimeTableListDataType):
+            raise TypeError("time_table_list_data is not of type TimeTableListDataType")
+        
+        if not isinstance(self.use_case_information_list_data, UseCaseInformationListDataType):
+            raise TypeError("use_case_information_list_data is not of type UseCaseInformationListDataType")
+        
+        if not isinstance(self.manufacturer_specific_extension, str | NoneType):
+            raise TypeError("manufacturer_specific_extension is not of type str")
+        
+        if not isinstance(self.last_update_at, AbsoluteOrRelativeTimeType | NoneType):
+            raise TypeError("last_update_at is not of type AbsoluteOrRelativeTimeType")
+        
+    def get_data(self):
+
+        msg_data = []
+        
+        if self.function is not None:
+            msg_data.append({"function": self.function.get_data()})
+        if self.filter is not None:
+            msg_data.append({"filter": [d.get_data() for d in self.filter]})
+        if self.actuator_level_data is not None:
+            msg_data.append({"actuatorLevelData": self.actuator_level_data.get_data()})
+        if self.actuator_level_description_data is not None:
+            msg_data.append({"actuatorLevelDescriptionData": self.actuator_level_description_data.get_data()})
+        if self.actuator_switch_data is not None:
+            msg_data.append({"actuatorSwitchData": self.actuator_switch_data.get_data()})
+        if self.actuator_switch_description_data is not None:
+            msg_data.append({"actuatorSwitchDescriptionData": self.actuator_switch_description_data.get_data()})
+        if self.alarm_list_data is not None:
+            msg_data.append({"alarmListData": self.alarm_list_data.get_data()})
+        if self.bill_constraints_list_data is not None:
+            msg_data.append({"billConstraintsListData": self.bill_constraints_list_data.get_data()})
+        if self.bill_description_list_data is not None:
+            msg_data.append({"billDescriptionListData": self.bill_description_list_data.get_data()})
+        if self.bill_list_data is not None:
+            msg_data.append({"billListData": self.bill_list_data.get_data()})
+        if self.binding_management_delete_call is not None:
+            msg_data.append({"bindingManagementDeleteCall": self.binding_management_delete_call.get_data()})
+        if self.binding_management_entry_list_data is not None:
+            msg_data.append({"bindingManagementEntryListData": self.binding_management_entry_list_data.get_data()})
+        if self.binding_management_request_call is not None:
+            msg_data.append({"bindingManagementRequestCall": self.binding_management_request_call.get_data()})
+        if self.commodity_list_data is not None:
+            msg_data.append({"commodityListData": self.commodity_list_data.get_data()})
+        if self.data_tunneling_call is not None:
+            msg_data.append({"dataTunnelingCall": self.data_tunneling_call.get_data()})
+        if self.device_classification_manufacturer_data is not None:
+            msg_data.append({"deviceClassificationManufacturerData": self.device_classification_manufacturer_data.get_data()})
+        if self.device_classification_user_data is not None:
+            msg_data.append({"deviceClassificationUserData": self.device_classification_user_data.get_data()})
+        if self.device_configuration_key_value_constraints_list_data is not None:
+            msg_data.append({"deviceConfigurationKeyValueConstraintsListData": self.device_configuration_key_value_constraints_list_data.get_data()})
+        if self.device_configuration_key_value_description_list_data is not None:
+            msg_data.append({"deviceConfigurationKeyValueDescriptionListData": self.device_configuration_key_value_description_list_data.get_data()})
+        if self.device_configuration_key_value_list_data is not None:
+            msg_data.append({"deviceConfigurationKeyValueListData": self.device_configuration_key_value_list_data.get_data()})
+        if self.device_diagnosis_heartbeat_data is not None:
+            msg_data.append({"deviceDiagnosisHeartbeatData": self.device_diagnosis_heartbeat_data.get_data()})
+        if self.device_diagnosis_service_data is not None:
+            msg_data.append({"deviceDiagnosisServiceData": self.device_diagnosis_service_data.get_data()})
+        if self.device_diagnosis_state_data is not None:
+            msg_data.append({"deviceDiagnosisStateData": self.device_diagnosis_state_data.get_data()})
+        if self.direct_control_activity_list_data is not None:
+            msg_data.append({"directControlActivityListData": self.direct_control_activity_list_data.get_data()})
+        if self.direct_control_description_data is not None:
+            msg_data.append({"directControlDescriptionData": self.direct_control_description_data.get_data()})
+        if self.electrical_connection_characteristic_list_data is not None:
+            msg_data.append({"electricalConnectionCharacteristicListData": self.electrical_connection_characteristic_list_data.get_data()})
+        if self.electrical_connection_description_list_data is not None:
+            msg_data.append({"electricalConnectionDescriptionListData": self.electrical_connection_description_list_data.get_data()})
+        if self.electrical_connection_parameter_description_list_data is not None:
+            msg_data.append({"electricalConnectionParameterDescriptionListData": self.electrical_connection_parameter_description_list_data.get_data()})
+        if self.electrical_connection_permitted_value_set_list_data is not None:
+            msg_data.append({"electricalConnectionPermittedValueSetListData": self.electrical_connection_permitted_value_set_list_data.get_data()})
+        if self.electrical_connection_state_list_data is not None:
+            msg_data.append({"electricalConnectionStateListData": self.electrical_connection_state_list_data.get_data()})
+        if self.hvac_operation_mode_description_list_data is not None:
+            msg_data.append({"hvacOperationModeDescriptionListData": self.hvac_operation_mode_description_list_data.get_data()})
+        if self.hvac_overrun_description_list_data is not None:
+            msg_data.append({"hvacOverrunDescriptionListData": self.hvac_overrun_description_list_data.get_data()})
+        if self.hvac_overrun_list_data is not None:
+            msg_data.append({"hvacOverrunListData": self.hvac_overrun_list_data.get_data()})
+        if self.hvac_system_function_description_list_data is not None:
+            msg_data.append({"hvacSystemFunctionDescriptionListData": self.hvac_system_function_description_list_data.get_data()})
+        if self.hvac_system_function_list_data is not None:
+            msg_data.append({"hvacSystemFunctionListData": self.hvac_system_function_list_data.get_data()})
+        if self.hvac_system_function_operation_mode_relation_list_data is not None:
+            msg_data.append({"hvacSystemFunctionOperationModeRelationListData": self.hvac_system_function_operation_mode_relation_list_data.get_data()})
+        if self.hvac_system_function_power_sequence_relation_list_data is not None:
+            msg_data.append({"hvacSystemFunctionPowerSequenceRelationListData": self.hvac_system_function_power_sequence_relation_list_data.get_data()})
+        if self.hvac_system_function_setpoint_relation_list_data is not None:
+            msg_data.append({"hvacSystemFunctionSetpointRelationListData": self.hvac_system_function_setpoint_relation_list_data.get_data()})
+        if self.identification_list_data is not None:
+            msg_data.append({"identificationListData": self.identification_list_data.get_data()})
+        if self.incentive_description_list_data is not None:
+            msg_data.append({"incentiveDescriptionListData": self.incentive_description_list_data.get_data()})
+        if self.incentive_list_data is not None:
+            msg_data.append({"incentiveListData": self.incentive_list_data.get_data()})
+        if self.incentive_table_constraints_data is not None:
+            msg_data.append({"incentiveTableConstraintsData": self.incentive_table_constraints_data.get_data()})
+        if self.incentive_table_data is not None:
+            msg_data.append({"incentiveTableData": self.incentive_table_data.get_data()})
+        if self.incentive_table_description_data is not None:
+            msg_data.append({"incentiveTableDescriptionData": self.incentive_table_description_data.get_data()})
+        if self.load_control_event_list_data is not None:
+            msg_data.append({"loadControlEventListData": self.load_control_event_list_data.get_data()})
+        if self.load_control_limit_constraints_list_data is not None:
+            msg_data.append({"loadControlLimitConstraintsListData": self.load_control_limit_constraints_list_data.get_data()})
+        if self.load_control_limit_description_list_data is not None:
+            msg_data.append({"loadControlLimitDescriptionListData": self.load_control_limit_description_list_data.get_data()})
+        if self.load_control_limit_list_data is not None:
+            msg_data.append({"loadControlLimitListData": self.load_control_limit_list_data.get_data()})
+        if self.load_control_node_data is not None:
+            msg_data.append({"loadControlNodeData": self.load_control_node_data.get_data()})
+        if self.load_control_state_list_data is not None:
+            msg_data.append({"loadControlStateListData": self.load_control_state_list_data.get_data()})
+        if self.measurement_constraints_list_data is not None:
+            msg_data.append({"measurementConstraintsListData": self.measurement_constraints_list_data.get_data()})
+        if self.measurement_description_list_data is not None:
+            msg_data.append({"measurementDescriptionListData": self.measurement_description_list_data.get_data()})
+        if self.measurement_list_data is not None:
+            msg_data.append({"measurementListData": self.measurement_list_data.get_data()})
+        if self.measurement_series_list_data is not None:
+            msg_data.append({"measurementSeriesListData": self.measurement_series_list_data.get_data()})
+        if self.measurement_threshold_relation_list_data is not None:
+            msg_data.append({"measurementThresholdRelationListData": self.measurement_threshold_relation_list_data.get_data()})
+        if self.messaging_list_data is not None:
+            msg_data.append({"messagingListData": self.messaging_list_data.get_data()})
+        if self.network_management_abort_call is not None:
+            msg_data.append({"networkManagementAbortCall": self.network_management_abort_call.get_data()})
+        if self.network_management_add_node_call is not None:
+            msg_data.append({"networkManagementAddNodeCall": self.network_management_add_node_call.get_data()})
+        if self.network_management_device_description_list_data is not None:
+            msg_data.append({"networkManagementDeviceDescriptionListData": self.network_management_device_description_list_data.get_data()})
+        if self.network_management_discover_call is not None:
+            msg_data.append({"networkManagementDiscoverCall": self.network_management_discover_call.get_data()})
+        if self.network_management_entity_description_list_data is not None:
+            msg_data.append({"networkManagementEntityDescriptionListData": self.network_management_entity_description_list_data.get_data()})
+        if self.network_management_feature_description_list_data is not None:
+            msg_data.append({"networkManagementFeatureDescriptionListData": self.network_management_feature_description_list_data.get_data()})
+        if self.network_management_joining_mode_data is not None:
+            msg_data.append({"networkManagementJoiningModeData": self.network_management_joining_mode_data.get_data()})
+        if self.network_management_modify_node_call is not None:
+            msg_data.append({"networkManagementModifyNodeCall": self.network_management_modify_node_call.get_data()})
+        if self.network_management_process_state_data is not None:
+            msg_data.append({"networkManagementProcessStateData": self.network_management_process_state_data.get_data()})
+        if self.network_management_remove_node_call is not None:
+            msg_data.append({"networkManagementRemoveNodeCall": self.network_management_remove_node_call.get_data()})
+        if self.network_management_report_candidate_data is not None:
+            msg_data.append({"networkManagementReportCandidateData": self.network_management_report_candidate_data.get_data()})
+        if self.network_management_scan_network_call is not None:
+            msg_data.append({"networkManagementScanNetworkCall": self.network_management_scan_network_call.get_data()})
+        if self.node_management_binding_data is not None:
+            msg_data.append({"nodeManagementBindingData": self.node_management_binding_data.get_data()})
+        if self.node_management_binding_delete_call is not None:
+            msg_data.append({"nodeManagementBindingDeleteCall": self.node_management_binding_delete_call.get_data()})
+        if self.node_management_binding_request_call is not None:
+            msg_data.append({"nodeManagementBindingRequestCall": self.node_management_binding_request_call.get_data()})
+        if self.node_management_destination_list_data is not None:
+            msg_data.append({"nodeManagementDestinationListData": self.node_management_destination_list_data.get_data()})
+        if self.node_management_detailed_discovery_data is not None:
+            msg_data.append({"nodeManagementDetailedDiscoveryData": self.node_management_detailed_discovery_data.get_data()})
+        if self.node_management_subscription_data is not None:
+            msg_data.append({"nodeManagementSubscriptionData": self.node_management_subscription_data.get_data()})
+        if self.node_management_subscription_delete_call is not None:
+            msg_data.append({"nodeManagementSubscriptionDeleteCall": self.node_management_subscription_delete_call.get_data()})
+        if self.node_management_subscription_request_call is not None:
+            msg_data.append({"nodeManagementSubscriptionRequestCall": self.node_management_subscription_request_call.get_data()})
+        if self.node_management_use_case_data is not None:
+            msg_data.append({"nodeManagementUseCaseData": self.node_management_use_case_data.get_data()})
+        if self.operating_constraints_duration_list_data is not None:
+            msg_data.append({"operatingConstraintsDurationListData": self.operating_constraints_duration_list_data.get_data()})
+        if self.operating_constraints_interrupt_list_data is not None:
+            msg_data.append({"operatingConstraintsInterruptListData": self.operating_constraints_interrupt_list_data.get_data()})
+        if self.operating_constraints_power_description_list_data is not None:
+            msg_data.append({"operatingConstraintsPowerDescriptionListData": self.operating_constraints_power_description_list_data.get_data()})
+        if self.operating_constraints_power_level_list_data is not None:
+            msg_data.append({"operatingConstraintsPowerLevelListData": self.operating_constraints_power_level_list_data.get_data()})
+        if self.operating_constraints_power_range_list_data is not None:
+            msg_data.append({"operatingConstraintsPowerRangeListData": self.operating_constraints_power_range_list_data.get_data()})
+        if self.operating_constraints_resume_implication_list_data is not None:
+            msg_data.append({"operatingConstraintsResumeImplicationListData": self.operating_constraints_resume_implication_list_data.get_data()})
+        if self.power_sequence_alternatives_relation_list_data is not None:
+            msg_data.append({"powerSequenceAlternativesRelationListData": self.power_sequence_alternatives_relation_list_data.get_data()})
+        if self.power_sequence_description_list_data is not None:
+            msg_data.append({"powerSequenceDescriptionListData": self.power_sequence_description_list_data.get_data()})
+        if self.power_sequence_node_schedule_information_data is not None:
+            msg_data.append({"powerSequenceNodeScheduleInformationData": self.power_sequence_node_schedule_information_data.get_data()})
+        if self.power_sequence_price_calculation_request_call is not None:
+            msg_data.append({"powerSequencePriceCalculationRequestCall": self.power_sequence_price_calculation_request_call.get_data()})
+        if self.power_sequence_price_list_data is not None:
+            msg_data.append({"powerSequencePriceListData": self.power_sequence_price_list_data.get_data()})
+        if self.power_sequence_schedule_configuration_request_call is not None:
+            msg_data.append({"powerSequenceScheduleConfigurationRequestCall": self.power_sequence_schedule_configuration_request_call.get_data()})
+        if self.power_sequence_schedule_constraints_list_data is not None:
+            msg_data.append({"powerSequenceScheduleConstraintsListData": self.power_sequence_schedule_constraints_list_data.get_data()})
+        if self.power_sequence_schedule_list_data is not None:
+            msg_data.append({"powerSequenceScheduleListData": self.power_sequence_schedule_list_data.get_data()})
+        if self.power_sequence_schedule_preference_list_data is not None:
+            msg_data.append({"powerSequenceSchedulePreferenceListData": self.power_sequence_schedule_preference_list_data.get_data()})
+        if self.power_sequence_state_list_data is not None:
+            msg_data.append({"powerSequenceStateListData": self.power_sequence_state_list_data.get_data()})
+        if self.power_time_slot_schedule_constraints_list_data is not None:
+            msg_data.append({"powerTimeSlotScheduleConstraintsListData": self.power_time_slot_schedule_constraints_list_data.get_data()})
+        if self.power_time_slot_schedule_list_data is not None:
+            msg_data.append({"powerTimeSlotScheduleListData": self.power_time_slot_schedule_list_data.get_data()})
+        if self.power_time_slot_value_list_data is not None:
+            msg_data.append({"powerTimeSlotValueListData": self.power_time_slot_value_list_data.get_data()})
+        if self.result_data is not None:
+            msg_data.append({"resultData": self.result_data.get_data()})
+        if self.sensing_description_data is not None:
+            msg_data.append({"sensingDescriptionData": self.sensing_description_data.get_data()})
+        if self.sensing_list_data is not None:
+            msg_data.append({"sensingListData": self.sensing_list_data.get_data()})
+        if self.session_identification_list_data is not None:
+            msg_data.append({"sessionIdentificationListData": self.session_identification_list_data.get_data()})
+        if self.session_measurement_relation_list_data is not None:
+            msg_data.append({"sessionMeasurementRelationListData": self.session_measurement_relation_list_data.get_data()})
+        if self.setpoint_constraints_list_data is not None:
+            msg_data.append({"setpointConstraintsListData": self.setpoint_constraints_list_data.get_data()})
+        if self.setpoint_description_list_data is not None:
+            msg_data.append({"setpointDescriptionListData": self.setpoint_description_list_data.get_data()})
+        if self.setpoint_list_data is not None:
+            msg_data.append({"setpointListData": self.setpoint_list_data.get_data()})
+        if self.smart_energy_management_ps_configuration_request_call is not None:
+            msg_data.append({"smartEnergyManagementPsConfigurationRequestCall": self.smart_energy_management_ps_configuration_request_call.get_data()})
+        if self.smart_energy_management_ps_data is not None:
+            msg_data.append({"smartEnergyManagementPsData": self.smart_energy_management_ps_data.get_data()})
+        if self.smart_energy_management_ps_price_calculation_request_call is not None:
+            msg_data.append({"smartEnergyManagementPsPriceCalculationRequestCall": self.smart_energy_management_ps_price_calculation_request_call.get_data()})
+        if self.smart_energy_management_ps_price_data is not None:
+            msg_data.append({"smartEnergyManagementPsPriceData": self.smart_energy_management_ps_price_data.get_data()})
+        if self.specification_version_list_data is not None:
+            msg_data.append({"specificationVersionListData": self.specification_version_list_data.get_data()})
+        if self.state_information_list_data is not None:
+            msg_data.append({"stateInformationListData": self.state_information_list_data.get_data()})
+        if self.subscription_management_delete_call is not None:
+            msg_data.append({"subscriptionManagementDeleteCall": self.subscription_management_delete_call.get_data()})
+        if self.subscription_management_entry_list_data is not None:
+            msg_data.append({"subscriptionManagementEntryListData": self.subscription_management_entry_list_data.get_data()})
+        if self.subscription_management_request_call is not None:
+            msg_data.append({"subscriptionManagementRequestCall": self.subscription_management_request_call.get_data()})
+        if self.supply_condition_description_list_data is not None:
+            msg_data.append({"supplyConditionDescriptionListData": self.supply_condition_description_list_data.get_data()})
+        if self.supply_condition_list_data is not None:
+            msg_data.append({"supplyConditionListData": self.supply_condition_list_data.get_data()})
+        if self.supply_condition_threshold_relation_list_data is not None:
+            msg_data.append({"supplyConditionThresholdRelationListData": self.supply_condition_threshold_relation_list_data.get_data()})
+        if self.tariff_boundary_relation_list_data is not None:
+            msg_data.append({"tariffBoundaryRelationListData": self.tariff_boundary_relation_list_data.get_data()})
+        if self.tariff_description_list_data is not None:
+            msg_data.append({"tariffDescriptionListData": self.tariff_description_list_data.get_data()})
+        if self.tariff_list_data is not None:
+            msg_data.append({"tariffListData": self.tariff_list_data.get_data()})
+        if self.tariff_overall_constraints_data is not None:
+            msg_data.append({"tariffOverallConstraintsData": self.tariff_overall_constraints_data.get_data()})
+        if self.tariff_tier_relation_list_data is not None:
+            msg_data.append({"tariffTierRelationListData": self.tariff_tier_relation_list_data.get_data()})
+        if self.task_management_job_description_list_data is not None:
+            msg_data.append({"taskManagementJobDescriptionListData": self.task_management_job_description_list_data.get_data()})
+        if self.task_management_job_list_data is not None:
+            msg_data.append({"taskManagementJobListData": self.task_management_job_list_data.get_data()})
+        if self.task_management_job_relation_list_data is not None:
+            msg_data.append({"taskManagementJobRelationListData": self.task_management_job_relation_list_data.get_data()})
+        if self.task_management_overview_data is not None:
+            msg_data.append({"taskManagementOverviewData": self.task_management_overview_data.get_data()})
+        if self.threshold_constraints_list_data is not None:
+            msg_data.append({"thresholdConstraintsListData": self.threshold_constraints_list_data.get_data()})
+        if self.threshold_description_list_data is not None:
+            msg_data.append({"thresholdDescriptionListData": self.threshold_description_list_data.get_data()})
+        if self.threshold_list_data is not None:
+            msg_data.append({"thresholdListData": self.threshold_list_data.get_data()})
+        if self.tier_boundary_description_list_data is not None:
+            msg_data.append({"tierBoundaryDescriptionListData": self.tier_boundary_description_list_data.get_data()})
+        if self.tier_boundary_list_data is not None:
+            msg_data.append({"tierBoundaryListData": self.tier_boundary_list_data.get_data()})
+        if self.tier_description_list_data is not None:
+            msg_data.append({"tierDescriptionListData": self.tier_description_list_data.get_data()})
+        if self.tier_incentive_relation_list_data is not None:
+            msg_data.append({"tierIncentiveRelationListData": self.tier_incentive_relation_list_data.get_data()})
+        if self.tier_list_data is not None:
+            msg_data.append({"tierListData": self.tier_list_data.get_data()})
+        if self.time_distributor_data is not None:
+            msg_data.append({"timeDistributorData": self.time_distributor_data.get_data()})
+        if self.time_distributor_enquiry_call is not None:
+            msg_data.append({"timeDistributorEnquiryCall": self.time_distributor_enquiry_call.get_data()})
+        if self.time_information_data is not None:
+            msg_data.append({"timeInformationData": self.time_information_data.get_data()})
+        if self.time_precision_data is not None:
+            msg_data.append({"timePrecisionData": self.time_precision_data.get_data()})
+        if self.time_series_constraints_list_data is not None:
+            msg_data.append({"timeSeriesConstraintsListData": self.time_series_constraints_list_data.get_data()})
+        if self.time_series_description_list_data is not None:
+            msg_data.append({"timeSeriesDescriptionListData": self.time_series_description_list_data.get_data()})
+        if self.time_series_list_data is not None:
+            msg_data.append({"timeSeriesListData": self.time_series_list_data.get_data()})
+        if self.time_table_constraints_list_data is not None:
+            msg_data.append({"timeTableConstraintsListData": self.time_table_constraints_list_data.get_data()})
+        if self.time_table_description_list_data is not None:
+            msg_data.append({"timeTableDescriptionListData": self.time_table_description_list_data.get_data()})
+        if self.time_table_list_data is not None:
+            msg_data.append({"timeTableListData": self.time_table_list_data.get_data()})
+        if self.use_case_information_list_data is not None:
+            msg_data.append({"useCaseInformationListData": self.use_case_information_list_data.get_data()})
+        if self.manufacturer_specific_extension is not None:
+            msg_data.append({"manufacturerSpecificExtension": self.manufacturer_specific_extension})
+        if self.last_update_at is not None:
+            msg_data.append({"lastUpdateAt": self.last_update_at.get_data()})
+        
+        return msg_data
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        if self.function is not None:
+            result_str += f"{sep}function: {self.function}"
+            sep = ", "
+        if self.filter is not None:
+            result_str += f"{sep}filter: {self.filter}"
+            sep = ", "
+        if self.actuator_level_data is not None:
+            result_str += f"{sep}actuatorLevelData: {self.actuator_level_data}"
+            sep = ", "
+        if self.actuator_level_description_data is not None:
+            result_str += f"{sep}actuatorLevelDescriptionData: {self.actuator_level_description_data}"
+            sep = ", "
+        if self.actuator_switch_data is not None:
+            result_str += f"{sep}actuatorSwitchData: {self.actuator_switch_data}"
+            sep = ", "
+        if self.actuator_switch_description_data is not None:
+            result_str += f"{sep}actuatorSwitchDescriptionData: {self.actuator_switch_description_data}"
+            sep = ", "
+        if self.alarm_list_data is not None:
+            result_str += f"{sep}alarmListData: {self.alarm_list_data}"
+            sep = ", "
+        if self.bill_constraints_list_data is not None:
+            result_str += f"{sep}billConstraintsListData: {self.bill_constraints_list_data}"
+            sep = ", "
+        if self.bill_description_list_data is not None:
+            result_str += f"{sep}billDescriptionListData: {self.bill_description_list_data}"
+            sep = ", "
+        if self.bill_list_data is not None:
+            result_str += f"{sep}billListData: {self.bill_list_data}"
+            sep = ", "
+        if self.binding_management_delete_call is not None:
+            result_str += f"{sep}bindingManagementDeleteCall: {self.binding_management_delete_call}"
+            sep = ", "
+        if self.binding_management_entry_list_data is not None:
+            result_str += f"{sep}bindingManagementEntryListData: {self.binding_management_entry_list_data}"
+            sep = ", "
+        if self.binding_management_request_call is not None:
+            result_str += f"{sep}bindingManagementRequestCall: {self.binding_management_request_call}"
+            sep = ", "
+        if self.commodity_list_data is not None:
+            result_str += f"{sep}commodityListData: {self.commodity_list_data}"
+            sep = ", "
+        if self.data_tunneling_call is not None:
+            result_str += f"{sep}dataTunnelingCall: {self.data_tunneling_call}"
+            sep = ", "
+        if self.device_classification_manufacturer_data is not None:
+            result_str += f"{sep}deviceClassificationManufacturerData: {self.device_classification_manufacturer_data}"
+            sep = ", "
+        if self.device_classification_user_data is not None:
+            result_str += f"{sep}deviceClassificationUserData: {self.device_classification_user_data}"
+            sep = ", "
+        if self.device_configuration_key_value_constraints_list_data is not None:
+            result_str += f"{sep}deviceConfigurationKeyValueConstraintsListData: {self.device_configuration_key_value_constraints_list_data}"
+            sep = ", "
+        if self.device_configuration_key_value_description_list_data is not None:
+            result_str += f"{sep}deviceConfigurationKeyValueDescriptionListData: {self.device_configuration_key_value_description_list_data}"
+            sep = ", "
+        if self.device_configuration_key_value_list_data is not None:
+            result_str += f"{sep}deviceConfigurationKeyValueListData: {self.device_configuration_key_value_list_data}"
+            sep = ", "
+        if self.device_diagnosis_heartbeat_data is not None:
+            result_str += f"{sep}deviceDiagnosisHeartbeatData: {self.device_diagnosis_heartbeat_data}"
+            sep = ", "
+        if self.device_diagnosis_service_data is not None:
+            result_str += f"{sep}deviceDiagnosisServiceData: {self.device_diagnosis_service_data}"
+            sep = ", "
+        if self.device_diagnosis_state_data is not None:
+            result_str += f"{sep}deviceDiagnosisStateData: {self.device_diagnosis_state_data}"
+            sep = ", "
+        if self.direct_control_activity_list_data is not None:
+            result_str += f"{sep}directControlActivityListData: {self.direct_control_activity_list_data}"
+            sep = ", "
+        if self.direct_control_description_data is not None:
+            result_str += f"{sep}directControlDescriptionData: {self.direct_control_description_data}"
+            sep = ", "
+        if self.electrical_connection_characteristic_list_data is not None:
+            result_str += f"{sep}electricalConnectionCharacteristicListData: {self.electrical_connection_characteristic_list_data}"
+            sep = ", "
+        if self.electrical_connection_description_list_data is not None:
+            result_str += f"{sep}electricalConnectionDescriptionListData: {self.electrical_connection_description_list_data}"
+            sep = ", "
+        if self.electrical_connection_parameter_description_list_data is not None:
+            result_str += f"{sep}electricalConnectionParameterDescriptionListData: {self.electrical_connection_parameter_description_list_data}"
+            sep = ", "
+        if self.electrical_connection_permitted_value_set_list_data is not None:
+            result_str += f"{sep}electricalConnectionPermittedValueSetListData: {self.electrical_connection_permitted_value_set_list_data}"
+            sep = ", "
+        if self.electrical_connection_state_list_data is not None:
+            result_str += f"{sep}electricalConnectionStateListData: {self.electrical_connection_state_list_data}"
+            sep = ", "
+        if self.hvac_operation_mode_description_list_data is not None:
+            result_str += f"{sep}hvacOperationModeDescriptionListData: {self.hvac_operation_mode_description_list_data}"
+            sep = ", "
+        if self.hvac_overrun_description_list_data is not None:
+            result_str += f"{sep}hvacOverrunDescriptionListData: {self.hvac_overrun_description_list_data}"
+            sep = ", "
+        if self.hvac_overrun_list_data is not None:
+            result_str += f"{sep}hvacOverrunListData: {self.hvac_overrun_list_data}"
+            sep = ", "
+        if self.hvac_system_function_description_list_data is not None:
+            result_str += f"{sep}hvacSystemFunctionDescriptionListData: {self.hvac_system_function_description_list_data}"
+            sep = ", "
+        if self.hvac_system_function_list_data is not None:
+            result_str += f"{sep}hvacSystemFunctionListData: {self.hvac_system_function_list_data}"
+            sep = ", "
+        if self.hvac_system_function_operation_mode_relation_list_data is not None:
+            result_str += f"{sep}hvacSystemFunctionOperationModeRelationListData: {self.hvac_system_function_operation_mode_relation_list_data}"
+            sep = ", "
+        if self.hvac_system_function_power_sequence_relation_list_data is not None:
+            result_str += f"{sep}hvacSystemFunctionPowerSequenceRelationListData: {self.hvac_system_function_power_sequence_relation_list_data}"
+            sep = ", "
+        if self.hvac_system_function_setpoint_relation_list_data is not None:
+            result_str += f"{sep}hvacSystemFunctionSetpointRelationListData: {self.hvac_system_function_setpoint_relation_list_data}"
+            sep = ", "
+        if self.identification_list_data is not None:
+            result_str += f"{sep}identificationListData: {self.identification_list_data}"
+            sep = ", "
+        if self.incentive_description_list_data is not None:
+            result_str += f"{sep}incentiveDescriptionListData: {self.incentive_description_list_data}"
+            sep = ", "
+        if self.incentive_list_data is not None:
+            result_str += f"{sep}incentiveListData: {self.incentive_list_data}"
+            sep = ", "
+        if self.incentive_table_constraints_data is not None:
+            result_str += f"{sep}incentiveTableConstraintsData: {self.incentive_table_constraints_data}"
+            sep = ", "
+        if self.incentive_table_data is not None:
+            result_str += f"{sep}incentiveTableData: {self.incentive_table_data}"
+            sep = ", "
+        if self.incentive_table_description_data is not None:
+            result_str += f"{sep}incentiveTableDescriptionData: {self.incentive_table_description_data}"
+            sep = ", "
+        if self.load_control_event_list_data is not None:
+            result_str += f"{sep}loadControlEventListData: {self.load_control_event_list_data}"
+            sep = ", "
+        if self.load_control_limit_constraints_list_data is not None:
+            result_str += f"{sep}loadControlLimitConstraintsListData: {self.load_control_limit_constraints_list_data}"
+            sep = ", "
+        if self.load_control_limit_description_list_data is not None:
+            result_str += f"{sep}loadControlLimitDescriptionListData: {self.load_control_limit_description_list_data}"
+            sep = ", "
+        if self.load_control_limit_list_data is not None:
+            result_str += f"{sep}loadControlLimitListData: {self.load_control_limit_list_data}"
+            sep = ", "
+        if self.load_control_node_data is not None:
+            result_str += f"{sep}loadControlNodeData: {self.load_control_node_data}"
+            sep = ", "
+        if self.load_control_state_list_data is not None:
+            result_str += f"{sep}loadControlStateListData: {self.load_control_state_list_data}"
+            sep = ", "
+        if self.measurement_constraints_list_data is not None:
+            result_str += f"{sep}measurementConstraintsListData: {self.measurement_constraints_list_data}"
+            sep = ", "
+        if self.measurement_description_list_data is not None:
+            result_str += f"{sep}measurementDescriptionListData: {self.measurement_description_list_data}"
+            sep = ", "
+        if self.measurement_list_data is not None:
+            result_str += f"{sep}measurementListData: {self.measurement_list_data}"
+            sep = ", "
+        if self.measurement_series_list_data is not None:
+            result_str += f"{sep}measurementSeriesListData: {self.measurement_series_list_data}"
+            sep = ", "
+        if self.measurement_threshold_relation_list_data is not None:
+            result_str += f"{sep}measurementThresholdRelationListData: {self.measurement_threshold_relation_list_data}"
+            sep = ", "
+        if self.messaging_list_data is not None:
+            result_str += f"{sep}messagingListData: {self.messaging_list_data}"
+            sep = ", "
+        if self.network_management_abort_call is not None:
+            result_str += f"{sep}networkManagementAbortCall: {self.network_management_abort_call}"
+            sep = ", "
+        if self.network_management_add_node_call is not None:
+            result_str += f"{sep}networkManagementAddNodeCall: {self.network_management_add_node_call}"
+            sep = ", "
+        if self.network_management_device_description_list_data is not None:
+            result_str += f"{sep}networkManagementDeviceDescriptionListData: {self.network_management_device_description_list_data}"
+            sep = ", "
+        if self.network_management_discover_call is not None:
+            result_str += f"{sep}networkManagementDiscoverCall: {self.network_management_discover_call}"
+            sep = ", "
+        if self.network_management_entity_description_list_data is not None:
+            result_str += f"{sep}networkManagementEntityDescriptionListData: {self.network_management_entity_description_list_data}"
+            sep = ", "
+        if self.network_management_feature_description_list_data is not None:
+            result_str += f"{sep}networkManagementFeatureDescriptionListData: {self.network_management_feature_description_list_data}"
+            sep = ", "
+        if self.network_management_joining_mode_data is not None:
+            result_str += f"{sep}networkManagementJoiningModeData: {self.network_management_joining_mode_data}"
+            sep = ", "
+        if self.network_management_modify_node_call is not None:
+            result_str += f"{sep}networkManagementModifyNodeCall: {self.network_management_modify_node_call}"
+            sep = ", "
+        if self.network_management_process_state_data is not None:
+            result_str += f"{sep}networkManagementProcessStateData: {self.network_management_process_state_data}"
+            sep = ", "
+        if self.network_management_remove_node_call is not None:
+            result_str += f"{sep}networkManagementRemoveNodeCall: {self.network_management_remove_node_call}"
+            sep = ", "
+        if self.network_management_report_candidate_data is not None:
+            result_str += f"{sep}networkManagementReportCandidateData: {self.network_management_report_candidate_data}"
+            sep = ", "
+        if self.network_management_scan_network_call is not None:
+            result_str += f"{sep}networkManagementScanNetworkCall: {self.network_management_scan_network_call}"
+            sep = ", "
+        if self.node_management_binding_data is not None:
+            result_str += f"{sep}nodeManagementBindingData: {self.node_management_binding_data}"
+            sep = ", "
+        if self.node_management_binding_delete_call is not None:
+            result_str += f"{sep}nodeManagementBindingDeleteCall: {self.node_management_binding_delete_call}"
+            sep = ", "
+        if self.node_management_binding_request_call is not None:
+            result_str += f"{sep}nodeManagementBindingRequestCall: {self.node_management_binding_request_call}"
+            sep = ", "
+        if self.node_management_destination_list_data is not None:
+            result_str += f"{sep}nodeManagementDestinationListData: {self.node_management_destination_list_data}"
+            sep = ", "
+        if self.node_management_detailed_discovery_data is not None:
+            result_str += f"{sep}nodeManagementDetailedDiscoveryData: {self.node_management_detailed_discovery_data}"
+            sep = ", "
+        if self.node_management_subscription_data is not None:
+            result_str += f"{sep}nodeManagementSubscriptionData: {self.node_management_subscription_data}"
+            sep = ", "
+        if self.node_management_subscription_delete_call is not None:
+            result_str += f"{sep}nodeManagementSubscriptionDeleteCall: {self.node_management_subscription_delete_call}"
+            sep = ", "
+        if self.node_management_subscription_request_call is not None:
+            result_str += f"{sep}nodeManagementSubscriptionRequestCall: {self.node_management_subscription_request_call}"
+            sep = ", "
+        if self.node_management_use_case_data is not None:
+            result_str += f"{sep}nodeManagementUseCaseData: {self.node_management_use_case_data}"
+            sep = ", "
+        if self.operating_constraints_duration_list_data is not None:
+            result_str += f"{sep}operatingConstraintsDurationListData: {self.operating_constraints_duration_list_data}"
+            sep = ", "
+        if self.operating_constraints_interrupt_list_data is not None:
+            result_str += f"{sep}operatingConstraintsInterruptListData: {self.operating_constraints_interrupt_list_data}"
+            sep = ", "
+        if self.operating_constraints_power_description_list_data is not None:
+            result_str += f"{sep}operatingConstraintsPowerDescriptionListData: {self.operating_constraints_power_description_list_data}"
+            sep = ", "
+        if self.operating_constraints_power_level_list_data is not None:
+            result_str += f"{sep}operatingConstraintsPowerLevelListData: {self.operating_constraints_power_level_list_data}"
+            sep = ", "
+        if self.operating_constraints_power_range_list_data is not None:
+            result_str += f"{sep}operatingConstraintsPowerRangeListData: {self.operating_constraints_power_range_list_data}"
+            sep = ", "
+        if self.operating_constraints_resume_implication_list_data is not None:
+            result_str += f"{sep}operatingConstraintsResumeImplicationListData: {self.operating_constraints_resume_implication_list_data}"
+            sep = ", "
+        if self.power_sequence_alternatives_relation_list_data is not None:
+            result_str += f"{sep}powerSequenceAlternativesRelationListData: {self.power_sequence_alternatives_relation_list_data}"
+            sep = ", "
+        if self.power_sequence_description_list_data is not None:
+            result_str += f"{sep}powerSequenceDescriptionListData: {self.power_sequence_description_list_data}"
+            sep = ", "
+        if self.power_sequence_node_schedule_information_data is not None:
+            result_str += f"{sep}powerSequenceNodeScheduleInformationData: {self.power_sequence_node_schedule_information_data}"
+            sep = ", "
+        if self.power_sequence_price_calculation_request_call is not None:
+            result_str += f"{sep}powerSequencePriceCalculationRequestCall: {self.power_sequence_price_calculation_request_call}"
+            sep = ", "
+        if self.power_sequence_price_list_data is not None:
+            result_str += f"{sep}powerSequencePriceListData: {self.power_sequence_price_list_data}"
+            sep = ", "
+        if self.power_sequence_schedule_configuration_request_call is not None:
+            result_str += f"{sep}powerSequenceScheduleConfigurationRequestCall: {self.power_sequence_schedule_configuration_request_call}"
+            sep = ", "
+        if self.power_sequence_schedule_constraints_list_data is not None:
+            result_str += f"{sep}powerSequenceScheduleConstraintsListData: {self.power_sequence_schedule_constraints_list_data}"
+            sep = ", "
+        if self.power_sequence_schedule_list_data is not None:
+            result_str += f"{sep}powerSequenceScheduleListData: {self.power_sequence_schedule_list_data}"
+            sep = ", "
+        if self.power_sequence_schedule_preference_list_data is not None:
+            result_str += f"{sep}powerSequenceSchedulePreferenceListData: {self.power_sequence_schedule_preference_list_data}"
+            sep = ", "
+        if self.power_sequence_state_list_data is not None:
+            result_str += f"{sep}powerSequenceStateListData: {self.power_sequence_state_list_data}"
+            sep = ", "
+        if self.power_time_slot_schedule_constraints_list_data is not None:
+            result_str += f"{sep}powerTimeSlotScheduleConstraintsListData: {self.power_time_slot_schedule_constraints_list_data}"
+            sep = ", "
+        if self.power_time_slot_schedule_list_data is not None:
+            result_str += f"{sep}powerTimeSlotScheduleListData: {self.power_time_slot_schedule_list_data}"
+            sep = ", "
+        if self.power_time_slot_value_list_data is not None:
+            result_str += f"{sep}powerTimeSlotValueListData: {self.power_time_slot_value_list_data}"
+            sep = ", "
+        if self.result_data is not None:
+            result_str += f"{sep}resultData: {self.result_data}"
+            sep = ", "
+        if self.sensing_description_data is not None:
+            result_str += f"{sep}sensingDescriptionData: {self.sensing_description_data}"
+            sep = ", "
+        if self.sensing_list_data is not None:
+            result_str += f"{sep}sensingListData: {self.sensing_list_data}"
+            sep = ", "
+        if self.session_identification_list_data is not None:
+            result_str += f"{sep}sessionIdentificationListData: {self.session_identification_list_data}"
+            sep = ", "
+        if self.session_measurement_relation_list_data is not None:
+            result_str += f"{sep}sessionMeasurementRelationListData: {self.session_measurement_relation_list_data}"
+            sep = ", "
+        if self.setpoint_constraints_list_data is not None:
+            result_str += f"{sep}setpointConstraintsListData: {self.setpoint_constraints_list_data}"
+            sep = ", "
+        if self.setpoint_description_list_data is not None:
+            result_str += f"{sep}setpointDescriptionListData: {self.setpoint_description_list_data}"
+            sep = ", "
+        if self.setpoint_list_data is not None:
+            result_str += f"{sep}setpointListData: {self.setpoint_list_data}"
+            sep = ", "
+        if self.smart_energy_management_ps_configuration_request_call is not None:
+            result_str += f"{sep}smartEnergyManagementPsConfigurationRequestCall: {self.smart_energy_management_ps_configuration_request_call}"
+            sep = ", "
+        if self.smart_energy_management_ps_data is not None:
+            result_str += f"{sep}smartEnergyManagementPsData: {self.smart_energy_management_ps_data}"
+            sep = ", "
+        if self.smart_energy_management_ps_price_calculation_request_call is not None:
+            result_str += f"{sep}smartEnergyManagementPsPriceCalculationRequestCall: {self.smart_energy_management_ps_price_calculation_request_call}"
+            sep = ", "
+        if self.smart_energy_management_ps_price_data is not None:
+            result_str += f"{sep}smartEnergyManagementPsPriceData: {self.smart_energy_management_ps_price_data}"
+            sep = ", "
+        if self.specification_version_list_data is not None:
+            result_str += f"{sep}specificationVersionListData: {self.specification_version_list_data}"
+            sep = ", "
+        if self.state_information_list_data is not None:
+            result_str += f"{sep}stateInformationListData: {self.state_information_list_data}"
+            sep = ", "
+        if self.subscription_management_delete_call is not None:
+            result_str += f"{sep}subscriptionManagementDeleteCall: {self.subscription_management_delete_call}"
+            sep = ", "
+        if self.subscription_management_entry_list_data is not None:
+            result_str += f"{sep}subscriptionManagementEntryListData: {self.subscription_management_entry_list_data}"
+            sep = ", "
+        if self.subscription_management_request_call is not None:
+            result_str += f"{sep}subscriptionManagementRequestCall: {self.subscription_management_request_call}"
+            sep = ", "
+        if self.supply_condition_description_list_data is not None:
+            result_str += f"{sep}supplyConditionDescriptionListData: {self.supply_condition_description_list_data}"
+            sep = ", "
+        if self.supply_condition_list_data is not None:
+            result_str += f"{sep}supplyConditionListData: {self.supply_condition_list_data}"
+            sep = ", "
+        if self.supply_condition_threshold_relation_list_data is not None:
+            result_str += f"{sep}supplyConditionThresholdRelationListData: {self.supply_condition_threshold_relation_list_data}"
+            sep = ", "
+        if self.tariff_boundary_relation_list_data is not None:
+            result_str += f"{sep}tariffBoundaryRelationListData: {self.tariff_boundary_relation_list_data}"
+            sep = ", "
+        if self.tariff_description_list_data is not None:
+            result_str += f"{sep}tariffDescriptionListData: {self.tariff_description_list_data}"
+            sep = ", "
+        if self.tariff_list_data is not None:
+            result_str += f"{sep}tariffListData: {self.tariff_list_data}"
+            sep = ", "
+        if self.tariff_overall_constraints_data is not None:
+            result_str += f"{sep}tariffOverallConstraintsData: {self.tariff_overall_constraints_data}"
+            sep = ", "
+        if self.tariff_tier_relation_list_data is not None:
+            result_str += f"{sep}tariffTierRelationListData: {self.tariff_tier_relation_list_data}"
+            sep = ", "
+        if self.task_management_job_description_list_data is not None:
+            result_str += f"{sep}taskManagementJobDescriptionListData: {self.task_management_job_description_list_data}"
+            sep = ", "
+        if self.task_management_job_list_data is not None:
+            result_str += f"{sep}taskManagementJobListData: {self.task_management_job_list_data}"
+            sep = ", "
+        if self.task_management_job_relation_list_data is not None:
+            result_str += f"{sep}taskManagementJobRelationListData: {self.task_management_job_relation_list_data}"
+            sep = ", "
+        if self.task_management_overview_data is not None:
+            result_str += f"{sep}taskManagementOverviewData: {self.task_management_overview_data}"
+            sep = ", "
+        if self.threshold_constraints_list_data is not None:
+            result_str += f"{sep}thresholdConstraintsListData: {self.threshold_constraints_list_data}"
+            sep = ", "
+        if self.threshold_description_list_data is not None:
+            result_str += f"{sep}thresholdDescriptionListData: {self.threshold_description_list_data}"
+            sep = ", "
+        if self.threshold_list_data is not None:
+            result_str += f"{sep}thresholdListData: {self.threshold_list_data}"
+            sep = ", "
+        if self.tier_boundary_description_list_data is not None:
+            result_str += f"{sep}tierBoundaryDescriptionListData: {self.tier_boundary_description_list_data}"
+            sep = ", "
+        if self.tier_boundary_list_data is not None:
+            result_str += f"{sep}tierBoundaryListData: {self.tier_boundary_list_data}"
+            sep = ", "
+        if self.tier_description_list_data is not None:
+            result_str += f"{sep}tierDescriptionListData: {self.tier_description_list_data}"
+            sep = ", "
+        if self.tier_incentive_relation_list_data is not None:
+            result_str += f"{sep}tierIncentiveRelationListData: {self.tier_incentive_relation_list_data}"
+            sep = ", "
+        if self.tier_list_data is not None:
+            result_str += f"{sep}tierListData: {self.tier_list_data}"
+            sep = ", "
+        if self.time_distributor_data is not None:
+            result_str += f"{sep}timeDistributorData: {self.time_distributor_data}"
+            sep = ", "
+        if self.time_distributor_enquiry_call is not None:
+            result_str += f"{sep}timeDistributorEnquiryCall: {self.time_distributor_enquiry_call}"
+            sep = ", "
+        if self.time_information_data is not None:
+            result_str += f"{sep}timeInformationData: {self.time_information_data}"
+            sep = ", "
+        if self.time_precision_data is not None:
+            result_str += f"{sep}timePrecisionData: {self.time_precision_data}"
+            sep = ", "
+        if self.time_series_constraints_list_data is not None:
+            result_str += f"{sep}timeSeriesConstraintsListData: {self.time_series_constraints_list_data}"
+            sep = ", "
+        if self.time_series_description_list_data is not None:
+            result_str += f"{sep}timeSeriesDescriptionListData: {self.time_series_description_list_data}"
+            sep = ", "
+        if self.time_series_list_data is not None:
+            result_str += f"{sep}timeSeriesListData: {self.time_series_list_data}"
+            sep = ", "
+        if self.time_table_constraints_list_data is not None:
+            result_str += f"{sep}timeTableConstraintsListData: {self.time_table_constraints_list_data}"
+            sep = ", "
+        if self.time_table_description_list_data is not None:
+            result_str += f"{sep}timeTableDescriptionListData: {self.time_table_description_list_data}"
+            sep = ", "
+        if self.time_table_list_data is not None:
+            result_str += f"{sep}timeTableListData: {self.time_table_list_data}"
+            sep = ", "
+        if self.use_case_information_list_data is not None:
+            result_str += f"{sep}useCaseInformationListData: {self.use_case_information_list_data}"
+            sep = ", "
+        if self.manufacturer_specific_extension is not None:
+            result_str += f"{sep}manufacturerSpecificExtension: {self.manufacturer_specific_extension}"
+            sep = ", "
+        if self.last_update_at is not None:
+            result_str += f"{sep}lastUpdateAt: {self.last_update_at}"
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+                function=data_dict.get('function'),
+                filter=data_dict.get('filter'),
+                actuator_level_data=data_dict.get('actuatorLevelData'),
+                actuator_level_description_data=data_dict.get('actuatorLevelDescriptionData'),
+                actuator_switch_data=data_dict.get('actuatorSwitchData'),
+                actuator_switch_description_data=data_dict.get('actuatorSwitchDescriptionData'),
+                alarm_list_data=data_dict.get('alarmListData'),
+                bill_constraints_list_data=data_dict.get('billConstraintsListData'),
+                bill_description_list_data=data_dict.get('billDescriptionListData'),
+                bill_list_data=data_dict.get('billListData'),
+                binding_management_delete_call=data_dict.get('bindingManagementDeleteCall'),
+                binding_management_entry_list_data=data_dict.get('bindingManagementEntryListData'),
+                binding_management_request_call=data_dict.get('bindingManagementRequestCall'),
+                commodity_list_data=data_dict.get('commodityListData'),
+                data_tunneling_call=data_dict.get('dataTunnelingCall'),
+                device_classification_manufacturer_data=data_dict.get('deviceClassificationManufacturerData'),
+                device_classification_user_data=data_dict.get('deviceClassificationUserData'),
+                device_configuration_key_value_constraints_list_data=data_dict.get('deviceConfigurationKeyValueConstraintsListData'),
+                device_configuration_key_value_description_list_data=data_dict.get('deviceConfigurationKeyValueDescriptionListData'),
+                device_configuration_key_value_list_data=data_dict.get('deviceConfigurationKeyValueListData'),
+                device_diagnosis_heartbeat_data=data_dict.get('deviceDiagnosisHeartbeatData'),
+                device_diagnosis_service_data=data_dict.get('deviceDiagnosisServiceData'),
+                device_diagnosis_state_data=data_dict.get('deviceDiagnosisStateData'),
+                direct_control_activity_list_data=data_dict.get('directControlActivityListData'),
+                direct_control_description_data=data_dict.get('directControlDescriptionData'),
+                electrical_connection_characteristic_list_data=data_dict.get('electricalConnectionCharacteristicListData'),
+                electrical_connection_description_list_data=data_dict.get('electricalConnectionDescriptionListData'),
+                electrical_connection_parameter_description_list_data=data_dict.get('electricalConnectionParameterDescriptionListData'),
+                electrical_connection_permitted_value_set_list_data=data_dict.get('electricalConnectionPermittedValueSetListData'),
+                electrical_connection_state_list_data=data_dict.get('electricalConnectionStateListData'),
+                hvac_operation_mode_description_list_data=data_dict.get('hvacOperationModeDescriptionListData'),
+                hvac_overrun_description_list_data=data_dict.get('hvacOverrunDescriptionListData'),
+                hvac_overrun_list_data=data_dict.get('hvacOverrunListData'),
+                hvac_system_function_description_list_data=data_dict.get('hvacSystemFunctionDescriptionListData'),
+                hvac_system_function_list_data=data_dict.get('hvacSystemFunctionListData'),
+                hvac_system_function_operation_mode_relation_list_data=data_dict.get('hvacSystemFunctionOperationModeRelationListData'),
+                hvac_system_function_power_sequence_relation_list_data=data_dict.get('hvacSystemFunctionPowerSequenceRelationListData'),
+                hvac_system_function_setpoint_relation_list_data=data_dict.get('hvacSystemFunctionSetpointRelationListData'),
+                identification_list_data=data_dict.get('identificationListData'),
+                incentive_description_list_data=data_dict.get('incentiveDescriptionListData'),
+                incentive_list_data=data_dict.get('incentiveListData'),
+                incentive_table_constraints_data=data_dict.get('incentiveTableConstraintsData'),
+                incentive_table_data=data_dict.get('incentiveTableData'),
+                incentive_table_description_data=data_dict.get('incentiveTableDescriptionData'),
+                load_control_event_list_data=data_dict.get('loadControlEventListData'),
+                load_control_limit_constraints_list_data=data_dict.get('loadControlLimitConstraintsListData'),
+                load_control_limit_description_list_data=data_dict.get('loadControlLimitDescriptionListData'),
+                load_control_limit_list_data=data_dict.get('loadControlLimitListData'),
+                load_control_node_data=data_dict.get('loadControlNodeData'),
+                load_control_state_list_data=data_dict.get('loadControlStateListData'),
+                measurement_constraints_list_data=data_dict.get('measurementConstraintsListData'),
+                measurement_description_list_data=data_dict.get('measurementDescriptionListData'),
+                measurement_list_data=data_dict.get('measurementListData'),
+                measurement_series_list_data=data_dict.get('measurementSeriesListData'),
+                measurement_threshold_relation_list_data=data_dict.get('measurementThresholdRelationListData'),
+                messaging_list_data=data_dict.get('messagingListData'),
+                network_management_abort_call=data_dict.get('networkManagementAbortCall'),
+                network_management_add_node_call=data_dict.get('networkManagementAddNodeCall'),
+                network_management_device_description_list_data=data_dict.get('networkManagementDeviceDescriptionListData'),
+                network_management_discover_call=data_dict.get('networkManagementDiscoverCall'),
+                network_management_entity_description_list_data=data_dict.get('networkManagementEntityDescriptionListData'),
+                network_management_feature_description_list_data=data_dict.get('networkManagementFeatureDescriptionListData'),
+                network_management_joining_mode_data=data_dict.get('networkManagementJoiningModeData'),
+                network_management_modify_node_call=data_dict.get('networkManagementModifyNodeCall'),
+                network_management_process_state_data=data_dict.get('networkManagementProcessStateData'),
+                network_management_remove_node_call=data_dict.get('networkManagementRemoveNodeCall'),
+                network_management_report_candidate_data=data_dict.get('networkManagementReportCandidateData'),
+                network_management_scan_network_call=data_dict.get('networkManagementScanNetworkCall'),
+                node_management_binding_data=data_dict.get('nodeManagementBindingData'),
+                node_management_binding_delete_call=data_dict.get('nodeManagementBindingDeleteCall'),
+                node_management_binding_request_call=data_dict.get('nodeManagementBindingRequestCall'),
+                node_management_destination_list_data=data_dict.get('nodeManagementDestinationListData'),
+                node_management_detailed_discovery_data=data_dict.get('nodeManagementDetailedDiscoveryData'),
+                node_management_subscription_data=data_dict.get('nodeManagementSubscriptionData'),
+                node_management_subscription_delete_call=data_dict.get('nodeManagementSubscriptionDeleteCall'),
+                node_management_subscription_request_call=data_dict.get('nodeManagementSubscriptionRequestCall'),
+                node_management_use_case_data=data_dict.get('nodeManagementUseCaseData'),
+                operating_constraints_duration_list_data=data_dict.get('operatingConstraintsDurationListData'),
+                operating_constraints_interrupt_list_data=data_dict.get('operatingConstraintsInterruptListData'),
+                operating_constraints_power_description_list_data=data_dict.get('operatingConstraintsPowerDescriptionListData'),
+                operating_constraints_power_level_list_data=data_dict.get('operatingConstraintsPowerLevelListData'),
+                operating_constraints_power_range_list_data=data_dict.get('operatingConstraintsPowerRangeListData'),
+                operating_constraints_resume_implication_list_data=data_dict.get('operatingConstraintsResumeImplicationListData'),
+                power_sequence_alternatives_relation_list_data=data_dict.get('powerSequenceAlternativesRelationListData'),
+                power_sequence_description_list_data=data_dict.get('powerSequenceDescriptionListData'),
+                power_sequence_node_schedule_information_data=data_dict.get('powerSequenceNodeScheduleInformationData'),
+                power_sequence_price_calculation_request_call=data_dict.get('powerSequencePriceCalculationRequestCall'),
+                power_sequence_price_list_data=data_dict.get('powerSequencePriceListData'),
+                power_sequence_schedule_configuration_request_call=data_dict.get('powerSequenceScheduleConfigurationRequestCall'),
+                power_sequence_schedule_constraints_list_data=data_dict.get('powerSequenceScheduleConstraintsListData'),
+                power_sequence_schedule_list_data=data_dict.get('powerSequenceScheduleListData'),
+                power_sequence_schedule_preference_list_data=data_dict.get('powerSequenceSchedulePreferenceListData'),
+                power_sequence_state_list_data=data_dict.get('powerSequenceStateListData'),
+                power_time_slot_schedule_constraints_list_data=data_dict.get('powerTimeSlotScheduleConstraintsListData'),
+                power_time_slot_schedule_list_data=data_dict.get('powerTimeSlotScheduleListData'),
+                power_time_slot_value_list_data=data_dict.get('powerTimeSlotValueListData'),
+                result_data=data_dict.get('resultData'),
+                sensing_description_data=data_dict.get('sensingDescriptionData'),
+                sensing_list_data=data_dict.get('sensingListData'),
+                session_identification_list_data=data_dict.get('sessionIdentificationListData'),
+                session_measurement_relation_list_data=data_dict.get('sessionMeasurementRelationListData'),
+                setpoint_constraints_list_data=data_dict.get('setpointConstraintsListData'),
+                setpoint_description_list_data=data_dict.get('setpointDescriptionListData'),
+                setpoint_list_data=data_dict.get('setpointListData'),
+                smart_energy_management_ps_configuration_request_call=data_dict.get('smartEnergyManagementPsConfigurationRequestCall'),
+                smart_energy_management_ps_data=data_dict.get('smartEnergyManagementPsData'),
+                smart_energy_management_ps_price_calculation_request_call=data_dict.get('smartEnergyManagementPsPriceCalculationRequestCall'),
+                smart_energy_management_ps_price_data=data_dict.get('smartEnergyManagementPsPriceData'),
+                specification_version_list_data=data_dict.get('specificationVersionListData'),
+                state_information_list_data=data_dict.get('stateInformationListData'),
+                subscription_management_delete_call=data_dict.get('subscriptionManagementDeleteCall'),
+                subscription_management_entry_list_data=data_dict.get('subscriptionManagementEntryListData'),
+                subscription_management_request_call=data_dict.get('subscriptionManagementRequestCall'),
+                supply_condition_description_list_data=data_dict.get('supplyConditionDescriptionListData'),
+                supply_condition_list_data=data_dict.get('supplyConditionListData'),
+                supply_condition_threshold_relation_list_data=data_dict.get('supplyConditionThresholdRelationListData'),
+                tariff_boundary_relation_list_data=data_dict.get('tariffBoundaryRelationListData'),
+                tariff_description_list_data=data_dict.get('tariffDescriptionListData'),
+                tariff_list_data=data_dict.get('tariffListData'),
+                tariff_overall_constraints_data=data_dict.get('tariffOverallConstraintsData'),
+                tariff_tier_relation_list_data=data_dict.get('tariffTierRelationListData'),
+                task_management_job_description_list_data=data_dict.get('taskManagementJobDescriptionListData'),
+                task_management_job_list_data=data_dict.get('taskManagementJobListData'),
+                task_management_job_relation_list_data=data_dict.get('taskManagementJobRelationListData'),
+                task_management_overview_data=data_dict.get('taskManagementOverviewData'),
+                threshold_constraints_list_data=data_dict.get('thresholdConstraintsListData'),
+                threshold_description_list_data=data_dict.get('thresholdDescriptionListData'),
+                threshold_list_data=data_dict.get('thresholdListData'),
+                tier_boundary_description_list_data=data_dict.get('tierBoundaryDescriptionListData'),
+                tier_boundary_list_data=data_dict.get('tierBoundaryListData'),
+                tier_description_list_data=data_dict.get('tierDescriptionListData'),
+                tier_incentive_relation_list_data=data_dict.get('tierIncentiveRelationListData'),
+                tier_list_data=data_dict.get('tierListData'),
+                time_distributor_data=data_dict.get('timeDistributorData'),
+                time_distributor_enquiry_call=data_dict.get('timeDistributorEnquiryCall'),
+                time_information_data=data_dict.get('timeInformationData'),
+                time_precision_data=data_dict.get('timePrecisionData'),
+                time_series_constraints_list_data=data_dict.get('timeSeriesConstraintsListData'),
+                time_series_description_list_data=data_dict.get('timeSeriesDescriptionListData'),
+                time_series_list_data=data_dict.get('timeSeriesListData'),
+                time_table_constraints_list_data=data_dict.get('timeTableConstraintsListData'),
+                time_table_description_list_data=data_dict.get('timeTableDescriptionListData'),
+                time_table_list_data=data_dict.get('timeTableListData'),
+                use_case_information_list_data=data_dict.get('useCaseInformationListData'),
+                manufacturer_specific_extension=data_dict.get('manufacturerSpecificExtension'),
+                last_update_at=data_dict.get('lastUpdateAt'),
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class DataExtendGroup: # EEBus_SPINE_TS_CommandFrame.xsd:ns_p:DataExtendGroup -> ChoiceType
+    def __init__(
+            self,
+            manufacturer_specific_extension: str = None,
+            last_update_at: AbsoluteOrRelativeTimeType = None,
+    ):
+        super().__init__()
+        
+        self.manufacturer_specific_extension = manufacturer_specific_extension
+        self.last_update_at = last_update_at
+
+        if not isinstance(self.manufacturer_specific_extension, str | NoneType):
+            raise TypeError("manufacturer_specific_extension is not of type str")
+        
+        if not isinstance(self.last_update_at, AbsoluteOrRelativeTimeType | NoneType):
+            raise TypeError("last_update_at is not of type AbsoluteOrRelativeTimeType")
+        
+    def get_data(self):
+
+        msg_data = []
+        
+        if self.manufacturer_specific_extension is not None:
+            msg_data.append({"manufacturerSpecificExtension": self.manufacturer_specific_extension})
+        if self.last_update_at is not None:
+            msg_data.append({"lastUpdateAt": self.last_update_at.get_data()})
+        
+        return msg_data
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        if self.manufacturer_specific_extension is not None:
+            result_str += f"{sep}manufacturerSpecificExtension: {self.manufacturer_specific_extension}"
+            sep = ", "
+        if self.last_update_at is not None:
+            result_str += f"{sep}lastUpdateAt: {self.last_update_at}"
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+                manufacturer_specific_extension=data_dict.get('manufacturerSpecificExtension'),
+                last_update_at=data_dict.get('lastUpdateAt'),
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class DataChoiceGroup: # EEBus_SPINE_TS_CommandFrame.xsd:ns_p:DataChoiceGroup -> ChoiceType
+    def __init__(
+            self,
+            actuator_level_data: ActuatorLevelDataType,
+            actuator_level_description_data: ActuatorLevelDescriptionDataType,
+            actuator_switch_data: ActuatorSwitchDataType,
+            actuator_switch_description_data: ActuatorSwitchDescriptionDataType,
+            alarm_list_data: AlarmListDataType,
+            bill_constraints_list_data: BillConstraintsListDataType,
+            bill_description_list_data: BillDescriptionListDataType,
+            bill_list_data: BillListDataType,
+            binding_management_delete_call: BindingManagementDeleteCallType,
+            binding_management_entry_list_data: BindingManagementEntryListDataType,
+            binding_management_request_call: BindingManagementRequestCallType,
+            commodity_list_data: CommodityListDataType,
+            data_tunneling_call: DataTunnelingCallType,
+            device_classification_manufacturer_data: DeviceClassificationManufacturerDataType,
+            device_classification_user_data: DeviceClassificationUserDataType,
+            device_configuration_key_value_constraints_list_data: DeviceConfigurationKeyValueConstraintsListDataType,
+            device_configuration_key_value_description_list_data: DeviceConfigurationKeyValueDescriptionListDataType,
+            device_configuration_key_value_list_data: DeviceConfigurationKeyValueListDataType,
+            device_diagnosis_heartbeat_data: DeviceDiagnosisHeartbeatDataType,
+            device_diagnosis_service_data: DeviceDiagnosisServiceDataType,
+            device_diagnosis_state_data: DeviceDiagnosisStateDataType,
+            direct_control_activity_list_data: DirectControlActivityListDataType,
+            direct_control_description_data: DirectControlDescriptionDataType,
+            electrical_connection_characteristic_list_data: ElectricalConnectionCharacteristicListDataType,
+            electrical_connection_description_list_data: ElectricalConnectionDescriptionListDataType,
+            electrical_connection_parameter_description_list_data: ElectricalConnectionParameterDescriptionListDataType,
+            electrical_connection_permitted_value_set_list_data: ElectricalConnectionPermittedValueSetListDataType,
+            electrical_connection_state_list_data: ElectricalConnectionStateListDataType,
+            hvac_operation_mode_description_list_data: HvacOperationModeDescriptionListDataType,
+            hvac_overrun_description_list_data: HvacOverrunDescriptionListDataType,
+            hvac_overrun_list_data: HvacOverrunListDataType,
+            hvac_system_function_description_list_data: HvacSystemFunctionDescriptionListDataType,
+            hvac_system_function_list_data: HvacSystemFunctionListDataType,
+            hvac_system_function_operation_mode_relation_list_data: HvacSystemFunctionOperationModeRelationListDataType,
+            hvac_system_function_power_sequence_relation_list_data: HvacSystemFunctionPowerSequenceRelationListDataType,
+            hvac_system_function_setpoint_relation_list_data: HvacSystemFunctionSetpointRelationListDataType,
+            identification_list_data: IdentificationListDataType,
+            incentive_description_list_data: IncentiveDescriptionListDataType,
+            incentive_list_data: IncentiveListDataType,
+            incentive_table_constraints_data: IncentiveTableConstraintsDataType,
+            incentive_table_data: IncentiveTableDataType,
+            incentive_table_description_data: IncentiveTableDescriptionDataType,
+            load_control_event_list_data: LoadControlEventListDataType,
+            load_control_limit_constraints_list_data: LoadControlLimitConstraintsListDataType,
+            load_control_limit_description_list_data: LoadControlLimitDescriptionListDataType,
+            load_control_limit_list_data: LoadControlLimitListDataType,
+            load_control_node_data: LoadControlNodeDataType,
+            load_control_state_list_data: LoadControlStateListDataType,
+            measurement_constraints_list_data: MeasurementConstraintsListDataType,
+            measurement_description_list_data: MeasurementDescriptionListDataType,
+            measurement_list_data: MeasurementListDataType,
+            measurement_series_list_data: MeasurementSeriesListDataType,
+            measurement_threshold_relation_list_data: MeasurementThresholdRelationListDataType,
+            messaging_list_data: MessagingListDataType,
+            network_management_abort_call: NetworkManagementAbortCallType,
+            network_management_add_node_call: NetworkManagementAddNodeCallType,
+            network_management_device_description_list_data: NetworkManagementDeviceDescriptionListDataType,
+            network_management_discover_call: NetworkManagementDiscoverCallType,
+            network_management_entity_description_list_data: NetworkManagementEntityDescriptionListDataType,
+            network_management_feature_description_list_data: NetworkManagementFeatureDescriptionListDataType,
+            network_management_joining_mode_data: NetworkManagementJoiningModeDataType,
+            network_management_modify_node_call: NetworkManagementModifyNodeCallType,
+            network_management_process_state_data: NetworkManagementProcessStateDataType,
+            network_management_remove_node_call: NetworkManagementRemoveNodeCallType,
+            network_management_report_candidate_data: NetworkManagementReportCandidateDataType,
+            network_management_scan_network_call: NetworkManagementScanNetworkCallType,
+            node_management_binding_data: NodeManagementBindingDataType,
+            node_management_binding_delete_call: NodeManagementBindingDeleteCallType,
+            node_management_binding_request_call: NodeManagementBindingRequestCallType,
+            node_management_destination_list_data: NodeManagementDestinationListDataType,
+            node_management_detailed_discovery_data: NodeManagementDetailedDiscoveryDataType,
+            node_management_subscription_data: NodeManagementSubscriptionDataType,
+            node_management_subscription_delete_call: NodeManagementSubscriptionDeleteCallType,
+            node_management_subscription_request_call: NodeManagementSubscriptionRequestCallType,
+            node_management_use_case_data: NodeManagementUseCaseDataType,
+            operating_constraints_duration_list_data: OperatingConstraintsDurationListDataType,
+            operating_constraints_interrupt_list_data: OperatingConstraintsInterruptListDataType,
+            operating_constraints_power_description_list_data: OperatingConstraintsPowerDescriptionListDataType,
+            operating_constraints_power_level_list_data: OperatingConstraintsPowerLevelListDataType,
+            operating_constraints_power_range_list_data: OperatingConstraintsPowerRangeListDataType,
+            operating_constraints_resume_implication_list_data: OperatingConstraintsResumeImplicationListDataType,
+            power_sequence_alternatives_relation_list_data: PowerSequenceAlternativesRelationListDataType,
+            power_sequence_description_list_data: PowerSequenceDescriptionListDataType,
+            power_sequence_node_schedule_information_data: PowerSequenceNodeScheduleInformationDataType,
+            power_sequence_price_calculation_request_call: PowerSequencePriceCalculationRequestCallType,
+            power_sequence_price_list_data: PowerSequencePriceListDataType,
+            power_sequence_schedule_configuration_request_call: PowerSequenceScheduleConfigurationRequestCallType,
+            power_sequence_schedule_constraints_list_data: PowerSequenceScheduleConstraintsListDataType,
+            power_sequence_schedule_list_data: PowerSequenceScheduleListDataType,
+            power_sequence_schedule_preference_list_data: PowerSequenceSchedulePreferenceListDataType,
+            power_sequence_state_list_data: PowerSequenceStateListDataType,
+            power_time_slot_schedule_constraints_list_data: PowerTimeSlotScheduleConstraintsListDataType,
+            power_time_slot_schedule_list_data: PowerTimeSlotScheduleListDataType,
+            power_time_slot_value_list_data: PowerTimeSlotValueListDataType,
+            result_data: ResultDataType,
+            sensing_description_data: SensingDescriptionDataType,
+            sensing_list_data: SensingListDataType,
+            session_identification_list_data: SessionIdentificationListDataType,
+            session_measurement_relation_list_data: SessionMeasurementRelationListDataType,
+            setpoint_constraints_list_data: SetpointConstraintsListDataType,
+            setpoint_description_list_data: SetpointDescriptionListDataType,
+            setpoint_list_data: SetpointListDataType,
+            smart_energy_management_ps_configuration_request_call: SmartEnergyManagementPsConfigurationRequestCallType,
+            smart_energy_management_ps_data: SmartEnergyManagementPsDataType,
+            smart_energy_management_ps_price_calculation_request_call: SmartEnergyManagementPsPriceCalculationRequestCallType,
+            smart_energy_management_ps_price_data: SmartEnergyManagementPsPriceDataType,
+            specification_version_list_data: SpecificationVersionListDataType,
+            state_information_list_data: StateInformationListDataType,
+            subscription_management_delete_call: SubscriptionManagementDeleteCallType,
+            subscription_management_entry_list_data: SubscriptionManagementEntryListDataType,
+            subscription_management_request_call: SubscriptionManagementRequestCallType,
+            supply_condition_description_list_data: SupplyConditionDescriptionListDataType,
+            supply_condition_list_data: SupplyConditionListDataType,
+            supply_condition_threshold_relation_list_data: SupplyConditionThresholdRelationListDataType,
+            tariff_boundary_relation_list_data: TariffBoundaryRelationListDataType,
+            tariff_description_list_data: TariffDescriptionListDataType,
+            tariff_list_data: TariffListDataType,
+            tariff_overall_constraints_data: TariffOverallConstraintsDataType,
+            tariff_tier_relation_list_data: TariffTierRelationListDataType,
+            task_management_job_description_list_data: TaskManagementJobDescriptionListDataType,
+            task_management_job_list_data: TaskManagementJobListDataType,
+            task_management_job_relation_list_data: TaskManagementJobRelationListDataType,
+            task_management_overview_data: TaskManagementOverviewDataType,
+            threshold_constraints_list_data: ThresholdConstraintsListDataType,
+            threshold_description_list_data: ThresholdDescriptionListDataType,
+            threshold_list_data: ThresholdListDataType,
+            tier_boundary_description_list_data: TierBoundaryDescriptionListDataType,
+            tier_boundary_list_data: TierBoundaryListDataType,
+            tier_description_list_data: TierDescriptionListDataType,
+            tier_incentive_relation_list_data: TierIncentiveRelationListDataType,
+            tier_list_data: TierListDataType,
+            time_distributor_data: TimeDistributorDataType,
+            time_distributor_enquiry_call: TimeDistributorEnquiryCallType,
+            time_information_data: TimeInformationDataType,
+            time_precision_data: TimePrecisionDataType,
+            time_series_constraints_list_data: TimeSeriesConstraintsListDataType,
+            time_series_description_list_data: TimeSeriesDescriptionListDataType,
+            time_series_list_data: TimeSeriesListDataType,
+            time_table_constraints_list_data: TimeTableConstraintsListDataType,
+            time_table_description_list_data: TimeTableDescriptionListDataType,
+            time_table_list_data: TimeTableListDataType,
+            use_case_information_list_data: UseCaseInformationListDataType,
+    ):
+        super().__init__()
+        
+        self.actuator_level_data = actuator_level_data
+        self.actuator_level_description_data = actuator_level_description_data
+        self.actuator_switch_data = actuator_switch_data
+        self.actuator_switch_description_data = actuator_switch_description_data
+        self.alarm_list_data = alarm_list_data
+        self.bill_constraints_list_data = bill_constraints_list_data
+        self.bill_description_list_data = bill_description_list_data
+        self.bill_list_data = bill_list_data
+        self.binding_management_delete_call = binding_management_delete_call
+        self.binding_management_entry_list_data = binding_management_entry_list_data
+        self.binding_management_request_call = binding_management_request_call
+        self.commodity_list_data = commodity_list_data
+        self.data_tunneling_call = data_tunneling_call
+        self.device_classification_manufacturer_data = device_classification_manufacturer_data
+        self.device_classification_user_data = device_classification_user_data
+        self.device_configuration_key_value_constraints_list_data = device_configuration_key_value_constraints_list_data
+        self.device_configuration_key_value_description_list_data = device_configuration_key_value_description_list_data
+        self.device_configuration_key_value_list_data = device_configuration_key_value_list_data
+        self.device_diagnosis_heartbeat_data = device_diagnosis_heartbeat_data
+        self.device_diagnosis_service_data = device_diagnosis_service_data
+        self.device_diagnosis_state_data = device_diagnosis_state_data
+        self.direct_control_activity_list_data = direct_control_activity_list_data
+        self.direct_control_description_data = direct_control_description_data
+        self.electrical_connection_characteristic_list_data = electrical_connection_characteristic_list_data
+        self.electrical_connection_description_list_data = electrical_connection_description_list_data
+        self.electrical_connection_parameter_description_list_data = electrical_connection_parameter_description_list_data
+        self.electrical_connection_permitted_value_set_list_data = electrical_connection_permitted_value_set_list_data
+        self.electrical_connection_state_list_data = electrical_connection_state_list_data
+        self.hvac_operation_mode_description_list_data = hvac_operation_mode_description_list_data
+        self.hvac_overrun_description_list_data = hvac_overrun_description_list_data
+        self.hvac_overrun_list_data = hvac_overrun_list_data
+        self.hvac_system_function_description_list_data = hvac_system_function_description_list_data
+        self.hvac_system_function_list_data = hvac_system_function_list_data
+        self.hvac_system_function_operation_mode_relation_list_data = hvac_system_function_operation_mode_relation_list_data
+        self.hvac_system_function_power_sequence_relation_list_data = hvac_system_function_power_sequence_relation_list_data
+        self.hvac_system_function_setpoint_relation_list_data = hvac_system_function_setpoint_relation_list_data
+        self.identification_list_data = identification_list_data
+        self.incentive_description_list_data = incentive_description_list_data
+        self.incentive_list_data = incentive_list_data
+        self.incentive_table_constraints_data = incentive_table_constraints_data
+        self.incentive_table_data = incentive_table_data
+        self.incentive_table_description_data = incentive_table_description_data
+        self.load_control_event_list_data = load_control_event_list_data
+        self.load_control_limit_constraints_list_data = load_control_limit_constraints_list_data
+        self.load_control_limit_description_list_data = load_control_limit_description_list_data
+        self.load_control_limit_list_data = load_control_limit_list_data
+        self.load_control_node_data = load_control_node_data
+        self.load_control_state_list_data = load_control_state_list_data
+        self.measurement_constraints_list_data = measurement_constraints_list_data
+        self.measurement_description_list_data = measurement_description_list_data
+        self.measurement_list_data = measurement_list_data
+        self.measurement_series_list_data = measurement_series_list_data
+        self.measurement_threshold_relation_list_data = measurement_threshold_relation_list_data
+        self.messaging_list_data = messaging_list_data
+        self.network_management_abort_call = network_management_abort_call
+        self.network_management_add_node_call = network_management_add_node_call
+        self.network_management_device_description_list_data = network_management_device_description_list_data
+        self.network_management_discover_call = network_management_discover_call
+        self.network_management_entity_description_list_data = network_management_entity_description_list_data
+        self.network_management_feature_description_list_data = network_management_feature_description_list_data
+        self.network_management_joining_mode_data = network_management_joining_mode_data
+        self.network_management_modify_node_call = network_management_modify_node_call
+        self.network_management_process_state_data = network_management_process_state_data
+        self.network_management_remove_node_call = network_management_remove_node_call
+        self.network_management_report_candidate_data = network_management_report_candidate_data
+        self.network_management_scan_network_call = network_management_scan_network_call
+        self.node_management_binding_data = node_management_binding_data
+        self.node_management_binding_delete_call = node_management_binding_delete_call
+        self.node_management_binding_request_call = node_management_binding_request_call
+        self.node_management_destination_list_data = node_management_destination_list_data
+        self.node_management_detailed_discovery_data = node_management_detailed_discovery_data
+        self.node_management_subscription_data = node_management_subscription_data
+        self.node_management_subscription_delete_call = node_management_subscription_delete_call
+        self.node_management_subscription_request_call = node_management_subscription_request_call
+        self.node_management_use_case_data = node_management_use_case_data
+        self.operating_constraints_duration_list_data = operating_constraints_duration_list_data
+        self.operating_constraints_interrupt_list_data = operating_constraints_interrupt_list_data
+        self.operating_constraints_power_description_list_data = operating_constraints_power_description_list_data
+        self.operating_constraints_power_level_list_data = operating_constraints_power_level_list_data
+        self.operating_constraints_power_range_list_data = operating_constraints_power_range_list_data
+        self.operating_constraints_resume_implication_list_data = operating_constraints_resume_implication_list_data
+        self.power_sequence_alternatives_relation_list_data = power_sequence_alternatives_relation_list_data
+        self.power_sequence_description_list_data = power_sequence_description_list_data
+        self.power_sequence_node_schedule_information_data = power_sequence_node_schedule_information_data
+        self.power_sequence_price_calculation_request_call = power_sequence_price_calculation_request_call
+        self.power_sequence_price_list_data = power_sequence_price_list_data
+        self.power_sequence_schedule_configuration_request_call = power_sequence_schedule_configuration_request_call
+        self.power_sequence_schedule_constraints_list_data = power_sequence_schedule_constraints_list_data
+        self.power_sequence_schedule_list_data = power_sequence_schedule_list_data
+        self.power_sequence_schedule_preference_list_data = power_sequence_schedule_preference_list_data
+        self.power_sequence_state_list_data = power_sequence_state_list_data
+        self.power_time_slot_schedule_constraints_list_data = power_time_slot_schedule_constraints_list_data
+        self.power_time_slot_schedule_list_data = power_time_slot_schedule_list_data
+        self.power_time_slot_value_list_data = power_time_slot_value_list_data
+        self.result_data = result_data
+        self.sensing_description_data = sensing_description_data
+        self.sensing_list_data = sensing_list_data
+        self.session_identification_list_data = session_identification_list_data
+        self.session_measurement_relation_list_data = session_measurement_relation_list_data
+        self.setpoint_constraints_list_data = setpoint_constraints_list_data
+        self.setpoint_description_list_data = setpoint_description_list_data
+        self.setpoint_list_data = setpoint_list_data
+        self.smart_energy_management_ps_configuration_request_call = smart_energy_management_ps_configuration_request_call
+        self.smart_energy_management_ps_data = smart_energy_management_ps_data
+        self.smart_energy_management_ps_price_calculation_request_call = smart_energy_management_ps_price_calculation_request_call
+        self.smart_energy_management_ps_price_data = smart_energy_management_ps_price_data
+        self.specification_version_list_data = specification_version_list_data
+        self.state_information_list_data = state_information_list_data
+        self.subscription_management_delete_call = subscription_management_delete_call
+        self.subscription_management_entry_list_data = subscription_management_entry_list_data
+        self.subscription_management_request_call = subscription_management_request_call
+        self.supply_condition_description_list_data = supply_condition_description_list_data
+        self.supply_condition_list_data = supply_condition_list_data
+        self.supply_condition_threshold_relation_list_data = supply_condition_threshold_relation_list_data
+        self.tariff_boundary_relation_list_data = tariff_boundary_relation_list_data
+        self.tariff_description_list_data = tariff_description_list_data
+        self.tariff_list_data = tariff_list_data
+        self.tariff_overall_constraints_data = tariff_overall_constraints_data
+        self.tariff_tier_relation_list_data = tariff_tier_relation_list_data
+        self.task_management_job_description_list_data = task_management_job_description_list_data
+        self.task_management_job_list_data = task_management_job_list_data
+        self.task_management_job_relation_list_data = task_management_job_relation_list_data
+        self.task_management_overview_data = task_management_overview_data
+        self.threshold_constraints_list_data = threshold_constraints_list_data
+        self.threshold_description_list_data = threshold_description_list_data
+        self.threshold_list_data = threshold_list_data
+        self.tier_boundary_description_list_data = tier_boundary_description_list_data
+        self.tier_boundary_list_data = tier_boundary_list_data
+        self.tier_description_list_data = tier_description_list_data
+        self.tier_incentive_relation_list_data = tier_incentive_relation_list_data
+        self.tier_list_data = tier_list_data
+        self.time_distributor_data = time_distributor_data
+        self.time_distributor_enquiry_call = time_distributor_enquiry_call
+        self.time_information_data = time_information_data
+        self.time_precision_data = time_precision_data
+        self.time_series_constraints_list_data = time_series_constraints_list_data
+        self.time_series_description_list_data = time_series_description_list_data
+        self.time_series_list_data = time_series_list_data
+        self.time_table_constraints_list_data = time_table_constraints_list_data
+        self.time_table_description_list_data = time_table_description_list_data
+        self.time_table_list_data = time_table_list_data
+        self.use_case_information_list_data = use_case_information_list_data
+
+        if not isinstance(self.actuator_level_data, ActuatorLevelDataType):
+            raise TypeError("actuator_level_data is not of type ActuatorLevelDataType")
+        
+        if not isinstance(self.actuator_level_description_data, ActuatorLevelDescriptionDataType):
+            raise TypeError("actuator_level_description_data is not of type ActuatorLevelDescriptionDataType")
+        
+        if not isinstance(self.actuator_switch_data, ActuatorSwitchDataType):
+            raise TypeError("actuator_switch_data is not of type ActuatorSwitchDataType")
+        
+        if not isinstance(self.actuator_switch_description_data, ActuatorSwitchDescriptionDataType):
+            raise TypeError("actuator_switch_description_data is not of type ActuatorSwitchDescriptionDataType")
+        
+        if not isinstance(self.alarm_list_data, AlarmListDataType):
+            raise TypeError("alarm_list_data is not of type AlarmListDataType")
+        
+        if not isinstance(self.bill_constraints_list_data, BillConstraintsListDataType):
+            raise TypeError("bill_constraints_list_data is not of type BillConstraintsListDataType")
+        
+        if not isinstance(self.bill_description_list_data, BillDescriptionListDataType):
+            raise TypeError("bill_description_list_data is not of type BillDescriptionListDataType")
+        
+        if not isinstance(self.bill_list_data, BillListDataType):
+            raise TypeError("bill_list_data is not of type BillListDataType")
+        
+        if not isinstance(self.binding_management_delete_call, BindingManagementDeleteCallType):
+            raise TypeError("binding_management_delete_call is not of type BindingManagementDeleteCallType")
+        
+        if not isinstance(self.binding_management_entry_list_data, BindingManagementEntryListDataType):
+            raise TypeError("binding_management_entry_list_data is not of type BindingManagementEntryListDataType")
+        
+        if not isinstance(self.binding_management_request_call, BindingManagementRequestCallType):
+            raise TypeError("binding_management_request_call is not of type BindingManagementRequestCallType")
+        
+        if not isinstance(self.commodity_list_data, CommodityListDataType):
+            raise TypeError("commodity_list_data is not of type CommodityListDataType")
+        
+        if not isinstance(self.data_tunneling_call, DataTunnelingCallType):
+            raise TypeError("data_tunneling_call is not of type DataTunnelingCallType")
+        
+        if not isinstance(self.device_classification_manufacturer_data, DeviceClassificationManufacturerDataType):
+            raise TypeError("device_classification_manufacturer_data is not of type DeviceClassificationManufacturerDataType")
+        
+        if not isinstance(self.device_classification_user_data, DeviceClassificationUserDataType):
+            raise TypeError("device_classification_user_data is not of type DeviceClassificationUserDataType")
+        
+        if not isinstance(self.device_configuration_key_value_constraints_list_data, DeviceConfigurationKeyValueConstraintsListDataType):
+            raise TypeError("device_configuration_key_value_constraints_list_data is not of type DeviceConfigurationKeyValueConstraintsListDataType")
+        
+        if not isinstance(self.device_configuration_key_value_description_list_data, DeviceConfigurationKeyValueDescriptionListDataType):
+            raise TypeError("device_configuration_key_value_description_list_data is not of type DeviceConfigurationKeyValueDescriptionListDataType")
+        
+        if not isinstance(self.device_configuration_key_value_list_data, DeviceConfigurationKeyValueListDataType):
+            raise TypeError("device_configuration_key_value_list_data is not of type DeviceConfigurationKeyValueListDataType")
+        
+        if not isinstance(self.device_diagnosis_heartbeat_data, DeviceDiagnosisHeartbeatDataType):
+            raise TypeError("device_diagnosis_heartbeat_data is not of type DeviceDiagnosisHeartbeatDataType")
+        
+        if not isinstance(self.device_diagnosis_service_data, DeviceDiagnosisServiceDataType):
+            raise TypeError("device_diagnosis_service_data is not of type DeviceDiagnosisServiceDataType")
+        
+        if not isinstance(self.device_diagnosis_state_data, DeviceDiagnosisStateDataType):
+            raise TypeError("device_diagnosis_state_data is not of type DeviceDiagnosisStateDataType")
+        
+        if not isinstance(self.direct_control_activity_list_data, DirectControlActivityListDataType):
+            raise TypeError("direct_control_activity_list_data is not of type DirectControlActivityListDataType")
+        
+        if not isinstance(self.direct_control_description_data, DirectControlDescriptionDataType):
+            raise TypeError("direct_control_description_data is not of type DirectControlDescriptionDataType")
+        
+        if not isinstance(self.electrical_connection_characteristic_list_data, ElectricalConnectionCharacteristicListDataType):
+            raise TypeError("electrical_connection_characteristic_list_data is not of type ElectricalConnectionCharacteristicListDataType")
+        
+        if not isinstance(self.electrical_connection_description_list_data, ElectricalConnectionDescriptionListDataType):
+            raise TypeError("electrical_connection_description_list_data is not of type ElectricalConnectionDescriptionListDataType")
+        
+        if not isinstance(self.electrical_connection_parameter_description_list_data, ElectricalConnectionParameterDescriptionListDataType):
+            raise TypeError("electrical_connection_parameter_description_list_data is not of type ElectricalConnectionParameterDescriptionListDataType")
+        
+        if not isinstance(self.electrical_connection_permitted_value_set_list_data, ElectricalConnectionPermittedValueSetListDataType):
+            raise TypeError("electrical_connection_permitted_value_set_list_data is not of type ElectricalConnectionPermittedValueSetListDataType")
+        
+        if not isinstance(self.electrical_connection_state_list_data, ElectricalConnectionStateListDataType):
+            raise TypeError("electrical_connection_state_list_data is not of type ElectricalConnectionStateListDataType")
+        
+        if not isinstance(self.hvac_operation_mode_description_list_data, HvacOperationModeDescriptionListDataType):
+            raise TypeError("hvac_operation_mode_description_list_data is not of type HvacOperationModeDescriptionListDataType")
+        
+        if not isinstance(self.hvac_overrun_description_list_data, HvacOverrunDescriptionListDataType):
+            raise TypeError("hvac_overrun_description_list_data is not of type HvacOverrunDescriptionListDataType")
+        
+        if not isinstance(self.hvac_overrun_list_data, HvacOverrunListDataType):
+            raise TypeError("hvac_overrun_list_data is not of type HvacOverrunListDataType")
+        
+        if not isinstance(self.hvac_system_function_description_list_data, HvacSystemFunctionDescriptionListDataType):
+            raise TypeError("hvac_system_function_description_list_data is not of type HvacSystemFunctionDescriptionListDataType")
+        
+        if not isinstance(self.hvac_system_function_list_data, HvacSystemFunctionListDataType):
+            raise TypeError("hvac_system_function_list_data is not of type HvacSystemFunctionListDataType")
+        
+        if not isinstance(self.hvac_system_function_operation_mode_relation_list_data, HvacSystemFunctionOperationModeRelationListDataType):
+            raise TypeError("hvac_system_function_operation_mode_relation_list_data is not of type HvacSystemFunctionOperationModeRelationListDataType")
+        
+        if not isinstance(self.hvac_system_function_power_sequence_relation_list_data, HvacSystemFunctionPowerSequenceRelationListDataType):
+            raise TypeError("hvac_system_function_power_sequence_relation_list_data is not of type HvacSystemFunctionPowerSequenceRelationListDataType")
+        
+        if not isinstance(self.hvac_system_function_setpoint_relation_list_data, HvacSystemFunctionSetpointRelationListDataType):
+            raise TypeError("hvac_system_function_setpoint_relation_list_data is not of type HvacSystemFunctionSetpointRelationListDataType")
+        
+        if not isinstance(self.identification_list_data, IdentificationListDataType):
+            raise TypeError("identification_list_data is not of type IdentificationListDataType")
+        
+        if not isinstance(self.incentive_description_list_data, IncentiveDescriptionListDataType):
+            raise TypeError("incentive_description_list_data is not of type IncentiveDescriptionListDataType")
+        
+        if not isinstance(self.incentive_list_data, IncentiveListDataType):
+            raise TypeError("incentive_list_data is not of type IncentiveListDataType")
+        
+        if not isinstance(self.incentive_table_constraints_data, IncentiveTableConstraintsDataType):
+            raise TypeError("incentive_table_constraints_data is not of type IncentiveTableConstraintsDataType")
+        
+        if not isinstance(self.incentive_table_data, IncentiveTableDataType):
+            raise TypeError("incentive_table_data is not of type IncentiveTableDataType")
+        
+        if not isinstance(self.incentive_table_description_data, IncentiveTableDescriptionDataType):
+            raise TypeError("incentive_table_description_data is not of type IncentiveTableDescriptionDataType")
+        
+        if not isinstance(self.load_control_event_list_data, LoadControlEventListDataType):
+            raise TypeError("load_control_event_list_data is not of type LoadControlEventListDataType")
+        
+        if not isinstance(self.load_control_limit_constraints_list_data, LoadControlLimitConstraintsListDataType):
+            raise TypeError("load_control_limit_constraints_list_data is not of type LoadControlLimitConstraintsListDataType")
+        
+        if not isinstance(self.load_control_limit_description_list_data, LoadControlLimitDescriptionListDataType):
+            raise TypeError("load_control_limit_description_list_data is not of type LoadControlLimitDescriptionListDataType")
+        
+        if not isinstance(self.load_control_limit_list_data, LoadControlLimitListDataType):
+            raise TypeError("load_control_limit_list_data is not of type LoadControlLimitListDataType")
+        
+        if not isinstance(self.load_control_node_data, LoadControlNodeDataType):
+            raise TypeError("load_control_node_data is not of type LoadControlNodeDataType")
+        
+        if not isinstance(self.load_control_state_list_data, LoadControlStateListDataType):
+            raise TypeError("load_control_state_list_data is not of type LoadControlStateListDataType")
+        
+        if not isinstance(self.measurement_constraints_list_data, MeasurementConstraintsListDataType):
+            raise TypeError("measurement_constraints_list_data is not of type MeasurementConstraintsListDataType")
+        
+        if not isinstance(self.measurement_description_list_data, MeasurementDescriptionListDataType):
+            raise TypeError("measurement_description_list_data is not of type MeasurementDescriptionListDataType")
+        
+        if not isinstance(self.measurement_list_data, MeasurementListDataType):
+            raise TypeError("measurement_list_data is not of type MeasurementListDataType")
+        
+        if not isinstance(self.measurement_series_list_data, MeasurementSeriesListDataType):
+            raise TypeError("measurement_series_list_data is not of type MeasurementSeriesListDataType")
+        
+        if not isinstance(self.measurement_threshold_relation_list_data, MeasurementThresholdRelationListDataType):
+            raise TypeError("measurement_threshold_relation_list_data is not of type MeasurementThresholdRelationListDataType")
+        
+        if not isinstance(self.messaging_list_data, MessagingListDataType):
+            raise TypeError("messaging_list_data is not of type MessagingListDataType")
+        
+        if not isinstance(self.network_management_abort_call, NetworkManagementAbortCallType):
+            raise TypeError("network_management_abort_call is not of type NetworkManagementAbortCallType")
+        
+        if not isinstance(self.network_management_add_node_call, NetworkManagementAddNodeCallType):
+            raise TypeError("network_management_add_node_call is not of type NetworkManagementAddNodeCallType")
+        
+        if not isinstance(self.network_management_device_description_list_data, NetworkManagementDeviceDescriptionListDataType):
+            raise TypeError("network_management_device_description_list_data is not of type NetworkManagementDeviceDescriptionListDataType")
+        
+        if not isinstance(self.network_management_discover_call, NetworkManagementDiscoverCallType):
+            raise TypeError("network_management_discover_call is not of type NetworkManagementDiscoverCallType")
+        
+        if not isinstance(self.network_management_entity_description_list_data, NetworkManagementEntityDescriptionListDataType):
+            raise TypeError("network_management_entity_description_list_data is not of type NetworkManagementEntityDescriptionListDataType")
+        
+        if not isinstance(self.network_management_feature_description_list_data, NetworkManagementFeatureDescriptionListDataType):
+            raise TypeError("network_management_feature_description_list_data is not of type NetworkManagementFeatureDescriptionListDataType")
+        
+        if not isinstance(self.network_management_joining_mode_data, NetworkManagementJoiningModeDataType):
+            raise TypeError("network_management_joining_mode_data is not of type NetworkManagementJoiningModeDataType")
+        
+        if not isinstance(self.network_management_modify_node_call, NetworkManagementModifyNodeCallType):
+            raise TypeError("network_management_modify_node_call is not of type NetworkManagementModifyNodeCallType")
+        
+        if not isinstance(self.network_management_process_state_data, NetworkManagementProcessStateDataType):
+            raise TypeError("network_management_process_state_data is not of type NetworkManagementProcessStateDataType")
+        
+        if not isinstance(self.network_management_remove_node_call, NetworkManagementRemoveNodeCallType):
+            raise TypeError("network_management_remove_node_call is not of type NetworkManagementRemoveNodeCallType")
+        
+        if not isinstance(self.network_management_report_candidate_data, NetworkManagementReportCandidateDataType):
+            raise TypeError("network_management_report_candidate_data is not of type NetworkManagementReportCandidateDataType")
+        
+        if not isinstance(self.network_management_scan_network_call, NetworkManagementScanNetworkCallType):
+            raise TypeError("network_management_scan_network_call is not of type NetworkManagementScanNetworkCallType")
+        
+        if not isinstance(self.node_management_binding_data, NodeManagementBindingDataType):
+            raise TypeError("node_management_binding_data is not of type NodeManagementBindingDataType")
+        
+        if not isinstance(self.node_management_binding_delete_call, NodeManagementBindingDeleteCallType):
+            raise TypeError("node_management_binding_delete_call is not of type NodeManagementBindingDeleteCallType")
+        
+        if not isinstance(self.node_management_binding_request_call, NodeManagementBindingRequestCallType):
+            raise TypeError("node_management_binding_request_call is not of type NodeManagementBindingRequestCallType")
+        
+        if not isinstance(self.node_management_destination_list_data, NodeManagementDestinationListDataType):
+            raise TypeError("node_management_destination_list_data is not of type NodeManagementDestinationListDataType")
+        
+        if not isinstance(self.node_management_detailed_discovery_data, NodeManagementDetailedDiscoveryDataType):
+            raise TypeError("node_management_detailed_discovery_data is not of type NodeManagementDetailedDiscoveryDataType")
+        
+        if not isinstance(self.node_management_subscription_data, NodeManagementSubscriptionDataType):
+            raise TypeError("node_management_subscription_data is not of type NodeManagementSubscriptionDataType")
+        
+        if not isinstance(self.node_management_subscription_delete_call, NodeManagementSubscriptionDeleteCallType):
+            raise TypeError("node_management_subscription_delete_call is not of type NodeManagementSubscriptionDeleteCallType")
+        
+        if not isinstance(self.node_management_subscription_request_call, NodeManagementSubscriptionRequestCallType):
+            raise TypeError("node_management_subscription_request_call is not of type NodeManagementSubscriptionRequestCallType")
+        
+        if not isinstance(self.node_management_use_case_data, NodeManagementUseCaseDataType):
+            raise TypeError("node_management_use_case_data is not of type NodeManagementUseCaseDataType")
+        
+        if not isinstance(self.operating_constraints_duration_list_data, OperatingConstraintsDurationListDataType):
+            raise TypeError("operating_constraints_duration_list_data is not of type OperatingConstraintsDurationListDataType")
+        
+        if not isinstance(self.operating_constraints_interrupt_list_data, OperatingConstraintsInterruptListDataType):
+            raise TypeError("operating_constraints_interrupt_list_data is not of type OperatingConstraintsInterruptListDataType")
+        
+        if not isinstance(self.operating_constraints_power_description_list_data, OperatingConstraintsPowerDescriptionListDataType):
+            raise TypeError("operating_constraints_power_description_list_data is not of type OperatingConstraintsPowerDescriptionListDataType")
+        
+        if not isinstance(self.operating_constraints_power_level_list_data, OperatingConstraintsPowerLevelListDataType):
+            raise TypeError("operating_constraints_power_level_list_data is not of type OperatingConstraintsPowerLevelListDataType")
+        
+        if not isinstance(self.operating_constraints_power_range_list_data, OperatingConstraintsPowerRangeListDataType):
+            raise TypeError("operating_constraints_power_range_list_data is not of type OperatingConstraintsPowerRangeListDataType")
+        
+        if not isinstance(self.operating_constraints_resume_implication_list_data, OperatingConstraintsResumeImplicationListDataType):
+            raise TypeError("operating_constraints_resume_implication_list_data is not of type OperatingConstraintsResumeImplicationListDataType")
+        
+        if not isinstance(self.power_sequence_alternatives_relation_list_data, PowerSequenceAlternativesRelationListDataType):
+            raise TypeError("power_sequence_alternatives_relation_list_data is not of type PowerSequenceAlternativesRelationListDataType")
+        
+        if not isinstance(self.power_sequence_description_list_data, PowerSequenceDescriptionListDataType):
+            raise TypeError("power_sequence_description_list_data is not of type PowerSequenceDescriptionListDataType")
+        
+        if not isinstance(self.power_sequence_node_schedule_information_data, PowerSequenceNodeScheduleInformationDataType):
+            raise TypeError("power_sequence_node_schedule_information_data is not of type PowerSequenceNodeScheduleInformationDataType")
+        
+        if not isinstance(self.power_sequence_price_calculation_request_call, PowerSequencePriceCalculationRequestCallType):
+            raise TypeError("power_sequence_price_calculation_request_call is not of type PowerSequencePriceCalculationRequestCallType")
+        
+        if not isinstance(self.power_sequence_price_list_data, PowerSequencePriceListDataType):
+            raise TypeError("power_sequence_price_list_data is not of type PowerSequencePriceListDataType")
+        
+        if not isinstance(self.power_sequence_schedule_configuration_request_call, PowerSequenceScheduleConfigurationRequestCallType):
+            raise TypeError("power_sequence_schedule_configuration_request_call is not of type PowerSequenceScheduleConfigurationRequestCallType")
+        
+        if not isinstance(self.power_sequence_schedule_constraints_list_data, PowerSequenceScheduleConstraintsListDataType):
+            raise TypeError("power_sequence_schedule_constraints_list_data is not of type PowerSequenceScheduleConstraintsListDataType")
+        
+        if not isinstance(self.power_sequence_schedule_list_data, PowerSequenceScheduleListDataType):
+            raise TypeError("power_sequence_schedule_list_data is not of type PowerSequenceScheduleListDataType")
+        
+        if not isinstance(self.power_sequence_schedule_preference_list_data, PowerSequenceSchedulePreferenceListDataType):
+            raise TypeError("power_sequence_schedule_preference_list_data is not of type PowerSequenceSchedulePreferenceListDataType")
+        
+        if not isinstance(self.power_sequence_state_list_data, PowerSequenceStateListDataType):
+            raise TypeError("power_sequence_state_list_data is not of type PowerSequenceStateListDataType")
+        
+        if not isinstance(self.power_time_slot_schedule_constraints_list_data, PowerTimeSlotScheduleConstraintsListDataType):
+            raise TypeError("power_time_slot_schedule_constraints_list_data is not of type PowerTimeSlotScheduleConstraintsListDataType")
+        
+        if not isinstance(self.power_time_slot_schedule_list_data, PowerTimeSlotScheduleListDataType):
+            raise TypeError("power_time_slot_schedule_list_data is not of type PowerTimeSlotScheduleListDataType")
+        
+        if not isinstance(self.power_time_slot_value_list_data, PowerTimeSlotValueListDataType):
+            raise TypeError("power_time_slot_value_list_data is not of type PowerTimeSlotValueListDataType")
+        
+        if not isinstance(self.result_data, ResultDataType):
+            raise TypeError("result_data is not of type ResultDataType")
+        
+        if not isinstance(self.sensing_description_data, SensingDescriptionDataType):
+            raise TypeError("sensing_description_data is not of type SensingDescriptionDataType")
+        
+        if not isinstance(self.sensing_list_data, SensingListDataType):
+            raise TypeError("sensing_list_data is not of type SensingListDataType")
+        
+        if not isinstance(self.session_identification_list_data, SessionIdentificationListDataType):
+            raise TypeError("session_identification_list_data is not of type SessionIdentificationListDataType")
+        
+        if not isinstance(self.session_measurement_relation_list_data, SessionMeasurementRelationListDataType):
+            raise TypeError("session_measurement_relation_list_data is not of type SessionMeasurementRelationListDataType")
+        
+        if not isinstance(self.setpoint_constraints_list_data, SetpointConstraintsListDataType):
+            raise TypeError("setpoint_constraints_list_data is not of type SetpointConstraintsListDataType")
+        
+        if not isinstance(self.setpoint_description_list_data, SetpointDescriptionListDataType):
+            raise TypeError("setpoint_description_list_data is not of type SetpointDescriptionListDataType")
+        
+        if not isinstance(self.setpoint_list_data, SetpointListDataType):
+            raise TypeError("setpoint_list_data is not of type SetpointListDataType")
+        
+        if not isinstance(self.smart_energy_management_ps_configuration_request_call, SmartEnergyManagementPsConfigurationRequestCallType):
+            raise TypeError("smart_energy_management_ps_configuration_request_call is not of type SmartEnergyManagementPsConfigurationRequestCallType")
+        
+        if not isinstance(self.smart_energy_management_ps_data, SmartEnergyManagementPsDataType):
+            raise TypeError("smart_energy_management_ps_data is not of type SmartEnergyManagementPsDataType")
+        
+        if not isinstance(self.smart_energy_management_ps_price_calculation_request_call, SmartEnergyManagementPsPriceCalculationRequestCallType):
+            raise TypeError("smart_energy_management_ps_price_calculation_request_call is not of type SmartEnergyManagementPsPriceCalculationRequestCallType")
+        
+        if not isinstance(self.smart_energy_management_ps_price_data, SmartEnergyManagementPsPriceDataType):
+            raise TypeError("smart_energy_management_ps_price_data is not of type SmartEnergyManagementPsPriceDataType")
+        
+        if not isinstance(self.specification_version_list_data, SpecificationVersionListDataType):
+            raise TypeError("specification_version_list_data is not of type SpecificationVersionListDataType")
+        
+        if not isinstance(self.state_information_list_data, StateInformationListDataType):
+            raise TypeError("state_information_list_data is not of type StateInformationListDataType")
+        
+        if not isinstance(self.subscription_management_delete_call, SubscriptionManagementDeleteCallType):
+            raise TypeError("subscription_management_delete_call is not of type SubscriptionManagementDeleteCallType")
+        
+        if not isinstance(self.subscription_management_entry_list_data, SubscriptionManagementEntryListDataType):
+            raise TypeError("subscription_management_entry_list_data is not of type SubscriptionManagementEntryListDataType")
+        
+        if not isinstance(self.subscription_management_request_call, SubscriptionManagementRequestCallType):
+            raise TypeError("subscription_management_request_call is not of type SubscriptionManagementRequestCallType")
+        
+        if not isinstance(self.supply_condition_description_list_data, SupplyConditionDescriptionListDataType):
+            raise TypeError("supply_condition_description_list_data is not of type SupplyConditionDescriptionListDataType")
+        
+        if not isinstance(self.supply_condition_list_data, SupplyConditionListDataType):
+            raise TypeError("supply_condition_list_data is not of type SupplyConditionListDataType")
+        
+        if not isinstance(self.supply_condition_threshold_relation_list_data, SupplyConditionThresholdRelationListDataType):
+            raise TypeError("supply_condition_threshold_relation_list_data is not of type SupplyConditionThresholdRelationListDataType")
+        
+        if not isinstance(self.tariff_boundary_relation_list_data, TariffBoundaryRelationListDataType):
+            raise TypeError("tariff_boundary_relation_list_data is not of type TariffBoundaryRelationListDataType")
+        
+        if not isinstance(self.tariff_description_list_data, TariffDescriptionListDataType):
+            raise TypeError("tariff_description_list_data is not of type TariffDescriptionListDataType")
+        
+        if not isinstance(self.tariff_list_data, TariffListDataType):
+            raise TypeError("tariff_list_data is not of type TariffListDataType")
+        
+        if not isinstance(self.tariff_overall_constraints_data, TariffOverallConstraintsDataType):
+            raise TypeError("tariff_overall_constraints_data is not of type TariffOverallConstraintsDataType")
+        
+        if not isinstance(self.tariff_tier_relation_list_data, TariffTierRelationListDataType):
+            raise TypeError("tariff_tier_relation_list_data is not of type TariffTierRelationListDataType")
+        
+        if not isinstance(self.task_management_job_description_list_data, TaskManagementJobDescriptionListDataType):
+            raise TypeError("task_management_job_description_list_data is not of type TaskManagementJobDescriptionListDataType")
+        
+        if not isinstance(self.task_management_job_list_data, TaskManagementJobListDataType):
+            raise TypeError("task_management_job_list_data is not of type TaskManagementJobListDataType")
+        
+        if not isinstance(self.task_management_job_relation_list_data, TaskManagementJobRelationListDataType):
+            raise TypeError("task_management_job_relation_list_data is not of type TaskManagementJobRelationListDataType")
+        
+        if not isinstance(self.task_management_overview_data, TaskManagementOverviewDataType):
+            raise TypeError("task_management_overview_data is not of type TaskManagementOverviewDataType")
+        
+        if not isinstance(self.threshold_constraints_list_data, ThresholdConstraintsListDataType):
+            raise TypeError("threshold_constraints_list_data is not of type ThresholdConstraintsListDataType")
+        
+        if not isinstance(self.threshold_description_list_data, ThresholdDescriptionListDataType):
+            raise TypeError("threshold_description_list_data is not of type ThresholdDescriptionListDataType")
+        
+        if not isinstance(self.threshold_list_data, ThresholdListDataType):
+            raise TypeError("threshold_list_data is not of type ThresholdListDataType")
+        
+        if not isinstance(self.tier_boundary_description_list_data, TierBoundaryDescriptionListDataType):
+            raise TypeError("tier_boundary_description_list_data is not of type TierBoundaryDescriptionListDataType")
+        
+        if not isinstance(self.tier_boundary_list_data, TierBoundaryListDataType):
+            raise TypeError("tier_boundary_list_data is not of type TierBoundaryListDataType")
+        
+        if not isinstance(self.tier_description_list_data, TierDescriptionListDataType):
+            raise TypeError("tier_description_list_data is not of type TierDescriptionListDataType")
+        
+        if not isinstance(self.tier_incentive_relation_list_data, TierIncentiveRelationListDataType):
+            raise TypeError("tier_incentive_relation_list_data is not of type TierIncentiveRelationListDataType")
+        
+        if not isinstance(self.tier_list_data, TierListDataType):
+            raise TypeError("tier_list_data is not of type TierListDataType")
+        
+        if not isinstance(self.time_distributor_data, TimeDistributorDataType):
+            raise TypeError("time_distributor_data is not of type TimeDistributorDataType")
+        
+        if not isinstance(self.time_distributor_enquiry_call, TimeDistributorEnquiryCallType):
+            raise TypeError("time_distributor_enquiry_call is not of type TimeDistributorEnquiryCallType")
+        
+        if not isinstance(self.time_information_data, TimeInformationDataType):
+            raise TypeError("time_information_data is not of type TimeInformationDataType")
+        
+        if not isinstance(self.time_precision_data, TimePrecisionDataType):
+            raise TypeError("time_precision_data is not of type TimePrecisionDataType")
+        
+        if not isinstance(self.time_series_constraints_list_data, TimeSeriesConstraintsListDataType):
+            raise TypeError("time_series_constraints_list_data is not of type TimeSeriesConstraintsListDataType")
+        
+        if not isinstance(self.time_series_description_list_data, TimeSeriesDescriptionListDataType):
+            raise TypeError("time_series_description_list_data is not of type TimeSeriesDescriptionListDataType")
+        
+        if not isinstance(self.time_series_list_data, TimeSeriesListDataType):
+            raise TypeError("time_series_list_data is not of type TimeSeriesListDataType")
+        
+        if not isinstance(self.time_table_constraints_list_data, TimeTableConstraintsListDataType):
+            raise TypeError("time_table_constraints_list_data is not of type TimeTableConstraintsListDataType")
+        
+        if not isinstance(self.time_table_description_list_data, TimeTableDescriptionListDataType):
+            raise TypeError("time_table_description_list_data is not of type TimeTableDescriptionListDataType")
+        
+        if not isinstance(self.time_table_list_data, TimeTableListDataType):
+            raise TypeError("time_table_list_data is not of type TimeTableListDataType")
+        
+        if not isinstance(self.use_case_information_list_data, UseCaseInformationListDataType):
+            raise TypeError("use_case_information_list_data is not of type UseCaseInformationListDataType")
+        
+    def get_data(self):
+
+        msg_data = []
+        
+        if self.actuator_level_data is not None:
+            msg_data.append({"actuatorLevelData": self.actuator_level_data.get_data()})
+        if self.actuator_level_description_data is not None:
+            msg_data.append({"actuatorLevelDescriptionData": self.actuator_level_description_data.get_data()})
+        if self.actuator_switch_data is not None:
+            msg_data.append({"actuatorSwitchData": self.actuator_switch_data.get_data()})
+        if self.actuator_switch_description_data is not None:
+            msg_data.append({"actuatorSwitchDescriptionData": self.actuator_switch_description_data.get_data()})
+        if self.alarm_list_data is not None:
+            msg_data.append({"alarmListData": self.alarm_list_data.get_data()})
+        if self.bill_constraints_list_data is not None:
+            msg_data.append({"billConstraintsListData": self.bill_constraints_list_data.get_data()})
+        if self.bill_description_list_data is not None:
+            msg_data.append({"billDescriptionListData": self.bill_description_list_data.get_data()})
+        if self.bill_list_data is not None:
+            msg_data.append({"billListData": self.bill_list_data.get_data()})
+        if self.binding_management_delete_call is not None:
+            msg_data.append({"bindingManagementDeleteCall": self.binding_management_delete_call.get_data()})
+        if self.binding_management_entry_list_data is not None:
+            msg_data.append({"bindingManagementEntryListData": self.binding_management_entry_list_data.get_data()})
+        if self.binding_management_request_call is not None:
+            msg_data.append({"bindingManagementRequestCall": self.binding_management_request_call.get_data()})
+        if self.commodity_list_data is not None:
+            msg_data.append({"commodityListData": self.commodity_list_data.get_data()})
+        if self.data_tunneling_call is not None:
+            msg_data.append({"dataTunnelingCall": self.data_tunneling_call.get_data()})
+        if self.device_classification_manufacturer_data is not None:
+            msg_data.append({"deviceClassificationManufacturerData": self.device_classification_manufacturer_data.get_data()})
+        if self.device_classification_user_data is not None:
+            msg_data.append({"deviceClassificationUserData": self.device_classification_user_data.get_data()})
+        if self.device_configuration_key_value_constraints_list_data is not None:
+            msg_data.append({"deviceConfigurationKeyValueConstraintsListData": self.device_configuration_key_value_constraints_list_data.get_data()})
+        if self.device_configuration_key_value_description_list_data is not None:
+            msg_data.append({"deviceConfigurationKeyValueDescriptionListData": self.device_configuration_key_value_description_list_data.get_data()})
+        if self.device_configuration_key_value_list_data is not None:
+            msg_data.append({"deviceConfigurationKeyValueListData": self.device_configuration_key_value_list_data.get_data()})
+        if self.device_diagnosis_heartbeat_data is not None:
+            msg_data.append({"deviceDiagnosisHeartbeatData": self.device_diagnosis_heartbeat_data.get_data()})
+        if self.device_diagnosis_service_data is not None:
+            msg_data.append({"deviceDiagnosisServiceData": self.device_diagnosis_service_data.get_data()})
+        if self.device_diagnosis_state_data is not None:
+            msg_data.append({"deviceDiagnosisStateData": self.device_diagnosis_state_data.get_data()})
+        if self.direct_control_activity_list_data is not None:
+            msg_data.append({"directControlActivityListData": self.direct_control_activity_list_data.get_data()})
+        if self.direct_control_description_data is not None:
+            msg_data.append({"directControlDescriptionData": self.direct_control_description_data.get_data()})
+        if self.electrical_connection_characteristic_list_data is not None:
+            msg_data.append({"electricalConnectionCharacteristicListData": self.electrical_connection_characteristic_list_data.get_data()})
+        if self.electrical_connection_description_list_data is not None:
+            msg_data.append({"electricalConnectionDescriptionListData": self.electrical_connection_description_list_data.get_data()})
+        if self.electrical_connection_parameter_description_list_data is not None:
+            msg_data.append({"electricalConnectionParameterDescriptionListData": self.electrical_connection_parameter_description_list_data.get_data()})
+        if self.electrical_connection_permitted_value_set_list_data is not None:
+            msg_data.append({"electricalConnectionPermittedValueSetListData": self.electrical_connection_permitted_value_set_list_data.get_data()})
+        if self.electrical_connection_state_list_data is not None:
+            msg_data.append({"electricalConnectionStateListData": self.electrical_connection_state_list_data.get_data()})
+        if self.hvac_operation_mode_description_list_data is not None:
+            msg_data.append({"hvacOperationModeDescriptionListData": self.hvac_operation_mode_description_list_data.get_data()})
+        if self.hvac_overrun_description_list_data is not None:
+            msg_data.append({"hvacOverrunDescriptionListData": self.hvac_overrun_description_list_data.get_data()})
+        if self.hvac_overrun_list_data is not None:
+            msg_data.append({"hvacOverrunListData": self.hvac_overrun_list_data.get_data()})
+        if self.hvac_system_function_description_list_data is not None:
+            msg_data.append({"hvacSystemFunctionDescriptionListData": self.hvac_system_function_description_list_data.get_data()})
+        if self.hvac_system_function_list_data is not None:
+            msg_data.append({"hvacSystemFunctionListData": self.hvac_system_function_list_data.get_data()})
+        if self.hvac_system_function_operation_mode_relation_list_data is not None:
+            msg_data.append({"hvacSystemFunctionOperationModeRelationListData": self.hvac_system_function_operation_mode_relation_list_data.get_data()})
+        if self.hvac_system_function_power_sequence_relation_list_data is not None:
+            msg_data.append({"hvacSystemFunctionPowerSequenceRelationListData": self.hvac_system_function_power_sequence_relation_list_data.get_data()})
+        if self.hvac_system_function_setpoint_relation_list_data is not None:
+            msg_data.append({"hvacSystemFunctionSetpointRelationListData": self.hvac_system_function_setpoint_relation_list_data.get_data()})
+        if self.identification_list_data is not None:
+            msg_data.append({"identificationListData": self.identification_list_data.get_data()})
+        if self.incentive_description_list_data is not None:
+            msg_data.append({"incentiveDescriptionListData": self.incentive_description_list_data.get_data()})
+        if self.incentive_list_data is not None:
+            msg_data.append({"incentiveListData": self.incentive_list_data.get_data()})
+        if self.incentive_table_constraints_data is not None:
+            msg_data.append({"incentiveTableConstraintsData": self.incentive_table_constraints_data.get_data()})
+        if self.incentive_table_data is not None:
+            msg_data.append({"incentiveTableData": self.incentive_table_data.get_data()})
+        if self.incentive_table_description_data is not None:
+            msg_data.append({"incentiveTableDescriptionData": self.incentive_table_description_data.get_data()})
+        if self.load_control_event_list_data is not None:
+            msg_data.append({"loadControlEventListData": self.load_control_event_list_data.get_data()})
+        if self.load_control_limit_constraints_list_data is not None:
+            msg_data.append({"loadControlLimitConstraintsListData": self.load_control_limit_constraints_list_data.get_data()})
+        if self.load_control_limit_description_list_data is not None:
+            msg_data.append({"loadControlLimitDescriptionListData": self.load_control_limit_description_list_data.get_data()})
+        if self.load_control_limit_list_data is not None:
+            msg_data.append({"loadControlLimitListData": self.load_control_limit_list_data.get_data()})
+        if self.load_control_node_data is not None:
+            msg_data.append({"loadControlNodeData": self.load_control_node_data.get_data()})
+        if self.load_control_state_list_data is not None:
+            msg_data.append({"loadControlStateListData": self.load_control_state_list_data.get_data()})
+        if self.measurement_constraints_list_data is not None:
+            msg_data.append({"measurementConstraintsListData": self.measurement_constraints_list_data.get_data()})
+        if self.measurement_description_list_data is not None:
+            msg_data.append({"measurementDescriptionListData": self.measurement_description_list_data.get_data()})
+        if self.measurement_list_data is not None:
+            msg_data.append({"measurementListData": self.measurement_list_data.get_data()})
+        if self.measurement_series_list_data is not None:
+            msg_data.append({"measurementSeriesListData": self.measurement_series_list_data.get_data()})
+        if self.measurement_threshold_relation_list_data is not None:
+            msg_data.append({"measurementThresholdRelationListData": self.measurement_threshold_relation_list_data.get_data()})
+        if self.messaging_list_data is not None:
+            msg_data.append({"messagingListData": self.messaging_list_data.get_data()})
+        if self.network_management_abort_call is not None:
+            msg_data.append({"networkManagementAbortCall": self.network_management_abort_call.get_data()})
+        if self.network_management_add_node_call is not None:
+            msg_data.append({"networkManagementAddNodeCall": self.network_management_add_node_call.get_data()})
+        if self.network_management_device_description_list_data is not None:
+            msg_data.append({"networkManagementDeviceDescriptionListData": self.network_management_device_description_list_data.get_data()})
+        if self.network_management_discover_call is not None:
+            msg_data.append({"networkManagementDiscoverCall": self.network_management_discover_call.get_data()})
+        if self.network_management_entity_description_list_data is not None:
+            msg_data.append({"networkManagementEntityDescriptionListData": self.network_management_entity_description_list_data.get_data()})
+        if self.network_management_feature_description_list_data is not None:
+            msg_data.append({"networkManagementFeatureDescriptionListData": self.network_management_feature_description_list_data.get_data()})
+        if self.network_management_joining_mode_data is not None:
+            msg_data.append({"networkManagementJoiningModeData": self.network_management_joining_mode_data.get_data()})
+        if self.network_management_modify_node_call is not None:
+            msg_data.append({"networkManagementModifyNodeCall": self.network_management_modify_node_call.get_data()})
+        if self.network_management_process_state_data is not None:
+            msg_data.append({"networkManagementProcessStateData": self.network_management_process_state_data.get_data()})
+        if self.network_management_remove_node_call is not None:
+            msg_data.append({"networkManagementRemoveNodeCall": self.network_management_remove_node_call.get_data()})
+        if self.network_management_report_candidate_data is not None:
+            msg_data.append({"networkManagementReportCandidateData": self.network_management_report_candidate_data.get_data()})
+        if self.network_management_scan_network_call is not None:
+            msg_data.append({"networkManagementScanNetworkCall": self.network_management_scan_network_call.get_data()})
+        if self.node_management_binding_data is not None:
+            msg_data.append({"nodeManagementBindingData": self.node_management_binding_data.get_data()})
+        if self.node_management_binding_delete_call is not None:
+            msg_data.append({"nodeManagementBindingDeleteCall": self.node_management_binding_delete_call.get_data()})
+        if self.node_management_binding_request_call is not None:
+            msg_data.append({"nodeManagementBindingRequestCall": self.node_management_binding_request_call.get_data()})
+        if self.node_management_destination_list_data is not None:
+            msg_data.append({"nodeManagementDestinationListData": self.node_management_destination_list_data.get_data()})
+        if self.node_management_detailed_discovery_data is not None:
+            msg_data.append({"nodeManagementDetailedDiscoveryData": self.node_management_detailed_discovery_data.get_data()})
+        if self.node_management_subscription_data is not None:
+            msg_data.append({"nodeManagementSubscriptionData": self.node_management_subscription_data.get_data()})
+        if self.node_management_subscription_delete_call is not None:
+            msg_data.append({"nodeManagementSubscriptionDeleteCall": self.node_management_subscription_delete_call.get_data()})
+        if self.node_management_subscription_request_call is not None:
+            msg_data.append({"nodeManagementSubscriptionRequestCall": self.node_management_subscription_request_call.get_data()})
+        if self.node_management_use_case_data is not None:
+            msg_data.append({"nodeManagementUseCaseData": self.node_management_use_case_data.get_data()})
+        if self.operating_constraints_duration_list_data is not None:
+            msg_data.append({"operatingConstraintsDurationListData": self.operating_constraints_duration_list_data.get_data()})
+        if self.operating_constraints_interrupt_list_data is not None:
+            msg_data.append({"operatingConstraintsInterruptListData": self.operating_constraints_interrupt_list_data.get_data()})
+        if self.operating_constraints_power_description_list_data is not None:
+            msg_data.append({"operatingConstraintsPowerDescriptionListData": self.operating_constraints_power_description_list_data.get_data()})
+        if self.operating_constraints_power_level_list_data is not None:
+            msg_data.append({"operatingConstraintsPowerLevelListData": self.operating_constraints_power_level_list_data.get_data()})
+        if self.operating_constraints_power_range_list_data is not None:
+            msg_data.append({"operatingConstraintsPowerRangeListData": self.operating_constraints_power_range_list_data.get_data()})
+        if self.operating_constraints_resume_implication_list_data is not None:
+            msg_data.append({"operatingConstraintsResumeImplicationListData": self.operating_constraints_resume_implication_list_data.get_data()})
+        if self.power_sequence_alternatives_relation_list_data is not None:
+            msg_data.append({"powerSequenceAlternativesRelationListData": self.power_sequence_alternatives_relation_list_data.get_data()})
+        if self.power_sequence_description_list_data is not None:
+            msg_data.append({"powerSequenceDescriptionListData": self.power_sequence_description_list_data.get_data()})
+        if self.power_sequence_node_schedule_information_data is not None:
+            msg_data.append({"powerSequenceNodeScheduleInformationData": self.power_sequence_node_schedule_information_data.get_data()})
+        if self.power_sequence_price_calculation_request_call is not None:
+            msg_data.append({"powerSequencePriceCalculationRequestCall": self.power_sequence_price_calculation_request_call.get_data()})
+        if self.power_sequence_price_list_data is not None:
+            msg_data.append({"powerSequencePriceListData": self.power_sequence_price_list_data.get_data()})
+        if self.power_sequence_schedule_configuration_request_call is not None:
+            msg_data.append({"powerSequenceScheduleConfigurationRequestCall": self.power_sequence_schedule_configuration_request_call.get_data()})
+        if self.power_sequence_schedule_constraints_list_data is not None:
+            msg_data.append({"powerSequenceScheduleConstraintsListData": self.power_sequence_schedule_constraints_list_data.get_data()})
+        if self.power_sequence_schedule_list_data is not None:
+            msg_data.append({"powerSequenceScheduleListData": self.power_sequence_schedule_list_data.get_data()})
+        if self.power_sequence_schedule_preference_list_data is not None:
+            msg_data.append({"powerSequenceSchedulePreferenceListData": self.power_sequence_schedule_preference_list_data.get_data()})
+        if self.power_sequence_state_list_data is not None:
+            msg_data.append({"powerSequenceStateListData": self.power_sequence_state_list_data.get_data()})
+        if self.power_time_slot_schedule_constraints_list_data is not None:
+            msg_data.append({"powerTimeSlotScheduleConstraintsListData": self.power_time_slot_schedule_constraints_list_data.get_data()})
+        if self.power_time_slot_schedule_list_data is not None:
+            msg_data.append({"powerTimeSlotScheduleListData": self.power_time_slot_schedule_list_data.get_data()})
+        if self.power_time_slot_value_list_data is not None:
+            msg_data.append({"powerTimeSlotValueListData": self.power_time_slot_value_list_data.get_data()})
+        if self.result_data is not None:
+            msg_data.append({"resultData": self.result_data.get_data()})
+        if self.sensing_description_data is not None:
+            msg_data.append({"sensingDescriptionData": self.sensing_description_data.get_data()})
+        if self.sensing_list_data is not None:
+            msg_data.append({"sensingListData": self.sensing_list_data.get_data()})
+        if self.session_identification_list_data is not None:
+            msg_data.append({"sessionIdentificationListData": self.session_identification_list_data.get_data()})
+        if self.session_measurement_relation_list_data is not None:
+            msg_data.append({"sessionMeasurementRelationListData": self.session_measurement_relation_list_data.get_data()})
+        if self.setpoint_constraints_list_data is not None:
+            msg_data.append({"setpointConstraintsListData": self.setpoint_constraints_list_data.get_data()})
+        if self.setpoint_description_list_data is not None:
+            msg_data.append({"setpointDescriptionListData": self.setpoint_description_list_data.get_data()})
+        if self.setpoint_list_data is not None:
+            msg_data.append({"setpointListData": self.setpoint_list_data.get_data()})
+        if self.smart_energy_management_ps_configuration_request_call is not None:
+            msg_data.append({"smartEnergyManagementPsConfigurationRequestCall": self.smart_energy_management_ps_configuration_request_call.get_data()})
+        if self.smart_energy_management_ps_data is not None:
+            msg_data.append({"smartEnergyManagementPsData": self.smart_energy_management_ps_data.get_data()})
+        if self.smart_energy_management_ps_price_calculation_request_call is not None:
+            msg_data.append({"smartEnergyManagementPsPriceCalculationRequestCall": self.smart_energy_management_ps_price_calculation_request_call.get_data()})
+        if self.smart_energy_management_ps_price_data is not None:
+            msg_data.append({"smartEnergyManagementPsPriceData": self.smart_energy_management_ps_price_data.get_data()})
+        if self.specification_version_list_data is not None:
+            msg_data.append({"specificationVersionListData": self.specification_version_list_data.get_data()})
+        if self.state_information_list_data is not None:
+            msg_data.append({"stateInformationListData": self.state_information_list_data.get_data()})
+        if self.subscription_management_delete_call is not None:
+            msg_data.append({"subscriptionManagementDeleteCall": self.subscription_management_delete_call.get_data()})
+        if self.subscription_management_entry_list_data is not None:
+            msg_data.append({"subscriptionManagementEntryListData": self.subscription_management_entry_list_data.get_data()})
+        if self.subscription_management_request_call is not None:
+            msg_data.append({"subscriptionManagementRequestCall": self.subscription_management_request_call.get_data()})
+        if self.supply_condition_description_list_data is not None:
+            msg_data.append({"supplyConditionDescriptionListData": self.supply_condition_description_list_data.get_data()})
+        if self.supply_condition_list_data is not None:
+            msg_data.append({"supplyConditionListData": self.supply_condition_list_data.get_data()})
+        if self.supply_condition_threshold_relation_list_data is not None:
+            msg_data.append({"supplyConditionThresholdRelationListData": self.supply_condition_threshold_relation_list_data.get_data()})
+        if self.tariff_boundary_relation_list_data is not None:
+            msg_data.append({"tariffBoundaryRelationListData": self.tariff_boundary_relation_list_data.get_data()})
+        if self.tariff_description_list_data is not None:
+            msg_data.append({"tariffDescriptionListData": self.tariff_description_list_data.get_data()})
+        if self.tariff_list_data is not None:
+            msg_data.append({"tariffListData": self.tariff_list_data.get_data()})
+        if self.tariff_overall_constraints_data is not None:
+            msg_data.append({"tariffOverallConstraintsData": self.tariff_overall_constraints_data.get_data()})
+        if self.tariff_tier_relation_list_data is not None:
+            msg_data.append({"tariffTierRelationListData": self.tariff_tier_relation_list_data.get_data()})
+        if self.task_management_job_description_list_data is not None:
+            msg_data.append({"taskManagementJobDescriptionListData": self.task_management_job_description_list_data.get_data()})
+        if self.task_management_job_list_data is not None:
+            msg_data.append({"taskManagementJobListData": self.task_management_job_list_data.get_data()})
+        if self.task_management_job_relation_list_data is not None:
+            msg_data.append({"taskManagementJobRelationListData": self.task_management_job_relation_list_data.get_data()})
+        if self.task_management_overview_data is not None:
+            msg_data.append({"taskManagementOverviewData": self.task_management_overview_data.get_data()})
+        if self.threshold_constraints_list_data is not None:
+            msg_data.append({"thresholdConstraintsListData": self.threshold_constraints_list_data.get_data()})
+        if self.threshold_description_list_data is not None:
+            msg_data.append({"thresholdDescriptionListData": self.threshold_description_list_data.get_data()})
+        if self.threshold_list_data is not None:
+            msg_data.append({"thresholdListData": self.threshold_list_data.get_data()})
+        if self.tier_boundary_description_list_data is not None:
+            msg_data.append({"tierBoundaryDescriptionListData": self.tier_boundary_description_list_data.get_data()})
+        if self.tier_boundary_list_data is not None:
+            msg_data.append({"tierBoundaryListData": self.tier_boundary_list_data.get_data()})
+        if self.tier_description_list_data is not None:
+            msg_data.append({"tierDescriptionListData": self.tier_description_list_data.get_data()})
+        if self.tier_incentive_relation_list_data is not None:
+            msg_data.append({"tierIncentiveRelationListData": self.tier_incentive_relation_list_data.get_data()})
+        if self.tier_list_data is not None:
+            msg_data.append({"tierListData": self.tier_list_data.get_data()})
+        if self.time_distributor_data is not None:
+            msg_data.append({"timeDistributorData": self.time_distributor_data.get_data()})
+        if self.time_distributor_enquiry_call is not None:
+            msg_data.append({"timeDistributorEnquiryCall": self.time_distributor_enquiry_call.get_data()})
+        if self.time_information_data is not None:
+            msg_data.append({"timeInformationData": self.time_information_data.get_data()})
+        if self.time_precision_data is not None:
+            msg_data.append({"timePrecisionData": self.time_precision_data.get_data()})
+        if self.time_series_constraints_list_data is not None:
+            msg_data.append({"timeSeriesConstraintsListData": self.time_series_constraints_list_data.get_data()})
+        if self.time_series_description_list_data is not None:
+            msg_data.append({"timeSeriesDescriptionListData": self.time_series_description_list_data.get_data()})
+        if self.time_series_list_data is not None:
+            msg_data.append({"timeSeriesListData": self.time_series_list_data.get_data()})
+        if self.time_table_constraints_list_data is not None:
+            msg_data.append({"timeTableConstraintsListData": self.time_table_constraints_list_data.get_data()})
+        if self.time_table_description_list_data is not None:
+            msg_data.append({"timeTableDescriptionListData": self.time_table_description_list_data.get_data()})
+        if self.time_table_list_data is not None:
+            msg_data.append({"timeTableListData": self.time_table_list_data.get_data()})
+        if self.use_case_information_list_data is not None:
+            msg_data.append({"useCaseInformationListData": self.use_case_information_list_data.get_data()})
+        
+        return msg_data
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        if self.actuator_level_data is not None:
+            result_str += f"{sep}actuatorLevelData: {self.actuator_level_data}"
+            sep = ", "
+        if self.actuator_level_description_data is not None:
+            result_str += f"{sep}actuatorLevelDescriptionData: {self.actuator_level_description_data}"
+            sep = ", "
+        if self.actuator_switch_data is not None:
+            result_str += f"{sep}actuatorSwitchData: {self.actuator_switch_data}"
+            sep = ", "
+        if self.actuator_switch_description_data is not None:
+            result_str += f"{sep}actuatorSwitchDescriptionData: {self.actuator_switch_description_data}"
+            sep = ", "
+        if self.alarm_list_data is not None:
+            result_str += f"{sep}alarmListData: {self.alarm_list_data}"
+            sep = ", "
+        if self.bill_constraints_list_data is not None:
+            result_str += f"{sep}billConstraintsListData: {self.bill_constraints_list_data}"
+            sep = ", "
+        if self.bill_description_list_data is not None:
+            result_str += f"{sep}billDescriptionListData: {self.bill_description_list_data}"
+            sep = ", "
+        if self.bill_list_data is not None:
+            result_str += f"{sep}billListData: {self.bill_list_data}"
+            sep = ", "
+        if self.binding_management_delete_call is not None:
+            result_str += f"{sep}bindingManagementDeleteCall: {self.binding_management_delete_call}"
+            sep = ", "
+        if self.binding_management_entry_list_data is not None:
+            result_str += f"{sep}bindingManagementEntryListData: {self.binding_management_entry_list_data}"
+            sep = ", "
+        if self.binding_management_request_call is not None:
+            result_str += f"{sep}bindingManagementRequestCall: {self.binding_management_request_call}"
+            sep = ", "
+        if self.commodity_list_data is not None:
+            result_str += f"{sep}commodityListData: {self.commodity_list_data}"
+            sep = ", "
+        if self.data_tunneling_call is not None:
+            result_str += f"{sep}dataTunnelingCall: {self.data_tunneling_call}"
+            sep = ", "
+        if self.device_classification_manufacturer_data is not None:
+            result_str += f"{sep}deviceClassificationManufacturerData: {self.device_classification_manufacturer_data}"
+            sep = ", "
+        if self.device_classification_user_data is not None:
+            result_str += f"{sep}deviceClassificationUserData: {self.device_classification_user_data}"
+            sep = ", "
+        if self.device_configuration_key_value_constraints_list_data is not None:
+            result_str += f"{sep}deviceConfigurationKeyValueConstraintsListData: {self.device_configuration_key_value_constraints_list_data}"
+            sep = ", "
+        if self.device_configuration_key_value_description_list_data is not None:
+            result_str += f"{sep}deviceConfigurationKeyValueDescriptionListData: {self.device_configuration_key_value_description_list_data}"
+            sep = ", "
+        if self.device_configuration_key_value_list_data is not None:
+            result_str += f"{sep}deviceConfigurationKeyValueListData: {self.device_configuration_key_value_list_data}"
+            sep = ", "
+        if self.device_diagnosis_heartbeat_data is not None:
+            result_str += f"{sep}deviceDiagnosisHeartbeatData: {self.device_diagnosis_heartbeat_data}"
+            sep = ", "
+        if self.device_diagnosis_service_data is not None:
+            result_str += f"{sep}deviceDiagnosisServiceData: {self.device_diagnosis_service_data}"
+            sep = ", "
+        if self.device_diagnosis_state_data is not None:
+            result_str += f"{sep}deviceDiagnosisStateData: {self.device_diagnosis_state_data}"
+            sep = ", "
+        if self.direct_control_activity_list_data is not None:
+            result_str += f"{sep}directControlActivityListData: {self.direct_control_activity_list_data}"
+            sep = ", "
+        if self.direct_control_description_data is not None:
+            result_str += f"{sep}directControlDescriptionData: {self.direct_control_description_data}"
+            sep = ", "
+        if self.electrical_connection_characteristic_list_data is not None:
+            result_str += f"{sep}electricalConnectionCharacteristicListData: {self.electrical_connection_characteristic_list_data}"
+            sep = ", "
+        if self.electrical_connection_description_list_data is not None:
+            result_str += f"{sep}electricalConnectionDescriptionListData: {self.electrical_connection_description_list_data}"
+            sep = ", "
+        if self.electrical_connection_parameter_description_list_data is not None:
+            result_str += f"{sep}electricalConnectionParameterDescriptionListData: {self.electrical_connection_parameter_description_list_data}"
+            sep = ", "
+        if self.electrical_connection_permitted_value_set_list_data is not None:
+            result_str += f"{sep}electricalConnectionPermittedValueSetListData: {self.electrical_connection_permitted_value_set_list_data}"
+            sep = ", "
+        if self.electrical_connection_state_list_data is not None:
+            result_str += f"{sep}electricalConnectionStateListData: {self.electrical_connection_state_list_data}"
+            sep = ", "
+        if self.hvac_operation_mode_description_list_data is not None:
+            result_str += f"{sep}hvacOperationModeDescriptionListData: {self.hvac_operation_mode_description_list_data}"
+            sep = ", "
+        if self.hvac_overrun_description_list_data is not None:
+            result_str += f"{sep}hvacOverrunDescriptionListData: {self.hvac_overrun_description_list_data}"
+            sep = ", "
+        if self.hvac_overrun_list_data is not None:
+            result_str += f"{sep}hvacOverrunListData: {self.hvac_overrun_list_data}"
+            sep = ", "
+        if self.hvac_system_function_description_list_data is not None:
+            result_str += f"{sep}hvacSystemFunctionDescriptionListData: {self.hvac_system_function_description_list_data}"
+            sep = ", "
+        if self.hvac_system_function_list_data is not None:
+            result_str += f"{sep}hvacSystemFunctionListData: {self.hvac_system_function_list_data}"
+            sep = ", "
+        if self.hvac_system_function_operation_mode_relation_list_data is not None:
+            result_str += f"{sep}hvacSystemFunctionOperationModeRelationListData: {self.hvac_system_function_operation_mode_relation_list_data}"
+            sep = ", "
+        if self.hvac_system_function_power_sequence_relation_list_data is not None:
+            result_str += f"{sep}hvacSystemFunctionPowerSequenceRelationListData: {self.hvac_system_function_power_sequence_relation_list_data}"
+            sep = ", "
+        if self.hvac_system_function_setpoint_relation_list_data is not None:
+            result_str += f"{sep}hvacSystemFunctionSetpointRelationListData: {self.hvac_system_function_setpoint_relation_list_data}"
+            sep = ", "
+        if self.identification_list_data is not None:
+            result_str += f"{sep}identificationListData: {self.identification_list_data}"
+            sep = ", "
+        if self.incentive_description_list_data is not None:
+            result_str += f"{sep}incentiveDescriptionListData: {self.incentive_description_list_data}"
+            sep = ", "
+        if self.incentive_list_data is not None:
+            result_str += f"{sep}incentiveListData: {self.incentive_list_data}"
+            sep = ", "
+        if self.incentive_table_constraints_data is not None:
+            result_str += f"{sep}incentiveTableConstraintsData: {self.incentive_table_constraints_data}"
+            sep = ", "
+        if self.incentive_table_data is not None:
+            result_str += f"{sep}incentiveTableData: {self.incentive_table_data}"
+            sep = ", "
+        if self.incentive_table_description_data is not None:
+            result_str += f"{sep}incentiveTableDescriptionData: {self.incentive_table_description_data}"
+            sep = ", "
+        if self.load_control_event_list_data is not None:
+            result_str += f"{sep}loadControlEventListData: {self.load_control_event_list_data}"
+            sep = ", "
+        if self.load_control_limit_constraints_list_data is not None:
+            result_str += f"{sep}loadControlLimitConstraintsListData: {self.load_control_limit_constraints_list_data}"
+            sep = ", "
+        if self.load_control_limit_description_list_data is not None:
+            result_str += f"{sep}loadControlLimitDescriptionListData: {self.load_control_limit_description_list_data}"
+            sep = ", "
+        if self.load_control_limit_list_data is not None:
+            result_str += f"{sep}loadControlLimitListData: {self.load_control_limit_list_data}"
+            sep = ", "
+        if self.load_control_node_data is not None:
+            result_str += f"{sep}loadControlNodeData: {self.load_control_node_data}"
+            sep = ", "
+        if self.load_control_state_list_data is not None:
+            result_str += f"{sep}loadControlStateListData: {self.load_control_state_list_data}"
+            sep = ", "
+        if self.measurement_constraints_list_data is not None:
+            result_str += f"{sep}measurementConstraintsListData: {self.measurement_constraints_list_data}"
+            sep = ", "
+        if self.measurement_description_list_data is not None:
+            result_str += f"{sep}measurementDescriptionListData: {self.measurement_description_list_data}"
+            sep = ", "
+        if self.measurement_list_data is not None:
+            result_str += f"{sep}measurementListData: {self.measurement_list_data}"
+            sep = ", "
+        if self.measurement_series_list_data is not None:
+            result_str += f"{sep}measurementSeriesListData: {self.measurement_series_list_data}"
+            sep = ", "
+        if self.measurement_threshold_relation_list_data is not None:
+            result_str += f"{sep}measurementThresholdRelationListData: {self.measurement_threshold_relation_list_data}"
+            sep = ", "
+        if self.messaging_list_data is not None:
+            result_str += f"{sep}messagingListData: {self.messaging_list_data}"
+            sep = ", "
+        if self.network_management_abort_call is not None:
+            result_str += f"{sep}networkManagementAbortCall: {self.network_management_abort_call}"
+            sep = ", "
+        if self.network_management_add_node_call is not None:
+            result_str += f"{sep}networkManagementAddNodeCall: {self.network_management_add_node_call}"
+            sep = ", "
+        if self.network_management_device_description_list_data is not None:
+            result_str += f"{sep}networkManagementDeviceDescriptionListData: {self.network_management_device_description_list_data}"
+            sep = ", "
+        if self.network_management_discover_call is not None:
+            result_str += f"{sep}networkManagementDiscoverCall: {self.network_management_discover_call}"
+            sep = ", "
+        if self.network_management_entity_description_list_data is not None:
+            result_str += f"{sep}networkManagementEntityDescriptionListData: {self.network_management_entity_description_list_data}"
+            sep = ", "
+        if self.network_management_feature_description_list_data is not None:
+            result_str += f"{sep}networkManagementFeatureDescriptionListData: {self.network_management_feature_description_list_data}"
+            sep = ", "
+        if self.network_management_joining_mode_data is not None:
+            result_str += f"{sep}networkManagementJoiningModeData: {self.network_management_joining_mode_data}"
+            sep = ", "
+        if self.network_management_modify_node_call is not None:
+            result_str += f"{sep}networkManagementModifyNodeCall: {self.network_management_modify_node_call}"
+            sep = ", "
+        if self.network_management_process_state_data is not None:
+            result_str += f"{sep}networkManagementProcessStateData: {self.network_management_process_state_data}"
+            sep = ", "
+        if self.network_management_remove_node_call is not None:
+            result_str += f"{sep}networkManagementRemoveNodeCall: {self.network_management_remove_node_call}"
+            sep = ", "
+        if self.network_management_report_candidate_data is not None:
+            result_str += f"{sep}networkManagementReportCandidateData: {self.network_management_report_candidate_data}"
+            sep = ", "
+        if self.network_management_scan_network_call is not None:
+            result_str += f"{sep}networkManagementScanNetworkCall: {self.network_management_scan_network_call}"
+            sep = ", "
+        if self.node_management_binding_data is not None:
+            result_str += f"{sep}nodeManagementBindingData: {self.node_management_binding_data}"
+            sep = ", "
+        if self.node_management_binding_delete_call is not None:
+            result_str += f"{sep}nodeManagementBindingDeleteCall: {self.node_management_binding_delete_call}"
+            sep = ", "
+        if self.node_management_binding_request_call is not None:
+            result_str += f"{sep}nodeManagementBindingRequestCall: {self.node_management_binding_request_call}"
+            sep = ", "
+        if self.node_management_destination_list_data is not None:
+            result_str += f"{sep}nodeManagementDestinationListData: {self.node_management_destination_list_data}"
+            sep = ", "
+        if self.node_management_detailed_discovery_data is not None:
+            result_str += f"{sep}nodeManagementDetailedDiscoveryData: {self.node_management_detailed_discovery_data}"
+            sep = ", "
+        if self.node_management_subscription_data is not None:
+            result_str += f"{sep}nodeManagementSubscriptionData: {self.node_management_subscription_data}"
+            sep = ", "
+        if self.node_management_subscription_delete_call is not None:
+            result_str += f"{sep}nodeManagementSubscriptionDeleteCall: {self.node_management_subscription_delete_call}"
+            sep = ", "
+        if self.node_management_subscription_request_call is not None:
+            result_str += f"{sep}nodeManagementSubscriptionRequestCall: {self.node_management_subscription_request_call}"
+            sep = ", "
+        if self.node_management_use_case_data is not None:
+            result_str += f"{sep}nodeManagementUseCaseData: {self.node_management_use_case_data}"
+            sep = ", "
+        if self.operating_constraints_duration_list_data is not None:
+            result_str += f"{sep}operatingConstraintsDurationListData: {self.operating_constraints_duration_list_data}"
+            sep = ", "
+        if self.operating_constraints_interrupt_list_data is not None:
+            result_str += f"{sep}operatingConstraintsInterruptListData: {self.operating_constraints_interrupt_list_data}"
+            sep = ", "
+        if self.operating_constraints_power_description_list_data is not None:
+            result_str += f"{sep}operatingConstraintsPowerDescriptionListData: {self.operating_constraints_power_description_list_data}"
+            sep = ", "
+        if self.operating_constraints_power_level_list_data is not None:
+            result_str += f"{sep}operatingConstraintsPowerLevelListData: {self.operating_constraints_power_level_list_data}"
+            sep = ", "
+        if self.operating_constraints_power_range_list_data is not None:
+            result_str += f"{sep}operatingConstraintsPowerRangeListData: {self.operating_constraints_power_range_list_data}"
+            sep = ", "
+        if self.operating_constraints_resume_implication_list_data is not None:
+            result_str += f"{sep}operatingConstraintsResumeImplicationListData: {self.operating_constraints_resume_implication_list_data}"
+            sep = ", "
+        if self.power_sequence_alternatives_relation_list_data is not None:
+            result_str += f"{sep}powerSequenceAlternativesRelationListData: {self.power_sequence_alternatives_relation_list_data}"
+            sep = ", "
+        if self.power_sequence_description_list_data is not None:
+            result_str += f"{sep}powerSequenceDescriptionListData: {self.power_sequence_description_list_data}"
+            sep = ", "
+        if self.power_sequence_node_schedule_information_data is not None:
+            result_str += f"{sep}powerSequenceNodeScheduleInformationData: {self.power_sequence_node_schedule_information_data}"
+            sep = ", "
+        if self.power_sequence_price_calculation_request_call is not None:
+            result_str += f"{sep}powerSequencePriceCalculationRequestCall: {self.power_sequence_price_calculation_request_call}"
+            sep = ", "
+        if self.power_sequence_price_list_data is not None:
+            result_str += f"{sep}powerSequencePriceListData: {self.power_sequence_price_list_data}"
+            sep = ", "
+        if self.power_sequence_schedule_configuration_request_call is not None:
+            result_str += f"{sep}powerSequenceScheduleConfigurationRequestCall: {self.power_sequence_schedule_configuration_request_call}"
+            sep = ", "
+        if self.power_sequence_schedule_constraints_list_data is not None:
+            result_str += f"{sep}powerSequenceScheduleConstraintsListData: {self.power_sequence_schedule_constraints_list_data}"
+            sep = ", "
+        if self.power_sequence_schedule_list_data is not None:
+            result_str += f"{sep}powerSequenceScheduleListData: {self.power_sequence_schedule_list_data}"
+            sep = ", "
+        if self.power_sequence_schedule_preference_list_data is not None:
+            result_str += f"{sep}powerSequenceSchedulePreferenceListData: {self.power_sequence_schedule_preference_list_data}"
+            sep = ", "
+        if self.power_sequence_state_list_data is not None:
+            result_str += f"{sep}powerSequenceStateListData: {self.power_sequence_state_list_data}"
+            sep = ", "
+        if self.power_time_slot_schedule_constraints_list_data is not None:
+            result_str += f"{sep}powerTimeSlotScheduleConstraintsListData: {self.power_time_slot_schedule_constraints_list_data}"
+            sep = ", "
+        if self.power_time_slot_schedule_list_data is not None:
+            result_str += f"{sep}powerTimeSlotScheduleListData: {self.power_time_slot_schedule_list_data}"
+            sep = ", "
+        if self.power_time_slot_value_list_data is not None:
+            result_str += f"{sep}powerTimeSlotValueListData: {self.power_time_slot_value_list_data}"
+            sep = ", "
+        if self.result_data is not None:
+            result_str += f"{sep}resultData: {self.result_data}"
+            sep = ", "
+        if self.sensing_description_data is not None:
+            result_str += f"{sep}sensingDescriptionData: {self.sensing_description_data}"
+            sep = ", "
+        if self.sensing_list_data is not None:
+            result_str += f"{sep}sensingListData: {self.sensing_list_data}"
+            sep = ", "
+        if self.session_identification_list_data is not None:
+            result_str += f"{sep}sessionIdentificationListData: {self.session_identification_list_data}"
+            sep = ", "
+        if self.session_measurement_relation_list_data is not None:
+            result_str += f"{sep}sessionMeasurementRelationListData: {self.session_measurement_relation_list_data}"
+            sep = ", "
+        if self.setpoint_constraints_list_data is not None:
+            result_str += f"{sep}setpointConstraintsListData: {self.setpoint_constraints_list_data}"
+            sep = ", "
+        if self.setpoint_description_list_data is not None:
+            result_str += f"{sep}setpointDescriptionListData: {self.setpoint_description_list_data}"
+            sep = ", "
+        if self.setpoint_list_data is not None:
+            result_str += f"{sep}setpointListData: {self.setpoint_list_data}"
+            sep = ", "
+        if self.smart_energy_management_ps_configuration_request_call is not None:
+            result_str += f"{sep}smartEnergyManagementPsConfigurationRequestCall: {self.smart_energy_management_ps_configuration_request_call}"
+            sep = ", "
+        if self.smart_energy_management_ps_data is not None:
+            result_str += f"{sep}smartEnergyManagementPsData: {self.smart_energy_management_ps_data}"
+            sep = ", "
+        if self.smart_energy_management_ps_price_calculation_request_call is not None:
+            result_str += f"{sep}smartEnergyManagementPsPriceCalculationRequestCall: {self.smart_energy_management_ps_price_calculation_request_call}"
+            sep = ", "
+        if self.smart_energy_management_ps_price_data is not None:
+            result_str += f"{sep}smartEnergyManagementPsPriceData: {self.smart_energy_management_ps_price_data}"
+            sep = ", "
+        if self.specification_version_list_data is not None:
+            result_str += f"{sep}specificationVersionListData: {self.specification_version_list_data}"
+            sep = ", "
+        if self.state_information_list_data is not None:
+            result_str += f"{sep}stateInformationListData: {self.state_information_list_data}"
+            sep = ", "
+        if self.subscription_management_delete_call is not None:
+            result_str += f"{sep}subscriptionManagementDeleteCall: {self.subscription_management_delete_call}"
+            sep = ", "
+        if self.subscription_management_entry_list_data is not None:
+            result_str += f"{sep}subscriptionManagementEntryListData: {self.subscription_management_entry_list_data}"
+            sep = ", "
+        if self.subscription_management_request_call is not None:
+            result_str += f"{sep}subscriptionManagementRequestCall: {self.subscription_management_request_call}"
+            sep = ", "
+        if self.supply_condition_description_list_data is not None:
+            result_str += f"{sep}supplyConditionDescriptionListData: {self.supply_condition_description_list_data}"
+            sep = ", "
+        if self.supply_condition_list_data is not None:
+            result_str += f"{sep}supplyConditionListData: {self.supply_condition_list_data}"
+            sep = ", "
+        if self.supply_condition_threshold_relation_list_data is not None:
+            result_str += f"{sep}supplyConditionThresholdRelationListData: {self.supply_condition_threshold_relation_list_data}"
+            sep = ", "
+        if self.tariff_boundary_relation_list_data is not None:
+            result_str += f"{sep}tariffBoundaryRelationListData: {self.tariff_boundary_relation_list_data}"
+            sep = ", "
+        if self.tariff_description_list_data is not None:
+            result_str += f"{sep}tariffDescriptionListData: {self.tariff_description_list_data}"
+            sep = ", "
+        if self.tariff_list_data is not None:
+            result_str += f"{sep}tariffListData: {self.tariff_list_data}"
+            sep = ", "
+        if self.tariff_overall_constraints_data is not None:
+            result_str += f"{sep}tariffOverallConstraintsData: {self.tariff_overall_constraints_data}"
+            sep = ", "
+        if self.tariff_tier_relation_list_data is not None:
+            result_str += f"{sep}tariffTierRelationListData: {self.tariff_tier_relation_list_data}"
+            sep = ", "
+        if self.task_management_job_description_list_data is not None:
+            result_str += f"{sep}taskManagementJobDescriptionListData: {self.task_management_job_description_list_data}"
+            sep = ", "
+        if self.task_management_job_list_data is not None:
+            result_str += f"{sep}taskManagementJobListData: {self.task_management_job_list_data}"
+            sep = ", "
+        if self.task_management_job_relation_list_data is not None:
+            result_str += f"{sep}taskManagementJobRelationListData: {self.task_management_job_relation_list_data}"
+            sep = ", "
+        if self.task_management_overview_data is not None:
+            result_str += f"{sep}taskManagementOverviewData: {self.task_management_overview_data}"
+            sep = ", "
+        if self.threshold_constraints_list_data is not None:
+            result_str += f"{sep}thresholdConstraintsListData: {self.threshold_constraints_list_data}"
+            sep = ", "
+        if self.threshold_description_list_data is not None:
+            result_str += f"{sep}thresholdDescriptionListData: {self.threshold_description_list_data}"
+            sep = ", "
+        if self.threshold_list_data is not None:
+            result_str += f"{sep}thresholdListData: {self.threshold_list_data}"
+            sep = ", "
+        if self.tier_boundary_description_list_data is not None:
+            result_str += f"{sep}tierBoundaryDescriptionListData: {self.tier_boundary_description_list_data}"
+            sep = ", "
+        if self.tier_boundary_list_data is not None:
+            result_str += f"{sep}tierBoundaryListData: {self.tier_boundary_list_data}"
+            sep = ", "
+        if self.tier_description_list_data is not None:
+            result_str += f"{sep}tierDescriptionListData: {self.tier_description_list_data}"
+            sep = ", "
+        if self.tier_incentive_relation_list_data is not None:
+            result_str += f"{sep}tierIncentiveRelationListData: {self.tier_incentive_relation_list_data}"
+            sep = ", "
+        if self.tier_list_data is not None:
+            result_str += f"{sep}tierListData: {self.tier_list_data}"
+            sep = ", "
+        if self.time_distributor_data is not None:
+            result_str += f"{sep}timeDistributorData: {self.time_distributor_data}"
+            sep = ", "
+        if self.time_distributor_enquiry_call is not None:
+            result_str += f"{sep}timeDistributorEnquiryCall: {self.time_distributor_enquiry_call}"
+            sep = ", "
+        if self.time_information_data is not None:
+            result_str += f"{sep}timeInformationData: {self.time_information_data}"
+            sep = ", "
+        if self.time_precision_data is not None:
+            result_str += f"{sep}timePrecisionData: {self.time_precision_data}"
+            sep = ", "
+        if self.time_series_constraints_list_data is not None:
+            result_str += f"{sep}timeSeriesConstraintsListData: {self.time_series_constraints_list_data}"
+            sep = ", "
+        if self.time_series_description_list_data is not None:
+            result_str += f"{sep}timeSeriesDescriptionListData: {self.time_series_description_list_data}"
+            sep = ", "
+        if self.time_series_list_data is not None:
+            result_str += f"{sep}timeSeriesListData: {self.time_series_list_data}"
+            sep = ", "
+        if self.time_table_constraints_list_data is not None:
+            result_str += f"{sep}timeTableConstraintsListData: {self.time_table_constraints_list_data}"
+            sep = ", "
+        if self.time_table_description_list_data is not None:
+            result_str += f"{sep}timeTableDescriptionListData: {self.time_table_description_list_data}"
+            sep = ", "
+        if self.time_table_list_data is not None:
+            result_str += f"{sep}timeTableListData: {self.time_table_list_data}"
+            sep = ", "
+        if self.use_case_information_list_data is not None:
+            result_str += f"{sep}useCaseInformationListData: {self.use_case_information_list_data}"
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+                actuator_level_data=data_dict.get('actuatorLevelData'),
+                actuator_level_description_data=data_dict.get('actuatorLevelDescriptionData'),
+                actuator_switch_data=data_dict.get('actuatorSwitchData'),
+                actuator_switch_description_data=data_dict.get('actuatorSwitchDescriptionData'),
+                alarm_list_data=data_dict.get('alarmListData'),
+                bill_constraints_list_data=data_dict.get('billConstraintsListData'),
+                bill_description_list_data=data_dict.get('billDescriptionListData'),
+                bill_list_data=data_dict.get('billListData'),
+                binding_management_delete_call=data_dict.get('bindingManagementDeleteCall'),
+                binding_management_entry_list_data=data_dict.get('bindingManagementEntryListData'),
+                binding_management_request_call=data_dict.get('bindingManagementRequestCall'),
+                commodity_list_data=data_dict.get('commodityListData'),
+                data_tunneling_call=data_dict.get('dataTunnelingCall'),
+                device_classification_manufacturer_data=data_dict.get('deviceClassificationManufacturerData'),
+                device_classification_user_data=data_dict.get('deviceClassificationUserData'),
+                device_configuration_key_value_constraints_list_data=data_dict.get('deviceConfigurationKeyValueConstraintsListData'),
+                device_configuration_key_value_description_list_data=data_dict.get('deviceConfigurationKeyValueDescriptionListData'),
+                device_configuration_key_value_list_data=data_dict.get('deviceConfigurationKeyValueListData'),
+                device_diagnosis_heartbeat_data=data_dict.get('deviceDiagnosisHeartbeatData'),
+                device_diagnosis_service_data=data_dict.get('deviceDiagnosisServiceData'),
+                device_diagnosis_state_data=data_dict.get('deviceDiagnosisStateData'),
+                direct_control_activity_list_data=data_dict.get('directControlActivityListData'),
+                direct_control_description_data=data_dict.get('directControlDescriptionData'),
+                electrical_connection_characteristic_list_data=data_dict.get('electricalConnectionCharacteristicListData'),
+                electrical_connection_description_list_data=data_dict.get('electricalConnectionDescriptionListData'),
+                electrical_connection_parameter_description_list_data=data_dict.get('electricalConnectionParameterDescriptionListData'),
+                electrical_connection_permitted_value_set_list_data=data_dict.get('electricalConnectionPermittedValueSetListData'),
+                electrical_connection_state_list_data=data_dict.get('electricalConnectionStateListData'),
+                hvac_operation_mode_description_list_data=data_dict.get('hvacOperationModeDescriptionListData'),
+                hvac_overrun_description_list_data=data_dict.get('hvacOverrunDescriptionListData'),
+                hvac_overrun_list_data=data_dict.get('hvacOverrunListData'),
+                hvac_system_function_description_list_data=data_dict.get('hvacSystemFunctionDescriptionListData'),
+                hvac_system_function_list_data=data_dict.get('hvacSystemFunctionListData'),
+                hvac_system_function_operation_mode_relation_list_data=data_dict.get('hvacSystemFunctionOperationModeRelationListData'),
+                hvac_system_function_power_sequence_relation_list_data=data_dict.get('hvacSystemFunctionPowerSequenceRelationListData'),
+                hvac_system_function_setpoint_relation_list_data=data_dict.get('hvacSystemFunctionSetpointRelationListData'),
+                identification_list_data=data_dict.get('identificationListData'),
+                incentive_description_list_data=data_dict.get('incentiveDescriptionListData'),
+                incentive_list_data=data_dict.get('incentiveListData'),
+                incentive_table_constraints_data=data_dict.get('incentiveTableConstraintsData'),
+                incentive_table_data=data_dict.get('incentiveTableData'),
+                incentive_table_description_data=data_dict.get('incentiveTableDescriptionData'),
+                load_control_event_list_data=data_dict.get('loadControlEventListData'),
+                load_control_limit_constraints_list_data=data_dict.get('loadControlLimitConstraintsListData'),
+                load_control_limit_description_list_data=data_dict.get('loadControlLimitDescriptionListData'),
+                load_control_limit_list_data=data_dict.get('loadControlLimitListData'),
+                load_control_node_data=data_dict.get('loadControlNodeData'),
+                load_control_state_list_data=data_dict.get('loadControlStateListData'),
+                measurement_constraints_list_data=data_dict.get('measurementConstraintsListData'),
+                measurement_description_list_data=data_dict.get('measurementDescriptionListData'),
+                measurement_list_data=data_dict.get('measurementListData'),
+                measurement_series_list_data=data_dict.get('measurementSeriesListData'),
+                measurement_threshold_relation_list_data=data_dict.get('measurementThresholdRelationListData'),
+                messaging_list_data=data_dict.get('messagingListData'),
+                network_management_abort_call=data_dict.get('networkManagementAbortCall'),
+                network_management_add_node_call=data_dict.get('networkManagementAddNodeCall'),
+                network_management_device_description_list_data=data_dict.get('networkManagementDeviceDescriptionListData'),
+                network_management_discover_call=data_dict.get('networkManagementDiscoverCall'),
+                network_management_entity_description_list_data=data_dict.get('networkManagementEntityDescriptionListData'),
+                network_management_feature_description_list_data=data_dict.get('networkManagementFeatureDescriptionListData'),
+                network_management_joining_mode_data=data_dict.get('networkManagementJoiningModeData'),
+                network_management_modify_node_call=data_dict.get('networkManagementModifyNodeCall'),
+                network_management_process_state_data=data_dict.get('networkManagementProcessStateData'),
+                network_management_remove_node_call=data_dict.get('networkManagementRemoveNodeCall'),
+                network_management_report_candidate_data=data_dict.get('networkManagementReportCandidateData'),
+                network_management_scan_network_call=data_dict.get('networkManagementScanNetworkCall'),
+                node_management_binding_data=data_dict.get('nodeManagementBindingData'),
+                node_management_binding_delete_call=data_dict.get('nodeManagementBindingDeleteCall'),
+                node_management_binding_request_call=data_dict.get('nodeManagementBindingRequestCall'),
+                node_management_destination_list_data=data_dict.get('nodeManagementDestinationListData'),
+                node_management_detailed_discovery_data=data_dict.get('nodeManagementDetailedDiscoveryData'),
+                node_management_subscription_data=data_dict.get('nodeManagementSubscriptionData'),
+                node_management_subscription_delete_call=data_dict.get('nodeManagementSubscriptionDeleteCall'),
+                node_management_subscription_request_call=data_dict.get('nodeManagementSubscriptionRequestCall'),
+                node_management_use_case_data=data_dict.get('nodeManagementUseCaseData'),
+                operating_constraints_duration_list_data=data_dict.get('operatingConstraintsDurationListData'),
+                operating_constraints_interrupt_list_data=data_dict.get('operatingConstraintsInterruptListData'),
+                operating_constraints_power_description_list_data=data_dict.get('operatingConstraintsPowerDescriptionListData'),
+                operating_constraints_power_level_list_data=data_dict.get('operatingConstraintsPowerLevelListData'),
+                operating_constraints_power_range_list_data=data_dict.get('operatingConstraintsPowerRangeListData'),
+                operating_constraints_resume_implication_list_data=data_dict.get('operatingConstraintsResumeImplicationListData'),
+                power_sequence_alternatives_relation_list_data=data_dict.get('powerSequenceAlternativesRelationListData'),
+                power_sequence_description_list_data=data_dict.get('powerSequenceDescriptionListData'),
+                power_sequence_node_schedule_information_data=data_dict.get('powerSequenceNodeScheduleInformationData'),
+                power_sequence_price_calculation_request_call=data_dict.get('powerSequencePriceCalculationRequestCall'),
+                power_sequence_price_list_data=data_dict.get('powerSequencePriceListData'),
+                power_sequence_schedule_configuration_request_call=data_dict.get('powerSequenceScheduleConfigurationRequestCall'),
+                power_sequence_schedule_constraints_list_data=data_dict.get('powerSequenceScheduleConstraintsListData'),
+                power_sequence_schedule_list_data=data_dict.get('powerSequenceScheduleListData'),
+                power_sequence_schedule_preference_list_data=data_dict.get('powerSequenceSchedulePreferenceListData'),
+                power_sequence_state_list_data=data_dict.get('powerSequenceStateListData'),
+                power_time_slot_schedule_constraints_list_data=data_dict.get('powerTimeSlotScheduleConstraintsListData'),
+                power_time_slot_schedule_list_data=data_dict.get('powerTimeSlotScheduleListData'),
+                power_time_slot_value_list_data=data_dict.get('powerTimeSlotValueListData'),
+                result_data=data_dict.get('resultData'),
+                sensing_description_data=data_dict.get('sensingDescriptionData'),
+                sensing_list_data=data_dict.get('sensingListData'),
+                session_identification_list_data=data_dict.get('sessionIdentificationListData'),
+                session_measurement_relation_list_data=data_dict.get('sessionMeasurementRelationListData'),
+                setpoint_constraints_list_data=data_dict.get('setpointConstraintsListData'),
+                setpoint_description_list_data=data_dict.get('setpointDescriptionListData'),
+                setpoint_list_data=data_dict.get('setpointListData'),
+                smart_energy_management_ps_configuration_request_call=data_dict.get('smartEnergyManagementPsConfigurationRequestCall'),
+                smart_energy_management_ps_data=data_dict.get('smartEnergyManagementPsData'),
+                smart_energy_management_ps_price_calculation_request_call=data_dict.get('smartEnergyManagementPsPriceCalculationRequestCall'),
+                smart_energy_management_ps_price_data=data_dict.get('smartEnergyManagementPsPriceData'),
+                specification_version_list_data=data_dict.get('specificationVersionListData'),
+                state_information_list_data=data_dict.get('stateInformationListData'),
+                subscription_management_delete_call=data_dict.get('subscriptionManagementDeleteCall'),
+                subscription_management_entry_list_data=data_dict.get('subscriptionManagementEntryListData'),
+                subscription_management_request_call=data_dict.get('subscriptionManagementRequestCall'),
+                supply_condition_description_list_data=data_dict.get('supplyConditionDescriptionListData'),
+                supply_condition_list_data=data_dict.get('supplyConditionListData'),
+                supply_condition_threshold_relation_list_data=data_dict.get('supplyConditionThresholdRelationListData'),
+                tariff_boundary_relation_list_data=data_dict.get('tariffBoundaryRelationListData'),
+                tariff_description_list_data=data_dict.get('tariffDescriptionListData'),
+                tariff_list_data=data_dict.get('tariffListData'),
+                tariff_overall_constraints_data=data_dict.get('tariffOverallConstraintsData'),
+                tariff_tier_relation_list_data=data_dict.get('tariffTierRelationListData'),
+                task_management_job_description_list_data=data_dict.get('taskManagementJobDescriptionListData'),
+                task_management_job_list_data=data_dict.get('taskManagementJobListData'),
+                task_management_job_relation_list_data=data_dict.get('taskManagementJobRelationListData'),
+                task_management_overview_data=data_dict.get('taskManagementOverviewData'),
+                threshold_constraints_list_data=data_dict.get('thresholdConstraintsListData'),
+                threshold_description_list_data=data_dict.get('thresholdDescriptionListData'),
+                threshold_list_data=data_dict.get('thresholdListData'),
+                tier_boundary_description_list_data=data_dict.get('tierBoundaryDescriptionListData'),
+                tier_boundary_list_data=data_dict.get('tierBoundaryListData'),
+                tier_description_list_data=data_dict.get('tierDescriptionListData'),
+                tier_incentive_relation_list_data=data_dict.get('tierIncentiveRelationListData'),
+                tier_list_data=data_dict.get('tierListData'),
+                time_distributor_data=data_dict.get('timeDistributorData'),
+                time_distributor_enquiry_call=data_dict.get('timeDistributorEnquiryCall'),
+                time_information_data=data_dict.get('timeInformationData'),
+                time_precision_data=data_dict.get('timePrecisionData'),
+                time_series_constraints_list_data=data_dict.get('timeSeriesConstraintsListData'),
+                time_series_description_list_data=data_dict.get('timeSeriesDescriptionListData'),
+                time_series_list_data=data_dict.get('timeSeriesListData'),
+                time_table_constraints_list_data=data_dict.get('timeTableConstraintsListData'),
+                time_table_description_list_data=data_dict.get('timeTableDescriptionListData'),
+                time_table_list_data=data_dict.get('timeTableListData'),
+                use_case_information_list_data=data_dict.get('useCaseInformationListData'),
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class CmdOptionGroup: # EEBus_SPINE_TS_CommandFrame.xsd:ns_p:CmdOptionGroup -> ChoiceType
+    def __init__(
+            self,
+            function: FunctionType = None,
+            filter: list[FilterType] = None,
+    ):
+        super().__init__()
+        
+        self.function = function
+        self.filter = filter
+
+        if not isinstance(self.function, FunctionType | NoneType):
+            raise TypeError("function is not of type FunctionType")
+        
+        if not isinstance(self.filter, list | NoneType):
+            raise TypeError("filter is not of type list[FilterType]")
+        
+    def get_data(self):
+
+        msg_data = []
+        
+        if self.function is not None:
+            msg_data.append({"function": self.function.get_data()})
+        if self.filter is not None:
+            msg_data.append({"filter": [d.get_data() for d in self.filter]})
+        
+        return msg_data
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        if self.function is not None:
+            result_str += f"{sep}function: {self.function}"
+            sep = ", "
+        if self.filter is not None:
+            result_str += f"{sep}filter: {self.filter}"
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+                function=data_dict.get('function'),
+                filter=data_dict.get('filter'),
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class DataElementsChoiceGroup: # EEBus_SPINE_TS_CommandFrame.xsd:ns_p:DataElementsChoiceGroup -> ChoiceType
     def __init__(
             self,
             actuator_level_data_elements: ActuatorLevelDataElementsType,
@@ -1827,7 +5312,7 @@ class DataElementsChoiceGroup: # EEBus_SPINE_TS_CommandFrame.xsd: ChoiceType
             return cls()
 
 
-class DataSelectorsChoiceGroup: # EEBus_SPINE_TS_CommandFrame.xsd: ChoiceType
+class DataSelectorsChoiceGroup: # EEBus_SPINE_TS_CommandFrame.xsd:ns_p:DataSelectorsChoiceGroup -> ChoiceType
     def __init__(
             self,
             alarm_list_data_selectors: AlarmListDataSelectorsType,
@@ -2952,138 +6437,6 @@ class DataSelectorsChoiceGroup: # EEBus_SPINE_TS_CommandFrame.xsd: ChoiceType
                 time_table_description_list_data_selectors=data_dict.get('timeTableDescriptionListDataSelectors'),
                 time_table_list_data_selectors=data_dict.get('timeTableListDataSelectors'),
                 use_case_information_list_data_selectors=data_dict.get('useCaseInformationListDataSelectors'),
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class PayloadContributionGroup: # EEBus_SPINE_TS_CommandFrame.xsd: ChoiceType
-    def __init__(
-            self,
-    ):
-        super().__init__()
-        
-
-    def get_data(self):
-
-        msg_data = []
-        
-        
-        return msg_data
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class DataExtendGroup: # EEBus_SPINE_TS_CommandFrame.xsd: ChoiceType
-    def __init__(
-            self,
-    ):
-        super().__init__()
-        
-
-    def get_data(self):
-
-        msg_data = []
-        
-        
-        return msg_data
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class DataChoiceGroup: # EEBus_SPINE_TS_CommandFrame.xsd: ChoiceType
-    def __init__(
-            self,
-    ):
-        super().__init__()
-        
-
-    def get_data(self):
-
-        msg_data = []
-        
-        
-        return msg_data
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class CmdOptionGroup: # EEBus_SPINE_TS_CommandFrame.xsd: ChoiceType
-    def __init__(
-            self,
-    ):
-        super().__init__()
-        
-
-    def get_data(self):
-
-        msg_data = []
-        
-        
-        return msg_data
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
             )
         elif data:
             return cls(data)

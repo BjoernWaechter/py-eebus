@@ -3,7 +3,7 @@ from types import NoneType
 from spine import array_2_dict
 
 
-class ElectricalConnectionCharacteristicIdType: # EEBus_SPINE_TS_ElectricalConnection.xsd: AliasType
+class ElectricalConnectionCharacteristicIdType: # EEBus_SPINE_TS_ElectricalConnection.xsd:ns_p:ElectricalConnectionCharacteristicIdType -> AliasType
     def __init__(
             self,
             value: int,
@@ -41,7 +41,7 @@ class ElectricalConnectionCharacteristicIdType: # EEBus_SPINE_TS_ElectricalConne
             return cls()
 
 
-class ElectricalConnectionParameterIdType: # EEBus_SPINE_TS_ElectricalConnection.xsd: AliasType
+class ElectricalConnectionParameterIdType: # EEBus_SPINE_TS_ElectricalConnection.xsd:ns_p:ElectricalConnectionParameterIdType -> AliasType
     def __init__(
             self,
             value: int,
@@ -79,7 +79,7 @@ class ElectricalConnectionParameterIdType: # EEBus_SPINE_TS_ElectricalConnection
             return cls()
 
 
-class ElectricalConnectionIdType: # EEBus_SPINE_TS_ElectricalConnection.xsd: AliasType
+class ElectricalConnectionIdType: # EEBus_SPINE_TS_ElectricalConnection.xsd:ns_p:ElectricalConnectionIdType -> AliasType
     def __init__(
             self,
             value: int,

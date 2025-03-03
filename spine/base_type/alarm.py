@@ -15,7 +15,7 @@ from types import NoneType
 from spine import array_2_dict
 
 
-class AlarmDataType: # EEBus_SPINE_TS_Alarm.xsd: ComplexType
+class AlarmDataType: # EEBus_SPINE_TS_Alarm.xsd:ns_p:AlarmDataType -> ComplexType
     def __init__(
             self,
             alarm_id: AlarmIdType = None,
@@ -146,7 +146,7 @@ class AlarmDataType: # EEBus_SPINE_TS_Alarm.xsd: ComplexType
             return cls()
 
 
-class AlarmListDataType: # EEBus_SPINE_TS_Alarm.xsd: ComplexType
+class AlarmListDataType: # EEBus_SPINE_TS_Alarm.xsd:ns_p:AlarmListDataType -> ComplexType
     def __init__(
             self,
             alarm_data: list[AlarmDataType] = None,
@@ -189,7 +189,7 @@ class AlarmListDataType: # EEBus_SPINE_TS_Alarm.xsd: ComplexType
             return cls()
 
 
-class AlarmDataElementsType: # EEBus_SPINE_TS_Alarm.xsd: ComplexType
+class AlarmDataElementsType: # EEBus_SPINE_TS_Alarm.xsd:ns_p:AlarmDataElementsType -> ComplexType
     def __init__(
             self,
             alarm_id: ElementTagType = None,
@@ -320,7 +320,7 @@ class AlarmDataElementsType: # EEBus_SPINE_TS_Alarm.xsd: ComplexType
             return cls()
 
 
-class AlarmListDataSelectorsType: # EEBus_SPINE_TS_Alarm.xsd: ComplexType
+class AlarmListDataSelectorsType: # EEBus_SPINE_TS_Alarm.xsd:ns_p:AlarmListDataSelectorsType -> ComplexType
     def __init__(
             self,
             alarm_id: AlarmIdType = None,

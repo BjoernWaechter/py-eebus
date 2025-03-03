@@ -8,7 +8,7 @@ from types import NoneType
 from spine import array_2_dict
 
 
-class SmartEnergyManagementPsPowerTimeSlotValueListType: # EEBus_SPINE_TS_SmartEnergyManagementPs.xsd: ComplexType
+class SmartEnergyManagementPsPowerTimeSlotValueListType: # EEBus_SPINE_TS_SmartEnergyManagementPs.xsd:ns_p:SmartEnergyManagementPsPowerTimeSlotValueListType -> ComplexType
     def __init__(
             self,
     ):
@@ -41,7 +41,7 @@ class SmartEnergyManagementPsPowerTimeSlotValueListType: # EEBus_SPINE_TS_SmartE
             return cls()
 
 
-class SmartEnergyManagementPsPowerTimeSlotValueListElementsType: # EEBus_SPINE_TS_SmartEnergyManagementPs.xsd: ComplexType
+class SmartEnergyManagementPsPowerTimeSlotValueListElementsType: # EEBus_SPINE_TS_SmartEnergyManagementPs.xsd:ns_p:SmartEnergyManagementPsPowerTimeSlotValueListElementsType -> ComplexType
     def __init__(
             self,
     ):
@@ -74,7 +74,7 @@ class SmartEnergyManagementPsPowerTimeSlotValueListElementsType: # EEBus_SPINE_T
             return cls()
 
 
-class SmartEnergyManagementPsPowerTimeSlotType: # EEBus_SPINE_TS_SmartEnergyManagementPs.xsd: ComplexType
+class SmartEnergyManagementPsPowerTimeSlotType: # EEBus_SPINE_TS_SmartEnergyManagementPs.xsd:ns_p:SmartEnergyManagementPsPowerTimeSlotType -> ComplexType
     def __init__(
             self,
             value_list: SmartEnergyManagementPsPowerTimeSlotValueListType = None,
@@ -117,7 +117,7 @@ class SmartEnergyManagementPsPowerTimeSlotType: # EEBus_SPINE_TS_SmartEnergyMana
             return cls()
 
 
-class SmartEnergyManagementPsPowerTimeSlotElementsType: # EEBus_SPINE_TS_SmartEnergyManagementPs.xsd: ComplexType
+class SmartEnergyManagementPsPowerTimeSlotElementsType: # EEBus_SPINE_TS_SmartEnergyManagementPs.xsd:ns_p:SmartEnergyManagementPsPowerTimeSlotElementsType -> ComplexType
     def __init__(
             self,
             value_list: SmartEnergyManagementPsPowerTimeSlotValueListElementsType = None,
@@ -160,7 +160,7 @@ class SmartEnergyManagementPsPowerTimeSlotElementsType: # EEBus_SPINE_TS_SmartEn
             return cls()
 
 
-class SmartEnergyManagementPsPowerSequenceType: # EEBus_SPINE_TS_SmartEnergyManagementPs.xsd: ComplexType
+class SmartEnergyManagementPsPowerSequenceType: # EEBus_SPINE_TS_SmartEnergyManagementPs.xsd:ns_p:SmartEnergyManagementPsPowerSequenceType -> ComplexType
     def __init__(
             self,
             power_time_slot: list[SmartEnergyManagementPsPowerTimeSlotType] = None,
@@ -203,7 +203,7 @@ class SmartEnergyManagementPsPowerSequenceType: # EEBus_SPINE_TS_SmartEnergyMana
             return cls()
 
 
-class SmartEnergyManagementPsAlternativesRelationType: # EEBus_SPINE_TS_SmartEnergyManagementPs.xsd: ComplexType
+class SmartEnergyManagementPsAlternativesRelationType: # EEBus_SPINE_TS_SmartEnergyManagementPs.xsd:ns_p:SmartEnergyManagementPsAlternativesRelationType -> ComplexType
     def __init__(
             self,
             alternatives_id: AlternativesIdType = None,
@@ -257,7 +257,7 @@ class SmartEnergyManagementPsAlternativesRelationType: # EEBus_SPINE_TS_SmartEne
             return cls()
 
 
-class SmartEnergyManagementPsPowerSequenceElementsType: # EEBus_SPINE_TS_SmartEnergyManagementPs.xsd: ComplexType
+class SmartEnergyManagementPsPowerSequenceElementsType: # EEBus_SPINE_TS_SmartEnergyManagementPs.xsd:ns_p:SmartEnergyManagementPsPowerSequenceElementsType -> ComplexType
     def __init__(
             self,
             power_time_slot: SmartEnergyManagementPsPowerTimeSlotElementsType = None,
@@ -300,7 +300,7 @@ class SmartEnergyManagementPsPowerSequenceElementsType: # EEBus_SPINE_TS_SmartEn
             return cls()
 
 
-class SmartEnergyManagementPsAlternativesRelationElementsType: # EEBus_SPINE_TS_SmartEnergyManagementPs.xsd: ComplexType
+class SmartEnergyManagementPsAlternativesRelationElementsType: # EEBus_SPINE_TS_SmartEnergyManagementPs.xsd:ns_p:SmartEnergyManagementPsAlternativesRelationElementsType -> ComplexType
     def __init__(
             self,
             alternatives_id: ElementTagType = None,
@@ -354,7 +354,7 @@ class SmartEnergyManagementPsAlternativesRelationElementsType: # EEBus_SPINE_TS_
             return cls()
 
 
-class SmartEnergyManagementPsAlternativesType: # EEBus_SPINE_TS_SmartEnergyManagementPs.xsd: ComplexType
+class SmartEnergyManagementPsAlternativesType: # EEBus_SPINE_TS_SmartEnergyManagementPs.xsd:ns_p:SmartEnergyManagementPsAlternativesType -> ComplexType
     def __init__(
             self,
             relation: SmartEnergyManagementPsAlternativesRelationType = None,
@@ -408,7 +408,7 @@ class SmartEnergyManagementPsAlternativesType: # EEBus_SPINE_TS_SmartEnergyManag
             return cls()
 
 
-class SmartEnergyManagementPsAlternativesElementsType: # EEBus_SPINE_TS_SmartEnergyManagementPs.xsd: ComplexType
+class SmartEnergyManagementPsAlternativesElementsType: # EEBus_SPINE_TS_SmartEnergyManagementPs.xsd:ns_p:SmartEnergyManagementPsAlternativesElementsType -> ComplexType
     def __init__(
             self,
             relation: SmartEnergyManagementPsAlternativesRelationElementsType = None,
@@ -462,7 +462,7 @@ class SmartEnergyManagementPsAlternativesElementsType: # EEBus_SPINE_TS_SmartEne
             return cls()
 
 
-class SmartEnergyManagementPsPriceCalculationRequestCallType: # EEBus_SPINE_TS_SmartEnergyManagementPs.xsd: ComplexType
+class SmartEnergyManagementPsPriceDataType: # EEBus_SPINE_TS_SmartEnergyManagementPs.xsd:ns_p:SmartEnergyManagementPsPriceDataType -> ComplexType
     def __init__(
             self,
     ):
@@ -495,7 +495,7 @@ class SmartEnergyManagementPsPriceCalculationRequestCallType: # EEBus_SPINE_TS_S
             return cls()
 
 
-class SmartEnergyManagementPsConfigurationRequestCallType: # EEBus_SPINE_TS_SmartEnergyManagementPs.xsd: ComplexType
+class SmartEnergyManagementPsPriceCalculationRequestCallType: # EEBus_SPINE_TS_SmartEnergyManagementPs.xsd:ns_p:SmartEnergyManagementPsPriceCalculationRequestCallType -> ComplexType
     def __init__(
             self,
     ):
@@ -528,40 +528,7 @@ class SmartEnergyManagementPsConfigurationRequestCallType: # EEBus_SPINE_TS_Smar
             return cls()
 
 
-class SmartEnergyManagementPsPriceDataType: # EEBus_SPINE_TS_SmartEnergyManagementPs.xsd: ComplexType
-    def __init__(
-            self,
-    ):
-        super().__init__()
-        
-
-    def get_data(self):
-
-        msg_data = []
-        
-        
-        return msg_data
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class SmartEnergyManagementPsDataType: # EEBus_SPINE_TS_SmartEnergyManagementPs.xsd: ComplexType
+class SmartEnergyManagementPsDataType: # EEBus_SPINE_TS_SmartEnergyManagementPs.xsd:ns_p:SmartEnergyManagementPsDataType -> ComplexType
     def __init__(
             self,
             alternatives: list[SmartEnergyManagementPsAlternativesType] = None,
@@ -604,7 +571,7 @@ class SmartEnergyManagementPsDataType: # EEBus_SPINE_TS_SmartEnergyManagementPs.
             return cls()
 
 
-class SmartEnergyManagementPsPriceDataElementsType: # EEBus_SPINE_TS_SmartEnergyManagementPs.xsd: ComplexType
+class SmartEnergyManagementPsConfigurationRequestCallType: # EEBus_SPINE_TS_SmartEnergyManagementPs.xsd:ns_p:SmartEnergyManagementPsConfigurationRequestCallType -> ComplexType
     def __init__(
             self,
     ):
@@ -637,7 +604,7 @@ class SmartEnergyManagementPsPriceDataElementsType: # EEBus_SPINE_TS_SmartEnergy
             return cls()
 
 
-class SmartEnergyManagementPsPriceCalculationRequestCallElementsType: # EEBus_SPINE_TS_SmartEnergyManagementPs.xsd: ComplexType
+class SmartEnergyManagementPsPriceDataElementsType: # EEBus_SPINE_TS_SmartEnergyManagementPs.xsd:ns_p:SmartEnergyManagementPsPriceDataElementsType -> ComplexType
     def __init__(
             self,
     ):
@@ -670,7 +637,40 @@ class SmartEnergyManagementPsPriceCalculationRequestCallElementsType: # EEBus_SP
             return cls()
 
 
-class SmartEnergyManagementPsDataElementsType: # EEBus_SPINE_TS_SmartEnergyManagementPs.xsd: ComplexType
+class SmartEnergyManagementPsPriceCalculationRequestCallElementsType: # EEBus_SPINE_TS_SmartEnergyManagementPs.xsd:ns_p:SmartEnergyManagementPsPriceCalculationRequestCallElementsType -> ComplexType
+    def __init__(
+            self,
+    ):
+        super().__init__()
+        
+
+    def get_data(self):
+
+        msg_data = []
+        
+        
+        return msg_data
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class SmartEnergyManagementPsDataElementsType: # EEBus_SPINE_TS_SmartEnergyManagementPs.xsd:ns_p:SmartEnergyManagementPsDataElementsType -> ComplexType
     def __init__(
             self,
             alternatives: SmartEnergyManagementPsAlternativesElementsType = None,
@@ -713,7 +713,7 @@ class SmartEnergyManagementPsDataElementsType: # EEBus_SPINE_TS_SmartEnergyManag
             return cls()
 
 
-class SmartEnergyManagementPsConfigurationRequestCallElementsType: # EEBus_SPINE_TS_SmartEnergyManagementPs.xsd: ComplexType
+class SmartEnergyManagementPsConfigurationRequestCallElementsType: # EEBus_SPINE_TS_SmartEnergyManagementPs.xsd:ns_p:SmartEnergyManagementPsConfigurationRequestCallElementsType -> ComplexType
     def __init__(
             self,
     ):
@@ -746,7 +746,7 @@ class SmartEnergyManagementPsConfigurationRequestCallElementsType: # EEBus_SPINE
             return cls()
 
 
-class SmartEnergyManagementPsPriceDataSelectorsType: # EEBus_SPINE_TS_SmartEnergyManagementPs.xsd: ComplexType
+class SmartEnergyManagementPsPriceDataSelectorsType: # EEBus_SPINE_TS_SmartEnergyManagementPs.xsd:ns_p:SmartEnergyManagementPsPriceDataSelectorsType -> ComplexType
     def __init__(
             self,
     ):
@@ -779,7 +779,7 @@ class SmartEnergyManagementPsPriceDataSelectorsType: # EEBus_SPINE_TS_SmartEnerg
             return cls()
 
 
-class SmartEnergyManagementPsDataSelectorsType: # EEBus_SPINE_TS_SmartEnergyManagementPs.xsd: ComplexType
+class SmartEnergyManagementPsDataSelectorsType: # EEBus_SPINE_TS_SmartEnergyManagementPs.xsd:ns_p:SmartEnergyManagementPsDataSelectorsType -> ComplexType
     def __init__(
             self,
     ):

@@ -13,7 +13,7 @@ from types import NoneType
 from spine import array_2_dict
 
 
-class DirectControlActivityDataType: # EEBus_SPINE_TS_DirectControl.xsd: ComplexType
+class DirectControlActivityDataType: # EEBus_SPINE_TS_DirectControl.xsd:ns_p:DirectControlActivityDataType -> ComplexType
     def __init__(
             self,
             timestamp: AbsoluteOrRelativeTimeType = None,
@@ -155,7 +155,7 @@ class DirectControlActivityDataType: # EEBus_SPINE_TS_DirectControl.xsd: Complex
             return cls()
 
 
-class DirectControlDescriptionDataType: # EEBus_SPINE_TS_DirectControl.xsd: ComplexType
+class DirectControlDescriptionDataType: # EEBus_SPINE_TS_DirectControl.xsd:ns_p:DirectControlDescriptionDataType -> ComplexType
     def __init__(
             self,
             positive_energy_direction: EnergyDirectionType = None,
@@ -220,7 +220,7 @@ class DirectControlDescriptionDataType: # EEBus_SPINE_TS_DirectControl.xsd: Comp
             return cls()
 
 
-class DirectControlActivityListDataType: # EEBus_SPINE_TS_DirectControl.xsd: ComplexType
+class DirectControlActivityListDataType: # EEBus_SPINE_TS_DirectControl.xsd:ns_p:DirectControlActivityListDataType -> ComplexType
     def __init__(
             self,
             direct_control_activity_data: list[DirectControlActivityDataType] = None,
@@ -263,7 +263,7 @@ class DirectControlActivityListDataType: # EEBus_SPINE_TS_DirectControl.xsd: Com
             return cls()
 
 
-class DirectControlDescriptionDataElementsType: # EEBus_SPINE_TS_DirectControl.xsd: ComplexType
+class DirectControlDescriptionDataElementsType: # EEBus_SPINE_TS_DirectControl.xsd:ns_p:DirectControlDescriptionDataElementsType -> ComplexType
     def __init__(
             self,
             positive_energy_direction: ElementTagType = None,
@@ -328,7 +328,7 @@ class DirectControlDescriptionDataElementsType: # EEBus_SPINE_TS_DirectControl.x
             return cls()
 
 
-class DirectControlActivityDataElementsType: # EEBus_SPINE_TS_DirectControl.xsd: ComplexType
+class DirectControlActivityDataElementsType: # EEBus_SPINE_TS_DirectControl.xsd:ns_p:DirectControlActivityDataElementsType -> ComplexType
     def __init__(
             self,
             timestamp: ElementTagType = None,
@@ -470,7 +470,7 @@ class DirectControlActivityDataElementsType: # EEBus_SPINE_TS_DirectControl.xsd:
             return cls()
 
 
-class DirectControlActivityListDataSelectorsType: # EEBus_SPINE_TS_DirectControl.xsd: ComplexType
+class DirectControlActivityListDataSelectorsType: # EEBus_SPINE_TS_DirectControl.xsd:ns_p:DirectControlActivityListDataSelectorsType -> ComplexType
     def __init__(
             self,
             timestamp_interval: TimestampIntervalType = None,

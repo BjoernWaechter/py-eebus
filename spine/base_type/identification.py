@@ -11,7 +11,7 @@ from types import NoneType
 from spine import array_2_dict
 
 
-class SessionMeasurementRelationDataType: # EEBus_SPINE_TS_Identification.xsd: ComplexType
+class SessionMeasurementRelationDataType: # EEBus_SPINE_TS_Identification.xsd:ns_p:SessionMeasurementRelationDataType -> ComplexType
     def __init__(
             self,
             session_id: SessionIdType = None,
@@ -65,7 +65,7 @@ class SessionMeasurementRelationDataType: # EEBus_SPINE_TS_Identification.xsd: C
             return cls()
 
 
-class SessionIdentificationDataType: # EEBus_SPINE_TS_Identification.xsd: ComplexType
+class SessionIdentificationDataType: # EEBus_SPINE_TS_Identification.xsd:ns_p:SessionIdentificationDataType -> ComplexType
     def __init__(
             self,
             session_id: SessionIdType = None,
@@ -141,7 +141,7 @@ class SessionIdentificationDataType: # EEBus_SPINE_TS_Identification.xsd: Comple
             return cls()
 
 
-class IdentificationDataType: # EEBus_SPINE_TS_Identification.xsd: ComplexType
+class IdentificationDataType: # EEBus_SPINE_TS_Identification.xsd:ns_p:IdentificationDataType -> ComplexType
     def __init__(
             self,
             identification_id: IdentificationIdType = None,
@@ -217,7 +217,7 @@ class IdentificationDataType: # EEBus_SPINE_TS_Identification.xsd: ComplexType
             return cls()
 
 
-class SessionMeasurementRelationListDataType: # EEBus_SPINE_TS_Identification.xsd: ComplexType
+class SessionMeasurementRelationListDataType: # EEBus_SPINE_TS_Identification.xsd:ns_p:SessionMeasurementRelationListDataType -> ComplexType
     def __init__(
             self,
             session_measurement_relation_data: list[SessionMeasurementRelationDataType] = None,
@@ -260,7 +260,7 @@ class SessionMeasurementRelationListDataType: # EEBus_SPINE_TS_Identification.xs
             return cls()
 
 
-class SessionIdentificationListDataType: # EEBus_SPINE_TS_Identification.xsd: ComplexType
+class SessionIdentificationListDataType: # EEBus_SPINE_TS_Identification.xsd:ns_p:SessionIdentificationListDataType -> ComplexType
     def __init__(
             self,
             session_identification_data: list[SessionIdentificationDataType] = None,
@@ -303,7 +303,7 @@ class SessionIdentificationListDataType: # EEBus_SPINE_TS_Identification.xsd: Co
             return cls()
 
 
-class IdentificationListDataType: # EEBus_SPINE_TS_Identification.xsd: ComplexType
+class IdentificationListDataType: # EEBus_SPINE_TS_Identification.xsd:ns_p:IdentificationListDataType -> ComplexType
     def __init__(
             self,
             identification_data: list[IdentificationDataType] = None,
@@ -346,7 +346,7 @@ class IdentificationListDataType: # EEBus_SPINE_TS_Identification.xsd: ComplexTy
             return cls()
 
 
-class SessionMeasurementRelationDataElementsType: # EEBus_SPINE_TS_Identification.xsd: ComplexType
+class SessionMeasurementRelationDataElementsType: # EEBus_SPINE_TS_Identification.xsd:ns_p:SessionMeasurementRelationDataElementsType -> ComplexType
     def __init__(
             self,
             session_id: ElementTagType = None,
@@ -400,7 +400,7 @@ class SessionMeasurementRelationDataElementsType: # EEBus_SPINE_TS_Identificatio
             return cls()
 
 
-class SessionIdentificationDataElementsType: # EEBus_SPINE_TS_Identification.xsd: ComplexType
+class SessionIdentificationDataElementsType: # EEBus_SPINE_TS_Identification.xsd:ns_p:SessionIdentificationDataElementsType -> ComplexType
     def __init__(
             self,
             session_id: ElementTagType = None,
@@ -476,7 +476,7 @@ class SessionIdentificationDataElementsType: # EEBus_SPINE_TS_Identification.xsd
             return cls()
 
 
-class IdentificationDataElementsType: # EEBus_SPINE_TS_Identification.xsd: ComplexType
+class IdentificationDataElementsType: # EEBus_SPINE_TS_Identification.xsd:ns_p:IdentificationDataElementsType -> ComplexType
     def __init__(
             self,
             identification_id: ElementTagType = None,
@@ -552,7 +552,7 @@ class IdentificationDataElementsType: # EEBus_SPINE_TS_Identification.xsd: Compl
             return cls()
 
 
-class SessionMeasurementRelationListDataSelectorsType: # EEBus_SPINE_TS_Identification.xsd: ComplexType
+class SessionMeasurementRelationListDataSelectorsType: # EEBus_SPINE_TS_Identification.xsd:ns_p:SessionMeasurementRelationListDataSelectorsType -> ComplexType
     def __init__(
             self,
             session_id: SessionIdType = None,
@@ -606,7 +606,7 @@ class SessionMeasurementRelationListDataSelectorsType: # EEBus_SPINE_TS_Identifi
             return cls()
 
 
-class SessionIdentificationListDataSelectorsType: # EEBus_SPINE_TS_Identification.xsd: ComplexType
+class SessionIdentificationListDataSelectorsType: # EEBus_SPINE_TS_Identification.xsd:ns_p:SessionIdentificationListDataSelectorsType -> ComplexType
     def __init__(
             self,
             session_id: SessionIdType = None,
@@ -682,7 +682,7 @@ class SessionIdentificationListDataSelectorsType: # EEBus_SPINE_TS_Identificatio
             return cls()
 
 
-class IdentificationListDataSelectorsType: # EEBus_SPINE_TS_Identification.xsd: ComplexType
+class IdentificationListDataSelectorsType: # EEBus_SPINE_TS_Identification.xsd:ns_p:IdentificationListDataSelectorsType -> ComplexType
     def __init__(
             self,
             identification_id: IdentificationIdType = None,

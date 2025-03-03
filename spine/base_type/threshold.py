@@ -12,7 +12,61 @@ from types import NoneType
 from spine import array_2_dict
 
 
-class ThresholdDescriptionDataType: # EEBus_SPINE_TS_Threshold.xsd: ComplexType
+class ThresholdDataType: # EEBus_SPINE_TS_Threshold.xsd:ns_p:ThresholdDataType -> ComplexType
+    def __init__(
+            self,
+            threshold_id: ThresholdIdType = None,
+            threshold_value: ScaledNumberType = None,
+    ):
+        super().__init__()
+        
+        self.threshold_id = threshold_id
+        self.threshold_value = threshold_value
+
+        if not isinstance(self.threshold_id, ThresholdIdType | NoneType):
+            raise TypeError("threshold_id is not of type ThresholdIdType")
+        
+        if not isinstance(self.threshold_value, ScaledNumberType | NoneType):
+            raise TypeError("threshold_value is not of type ScaledNumberType")
+        
+    def get_data(self):
+
+        msg_data = []
+        
+        if self.threshold_id is not None:
+            msg_data.append({"thresholdId": self.threshold_id.get_data()})
+        if self.threshold_value is not None:
+            msg_data.append({"thresholdValue": self.threshold_value.get_data()})
+        
+        return msg_data
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        if self.threshold_id is not None:
+            result_str += f"{sep}thresholdId: {self.threshold_id}"
+            sep = ", "
+        if self.threshold_value is not None:
+            result_str += f"{sep}thresholdValue: {self.threshold_value}"
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+                threshold_id=data_dict.get('thresholdId'),
+                threshold_value=data_dict.get('thresholdValue'),
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class ThresholdDescriptionDataType: # EEBus_SPINE_TS_Threshold.xsd:ns_p:ThresholdDescriptionDataType -> ComplexType
     def __init__(
             self,
             threshold_id: ThresholdIdType = None,
@@ -110,7 +164,7 @@ class ThresholdDescriptionDataType: # EEBus_SPINE_TS_Threshold.xsd: ComplexType
             return cls()
 
 
-class ThresholdConstraintsDataType: # EEBus_SPINE_TS_Threshold.xsd: ComplexType
+class ThresholdConstraintsDataType: # EEBus_SPINE_TS_Threshold.xsd:ns_p:ThresholdConstraintsDataType -> ComplexType
     def __init__(
             self,
             threshold_id: ThresholdIdType = None,
@@ -186,147 +240,7 @@ class ThresholdConstraintsDataType: # EEBus_SPINE_TS_Threshold.xsd: ComplexType
             return cls()
 
 
-class ThresholdDataType: # EEBus_SPINE_TS_Threshold.xsd: ComplexType
-    def __init__(
-            self,
-            threshold_id: ThresholdIdType = None,
-            threshold_value: ScaledNumberType = None,
-    ):
-        super().__init__()
-        
-        self.threshold_id = threshold_id
-        self.threshold_value = threshold_value
-
-        if not isinstance(self.threshold_id, ThresholdIdType | NoneType):
-            raise TypeError("threshold_id is not of type ThresholdIdType")
-        
-        if not isinstance(self.threshold_value, ScaledNumberType | NoneType):
-            raise TypeError("threshold_value is not of type ScaledNumberType")
-        
-    def get_data(self):
-
-        msg_data = []
-        
-        if self.threshold_id is not None:
-            msg_data.append({"thresholdId": self.threshold_id.get_data()})
-        if self.threshold_value is not None:
-            msg_data.append({"thresholdValue": self.threshold_value.get_data()})
-        
-        return msg_data
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        if self.threshold_id is not None:
-            result_str += f"{sep}thresholdId: {self.threshold_id}"
-            sep = ", "
-        if self.threshold_value is not None:
-            result_str += f"{sep}thresholdValue: {self.threshold_value}"
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
-                threshold_id=data_dict.get('thresholdId'),
-                threshold_value=data_dict.get('thresholdValue'),
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class ThresholdDescriptionListDataType: # EEBus_SPINE_TS_Threshold.xsd: ComplexType
-    def __init__(
-            self,
-            threshold_description_data: list[ThresholdDescriptionDataType] = None,
-    ):
-        super().__init__()
-        
-        self.threshold_description_data = threshold_description_data
-
-        if not isinstance(self.threshold_description_data, list | NoneType):
-            raise TypeError("threshold_description_data is not of type list[ThresholdDescriptionDataType]")
-        
-    def get_data(self):
-
-        msg_data = []
-        
-        if self.threshold_description_data is not None:
-            msg_data.append({"thresholdDescriptionData": [d.get_data() for d in self.threshold_description_data]})
-        
-        return msg_data
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        if self.threshold_description_data is not None:
-            result_str += f"{sep}thresholdDescriptionData: {self.threshold_description_data}"
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
-                threshold_description_data=data_dict.get('thresholdDescriptionData'),
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class ThresholdConstraintsListDataType: # EEBus_SPINE_TS_Threshold.xsd: ComplexType
-    def __init__(
-            self,
-            threshold_constraints_data: list[ThresholdConstraintsDataType] = None,
-    ):
-        super().__init__()
-        
-        self.threshold_constraints_data = threshold_constraints_data
-
-        if not isinstance(self.threshold_constraints_data, list | NoneType):
-            raise TypeError("threshold_constraints_data is not of type list[ThresholdConstraintsDataType]")
-        
-    def get_data(self):
-
-        msg_data = []
-        
-        if self.threshold_constraints_data is not None:
-            msg_data.append({"thresholdConstraintsData": [d.get_data() for d in self.threshold_constraints_data]})
-        
-        return msg_data
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        if self.threshold_constraints_data is not None:
-            result_str += f"{sep}thresholdConstraintsData: {self.threshold_constraints_data}"
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
-                threshold_constraints_data=data_dict.get('thresholdConstraintsData'),
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class ThresholdListDataType: # EEBus_SPINE_TS_Threshold.xsd: ComplexType
+class ThresholdListDataType: # EEBus_SPINE_TS_Threshold.xsd:ns_p:ThresholdListDataType -> ComplexType
     def __init__(
             self,
             threshold_data: list[ThresholdDataType] = None,
@@ -369,7 +283,93 @@ class ThresholdListDataType: # EEBus_SPINE_TS_Threshold.xsd: ComplexType
             return cls()
 
 
-class ThresholdDescriptionDataElementsType: # EEBus_SPINE_TS_Threshold.xsd: ComplexType
+class ThresholdDescriptionListDataType: # EEBus_SPINE_TS_Threshold.xsd:ns_p:ThresholdDescriptionListDataType -> ComplexType
+    def __init__(
+            self,
+            threshold_description_data: list[ThresholdDescriptionDataType] = None,
+    ):
+        super().__init__()
+        
+        self.threshold_description_data = threshold_description_data
+
+        if not isinstance(self.threshold_description_data, list | NoneType):
+            raise TypeError("threshold_description_data is not of type list[ThresholdDescriptionDataType]")
+        
+    def get_data(self):
+
+        msg_data = []
+        
+        if self.threshold_description_data is not None:
+            msg_data.append({"thresholdDescriptionData": [d.get_data() for d in self.threshold_description_data]})
+        
+        return msg_data
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        if self.threshold_description_data is not None:
+            result_str += f"{sep}thresholdDescriptionData: {self.threshold_description_data}"
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+                threshold_description_data=data_dict.get('thresholdDescriptionData'),
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class ThresholdConstraintsListDataType: # EEBus_SPINE_TS_Threshold.xsd:ns_p:ThresholdConstraintsListDataType -> ComplexType
+    def __init__(
+            self,
+            threshold_constraints_data: list[ThresholdConstraintsDataType] = None,
+    ):
+        super().__init__()
+        
+        self.threshold_constraints_data = threshold_constraints_data
+
+        if not isinstance(self.threshold_constraints_data, list | NoneType):
+            raise TypeError("threshold_constraints_data is not of type list[ThresholdConstraintsDataType]")
+        
+    def get_data(self):
+
+        msg_data = []
+        
+        if self.threshold_constraints_data is not None:
+            msg_data.append({"thresholdConstraintsData": [d.get_data() for d in self.threshold_constraints_data]})
+        
+        return msg_data
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        if self.threshold_constraints_data is not None:
+            result_str += f"{sep}thresholdConstraintsData: {self.threshold_constraints_data}"
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+                threshold_constraints_data=data_dict.get('thresholdConstraintsData'),
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class ThresholdDescriptionDataElementsType: # EEBus_SPINE_TS_Threshold.xsd:ns_p:ThresholdDescriptionDataElementsType -> ComplexType
     def __init__(
             self,
             threshold_id: ElementTagType = None,
@@ -467,7 +467,7 @@ class ThresholdDescriptionDataElementsType: # EEBus_SPINE_TS_Threshold.xsd: Comp
             return cls()
 
 
-class ThresholdDataElementsType: # EEBus_SPINE_TS_Threshold.xsd: ComplexType
+class ThresholdDataElementsType: # EEBus_SPINE_TS_Threshold.xsd:ns_p:ThresholdDataElementsType -> ComplexType
     def __init__(
             self,
             threshold_id: ElementTagType = None,
@@ -521,7 +521,7 @@ class ThresholdDataElementsType: # EEBus_SPINE_TS_Threshold.xsd: ComplexType
             return cls()
 
 
-class ThresholdConstraintsDataElementsType: # EEBus_SPINE_TS_Threshold.xsd: ComplexType
+class ThresholdConstraintsDataElementsType: # EEBus_SPINE_TS_Threshold.xsd:ns_p:ThresholdConstraintsDataElementsType -> ComplexType
     def __init__(
             self,
             threshold_id: ElementTagType = None,
@@ -597,7 +597,7 @@ class ThresholdConstraintsDataElementsType: # EEBus_SPINE_TS_Threshold.xsd: Comp
             return cls()
 
 
-class ThresholdListDataSelectorsType: # EEBus_SPINE_TS_Threshold.xsd: ComplexType
+class ThresholdListDataSelectorsType: # EEBus_SPINE_TS_Threshold.xsd:ns_p:ThresholdListDataSelectorsType -> ComplexType
     def __init__(
             self,
             threshold_id: ThresholdIdType = None,
@@ -640,7 +640,7 @@ class ThresholdListDataSelectorsType: # EEBus_SPINE_TS_Threshold.xsd: ComplexTyp
             return cls()
 
 
-class ThresholdDescriptionListDataSelectorsType: # EEBus_SPINE_TS_Threshold.xsd: ComplexType
+class ThresholdDescriptionListDataSelectorsType: # EEBus_SPINE_TS_Threshold.xsd:ns_p:ThresholdDescriptionListDataSelectorsType -> ComplexType
     def __init__(
             self,
             threshold_id: ThresholdIdType = None,
@@ -694,7 +694,7 @@ class ThresholdDescriptionListDataSelectorsType: # EEBus_SPINE_TS_Threshold.xsd:
             return cls()
 
 
-class ThresholdConstraintsListDataSelectorsType: # EEBus_SPINE_TS_Threshold.xsd: ComplexType
+class ThresholdConstraintsListDataSelectorsType: # EEBus_SPINE_TS_Threshold.xsd:ns_p:ThresholdConstraintsListDataSelectorsType -> ComplexType
     def __init__(
             self,
             threshold_id: ThresholdIdType = None,

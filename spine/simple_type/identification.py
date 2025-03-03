@@ -3,7 +3,7 @@ from types import NoneType
 from spine import array_2_dict
 
 
-class IdentificationValueType: # EEBus_SPINE_TS_Identification.xsd: AliasType
+class IdentificationValueType: # EEBus_SPINE_TS_Identification.xsd:ns_p:IdentificationValueType -> AliasType
     def __init__(
             self,
             value: str,
@@ -41,7 +41,7 @@ class IdentificationValueType: # EEBus_SPINE_TS_Identification.xsd: AliasType
             return cls()
 
 
-class SessionIdType: # EEBus_SPINE_TS_Identification.xsd: AliasType
+class SessionIdType: # EEBus_SPINE_TS_Identification.xsd:ns_p:SessionIdType -> AliasType
     def __init__(
             self,
             value: int,
@@ -79,7 +79,7 @@ class SessionIdType: # EEBus_SPINE_TS_Identification.xsd: AliasType
             return cls()
 
 
-class IdentificationIdType: # EEBus_SPINE_TS_Identification.xsd: AliasType
+class IdentificationIdType: # EEBus_SPINE_TS_Identification.xsd:ns_p:IdentificationIdType -> AliasType
     def __init__(
             self,
             value: int,

@@ -3,7 +3,7 @@ from types import NoneType
 from spine import array_2_dict
 
 
-class NetworkManagementMinimumTrustLevelType: # EEBus_SPINE_TS_NetworkManagement.xsd: AliasType
+class NetworkManagementScanSetupType: # EEBus_SPINE_TS_NetworkManagement.xsd:ns_p:NetworkManagementScanSetupType -> AliasType
     def __init__(
             self,
             value: str,
@@ -41,7 +41,7 @@ class NetworkManagementMinimumTrustLevelType: # EEBus_SPINE_TS_NetworkManagement
             return cls()
 
 
-class NetworkManagementCommunicationsTechnologyInformationType: # EEBus_SPINE_TS_NetworkManagement.xsd: AliasType
+class NetworkManagementCandidateSetupType: # EEBus_SPINE_TS_NetworkManagement.xsd:ns_p:NetworkManagementCandidateSetupType -> AliasType
     def __init__(
             self,
             value: str,
@@ -79,7 +79,7 @@ class NetworkManagementCommunicationsTechnologyInformationType: # EEBus_SPINE_TS
             return cls()
 
 
-class NetworkManagementTechnologyAddressType: # EEBus_SPINE_TS_NetworkManagement.xsd: AliasType
+class NetworkManagementSetupType: # EEBus_SPINE_TS_NetworkManagement.xsd:ns_p:NetworkManagementSetupType -> AliasType
     def __init__(
             self,
             value: str,
@@ -117,7 +117,7 @@ class NetworkManagementTechnologyAddressType: # EEBus_SPINE_TS_NetworkManagement
             return cls()
 
 
-class NetworkManagementCandidateSetupType: # EEBus_SPINE_TS_NetworkManagement.xsd: AliasType
+class NetworkManagementMinimumTrustLevelType: # EEBus_SPINE_TS_NetworkManagement.xsd:ns_p:NetworkManagementMinimumTrustLevelType -> AliasType
     def __init__(
             self,
             value: str,
@@ -155,7 +155,7 @@ class NetworkManagementCandidateSetupType: # EEBus_SPINE_TS_NetworkManagement.xs
             return cls()
 
 
-class NetworkManagementSetupType: # EEBus_SPINE_TS_NetworkManagement.xsd: AliasType
+class NetworkManagementCommunicationsTechnologyInformationType: # EEBus_SPINE_TS_NetworkManagement.xsd:ns_p:NetworkManagementCommunicationsTechnologyInformationType -> AliasType
     def __init__(
             self,
             value: str,
@@ -193,7 +193,7 @@ class NetworkManagementSetupType: # EEBus_SPINE_TS_NetworkManagement.xsd: AliasT
             return cls()
 
 
-class NetworkManagementScanSetupType: # EEBus_SPINE_TS_NetworkManagement.xsd: AliasType
+class NetworkManagementTechnologyAddressType: # EEBus_SPINE_TS_NetworkManagement.xsd:ns_p:NetworkManagementTechnologyAddressType -> AliasType
     def __init__(
             self,
             value: str,
@@ -231,7 +231,7 @@ class NetworkManagementScanSetupType: # EEBus_SPINE_TS_NetworkManagement.xsd: Al
             return cls()
 
 
-class NetworkManagementProcessTimeoutType: # EEBus_SPINE_TS_NetworkManagement.xsd: AliasType
+class NetworkManagementProcessTimeoutType: # EEBus_SPINE_TS_NetworkManagement.xsd:ns_p:NetworkManagementProcessTimeoutType -> AliasType
     def __init__(
             self,
             value: str,
@@ -269,7 +269,7 @@ class NetworkManagementProcessTimeoutType: # EEBus_SPINE_TS_NetworkManagement.xs
             return cls()
 
 
-class NetworkManagementNativeSetupType: # EEBus_SPINE_TS_NetworkManagement.xsd: AliasType
+class NetworkManagementNativeSetupType: # EEBus_SPINE_TS_NetworkManagement.xsd:ns_p:NetworkManagementNativeSetupType -> AliasType
     def __init__(
             self,
             value: str,

@@ -33,344 +33,7 @@ from types import NoneType
 from spine import array_2_dict
 
 
-class IncentiveDescriptionDataType: # EEBus_SPINE_TS_TariffInformation.xsd: ComplexType
-    def __init__(
-            self,
-            incentive_id: IncentiveIdType = None,
-            incentive_type: IncentiveTypeType = None,
-            incentive_priority: IncentivePriorityType = None,
-            currency: CurrencyType = None,
-            unit: UnitOfMeasurementType = None,
-            label: LabelType = None,
-            description: DescriptionType = None,
-    ):
-        super().__init__()
-        
-        self.incentive_id = incentive_id
-        self.incentive_type = incentive_type
-        self.incentive_priority = incentive_priority
-        self.currency = currency
-        self.unit = unit
-        self.label = label
-        self.description = description
-
-        if not isinstance(self.incentive_id, IncentiveIdType | NoneType):
-            raise TypeError("incentive_id is not of type IncentiveIdType")
-        
-        if not isinstance(self.incentive_type, IncentiveTypeType | NoneType):
-            raise TypeError("incentive_type is not of type IncentiveTypeType")
-        
-        if not isinstance(self.incentive_priority, IncentivePriorityType | NoneType):
-            raise TypeError("incentive_priority is not of type IncentivePriorityType")
-        
-        if not isinstance(self.currency, CurrencyType | NoneType):
-            raise TypeError("currency is not of type CurrencyType")
-        
-        if not isinstance(self.unit, UnitOfMeasurementType | NoneType):
-            raise TypeError("unit is not of type UnitOfMeasurementType")
-        
-        if not isinstance(self.label, LabelType | NoneType):
-            raise TypeError("label is not of type LabelType")
-        
-        if not isinstance(self.description, DescriptionType | NoneType):
-            raise TypeError("description is not of type DescriptionType")
-        
-    def get_data(self):
-
-        msg_data = []
-        
-        if self.incentive_id is not None:
-            msg_data.append({"incentiveId": self.incentive_id.get_data()})
-        if self.incentive_type is not None:
-            msg_data.append({"incentiveType": self.incentive_type.get_data()})
-        if self.incentive_priority is not None:
-            msg_data.append({"incentivePriority": self.incentive_priority.get_data()})
-        if self.currency is not None:
-            msg_data.append({"currency": self.currency.get_data()})
-        if self.unit is not None:
-            msg_data.append({"unit": self.unit.get_data()})
-        if self.label is not None:
-            msg_data.append({"label": self.label.get_data()})
-        if self.description is not None:
-            msg_data.append({"description": self.description.get_data()})
-        
-        return msg_data
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        if self.incentive_id is not None:
-            result_str += f"{sep}incentiveId: {self.incentive_id}"
-            sep = ", "
-        if self.incentive_type is not None:
-            result_str += f"{sep}incentiveType: {self.incentive_type}"
-            sep = ", "
-        if self.incentive_priority is not None:
-            result_str += f"{sep}incentivePriority: {self.incentive_priority}"
-            sep = ", "
-        if self.currency is not None:
-            result_str += f"{sep}currency: {self.currency}"
-            sep = ", "
-        if self.unit is not None:
-            result_str += f"{sep}unit: {self.unit}"
-            sep = ", "
-        if self.label is not None:
-            result_str += f"{sep}label: {self.label}"
-            sep = ", "
-        if self.description is not None:
-            result_str += f"{sep}description: {self.description}"
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
-                incentive_id=data_dict.get('incentiveId'),
-                incentive_type=data_dict.get('incentiveType'),
-                incentive_priority=data_dict.get('incentivePriority'),
-                currency=data_dict.get('currency'),
-                unit=data_dict.get('unit'),
-                label=data_dict.get('label'),
-                description=data_dict.get('description'),
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class IncentiveDataType: # EEBus_SPINE_TS_TariffInformation.xsd: ComplexType
-    def __init__(
-            self,
-            incentive_id: IncentiveIdType = None,
-            value_type: IncentiveValueTypeType = None,
-            timestamp: AbsoluteOrRelativeTimeType = None,
-            time_period: TimePeriodType = None,
-            time_table_id: TimeTableIdType = None,
-            value: ScaledNumberType = None,
-    ):
-        super().__init__()
-        
-        self.incentive_id = incentive_id
-        self.value_type = value_type
-        self.timestamp = timestamp
-        self.time_period = time_period
-        self.time_table_id = time_table_id
-        self.value = value
-
-        if not isinstance(self.incentive_id, IncentiveIdType | NoneType):
-            raise TypeError("incentive_id is not of type IncentiveIdType")
-        
-        if not isinstance(self.value_type, IncentiveValueTypeType | NoneType):
-            raise TypeError("value_type is not of type IncentiveValueTypeType")
-        
-        if not isinstance(self.timestamp, AbsoluteOrRelativeTimeType | NoneType):
-            raise TypeError("timestamp is not of type AbsoluteOrRelativeTimeType")
-        
-        if not isinstance(self.time_period, TimePeriodType | NoneType):
-            raise TypeError("time_period is not of type TimePeriodType")
-        
-        if not isinstance(self.time_table_id, TimeTableIdType | NoneType):
-            raise TypeError("time_table_id is not of type TimeTableIdType")
-        
-        if not isinstance(self.value, ScaledNumberType | NoneType):
-            raise TypeError("value is not of type ScaledNumberType")
-        
-    def get_data(self):
-
-        msg_data = []
-        
-        if self.incentive_id is not None:
-            msg_data.append({"incentiveId": self.incentive_id.get_data()})
-        if self.value_type is not None:
-            msg_data.append({"valueType": self.value_type.get_data()})
-        if self.timestamp is not None:
-            msg_data.append({"timestamp": self.timestamp.get_data()})
-        if self.time_period is not None:
-            msg_data.append({"timePeriod": self.time_period.get_data()})
-        if self.time_table_id is not None:
-            msg_data.append({"timeTableId": self.time_table_id.get_data()})
-        if self.value is not None:
-            msg_data.append({"value": self.value.get_data()})
-        
-        return msg_data
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        if self.incentive_id is not None:
-            result_str += f"{sep}incentiveId: {self.incentive_id}"
-            sep = ", "
-        if self.value_type is not None:
-            result_str += f"{sep}valueType: {self.value_type}"
-            sep = ", "
-        if self.timestamp is not None:
-            result_str += f"{sep}timestamp: {self.timestamp}"
-            sep = ", "
-        if self.time_period is not None:
-            result_str += f"{sep}timePeriod: {self.time_period}"
-            sep = ", "
-        if self.time_table_id is not None:
-            result_str += f"{sep}timeTableId: {self.time_table_id}"
-            sep = ", "
-        if self.value is not None:
-            result_str += f"{sep}value: {self.value}"
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
-                incentive_id=data_dict.get('incentiveId'),
-                value_type=data_dict.get('valueType'),
-                timestamp=data_dict.get('timestamp'),
-                time_period=data_dict.get('timePeriod'),
-                time_table_id=data_dict.get('timeTableId'),
-                value=data_dict.get('value'),
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class TierDescriptionDataType: # EEBus_SPINE_TS_TariffInformation.xsd: ComplexType
-    def __init__(
-            self,
-            tier_id: TierIdType = None,
-            tier_type: TierTypeType = None,
-            label: LabelType = None,
-            description: DescriptionType = None,
-    ):
-        super().__init__()
-        
-        self.tier_id = tier_id
-        self.tier_type = tier_type
-        self.label = label
-        self.description = description
-
-        if not isinstance(self.tier_id, TierIdType | NoneType):
-            raise TypeError("tier_id is not of type TierIdType")
-        
-        if not isinstance(self.tier_type, TierTypeType | NoneType):
-            raise TypeError("tier_type is not of type TierTypeType")
-        
-        if not isinstance(self.label, LabelType | NoneType):
-            raise TypeError("label is not of type LabelType")
-        
-        if not isinstance(self.description, DescriptionType | NoneType):
-            raise TypeError("description is not of type DescriptionType")
-        
-    def get_data(self):
-
-        msg_data = []
-        
-        if self.tier_id is not None:
-            msg_data.append({"tierId": self.tier_id.get_data()})
-        if self.tier_type is not None:
-            msg_data.append({"tierType": self.tier_type.get_data()})
-        if self.label is not None:
-            msg_data.append({"label": self.label.get_data()})
-        if self.description is not None:
-            msg_data.append({"description": self.description.get_data()})
-        
-        return msg_data
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        if self.tier_id is not None:
-            result_str += f"{sep}tierId: {self.tier_id}"
-            sep = ", "
-        if self.tier_type is not None:
-            result_str += f"{sep}tierType: {self.tier_type}"
-            sep = ", "
-        if self.label is not None:
-            result_str += f"{sep}label: {self.label}"
-            sep = ", "
-        if self.description is not None:
-            result_str += f"{sep}description: {self.description}"
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
-                tier_id=data_dict.get('tierId'),
-                tier_type=data_dict.get('tierType'),
-                label=data_dict.get('label'),
-                description=data_dict.get('description'),
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class TierIncentiveRelationDataType: # EEBus_SPINE_TS_TariffInformation.xsd: ComplexType
-    def __init__(
-            self,
-            tier_id: TierIdType = None,
-            incentive_id: list[IncentiveIdType] = None,
-    ):
-        super().__init__()
-        
-        self.tier_id = tier_id
-        self.incentive_id = incentive_id
-
-        if not isinstance(self.tier_id, TierIdType | NoneType):
-            raise TypeError("tier_id is not of type TierIdType")
-        
-        if not isinstance(self.incentive_id, list | NoneType):
-            raise TypeError("incentive_id is not of type list[IncentiveIdType]")
-        
-    def get_data(self):
-
-        msg_data = []
-        
-        if self.tier_id is not None:
-            msg_data.append({"tierId": self.tier_id.get_data()})
-        if self.incentive_id is not None:
-            msg_data.append({"incentiveId": [d.get_data() for d in self.incentive_id]})
-        
-        return msg_data
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        if self.tier_id is not None:
-            result_str += f"{sep}tierId: {self.tier_id}"
-            sep = ", "
-        if self.incentive_id is not None:
-            result_str += f"{sep}incentiveId: {self.incentive_id}"
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
-                tier_id=data_dict.get('tierId'),
-                incentive_id=data_dict.get('incentiveId'),
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class TierDataType: # EEBus_SPINE_TS_TariffInformation.xsd: ComplexType
+class TierDataType: # EEBus_SPINE_TS_TariffInformation.xsd:ns_p:TierDataType -> ComplexType
     def __init__(
             self,
             tier_id: TierIdType = None,
@@ -446,31 +109,80 @@ class TierDataType: # EEBus_SPINE_TS_TariffInformation.xsd: ComplexType
             return cls()
 
 
-class CommodityDataType: # EEBus_SPINE_TS_TariffInformation.xsd: ComplexType
+class TierIncentiveRelationDataType: # EEBus_SPINE_TS_TariffInformation.xsd:ns_p:TierIncentiveRelationDataType -> ComplexType
     def __init__(
             self,
-            commodity_id: CommodityIdType = None,
-            commodity_type: CommodityTypeType = None,
-            positive_energy_direction: EnergyDirectionType = None,
+            tier_id: TierIdType = None,
+            incentive_id: list[IncentiveIdType] = None,
+    ):
+        super().__init__()
+        
+        self.tier_id = tier_id
+        self.incentive_id = incentive_id
+
+        if not isinstance(self.tier_id, TierIdType | NoneType):
+            raise TypeError("tier_id is not of type TierIdType")
+        
+        if not isinstance(self.incentive_id, list | NoneType):
+            raise TypeError("incentive_id is not of type list[IncentiveIdType]")
+        
+    def get_data(self):
+
+        msg_data = []
+        
+        if self.tier_id is not None:
+            msg_data.append({"tierId": self.tier_id.get_data()})
+        if self.incentive_id is not None:
+            msg_data.append({"incentiveId": [d.get_data() for d in self.incentive_id]})
+        
+        return msg_data
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        if self.tier_id is not None:
+            result_str += f"{sep}tierId: {self.tier_id}"
+            sep = ", "
+        if self.incentive_id is not None:
+            result_str += f"{sep}incentiveId: {self.incentive_id}"
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+                tier_id=data_dict.get('tierId'),
+                incentive_id=data_dict.get('incentiveId'),
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class TierDescriptionDataType: # EEBus_SPINE_TS_TariffInformation.xsd:ns_p:TierDescriptionDataType -> ComplexType
+    def __init__(
+            self,
+            tier_id: TierIdType = None,
+            tier_type: TierTypeType = None,
             label: LabelType = None,
             description: DescriptionType = None,
     ):
         super().__init__()
         
-        self.commodity_id = commodity_id
-        self.commodity_type = commodity_type
-        self.positive_energy_direction = positive_energy_direction
+        self.tier_id = tier_id
+        self.tier_type = tier_type
         self.label = label
         self.description = description
 
-        if not isinstance(self.commodity_id, CommodityIdType | NoneType):
-            raise TypeError("commodity_id is not of type CommodityIdType")
+        if not isinstance(self.tier_id, TierIdType | NoneType):
+            raise TypeError("tier_id is not of type TierIdType")
         
-        if not isinstance(self.commodity_type, CommodityTypeType | NoneType):
-            raise TypeError("commodity_type is not of type CommodityTypeType")
-        
-        if not isinstance(self.positive_energy_direction, EnergyDirectionType | NoneType):
-            raise TypeError("positive_energy_direction is not of type EnergyDirectionType")
+        if not isinstance(self.tier_type, TierTypeType | NoneType):
+            raise TypeError("tier_type is not of type TierTypeType")
         
         if not isinstance(self.label, LabelType | NoneType):
             raise TypeError("label is not of type LabelType")
@@ -482,12 +194,10 @@ class CommodityDataType: # EEBus_SPINE_TS_TariffInformation.xsd: ComplexType
 
         msg_data = []
         
-        if self.commodity_id is not None:
-            msg_data.append({"commodityId": self.commodity_id.get_data()})
-        if self.commodity_type is not None:
-            msg_data.append({"commodityType": self.commodity_type.get_data()})
-        if self.positive_energy_direction is not None:
-            msg_data.append({"positiveEnergyDirection": self.positive_energy_direction.get_data()})
+        if self.tier_id is not None:
+            msg_data.append({"tierId": self.tier_id.get_data()})
+        if self.tier_type is not None:
+            msg_data.append({"tierType": self.tier_type.get_data()})
         if self.label is not None:
             msg_data.append({"label": self.label.get_data()})
         if self.description is not None:
@@ -499,14 +209,11 @@ class CommodityDataType: # EEBus_SPINE_TS_TariffInformation.xsd: ComplexType
     def __str__(self):
         result_str = ""
         sep = ""
-        if self.commodity_id is not None:
-            result_str += f"{sep}commodityId: {self.commodity_id}"
+        if self.tier_id is not None:
+            result_str += f"{sep}tierId: {self.tier_id}"
             sep = ", "
-        if self.commodity_type is not None:
-            result_str += f"{sep}commodityType: {self.commodity_type}"
-            sep = ", "
-        if self.positive_energy_direction is not None:
-            result_str += f"{sep}positiveEnergyDirection: {self.positive_energy_direction}"
+        if self.tier_type is not None:
+            result_str += f"{sep}tierType: {self.tier_type}"
             sep = ", "
         if self.label is not None:
             result_str += f"{sep}label: {self.label}"
@@ -521,9 +228,8 @@ class CommodityDataType: # EEBus_SPINE_TS_TariffInformation.xsd: ComplexType
         if type(data) == list:
             data_dict = array_2_dict(data)
             return cls(
-                commodity_id=data_dict.get('commodityId'),
-                commodity_type=data_dict.get('commodityType'),
-                positive_energy_direction=data_dict.get('positiveEnergyDirection'),
+                tier_id=data_dict.get('tierId'),
+                tier_type=data_dict.get('tierType'),
                 label=data_dict.get('label'),
                 description=data_dict.get('description'),
             )
@@ -533,7 +239,94 @@ class CommodityDataType: # EEBus_SPINE_TS_TariffInformation.xsd: ComplexType
             return cls()
 
 
-class TierBoundaryDescriptionDataType: # EEBus_SPINE_TS_TariffInformation.xsd: ComplexType
+class TierBoundaryDataType: # EEBus_SPINE_TS_TariffInformation.xsd:ns_p:TierBoundaryDataType -> ComplexType
+    def __init__(
+            self,
+            boundary_id: TierBoundaryIdType = None,
+            time_period: TimePeriodType = None,
+            time_table_id: TimeTableIdType = None,
+            lower_boundary_value: ScaledNumberType = None,
+            upper_boundary_value: ScaledNumberType = None,
+    ):
+        super().__init__()
+        
+        self.boundary_id = boundary_id
+        self.time_period = time_period
+        self.time_table_id = time_table_id
+        self.lower_boundary_value = lower_boundary_value
+        self.upper_boundary_value = upper_boundary_value
+
+        if not isinstance(self.boundary_id, TierBoundaryIdType | NoneType):
+            raise TypeError("boundary_id is not of type TierBoundaryIdType")
+        
+        if not isinstance(self.time_period, TimePeriodType | NoneType):
+            raise TypeError("time_period is not of type TimePeriodType")
+        
+        if not isinstance(self.time_table_id, TimeTableIdType | NoneType):
+            raise TypeError("time_table_id is not of type TimeTableIdType")
+        
+        if not isinstance(self.lower_boundary_value, ScaledNumberType | NoneType):
+            raise TypeError("lower_boundary_value is not of type ScaledNumberType")
+        
+        if not isinstance(self.upper_boundary_value, ScaledNumberType | NoneType):
+            raise TypeError("upper_boundary_value is not of type ScaledNumberType")
+        
+    def get_data(self):
+
+        msg_data = []
+        
+        if self.boundary_id is not None:
+            msg_data.append({"boundaryId": self.boundary_id.get_data()})
+        if self.time_period is not None:
+            msg_data.append({"timePeriod": self.time_period.get_data()})
+        if self.time_table_id is not None:
+            msg_data.append({"timeTableId": self.time_table_id.get_data()})
+        if self.lower_boundary_value is not None:
+            msg_data.append({"lowerBoundaryValue": self.lower_boundary_value.get_data()})
+        if self.upper_boundary_value is not None:
+            msg_data.append({"upperBoundaryValue": self.upper_boundary_value.get_data()})
+        
+        return msg_data
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        if self.boundary_id is not None:
+            result_str += f"{sep}boundaryId: {self.boundary_id}"
+            sep = ", "
+        if self.time_period is not None:
+            result_str += f"{sep}timePeriod: {self.time_period}"
+            sep = ", "
+        if self.time_table_id is not None:
+            result_str += f"{sep}timeTableId: {self.time_table_id}"
+            sep = ", "
+        if self.lower_boundary_value is not None:
+            result_str += f"{sep}lowerBoundaryValue: {self.lower_boundary_value}"
+            sep = ", "
+        if self.upper_boundary_value is not None:
+            result_str += f"{sep}upperBoundaryValue: {self.upper_boundary_value}"
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+                boundary_id=data_dict.get('boundaryId'),
+                time_period=data_dict.get('timePeriod'),
+                time_table_id=data_dict.get('timeTableId'),
+                lower_boundary_value=data_dict.get('lowerBoundaryValue'),
+                upper_boundary_value=data_dict.get('upperBoundaryValue'),
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class TierBoundaryDescriptionDataType: # EEBus_SPINE_TS_TariffInformation.xsd:ns_p:TierBoundaryDescriptionDataType -> ComplexType
     def __init__(
             self,
             boundary_id: TierBoundaryIdType = None,
@@ -653,52 +446,31 @@ class TierBoundaryDescriptionDataType: # EEBus_SPINE_TS_TariffInformation.xsd: C
             return cls()
 
 
-class TierBoundaryDataType: # EEBus_SPINE_TS_TariffInformation.xsd: ComplexType
+class TariffTierRelationDataType: # EEBus_SPINE_TS_TariffInformation.xsd:ns_p:TariffTierRelationDataType -> ComplexType
     def __init__(
             self,
-            boundary_id: TierBoundaryIdType = None,
-            time_period: TimePeriodType = None,
-            time_table_id: TimeTableIdType = None,
-            lower_boundary_value: ScaledNumberType = None,
-            upper_boundary_value: ScaledNumberType = None,
+            tariff_id: TariffIdType = None,
+            tier_id: list[TierIdType] = None,
     ):
         super().__init__()
         
-        self.boundary_id = boundary_id
-        self.time_period = time_period
-        self.time_table_id = time_table_id
-        self.lower_boundary_value = lower_boundary_value
-        self.upper_boundary_value = upper_boundary_value
+        self.tariff_id = tariff_id
+        self.tier_id = tier_id
 
-        if not isinstance(self.boundary_id, TierBoundaryIdType | NoneType):
-            raise TypeError("boundary_id is not of type TierBoundaryIdType")
+        if not isinstance(self.tariff_id, TariffIdType | NoneType):
+            raise TypeError("tariff_id is not of type TariffIdType")
         
-        if not isinstance(self.time_period, TimePeriodType | NoneType):
-            raise TypeError("time_period is not of type TimePeriodType")
-        
-        if not isinstance(self.time_table_id, TimeTableIdType | NoneType):
-            raise TypeError("time_table_id is not of type TimeTableIdType")
-        
-        if not isinstance(self.lower_boundary_value, ScaledNumberType | NoneType):
-            raise TypeError("lower_boundary_value is not of type ScaledNumberType")
-        
-        if not isinstance(self.upper_boundary_value, ScaledNumberType | NoneType):
-            raise TypeError("upper_boundary_value is not of type ScaledNumberType")
+        if not isinstance(self.tier_id, list | NoneType):
+            raise TypeError("tier_id is not of type list[TierIdType]")
         
     def get_data(self):
 
         msg_data = []
         
-        if self.boundary_id is not None:
-            msg_data.append({"boundaryId": self.boundary_id.get_data()})
-        if self.time_period is not None:
-            msg_data.append({"timePeriod": self.time_period.get_data()})
-        if self.time_table_id is not None:
-            msg_data.append({"timeTableId": self.time_table_id.get_data()})
-        if self.lower_boundary_value is not None:
-            msg_data.append({"lowerBoundaryValue": self.lower_boundary_value.get_data()})
-        if self.upper_boundary_value is not None:
-            msg_data.append({"upperBoundaryValue": self.upper_boundary_value.get_data()})
+        if self.tariff_id is not None:
+            msg_data.append({"tariffId": self.tariff_id.get_data()})
+        if self.tier_id is not None:
+            msg_data.append({"tierId": [d.get_data() for d in self.tier_id]})
         
         return msg_data
 
@@ -706,20 +478,11 @@ class TierBoundaryDataType: # EEBus_SPINE_TS_TariffInformation.xsd: ComplexType
     def __str__(self):
         result_str = ""
         sep = ""
-        if self.boundary_id is not None:
-            result_str += f"{sep}boundaryId: {self.boundary_id}"
+        if self.tariff_id is not None:
+            result_str += f"{sep}tariffId: {self.tariff_id}"
             sep = ", "
-        if self.time_period is not None:
-            result_str += f"{sep}timePeriod: {self.time_period}"
-            sep = ", "
-        if self.time_table_id is not None:
-            result_str += f"{sep}timeTableId: {self.time_table_id}"
-            sep = ", "
-        if self.lower_boundary_value is not None:
-            result_str += f"{sep}lowerBoundaryValue: {self.lower_boundary_value}"
-            sep = ", "
-        if self.upper_boundary_value is not None:
-            result_str += f"{sep}upperBoundaryValue: {self.upper_boundary_value}"
+        if self.tier_id is not None:
+            result_str += f"{sep}tierId: {self.tier_id}"
         
         return result_str
 
@@ -728,11 +491,8 @@ class TierBoundaryDataType: # EEBus_SPINE_TS_TariffInformation.xsd: ComplexType
         if type(data) == list:
             data_dict = array_2_dict(data)
             return cls(
-                boundary_id=data_dict.get('boundaryId'),
-                time_period=data_dict.get('timePeriod'),
-                time_table_id=data_dict.get('timeTableId'),
-                lower_boundary_value=data_dict.get('lowerBoundaryValue'),
-                upper_boundary_value=data_dict.get('upperBoundaryValue'),
+                tariff_id=data_dict.get('tariffId'),
+                tier_id=data_dict.get('tierId'),
             )
         elif data:
             return cls(data)
@@ -740,7 +500,61 @@ class TierBoundaryDataType: # EEBus_SPINE_TS_TariffInformation.xsd: ComplexType
             return cls()
 
 
-class TariffDescriptionDataType: # EEBus_SPINE_TS_TariffInformation.xsd: ComplexType
+class TariffDataType: # EEBus_SPINE_TS_TariffInformation.xsd:ns_p:TariffDataType -> ComplexType
+    def __init__(
+            self,
+            tariff_id: TariffIdType = None,
+            active_tier_id: list[TierIdType] = None,
+    ):
+        super().__init__()
+        
+        self.tariff_id = tariff_id
+        self.active_tier_id = active_tier_id
+
+        if not isinstance(self.tariff_id, TariffIdType | NoneType):
+            raise TypeError("tariff_id is not of type TariffIdType")
+        
+        if not isinstance(self.active_tier_id, list | NoneType):
+            raise TypeError("active_tier_id is not of type list[TierIdType]")
+        
+    def get_data(self):
+
+        msg_data = []
+        
+        if self.tariff_id is not None:
+            msg_data.append({"tariffId": self.tariff_id.get_data()})
+        if self.active_tier_id is not None:
+            msg_data.append({"activeTierId": [d.get_data() for d in self.active_tier_id]})
+        
+        return msg_data
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        if self.tariff_id is not None:
+            result_str += f"{sep}tariffId: {self.tariff_id}"
+            sep = ", "
+        if self.active_tier_id is not None:
+            result_str += f"{sep}activeTierId: {self.active_tier_id}"
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+                tariff_id=data_dict.get('tariffId'),
+                active_tier_id=data_dict.get('activeTierId'),
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class TariffDescriptionDataType: # EEBus_SPINE_TS_TariffInformation.xsd:ns_p:TariffDescriptionDataType -> ComplexType
     def __init__(
             self,
             tariff_id: TariffIdType = None,
@@ -871,7 +685,7 @@ class TariffDescriptionDataType: # EEBus_SPINE_TS_TariffInformation.xsd: Complex
             return cls()
 
 
-class TariffBoundaryRelationDataType: # EEBus_SPINE_TS_TariffInformation.xsd: ComplexType
+class TariffBoundaryRelationDataType: # EEBus_SPINE_TS_TariffInformation.xsd:ns_p:TariffBoundaryRelationDataType -> ComplexType
     def __init__(
             self,
             tariff_id: TariffIdType = None,
@@ -925,31 +739,59 @@ class TariffBoundaryRelationDataType: # EEBus_SPINE_TS_TariffInformation.xsd: Co
             return cls()
 
 
-class TariffTierRelationDataType: # EEBus_SPINE_TS_TariffInformation.xsd: ComplexType
+class IncentiveDataType: # EEBus_SPINE_TS_TariffInformation.xsd:ns_p:IncentiveDataType -> ComplexType
     def __init__(
             self,
-            tariff_id: TariffIdType = None,
-            tier_id: list[TierIdType] = None,
+            incentive_id: IncentiveIdType = None,
+            value_type: IncentiveValueTypeType = None,
+            timestamp: AbsoluteOrRelativeTimeType = None,
+            time_period: TimePeriodType = None,
+            time_table_id: TimeTableIdType = None,
+            value: ScaledNumberType = None,
     ):
         super().__init__()
         
-        self.tariff_id = tariff_id
-        self.tier_id = tier_id
+        self.incentive_id = incentive_id
+        self.value_type = value_type
+        self.timestamp = timestamp
+        self.time_period = time_period
+        self.time_table_id = time_table_id
+        self.value = value
 
-        if not isinstance(self.tariff_id, TariffIdType | NoneType):
-            raise TypeError("tariff_id is not of type TariffIdType")
+        if not isinstance(self.incentive_id, IncentiveIdType | NoneType):
+            raise TypeError("incentive_id is not of type IncentiveIdType")
         
-        if not isinstance(self.tier_id, list | NoneType):
-            raise TypeError("tier_id is not of type list[TierIdType]")
+        if not isinstance(self.value_type, IncentiveValueTypeType | NoneType):
+            raise TypeError("value_type is not of type IncentiveValueTypeType")
+        
+        if not isinstance(self.timestamp, AbsoluteOrRelativeTimeType | NoneType):
+            raise TypeError("timestamp is not of type AbsoluteOrRelativeTimeType")
+        
+        if not isinstance(self.time_period, TimePeriodType | NoneType):
+            raise TypeError("time_period is not of type TimePeriodType")
+        
+        if not isinstance(self.time_table_id, TimeTableIdType | NoneType):
+            raise TypeError("time_table_id is not of type TimeTableIdType")
+        
+        if not isinstance(self.value, ScaledNumberType | NoneType):
+            raise TypeError("value is not of type ScaledNumberType")
         
     def get_data(self):
 
         msg_data = []
         
-        if self.tariff_id is not None:
-            msg_data.append({"tariffId": self.tariff_id.get_data()})
-        if self.tier_id is not None:
-            msg_data.append({"tierId": [d.get_data() for d in self.tier_id]})
+        if self.incentive_id is not None:
+            msg_data.append({"incentiveId": self.incentive_id.get_data()})
+        if self.value_type is not None:
+            msg_data.append({"valueType": self.value_type.get_data()})
+        if self.timestamp is not None:
+            msg_data.append({"timestamp": self.timestamp.get_data()})
+        if self.time_period is not None:
+            msg_data.append({"timePeriod": self.time_period.get_data()})
+        if self.time_table_id is not None:
+            msg_data.append({"timeTableId": self.time_table_id.get_data()})
+        if self.value is not None:
+            msg_data.append({"value": self.value.get_data()})
         
         return msg_data
 
@@ -957,65 +799,23 @@ class TariffTierRelationDataType: # EEBus_SPINE_TS_TariffInformation.xsd: Comple
     def __str__(self):
         result_str = ""
         sep = ""
-        if self.tariff_id is not None:
-            result_str += f"{sep}tariffId: {self.tariff_id}"
+        if self.incentive_id is not None:
+            result_str += f"{sep}incentiveId: {self.incentive_id}"
             sep = ", "
-        if self.tier_id is not None:
-            result_str += f"{sep}tierId: {self.tier_id}"
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
-                tariff_id=data_dict.get('tariffId'),
-                tier_id=data_dict.get('tierId'),
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class TariffDataType: # EEBus_SPINE_TS_TariffInformation.xsd: ComplexType
-    def __init__(
-            self,
-            tariff_id: TariffIdType = None,
-            active_tier_id: list[TierIdType] = None,
-    ):
-        super().__init__()
-        
-        self.tariff_id = tariff_id
-        self.active_tier_id = active_tier_id
-
-        if not isinstance(self.tariff_id, TariffIdType | NoneType):
-            raise TypeError("tariff_id is not of type TariffIdType")
-        
-        if not isinstance(self.active_tier_id, list | NoneType):
-            raise TypeError("active_tier_id is not of type list[TierIdType]")
-        
-    def get_data(self):
-
-        msg_data = []
-        
-        if self.tariff_id is not None:
-            msg_data.append({"tariffId": self.tariff_id.get_data()})
-        if self.active_tier_id is not None:
-            msg_data.append({"activeTierId": [d.get_data() for d in self.active_tier_id]})
-        
-        return msg_data
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        if self.tariff_id is not None:
-            result_str += f"{sep}tariffId: {self.tariff_id}"
+        if self.value_type is not None:
+            result_str += f"{sep}valueType: {self.value_type}"
             sep = ", "
-        if self.active_tier_id is not None:
-            result_str += f"{sep}activeTierId: {self.active_tier_id}"
+        if self.timestamp is not None:
+            result_str += f"{sep}timestamp: {self.timestamp}"
+            sep = ", "
+        if self.time_period is not None:
+            result_str += f"{sep}timePeriod: {self.time_period}"
+            sep = ", "
+        if self.time_table_id is not None:
+            result_str += f"{sep}timeTableId: {self.time_table_id}"
+            sep = ", "
+        if self.value is not None:
+            result_str += f"{sep}value: {self.value}"
         
         return result_str
 
@@ -1024,8 +824,12 @@ class TariffDataType: # EEBus_SPINE_TS_TariffInformation.xsd: ComplexType
         if type(data) == list:
             data_dict = array_2_dict(data)
             return cls(
-                tariff_id=data_dict.get('tariffId'),
-                active_tier_id=data_dict.get('activeTierId'),
+                incentive_id=data_dict.get('incentiveId'),
+                value_type=data_dict.get('valueType'),
+                timestamp=data_dict.get('timestamp'),
+                time_period=data_dict.get('timePeriod'),
+                time_table_id=data_dict.get('timeTableId'),
+                value=data_dict.get('value'),
             )
         elif data:
             return cls(data)
@@ -1033,24 +837,66 @@ class TariffDataType: # EEBus_SPINE_TS_TariffInformation.xsd: ComplexType
             return cls()
 
 
-class IncentiveDescriptionListDataType: # EEBus_SPINE_TS_TariffInformation.xsd: ComplexType
+class IncentiveDescriptionDataType: # EEBus_SPINE_TS_TariffInformation.xsd:ns_p:IncentiveDescriptionDataType -> ComplexType
     def __init__(
             self,
-            incentive_description_data: list[IncentiveDescriptionDataType] = None,
+            incentive_id: IncentiveIdType = None,
+            incentive_type: IncentiveTypeType = None,
+            incentive_priority: IncentivePriorityType = None,
+            currency: CurrencyType = None,
+            unit: UnitOfMeasurementType = None,
+            label: LabelType = None,
+            description: DescriptionType = None,
     ):
         super().__init__()
         
-        self.incentive_description_data = incentive_description_data
+        self.incentive_id = incentive_id
+        self.incentive_type = incentive_type
+        self.incentive_priority = incentive_priority
+        self.currency = currency
+        self.unit = unit
+        self.label = label
+        self.description = description
 
-        if not isinstance(self.incentive_description_data, list | NoneType):
-            raise TypeError("incentive_description_data is not of type list[IncentiveDescriptionDataType]")
+        if not isinstance(self.incentive_id, IncentiveIdType | NoneType):
+            raise TypeError("incentive_id is not of type IncentiveIdType")
+        
+        if not isinstance(self.incentive_type, IncentiveTypeType | NoneType):
+            raise TypeError("incentive_type is not of type IncentiveTypeType")
+        
+        if not isinstance(self.incentive_priority, IncentivePriorityType | NoneType):
+            raise TypeError("incentive_priority is not of type IncentivePriorityType")
+        
+        if not isinstance(self.currency, CurrencyType | NoneType):
+            raise TypeError("currency is not of type CurrencyType")
+        
+        if not isinstance(self.unit, UnitOfMeasurementType | NoneType):
+            raise TypeError("unit is not of type UnitOfMeasurementType")
+        
+        if not isinstance(self.label, LabelType | NoneType):
+            raise TypeError("label is not of type LabelType")
+        
+        if not isinstance(self.description, DescriptionType | NoneType):
+            raise TypeError("description is not of type DescriptionType")
         
     def get_data(self):
 
         msg_data = []
         
-        if self.incentive_description_data is not None:
-            msg_data.append({"incentiveDescriptionData": [d.get_data() for d in self.incentive_description_data]})
+        if self.incentive_id is not None:
+            msg_data.append({"incentiveId": self.incentive_id.get_data()})
+        if self.incentive_type is not None:
+            msg_data.append({"incentiveType": self.incentive_type.get_data()})
+        if self.incentive_priority is not None:
+            msg_data.append({"incentivePriority": self.incentive_priority.get_data()})
+        if self.currency is not None:
+            msg_data.append({"currency": self.currency.get_data()})
+        if self.unit is not None:
+            msg_data.append({"unit": self.unit.get_data()})
+        if self.label is not None:
+            msg_data.append({"label": self.label.get_data()})
+        if self.description is not None:
+            msg_data.append({"description": self.description.get_data()})
         
         return msg_data
 
@@ -1058,8 +904,26 @@ class IncentiveDescriptionListDataType: # EEBus_SPINE_TS_TariffInformation.xsd: 
     def __str__(self):
         result_str = ""
         sep = ""
-        if self.incentive_description_data is not None:
-            result_str += f"{sep}incentiveDescriptionData: {self.incentive_description_data}"
+        if self.incentive_id is not None:
+            result_str += f"{sep}incentiveId: {self.incentive_id}"
+            sep = ", "
+        if self.incentive_type is not None:
+            result_str += f"{sep}incentiveType: {self.incentive_type}"
+            sep = ", "
+        if self.incentive_priority is not None:
+            result_str += f"{sep}incentivePriority: {self.incentive_priority}"
+            sep = ", "
+        if self.currency is not None:
+            result_str += f"{sep}currency: {self.currency}"
+            sep = ", "
+        if self.unit is not None:
+            result_str += f"{sep}unit: {self.unit}"
+            sep = ", "
+        if self.label is not None:
+            result_str += f"{sep}label: {self.label}"
+            sep = ", "
+        if self.description is not None:
+            result_str += f"{sep}description: {self.description}"
         
         return result_str
 
@@ -1068,7 +932,13 @@ class IncentiveDescriptionListDataType: # EEBus_SPINE_TS_TariffInformation.xsd: 
         if type(data) == list:
             data_dict = array_2_dict(data)
             return cls(
-                incentive_description_data=data_dict.get('incentiveDescriptionData'),
+                incentive_id=data_dict.get('incentiveId'),
+                incentive_type=data_dict.get('incentiveType'),
+                incentive_priority=data_dict.get('incentivePriority'),
+                currency=data_dict.get('currency'),
+                unit=data_dict.get('unit'),
+                label=data_dict.get('label'),
+                description=data_dict.get('description'),
             )
         elif data:
             return cls(data)
@@ -1076,24 +946,52 @@ class IncentiveDescriptionListDataType: # EEBus_SPINE_TS_TariffInformation.xsd: 
             return cls()
 
 
-class IncentiveListDataType: # EEBus_SPINE_TS_TariffInformation.xsd: ComplexType
+class CommodityDataType: # EEBus_SPINE_TS_TariffInformation.xsd:ns_p:CommodityDataType -> ComplexType
     def __init__(
             self,
-            incentive_data: list[IncentiveDataType] = None,
+            commodity_id: CommodityIdType = None,
+            commodity_type: CommodityTypeType = None,
+            positive_energy_direction: EnergyDirectionType = None,
+            label: LabelType = None,
+            description: DescriptionType = None,
     ):
         super().__init__()
         
-        self.incentive_data = incentive_data
+        self.commodity_id = commodity_id
+        self.commodity_type = commodity_type
+        self.positive_energy_direction = positive_energy_direction
+        self.label = label
+        self.description = description
 
-        if not isinstance(self.incentive_data, list | NoneType):
-            raise TypeError("incentive_data is not of type list[IncentiveDataType]")
+        if not isinstance(self.commodity_id, CommodityIdType | NoneType):
+            raise TypeError("commodity_id is not of type CommodityIdType")
+        
+        if not isinstance(self.commodity_type, CommodityTypeType | NoneType):
+            raise TypeError("commodity_type is not of type CommodityTypeType")
+        
+        if not isinstance(self.positive_energy_direction, EnergyDirectionType | NoneType):
+            raise TypeError("positive_energy_direction is not of type EnergyDirectionType")
+        
+        if not isinstance(self.label, LabelType | NoneType):
+            raise TypeError("label is not of type LabelType")
+        
+        if not isinstance(self.description, DescriptionType | NoneType):
+            raise TypeError("description is not of type DescriptionType")
         
     def get_data(self):
 
         msg_data = []
         
-        if self.incentive_data is not None:
-            msg_data.append({"incentiveData": [d.get_data() for d in self.incentive_data]})
+        if self.commodity_id is not None:
+            msg_data.append({"commodityId": self.commodity_id.get_data()})
+        if self.commodity_type is not None:
+            msg_data.append({"commodityType": self.commodity_type.get_data()})
+        if self.positive_energy_direction is not None:
+            msg_data.append({"positiveEnergyDirection": self.positive_energy_direction.get_data()})
+        if self.label is not None:
+            msg_data.append({"label": self.label.get_data()})
+        if self.description is not None:
+            msg_data.append({"description": self.description.get_data()})
         
         return msg_data
 
@@ -1101,8 +999,20 @@ class IncentiveListDataType: # EEBus_SPINE_TS_TariffInformation.xsd: ComplexType
     def __str__(self):
         result_str = ""
         sep = ""
-        if self.incentive_data is not None:
-            result_str += f"{sep}incentiveData: {self.incentive_data}"
+        if self.commodity_id is not None:
+            result_str += f"{sep}commodityId: {self.commodity_id}"
+            sep = ", "
+        if self.commodity_type is not None:
+            result_str += f"{sep}commodityType: {self.commodity_type}"
+            sep = ", "
+        if self.positive_energy_direction is not None:
+            result_str += f"{sep}positiveEnergyDirection: {self.positive_energy_direction}"
+            sep = ", "
+        if self.label is not None:
+            result_str += f"{sep}label: {self.label}"
+            sep = ", "
+        if self.description is not None:
+            result_str += f"{sep}description: {self.description}"
         
         return result_str
 
@@ -1111,7 +1021,11 @@ class IncentiveListDataType: # EEBus_SPINE_TS_TariffInformation.xsd: ComplexType
         if type(data) == list:
             data_dict = array_2_dict(data)
             return cls(
-                incentive_data=data_dict.get('incentiveData'),
+                commodity_id=data_dict.get('commodityId'),
+                commodity_type=data_dict.get('commodityType'),
+                positive_energy_direction=data_dict.get('positiveEnergyDirection'),
+                label=data_dict.get('label'),
+                description=data_dict.get('description'),
             )
         elif data:
             return cls(data)
@@ -1119,93 +1033,7 @@ class IncentiveListDataType: # EEBus_SPINE_TS_TariffInformation.xsd: ComplexType
             return cls()
 
 
-class TierDescriptionListDataType: # EEBus_SPINE_TS_TariffInformation.xsd: ComplexType
-    def __init__(
-            self,
-            tier_description_data: list[TierDescriptionDataType] = None,
-    ):
-        super().__init__()
-        
-        self.tier_description_data = tier_description_data
-
-        if not isinstance(self.tier_description_data, list | NoneType):
-            raise TypeError("tier_description_data is not of type list[TierDescriptionDataType]")
-        
-    def get_data(self):
-
-        msg_data = []
-        
-        if self.tier_description_data is not None:
-            msg_data.append({"tierDescriptionData": [d.get_data() for d in self.tier_description_data]})
-        
-        return msg_data
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        if self.tier_description_data is not None:
-            result_str += f"{sep}tierDescriptionData: {self.tier_description_data}"
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
-                tier_description_data=data_dict.get('tierDescriptionData'),
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class TierIncentiveRelationListDataType: # EEBus_SPINE_TS_TariffInformation.xsd: ComplexType
-    def __init__(
-            self,
-            tier_incentive_relation_data: list[TierIncentiveRelationDataType] = None,
-    ):
-        super().__init__()
-        
-        self.tier_incentive_relation_data = tier_incentive_relation_data
-
-        if not isinstance(self.tier_incentive_relation_data, list | NoneType):
-            raise TypeError("tier_incentive_relation_data is not of type list[TierIncentiveRelationDataType]")
-        
-    def get_data(self):
-
-        msg_data = []
-        
-        if self.tier_incentive_relation_data is not None:
-            msg_data.append({"tierIncentiveRelationData": [d.get_data() for d in self.tier_incentive_relation_data]})
-        
-        return msg_data
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        if self.tier_incentive_relation_data is not None:
-            result_str += f"{sep}tierIncentiveRelationData: {self.tier_incentive_relation_data}"
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
-                tier_incentive_relation_data=data_dict.get('tierIncentiveRelationData'),
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class TierListDataType: # EEBus_SPINE_TS_TariffInformation.xsd: ComplexType
+class TierListDataType: # EEBus_SPINE_TS_TariffInformation.xsd:ns_p:TierListDataType -> ComplexType
     def __init__(
             self,
             tier_data: list[TierDataType] = None,
@@ -1248,24 +1076,24 @@ class TierListDataType: # EEBus_SPINE_TS_TariffInformation.xsd: ComplexType
             return cls()
 
 
-class CommodityListDataType: # EEBus_SPINE_TS_TariffInformation.xsd: ComplexType
+class TierIncentiveRelationListDataType: # EEBus_SPINE_TS_TariffInformation.xsd:ns_p:TierIncentiveRelationListDataType -> ComplexType
     def __init__(
             self,
-            commodity_data: list[CommodityDataType] = None,
+            tier_incentive_relation_data: list[TierIncentiveRelationDataType] = None,
     ):
         super().__init__()
         
-        self.commodity_data = commodity_data
+        self.tier_incentive_relation_data = tier_incentive_relation_data
 
-        if not isinstance(self.commodity_data, list | NoneType):
-            raise TypeError("commodity_data is not of type list[CommodityDataType]")
+        if not isinstance(self.tier_incentive_relation_data, list | NoneType):
+            raise TypeError("tier_incentive_relation_data is not of type list[TierIncentiveRelationDataType]")
         
     def get_data(self):
 
         msg_data = []
         
-        if self.commodity_data is not None:
-            msg_data.append({"commodityData": [d.get_data() for d in self.commodity_data]})
+        if self.tier_incentive_relation_data is not None:
+            msg_data.append({"tierIncentiveRelationData": [d.get_data() for d in self.tier_incentive_relation_data]})
         
         return msg_data
 
@@ -1273,8 +1101,8 @@ class CommodityListDataType: # EEBus_SPINE_TS_TariffInformation.xsd: ComplexType
     def __str__(self):
         result_str = ""
         sep = ""
-        if self.commodity_data is not None:
-            result_str += f"{sep}commodityData: {self.commodity_data}"
+        if self.tier_incentive_relation_data is not None:
+            result_str += f"{sep}tierIncentiveRelationData: {self.tier_incentive_relation_data}"
         
         return result_str
 
@@ -1283,7 +1111,7 @@ class CommodityListDataType: # EEBus_SPINE_TS_TariffInformation.xsd: ComplexType
         if type(data) == list:
             data_dict = array_2_dict(data)
             return cls(
-                commodity_data=data_dict.get('commodityData'),
+                tier_incentive_relation_data=data_dict.get('tierIncentiveRelationData'),
             )
         elif data:
             return cls(data)
@@ -1291,24 +1119,24 @@ class CommodityListDataType: # EEBus_SPINE_TS_TariffInformation.xsd: ComplexType
             return cls()
 
 
-class TierBoundaryDescriptionListDataType: # EEBus_SPINE_TS_TariffInformation.xsd: ComplexType
+class TierDescriptionListDataType: # EEBus_SPINE_TS_TariffInformation.xsd:ns_p:TierDescriptionListDataType -> ComplexType
     def __init__(
             self,
-            tier_boundary_description_data: list[TierBoundaryDescriptionDataType] = None,
+            tier_description_data: list[TierDescriptionDataType] = None,
     ):
         super().__init__()
         
-        self.tier_boundary_description_data = tier_boundary_description_data
+        self.tier_description_data = tier_description_data
 
-        if not isinstance(self.tier_boundary_description_data, list | NoneType):
-            raise TypeError("tier_boundary_description_data is not of type list[TierBoundaryDescriptionDataType]")
+        if not isinstance(self.tier_description_data, list | NoneType):
+            raise TypeError("tier_description_data is not of type list[TierDescriptionDataType]")
         
     def get_data(self):
 
         msg_data = []
         
-        if self.tier_boundary_description_data is not None:
-            msg_data.append({"tierBoundaryDescriptionData": [d.get_data() for d in self.tier_boundary_description_data]})
+        if self.tier_description_data is not None:
+            msg_data.append({"tierDescriptionData": [d.get_data() for d in self.tier_description_data]})
         
         return msg_data
 
@@ -1316,8 +1144,8 @@ class TierBoundaryDescriptionListDataType: # EEBus_SPINE_TS_TariffInformation.xs
     def __str__(self):
         result_str = ""
         sep = ""
-        if self.tier_boundary_description_data is not None:
-            result_str += f"{sep}tierBoundaryDescriptionData: {self.tier_boundary_description_data}"
+        if self.tier_description_data is not None:
+            result_str += f"{sep}tierDescriptionData: {self.tier_description_data}"
         
         return result_str
 
@@ -1326,7 +1154,7 @@ class TierBoundaryDescriptionListDataType: # EEBus_SPINE_TS_TariffInformation.xs
         if type(data) == list:
             data_dict = array_2_dict(data)
             return cls(
-                tier_boundary_description_data=data_dict.get('tierBoundaryDescriptionData'),
+                tier_description_data=data_dict.get('tierDescriptionData'),
             )
         elif data:
             return cls(data)
@@ -1334,7 +1162,7 @@ class TierBoundaryDescriptionListDataType: # EEBus_SPINE_TS_TariffInformation.xs
             return cls()
 
 
-class TierBoundaryListDataType: # EEBus_SPINE_TS_TariffInformation.xsd: ComplexType
+class TierBoundaryListDataType: # EEBus_SPINE_TS_TariffInformation.xsd:ns_p:TierBoundaryListDataType -> ComplexType
     def __init__(
             self,
             tier_boundary_data: list[TierBoundaryDataType] = None,
@@ -1377,24 +1205,24 @@ class TierBoundaryListDataType: # EEBus_SPINE_TS_TariffInformation.xsd: ComplexT
             return cls()
 
 
-class TariffDescriptionListDataType: # EEBus_SPINE_TS_TariffInformation.xsd: ComplexType
+class TierBoundaryDescriptionListDataType: # EEBus_SPINE_TS_TariffInformation.xsd:ns_p:TierBoundaryDescriptionListDataType -> ComplexType
     def __init__(
             self,
-            tariff_description_data: list[TariffDescriptionDataType] = None,
+            tier_boundary_description_data: list[TierBoundaryDescriptionDataType] = None,
     ):
         super().__init__()
         
-        self.tariff_description_data = tariff_description_data
+        self.tier_boundary_description_data = tier_boundary_description_data
 
-        if not isinstance(self.tariff_description_data, list | NoneType):
-            raise TypeError("tariff_description_data is not of type list[TariffDescriptionDataType]")
+        if not isinstance(self.tier_boundary_description_data, list | NoneType):
+            raise TypeError("tier_boundary_description_data is not of type list[TierBoundaryDescriptionDataType]")
         
     def get_data(self):
 
         msg_data = []
         
-        if self.tariff_description_data is not None:
-            msg_data.append({"tariffDescriptionData": [d.get_data() for d in self.tariff_description_data]})
+        if self.tier_boundary_description_data is not None:
+            msg_data.append({"tierBoundaryDescriptionData": [d.get_data() for d in self.tier_boundary_description_data]})
         
         return msg_data
 
@@ -1402,8 +1230,8 @@ class TariffDescriptionListDataType: # EEBus_SPINE_TS_TariffInformation.xsd: Com
     def __str__(self):
         result_str = ""
         sep = ""
-        if self.tariff_description_data is not None:
-            result_str += f"{sep}tariffDescriptionData: {self.tariff_description_data}"
+        if self.tier_boundary_description_data is not None:
+            result_str += f"{sep}tierBoundaryDescriptionData: {self.tier_boundary_description_data}"
         
         return result_str
 
@@ -1412,7 +1240,7 @@ class TariffDescriptionListDataType: # EEBus_SPINE_TS_TariffInformation.xsd: Com
         if type(data) == list:
             data_dict = array_2_dict(data)
             return cls(
-                tariff_description_data=data_dict.get('tariffDescriptionData'),
+                tier_boundary_description_data=data_dict.get('tierBoundaryDescriptionData'),
             )
         elif data:
             return cls(data)
@@ -1420,50 +1248,7 @@ class TariffDescriptionListDataType: # EEBus_SPINE_TS_TariffInformation.xsd: Com
             return cls()
 
 
-class TariffBoundaryRelationListDataType: # EEBus_SPINE_TS_TariffInformation.xsd: ComplexType
-    def __init__(
-            self,
-            tariff_boundary_relation_data: list[TariffBoundaryRelationDataType] = None,
-    ):
-        super().__init__()
-        
-        self.tariff_boundary_relation_data = tariff_boundary_relation_data
-
-        if not isinstance(self.tariff_boundary_relation_data, list | NoneType):
-            raise TypeError("tariff_boundary_relation_data is not of type list[TariffBoundaryRelationDataType]")
-        
-    def get_data(self):
-
-        msg_data = []
-        
-        if self.tariff_boundary_relation_data is not None:
-            msg_data.append({"tariffBoundaryRelationData": [d.get_data() for d in self.tariff_boundary_relation_data]})
-        
-        return msg_data
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        if self.tariff_boundary_relation_data is not None:
-            result_str += f"{sep}tariffBoundaryRelationData: {self.tariff_boundary_relation_data}"
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
-                tariff_boundary_relation_data=data_dict.get('tariffBoundaryRelationData'),
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class TariffTierRelationListDataType: # EEBus_SPINE_TS_TariffInformation.xsd: ComplexType
+class TariffTierRelationListDataType: # EEBus_SPINE_TS_TariffInformation.xsd:ns_p:TariffTierRelationListDataType -> ComplexType
     def __init__(
             self,
             tariff_tier_relation_data: list[TariffTierRelationDataType] = None,
@@ -1506,50 +1291,7 @@ class TariffTierRelationListDataType: # EEBus_SPINE_TS_TariffInformation.xsd: Co
             return cls()
 
 
-class TariffListDataType: # EEBus_SPINE_TS_TariffInformation.xsd: ComplexType
-    def __init__(
-            self,
-            tariff_data: list[TariffDataType] = None,
-    ):
-        super().__init__()
-        
-        self.tariff_data = tariff_data
-
-        if not isinstance(self.tariff_data, list | NoneType):
-            raise TypeError("tariff_data is not of type list[TariffDataType]")
-        
-    def get_data(self):
-
-        msg_data = []
-        
-        if self.tariff_data is not None:
-            msg_data.append({"tariffData": [d.get_data() for d in self.tariff_data]})
-        
-        return msg_data
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        if self.tariff_data is not None:
-            result_str += f"{sep}tariffData: {self.tariff_data}"
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
-                tariff_data=data_dict.get('tariffData'),
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class TariffOverallConstraintsDataType: # EEBus_SPINE_TS_TariffInformation.xsd: ComplexType
+class TariffOverallConstraintsDataType: # EEBus_SPINE_TS_TariffInformation.xsd:ns_p:TariffOverallConstraintsDataType -> ComplexType
     def __init__(
             self,
             max_tariff_count: TariffCountType = None,
@@ -1669,7 +1411,265 @@ class TariffOverallConstraintsDataType: # EEBus_SPINE_TS_TariffInformation.xsd: 
             return cls()
 
 
-class TierIncentiveRelationDataElementsType: # EEBus_SPINE_TS_TariffInformation.xsd: ComplexType
+class TariffListDataType: # EEBus_SPINE_TS_TariffInformation.xsd:ns_p:TariffListDataType -> ComplexType
+    def __init__(
+            self,
+            tariff_data: list[TariffDataType] = None,
+    ):
+        super().__init__()
+        
+        self.tariff_data = tariff_data
+
+        if not isinstance(self.tariff_data, list | NoneType):
+            raise TypeError("tariff_data is not of type list[TariffDataType]")
+        
+    def get_data(self):
+
+        msg_data = []
+        
+        if self.tariff_data is not None:
+            msg_data.append({"tariffData": [d.get_data() for d in self.tariff_data]})
+        
+        return msg_data
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        if self.tariff_data is not None:
+            result_str += f"{sep}tariffData: {self.tariff_data}"
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+                tariff_data=data_dict.get('tariffData'),
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class TariffDescriptionListDataType: # EEBus_SPINE_TS_TariffInformation.xsd:ns_p:TariffDescriptionListDataType -> ComplexType
+    def __init__(
+            self,
+            tariff_description_data: list[TariffDescriptionDataType] = None,
+    ):
+        super().__init__()
+        
+        self.tariff_description_data = tariff_description_data
+
+        if not isinstance(self.tariff_description_data, list | NoneType):
+            raise TypeError("tariff_description_data is not of type list[TariffDescriptionDataType]")
+        
+    def get_data(self):
+
+        msg_data = []
+        
+        if self.tariff_description_data is not None:
+            msg_data.append({"tariffDescriptionData": [d.get_data() for d in self.tariff_description_data]})
+        
+        return msg_data
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        if self.tariff_description_data is not None:
+            result_str += f"{sep}tariffDescriptionData: {self.tariff_description_data}"
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+                tariff_description_data=data_dict.get('tariffDescriptionData'),
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class TariffBoundaryRelationListDataType: # EEBus_SPINE_TS_TariffInformation.xsd:ns_p:TariffBoundaryRelationListDataType -> ComplexType
+    def __init__(
+            self,
+            tariff_boundary_relation_data: list[TariffBoundaryRelationDataType] = None,
+    ):
+        super().__init__()
+        
+        self.tariff_boundary_relation_data = tariff_boundary_relation_data
+
+        if not isinstance(self.tariff_boundary_relation_data, list | NoneType):
+            raise TypeError("tariff_boundary_relation_data is not of type list[TariffBoundaryRelationDataType]")
+        
+    def get_data(self):
+
+        msg_data = []
+        
+        if self.tariff_boundary_relation_data is not None:
+            msg_data.append({"tariffBoundaryRelationData": [d.get_data() for d in self.tariff_boundary_relation_data]})
+        
+        return msg_data
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        if self.tariff_boundary_relation_data is not None:
+            result_str += f"{sep}tariffBoundaryRelationData: {self.tariff_boundary_relation_data}"
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+                tariff_boundary_relation_data=data_dict.get('tariffBoundaryRelationData'),
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class IncentiveListDataType: # EEBus_SPINE_TS_TariffInformation.xsd:ns_p:IncentiveListDataType -> ComplexType
+    def __init__(
+            self,
+            incentive_data: list[IncentiveDataType] = None,
+    ):
+        super().__init__()
+        
+        self.incentive_data = incentive_data
+
+        if not isinstance(self.incentive_data, list | NoneType):
+            raise TypeError("incentive_data is not of type list[IncentiveDataType]")
+        
+    def get_data(self):
+
+        msg_data = []
+        
+        if self.incentive_data is not None:
+            msg_data.append({"incentiveData": [d.get_data() for d in self.incentive_data]})
+        
+        return msg_data
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        if self.incentive_data is not None:
+            result_str += f"{sep}incentiveData: {self.incentive_data}"
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+                incentive_data=data_dict.get('incentiveData'),
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class IncentiveDescriptionListDataType: # EEBus_SPINE_TS_TariffInformation.xsd:ns_p:IncentiveDescriptionListDataType -> ComplexType
+    def __init__(
+            self,
+            incentive_description_data: list[IncentiveDescriptionDataType] = None,
+    ):
+        super().__init__()
+        
+        self.incentive_description_data = incentive_description_data
+
+        if not isinstance(self.incentive_description_data, list | NoneType):
+            raise TypeError("incentive_description_data is not of type list[IncentiveDescriptionDataType]")
+        
+    def get_data(self):
+
+        msg_data = []
+        
+        if self.incentive_description_data is not None:
+            msg_data.append({"incentiveDescriptionData": [d.get_data() for d in self.incentive_description_data]})
+        
+        return msg_data
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        if self.incentive_description_data is not None:
+            result_str += f"{sep}incentiveDescriptionData: {self.incentive_description_data}"
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+                incentive_description_data=data_dict.get('incentiveDescriptionData'),
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class CommodityListDataType: # EEBus_SPINE_TS_TariffInformation.xsd:ns_p:CommodityListDataType -> ComplexType
+    def __init__(
+            self,
+            commodity_data: list[CommodityDataType] = None,
+    ):
+        super().__init__()
+        
+        self.commodity_data = commodity_data
+
+        if not isinstance(self.commodity_data, list | NoneType):
+            raise TypeError("commodity_data is not of type list[CommodityDataType]")
+        
+    def get_data(self):
+
+        msg_data = []
+        
+        if self.commodity_data is not None:
+            msg_data.append({"commodityData": [d.get_data() for d in self.commodity_data]})
+        
+        return msg_data
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        if self.commodity_data is not None:
+            result_str += f"{sep}commodityData: {self.commodity_data}"
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+                commodity_data=data_dict.get('commodityData'),
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class TierIncentiveRelationDataElementsType: # EEBus_SPINE_TS_TariffInformation.xsd:ns_p:TierIncentiveRelationDataElementsType -> ComplexType
     def __init__(
             self,
             tier_id: ElementTagType = None,
@@ -1723,7 +1723,7 @@ class TierIncentiveRelationDataElementsType: # EEBus_SPINE_TS_TariffInformation.
             return cls()
 
 
-class TierDescriptionDataElementsType: # EEBus_SPINE_TS_TariffInformation.xsd: ComplexType
+class TierDescriptionDataElementsType: # EEBus_SPINE_TS_TariffInformation.xsd:ns_p:TierDescriptionDataElementsType -> ComplexType
     def __init__(
             self,
             tier_id: ElementTagType = None,
@@ -1799,7 +1799,7 @@ class TierDescriptionDataElementsType: # EEBus_SPINE_TS_TariffInformation.xsd: C
             return cls()
 
 
-class TierDataElementsType: # EEBus_SPINE_TS_TariffInformation.xsd: ComplexType
+class TierDataElementsType: # EEBus_SPINE_TS_TariffInformation.xsd:ns_p:TierDataElementsType -> ComplexType
     def __init__(
             self,
             tier_id: ElementTagType = None,
@@ -1875,7 +1875,7 @@ class TierDataElementsType: # EEBus_SPINE_TS_TariffInformation.xsd: ComplexType
             return cls()
 
 
-class TierBoundaryDescriptionDataElementsType: # EEBus_SPINE_TS_TariffInformation.xsd: ComplexType
+class TierBoundaryDescriptionDataElementsType: # EEBus_SPINE_TS_TariffInformation.xsd:ns_p:TierBoundaryDescriptionDataElementsType -> ComplexType
     def __init__(
             self,
             boundary_id: ElementTagType = None,
@@ -1995,7 +1995,7 @@ class TierBoundaryDescriptionDataElementsType: # EEBus_SPINE_TS_TariffInformatio
             return cls()
 
 
-class TierBoundaryDataElementsType: # EEBus_SPINE_TS_TariffInformation.xsd: ComplexType
+class TierBoundaryDataElementsType: # EEBus_SPINE_TS_TariffInformation.xsd:ns_p:TierBoundaryDataElementsType -> ComplexType
     def __init__(
             self,
             boundary_id: ElementTagType = None,
@@ -2082,7 +2082,7 @@ class TierBoundaryDataElementsType: # EEBus_SPINE_TS_TariffInformation.xsd: Comp
             return cls()
 
 
-class TariffTierRelationDataElementsType: # EEBus_SPINE_TS_TariffInformation.xsd: ComplexType
+class TariffTierRelationDataElementsType: # EEBus_SPINE_TS_TariffInformation.xsd:ns_p:TariffTierRelationDataElementsType -> ComplexType
     def __init__(
             self,
             tariff_id: ElementTagType = None,
@@ -2136,7 +2136,7 @@ class TariffTierRelationDataElementsType: # EEBus_SPINE_TS_TariffInformation.xsd
             return cls()
 
 
-class TariffOverallConstraintsDataElementsType: # EEBus_SPINE_TS_TariffInformation.xsd: ComplexType
+class TariffOverallConstraintsDataElementsType: # EEBus_SPINE_TS_TariffInformation.xsd:ns_p:TariffOverallConstraintsDataElementsType -> ComplexType
     def __init__(
             self,
             max_tariff_count: ElementTagType = None,
@@ -2256,7 +2256,7 @@ class TariffOverallConstraintsDataElementsType: # EEBus_SPINE_TS_TariffInformati
             return cls()
 
 
-class TariffDescriptionDataElementsType: # EEBus_SPINE_TS_TariffInformation.xsd: ComplexType
+class TariffDescriptionDataElementsType: # EEBus_SPINE_TS_TariffInformation.xsd:ns_p:TariffDescriptionDataElementsType -> ComplexType
     def __init__(
             self,
             tariff_id: ElementTagType = None,
@@ -2387,7 +2387,7 @@ class TariffDescriptionDataElementsType: # EEBus_SPINE_TS_TariffInformation.xsd:
             return cls()
 
 
-class TariffDataElementsType: # EEBus_SPINE_TS_TariffInformation.xsd: ComplexType
+class TariffDataElementsType: # EEBus_SPINE_TS_TariffInformation.xsd:ns_p:TariffDataElementsType -> ComplexType
     def __init__(
             self,
             tariff_id: ElementTagType = None,
@@ -2441,7 +2441,7 @@ class TariffDataElementsType: # EEBus_SPINE_TS_TariffInformation.xsd: ComplexTyp
             return cls()
 
 
-class TariffBoundaryRelationDataElementsType: # EEBus_SPINE_TS_TariffInformation.xsd: ComplexType
+class TariffBoundaryRelationDataElementsType: # EEBus_SPINE_TS_TariffInformation.xsd:ns_p:TariffBoundaryRelationDataElementsType -> ComplexType
     def __init__(
             self,
             tariff_id: ElementTagType = None,
@@ -2495,7 +2495,7 @@ class TariffBoundaryRelationDataElementsType: # EEBus_SPINE_TS_TariffInformation
             return cls()
 
 
-class IncentiveDescriptionDataElementsType: # EEBus_SPINE_TS_TariffInformation.xsd: ComplexType
+class IncentiveDescriptionDataElementsType: # EEBus_SPINE_TS_TariffInformation.xsd:ns_p:IncentiveDescriptionDataElementsType -> ComplexType
     def __init__(
             self,
             incentive_id: ElementTagType = None,
@@ -2604,7 +2604,7 @@ class IncentiveDescriptionDataElementsType: # EEBus_SPINE_TS_TariffInformation.x
             return cls()
 
 
-class IncentiveDataElementsType: # EEBus_SPINE_TS_TariffInformation.xsd: ComplexType
+class IncentiveDataElementsType: # EEBus_SPINE_TS_TariffInformation.xsd:ns_p:IncentiveDataElementsType -> ComplexType
     def __init__(
             self,
             incentive_id: ElementTagType = None,
@@ -2702,7 +2702,7 @@ class IncentiveDataElementsType: # EEBus_SPINE_TS_TariffInformation.xsd: Complex
             return cls()
 
 
-class CommodityDataElementsType: # EEBus_SPINE_TS_TariffInformation.xsd: ComplexType
+class CommodityDataElementsType: # EEBus_SPINE_TS_TariffInformation.xsd:ns_p:CommodityDataElementsType -> ComplexType
     def __init__(
             self,
             commodity_id: ElementTagType = None,
@@ -2789,7 +2789,7 @@ class CommodityDataElementsType: # EEBus_SPINE_TS_TariffInformation.xsd: Complex
             return cls()
 
 
-class TierListDataSelectorsType: # EEBus_SPINE_TS_TariffInformation.xsd: ComplexType
+class TierListDataSelectorsType: # EEBus_SPINE_TS_TariffInformation.xsd:ns_p:TierListDataSelectorsType -> ComplexType
     def __init__(
             self,
             tier_id: TierIdType = None,
@@ -2843,7 +2843,7 @@ class TierListDataSelectorsType: # EEBus_SPINE_TS_TariffInformation.xsd: Complex
             return cls()
 
 
-class TierIncentiveRelationListDataSelectorsType: # EEBus_SPINE_TS_TariffInformation.xsd: ComplexType
+class TierIncentiveRelationListDataSelectorsType: # EEBus_SPINE_TS_TariffInformation.xsd:ns_p:TierIncentiveRelationListDataSelectorsType -> ComplexType
     def __init__(
             self,
             tier_id: TierIdType = None,
@@ -2897,7 +2897,7 @@ class TierIncentiveRelationListDataSelectorsType: # EEBus_SPINE_TS_TariffInforma
             return cls()
 
 
-class TierDescriptionListDataSelectorsType: # EEBus_SPINE_TS_TariffInformation.xsd: ComplexType
+class TierDescriptionListDataSelectorsType: # EEBus_SPINE_TS_TariffInformation.xsd:ns_p:TierDescriptionListDataSelectorsType -> ComplexType
     def __init__(
             self,
             tier_id: TierIdType = None,
@@ -2951,7 +2951,7 @@ class TierDescriptionListDataSelectorsType: # EEBus_SPINE_TS_TariffInformation.x
             return cls()
 
 
-class TierBoundaryListDataSelectorsType: # EEBus_SPINE_TS_TariffInformation.xsd: ComplexType
+class TierBoundaryListDataSelectorsType: # EEBus_SPINE_TS_TariffInformation.xsd:ns_p:TierBoundaryListDataSelectorsType -> ComplexType
     def __init__(
             self,
             boundary_id: TierBoundaryIdType = None,
@@ -2994,7 +2994,7 @@ class TierBoundaryListDataSelectorsType: # EEBus_SPINE_TS_TariffInformation.xsd:
             return cls()
 
 
-class TierBoundaryDescriptionListDataSelectorsType: # EEBus_SPINE_TS_TariffInformation.xsd: ComplexType
+class TierBoundaryDescriptionListDataSelectorsType: # EEBus_SPINE_TS_TariffInformation.xsd:ns_p:TierBoundaryDescriptionListDataSelectorsType -> ComplexType
     def __init__(
             self,
             boundary_id: TierBoundaryIdType = None,
@@ -3048,7 +3048,7 @@ class TierBoundaryDescriptionListDataSelectorsType: # EEBus_SPINE_TS_TariffInfor
             return cls()
 
 
-class TariffTierRelationListDataSelectorsType: # EEBus_SPINE_TS_TariffInformation.xsd: ComplexType
+class TariffTierRelationListDataSelectorsType: # EEBus_SPINE_TS_TariffInformation.xsd:ns_p:TariffTierRelationListDataSelectorsType -> ComplexType
     def __init__(
             self,
             tariff_id: TariffIdType = None,
@@ -3102,7 +3102,7 @@ class TariffTierRelationListDataSelectorsType: # EEBus_SPINE_TS_TariffInformatio
             return cls()
 
 
-class TariffListDataSelectorsType: # EEBus_SPINE_TS_TariffInformation.xsd: ComplexType
+class TariffListDataSelectorsType: # EEBus_SPINE_TS_TariffInformation.xsd:ns_p:TariffListDataSelectorsType -> ComplexType
     def __init__(
             self,
             tariff_id: TariffIdType = None,
@@ -3156,7 +3156,7 @@ class TariffListDataSelectorsType: # EEBus_SPINE_TS_TariffInformation.xsd: Compl
             return cls()
 
 
-class TariffDescriptionListDataSelectorsType: # EEBus_SPINE_TS_TariffInformation.xsd: ComplexType
+class TariffDescriptionListDataSelectorsType: # EEBus_SPINE_TS_TariffInformation.xsd:ns_p:TariffDescriptionListDataSelectorsType -> ComplexType
     def __init__(
             self,
             tariff_id: TariffIdType = None,
@@ -3232,7 +3232,7 @@ class TariffDescriptionListDataSelectorsType: # EEBus_SPINE_TS_TariffInformation
             return cls()
 
 
-class TariffBoundaryRelationListDataSelectorsType: # EEBus_SPINE_TS_TariffInformation.xsd: ComplexType
+class TariffBoundaryRelationListDataSelectorsType: # EEBus_SPINE_TS_TariffInformation.xsd:ns_p:TariffBoundaryRelationListDataSelectorsType -> ComplexType
     def __init__(
             self,
             tariff_id: TariffIdType = None,
@@ -3286,7 +3286,7 @@ class TariffBoundaryRelationListDataSelectorsType: # EEBus_SPINE_TS_TariffInform
             return cls()
 
 
-class IncentiveListDataSelectorsType: # EEBus_SPINE_TS_TariffInformation.xsd: ComplexType
+class IncentiveListDataSelectorsType: # EEBus_SPINE_TS_TariffInformation.xsd:ns_p:IncentiveListDataSelectorsType -> ComplexType
     def __init__(
             self,
             incentive_id: IncentiveIdType = None,
@@ -3351,7 +3351,7 @@ class IncentiveListDataSelectorsType: # EEBus_SPINE_TS_TariffInformation.xsd: Co
             return cls()
 
 
-class IncentiveDescriptionListDataSelectorsType: # EEBus_SPINE_TS_TariffInformation.xsd: ComplexType
+class IncentiveDescriptionListDataSelectorsType: # EEBus_SPINE_TS_TariffInformation.xsd:ns_p:IncentiveDescriptionListDataSelectorsType -> ComplexType
     def __init__(
             self,
             incentive_id: IncentiveIdType = None,
@@ -3405,7 +3405,7 @@ class IncentiveDescriptionListDataSelectorsType: # EEBus_SPINE_TS_TariffInformat
             return cls()
 
 
-class CommodityListDataSelectorsType: # EEBus_SPINE_TS_TariffInformation.xsd: ComplexType
+class CommodityListDataSelectorsType: # EEBus_SPINE_TS_TariffInformation.xsd:ns_p:CommodityListDataSelectorsType -> ComplexType
     def __init__(
             self,
             commodity_id: CommodityIdType = None,

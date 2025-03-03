@@ -37,7 +37,8 @@ class ChoiceType(xsd2code.DataType):
             elif isinstance(ele, XsdGroup):
                 group_type.add_choice_type(
                     xsd2code.ALL_TYPES.get_or_create(
-                        xsd2code.ChoiceType(type_name=ele.display_name, source_file=ele.schema.name)
+                        #xsd2code.ChoiceType(type_name=ele.display_name, source_file=ele.schema.name)
+                        xsd2code.ALL_TYPES.get_or_create(xsd2code.create_type_from_xsd(ele))
                     )
                 )
 
@@ -64,7 +65,10 @@ class ChoiceType(xsd2code.DataType):
 
     @property
     def members(self):
-        return self._choice_members
+        result = self._choice_members.copy()
+        for ct in self._choice_types:
+            result += ct.members
+        return result
 
     @property
     def depend_on_types(self):

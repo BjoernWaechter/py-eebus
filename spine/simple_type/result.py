@@ -3,7 +3,7 @@ from types import NoneType
 from spine import array_2_dict
 
 
-class ErrorNumberType: # EEBus_SPINE_TS_Result.xsd: AliasType
+class ErrorNumberType: # EEBus_SPINE_TS_Result.xsd:ns_p:ErrorNumberType -> AliasType
     def __init__(
             self,
             value: int,

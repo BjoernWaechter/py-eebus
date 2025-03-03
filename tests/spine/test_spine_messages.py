@@ -2,6 +2,7 @@ import pytest
 
 from ship.base_type import HeaderType as ShipHeader
 from ship.message import Data, ProtocolIdType
+from spine.choice_type.commandframe import PayloadContributionGroup
 from spine.enums.commandframe import CmdClassifierType
 from spine.simple_type.commandframe import MsgCounterType
 from spine.simple_type.commondatatypes import SpecificationVersionType, AddressDeviceType, AddressEntityType, \
@@ -41,7 +42,7 @@ class TestSpine:
                         ack_request=True
                     ),
                     payload=PayloadType(
-                        cmd=[]
+                        cmd=[CmdType(payload_contribution_group=PayloadContributionGroup())]
                     )
                 )
 

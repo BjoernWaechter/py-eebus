@@ -22,224 +22,7 @@ from types import NoneType
 from spine import array_2_dict
 
 
-class BillDescriptionDataType: # EEBus_SPINE_TS_Bill.xsd: ComplexType
-    def __init__(
-            self,
-            bill_id: BillIdType = None,
-            bill_writeable: bool = None,
-            update_required: bool = None,
-            supported_bill_type: list[BillTypeType] = None,
-            session_id: SessionIdType = None,
-    ):
-        super().__init__()
-        
-        self.bill_id = bill_id
-        self.bill_writeable = bill_writeable
-        self.update_required = update_required
-        self.supported_bill_type = supported_bill_type
-        self.session_id = session_id
-
-        if not isinstance(self.bill_id, BillIdType | NoneType):
-            raise TypeError("bill_id is not of type BillIdType")
-        
-        if not isinstance(self.bill_writeable, bool | NoneType):
-            raise TypeError("bill_writeable is not of type bool")
-        
-        if not isinstance(self.update_required, bool | NoneType):
-            raise TypeError("update_required is not of type bool")
-        
-        if not isinstance(self.supported_bill_type, list | NoneType):
-            raise TypeError("supported_bill_type is not of type list[BillTypeType]")
-        
-        if not isinstance(self.session_id, SessionIdType | NoneType):
-            raise TypeError("session_id is not of type SessionIdType")
-        
-    def get_data(self):
-
-        msg_data = []
-        
-        if self.bill_id is not None:
-            msg_data.append({"billId": self.bill_id.get_data()})
-        if self.bill_writeable is not None:
-            msg_data.append({"billWriteable": self.bill_writeable})
-        if self.update_required is not None:
-            msg_data.append({"updateRequired": self.update_required})
-        if self.supported_bill_type is not None:
-            msg_data.append({"supportedBillType": [d.get_data() for d in self.supported_bill_type]})
-        if self.session_id is not None:
-            msg_data.append({"sessionId": self.session_id.get_data()})
-        
-        return msg_data
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        if self.bill_id is not None:
-            result_str += f"{sep}billId: {self.bill_id}"
-            sep = ", "
-        if self.bill_writeable is not None:
-            result_str += f"{sep}billWriteable: {self.bill_writeable}"
-            sep = ", "
-        if self.update_required is not None:
-            result_str += f"{sep}updateRequired: {self.update_required}"
-            sep = ", "
-        if self.supported_bill_type is not None:
-            result_str += f"{sep}supportedBillType: {self.supported_bill_type}"
-            sep = ", "
-        if self.session_id is not None:
-            result_str += f"{sep}sessionId: {self.session_id}"
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
-                bill_id=data_dict.get('billId'),
-                bill_writeable=data_dict.get('billWriteable'),
-                update_required=data_dict.get('updateRequired'),
-                supported_bill_type=data_dict.get('supportedBillType'),
-                session_id=data_dict.get('sessionId'),
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class BillConstraintsDataType: # EEBus_SPINE_TS_Bill.xsd: ComplexType
-    def __init__(
-            self,
-            bill_id: BillIdType = None,
-            position_count_min: BillPositionCountType = None,
-            position_count_max: BillPositionCountType = None,
-    ):
-        super().__init__()
-        
-        self.bill_id = bill_id
-        self.position_count_min = position_count_min
-        self.position_count_max = position_count_max
-
-        if not isinstance(self.bill_id, BillIdType | NoneType):
-            raise TypeError("bill_id is not of type BillIdType")
-        
-        if not isinstance(self.position_count_min, BillPositionCountType | NoneType):
-            raise TypeError("position_count_min is not of type BillPositionCountType")
-        
-        if not isinstance(self.position_count_max, BillPositionCountType | NoneType):
-            raise TypeError("position_count_max is not of type BillPositionCountType")
-        
-    def get_data(self):
-
-        msg_data = []
-        
-        if self.bill_id is not None:
-            msg_data.append({"billId": self.bill_id.get_data()})
-        if self.position_count_min is not None:
-            msg_data.append({"positionCountMin": self.position_count_min.get_data()})
-        if self.position_count_max is not None:
-            msg_data.append({"positionCountMax": self.position_count_max.get_data()})
-        
-        return msg_data
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        if self.bill_id is not None:
-            result_str += f"{sep}billId: {self.bill_id}"
-            sep = ", "
-        if self.position_count_min is not None:
-            result_str += f"{sep}positionCountMin: {self.position_count_min}"
-            sep = ", "
-        if self.position_count_max is not None:
-            result_str += f"{sep}positionCountMax: {self.position_count_max}"
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
-                bill_id=data_dict.get('billId'),
-                position_count_min=data_dict.get('positionCountMin'),
-                position_count_max=data_dict.get('positionCountMax'),
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class BillDataType: # EEBus_SPINE_TS_Bill.xsd: ComplexType
-    def __init__(
-            self,
-            bill_id: BillIdType = None,
-            bill_type: BillTypeType = None,
-            scope_type: ScopeTypeType = None,
-    ):
-        super().__init__()
-        
-        self.bill_id = bill_id
-        self.bill_type = bill_type
-        self.scope_type = scope_type
-
-        if not isinstance(self.bill_id, BillIdType | NoneType):
-            raise TypeError("bill_id is not of type BillIdType")
-        
-        if not isinstance(self.bill_type, BillTypeType | NoneType):
-            raise TypeError("bill_type is not of type BillTypeType")
-        
-        if not isinstance(self.scope_type, ScopeTypeType | NoneType):
-            raise TypeError("scope_type is not of type ScopeTypeType")
-        
-    def get_data(self):
-
-        msg_data = []
-        
-        if self.bill_id is not None:
-            msg_data.append({"billId": self.bill_id.get_data()})
-        if self.bill_type is not None:
-            msg_data.append({"billType": self.bill_type.get_data()})
-        if self.scope_type is not None:
-            msg_data.append({"scopeType": self.scope_type.get_data()})
-        
-        return msg_data
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        if self.bill_id is not None:
-            result_str += f"{sep}billId: {self.bill_id}"
-            sep = ", "
-        if self.bill_type is not None:
-            result_str += f"{sep}billType: {self.bill_type}"
-            sep = ", "
-        if self.scope_type is not None:
-            result_str += f"{sep}scopeType: {self.scope_type}"
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
-                bill_id=data_dict.get('billId'),
-                bill_type=data_dict.get('billType'),
-                scope_type=data_dict.get('scopeType'),
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class BillCostElementsType: # EEBus_SPINE_TS_Bill.xsd: ComplexType
+class BillCostElementsType: # EEBus_SPINE_TS_Bill.xsd:ns_p:BillCostElementsType -> ComplexType
     def __init__(
             self,
             cost_id: ElementTagType = None,
@@ -348,7 +131,7 @@ class BillCostElementsType: # EEBus_SPINE_TS_Bill.xsd: ComplexType
             return cls()
 
 
-class BillValueElementsType: # EEBus_SPINE_TS_Bill.xsd: ComplexType
+class BillValueElementsType: # EEBus_SPINE_TS_Bill.xsd:ns_p:BillValueElementsType -> ComplexType
     def __init__(
             self,
             value_id: ElementTagType = None,
@@ -424,7 +207,7 @@ class BillValueElementsType: # EEBus_SPINE_TS_Bill.xsd: ComplexType
             return cls()
 
 
-class BillCostType: # EEBus_SPINE_TS_Bill.xsd: ComplexType
+class BillCostType: # EEBus_SPINE_TS_Bill.xsd:ns_p:BillCostType -> ComplexType
     def __init__(
             self,
             cost_id: BillCostIdType = None,
@@ -533,7 +316,7 @@ class BillCostType: # EEBus_SPINE_TS_Bill.xsd: ComplexType
             return cls()
 
 
-class BillValueType: # EEBus_SPINE_TS_Bill.xsd: ComplexType
+class BillValueType: # EEBus_SPINE_TS_Bill.xsd:ns_p:BillValueType -> ComplexType
     def __init__(
             self,
             value_id: BillValueIdType = None,
@@ -609,24 +392,38 @@ class BillValueType: # EEBus_SPINE_TS_Bill.xsd: ComplexType
             return cls()
 
 
-class BillDescriptionListDataType: # EEBus_SPINE_TS_Bill.xsd: ComplexType
+class BillDataType: # EEBus_SPINE_TS_Bill.xsd:ns_p:BillDataType -> ComplexType
     def __init__(
             self,
-            bill_description_data: list[BillDescriptionDataType] = None,
+            bill_id: BillIdType = None,
+            bill_type: BillTypeType = None,
+            scope_type: ScopeTypeType = None,
     ):
         super().__init__()
         
-        self.bill_description_data = bill_description_data
+        self.bill_id = bill_id
+        self.bill_type = bill_type
+        self.scope_type = scope_type
 
-        if not isinstance(self.bill_description_data, list | NoneType):
-            raise TypeError("bill_description_data is not of type list[BillDescriptionDataType]")
+        if not isinstance(self.bill_id, BillIdType | NoneType):
+            raise TypeError("bill_id is not of type BillIdType")
+        
+        if not isinstance(self.bill_type, BillTypeType | NoneType):
+            raise TypeError("bill_type is not of type BillTypeType")
+        
+        if not isinstance(self.scope_type, ScopeTypeType | NoneType):
+            raise TypeError("scope_type is not of type ScopeTypeType")
         
     def get_data(self):
 
         msg_data = []
         
-        if self.bill_description_data is not None:
-            msg_data.append({"billDescriptionData": [d.get_data() for d in self.bill_description_data]})
+        if self.bill_id is not None:
+            msg_data.append({"billId": self.bill_id.get_data()})
+        if self.bill_type is not None:
+            msg_data.append({"billType": self.bill_type.get_data()})
+        if self.scope_type is not None:
+            msg_data.append({"scopeType": self.scope_type.get_data()})
         
         return msg_data
 
@@ -634,8 +431,14 @@ class BillDescriptionListDataType: # EEBus_SPINE_TS_Bill.xsd: ComplexType
     def __str__(self):
         result_str = ""
         sep = ""
-        if self.bill_description_data is not None:
-            result_str += f"{sep}billDescriptionData: {self.bill_description_data}"
+        if self.bill_id is not None:
+            result_str += f"{sep}billId: {self.bill_id}"
+            sep = ", "
+        if self.bill_type is not None:
+            result_str += f"{sep}billType: {self.bill_type}"
+            sep = ", "
+        if self.scope_type is not None:
+            result_str += f"{sep}scopeType: {self.scope_type}"
         
         return result_str
 
@@ -644,7 +447,9 @@ class BillDescriptionListDataType: # EEBus_SPINE_TS_Bill.xsd: ComplexType
         if type(data) == list:
             data_dict = array_2_dict(data)
             return cls(
-                bill_description_data=data_dict.get('billDescriptionData'),
+                bill_id=data_dict.get('billId'),
+                bill_type=data_dict.get('billType'),
+                scope_type=data_dict.get('scopeType'),
             )
         elif data:
             return cls(data)
@@ -652,24 +457,52 @@ class BillDescriptionListDataType: # EEBus_SPINE_TS_Bill.xsd: ComplexType
             return cls()
 
 
-class BillConstraintsListDataType: # EEBus_SPINE_TS_Bill.xsd: ComplexType
+class BillDescriptionDataType: # EEBus_SPINE_TS_Bill.xsd:ns_p:BillDescriptionDataType -> ComplexType
     def __init__(
             self,
-            bill_constraints_data: list[BillConstraintsDataType] = None,
+            bill_id: BillIdType = None,
+            bill_writeable: bool = None,
+            update_required: bool = None,
+            supported_bill_type: list[BillTypeType] = None,
+            session_id: SessionIdType = None,
     ):
         super().__init__()
         
-        self.bill_constraints_data = bill_constraints_data
+        self.bill_id = bill_id
+        self.bill_writeable = bill_writeable
+        self.update_required = update_required
+        self.supported_bill_type = supported_bill_type
+        self.session_id = session_id
 
-        if not isinstance(self.bill_constraints_data, list | NoneType):
-            raise TypeError("bill_constraints_data is not of type list[BillConstraintsDataType]")
+        if not isinstance(self.bill_id, BillIdType | NoneType):
+            raise TypeError("bill_id is not of type BillIdType")
+        
+        if not isinstance(self.bill_writeable, bool | NoneType):
+            raise TypeError("bill_writeable is not of type bool")
+        
+        if not isinstance(self.update_required, bool | NoneType):
+            raise TypeError("update_required is not of type bool")
+        
+        if not isinstance(self.supported_bill_type, list | NoneType):
+            raise TypeError("supported_bill_type is not of type list[BillTypeType]")
+        
+        if not isinstance(self.session_id, SessionIdType | NoneType):
+            raise TypeError("session_id is not of type SessionIdType")
         
     def get_data(self):
 
         msg_data = []
         
-        if self.bill_constraints_data is not None:
-            msg_data.append({"billConstraintsData": [d.get_data() for d in self.bill_constraints_data]})
+        if self.bill_id is not None:
+            msg_data.append({"billId": self.bill_id.get_data()})
+        if self.bill_writeable is not None:
+            msg_data.append({"billWriteable": self.bill_writeable})
+        if self.update_required is not None:
+            msg_data.append({"updateRequired": self.update_required})
+        if self.supported_bill_type is not None:
+            msg_data.append({"supportedBillType": [d.get_data() for d in self.supported_bill_type]})
+        if self.session_id is not None:
+            msg_data.append({"sessionId": self.session_id.get_data()})
         
         return msg_data
 
@@ -677,8 +510,20 @@ class BillConstraintsListDataType: # EEBus_SPINE_TS_Bill.xsd: ComplexType
     def __str__(self):
         result_str = ""
         sep = ""
-        if self.bill_constraints_data is not None:
-            result_str += f"{sep}billConstraintsData: {self.bill_constraints_data}"
+        if self.bill_id is not None:
+            result_str += f"{sep}billId: {self.bill_id}"
+            sep = ", "
+        if self.bill_writeable is not None:
+            result_str += f"{sep}billWriteable: {self.bill_writeable}"
+            sep = ", "
+        if self.update_required is not None:
+            result_str += f"{sep}updateRequired: {self.update_required}"
+            sep = ", "
+        if self.supported_bill_type is not None:
+            result_str += f"{sep}supportedBillType: {self.supported_bill_type}"
+            sep = ", "
+        if self.session_id is not None:
+            result_str += f"{sep}sessionId: {self.session_id}"
         
         return result_str
 
@@ -687,7 +532,11 @@ class BillConstraintsListDataType: # EEBus_SPINE_TS_Bill.xsd: ComplexType
         if type(data) == list:
             data_dict = array_2_dict(data)
             return cls(
-                bill_constraints_data=data_dict.get('billConstraintsData'),
+                bill_id=data_dict.get('billId'),
+                bill_writeable=data_dict.get('billWriteable'),
+                update_required=data_dict.get('updateRequired'),
+                supported_bill_type=data_dict.get('supportedBillType'),
+                session_id=data_dict.get('sessionId'),
             )
         elif data:
             return cls(data)
@@ -695,24 +544,38 @@ class BillConstraintsListDataType: # EEBus_SPINE_TS_Bill.xsd: ComplexType
             return cls()
 
 
-class BillListDataType: # EEBus_SPINE_TS_Bill.xsd: ComplexType
+class BillConstraintsDataType: # EEBus_SPINE_TS_Bill.xsd:ns_p:BillConstraintsDataType -> ComplexType
     def __init__(
             self,
-            bill_data: list[BillDataType] = None,
+            bill_id: BillIdType = None,
+            position_count_min: BillPositionCountType = None,
+            position_count_max: BillPositionCountType = None,
     ):
         super().__init__()
         
-        self.bill_data = bill_data
+        self.bill_id = bill_id
+        self.position_count_min = position_count_min
+        self.position_count_max = position_count_max
 
-        if not isinstance(self.bill_data, list | NoneType):
-            raise TypeError("bill_data is not of type list[BillDataType]")
+        if not isinstance(self.bill_id, BillIdType | NoneType):
+            raise TypeError("bill_id is not of type BillIdType")
+        
+        if not isinstance(self.position_count_min, BillPositionCountType | NoneType):
+            raise TypeError("position_count_min is not of type BillPositionCountType")
+        
+        if not isinstance(self.position_count_max, BillPositionCountType | NoneType):
+            raise TypeError("position_count_max is not of type BillPositionCountType")
         
     def get_data(self):
 
         msg_data = []
         
-        if self.bill_data is not None:
-            msg_data.append({"billData": [d.get_data() for d in self.bill_data]})
+        if self.bill_id is not None:
+            msg_data.append({"billId": self.bill_id.get_data()})
+        if self.position_count_min is not None:
+            msg_data.append({"positionCountMin": self.position_count_min.get_data()})
+        if self.position_count_max is not None:
+            msg_data.append({"positionCountMax": self.position_count_max.get_data()})
         
         return msg_data
 
@@ -720,8 +583,14 @@ class BillListDataType: # EEBus_SPINE_TS_Bill.xsd: ComplexType
     def __str__(self):
         result_str = ""
         sep = ""
-        if self.bill_data is not None:
-            result_str += f"{sep}billData: {self.bill_data}"
+        if self.bill_id is not None:
+            result_str += f"{sep}billId: {self.bill_id}"
+            sep = ", "
+        if self.position_count_min is not None:
+            result_str += f"{sep}positionCountMin: {self.position_count_min}"
+            sep = ", "
+        if self.position_count_max is not None:
+            result_str += f"{sep}positionCountMax: {self.position_count_max}"
         
         return result_str
 
@@ -730,7 +599,9 @@ class BillListDataType: # EEBus_SPINE_TS_Bill.xsd: ComplexType
         if type(data) == list:
             data_dict = array_2_dict(data)
             return cls(
-                bill_data=data_dict.get('billData'),
+                bill_id=data_dict.get('billId'),
+                position_count_min=data_dict.get('positionCountMin'),
+                position_count_max=data_dict.get('positionCountMax'),
             )
         elif data:
             return cls(data)
@@ -738,7 +609,7 @@ class BillListDataType: # EEBus_SPINE_TS_Bill.xsd: ComplexType
             return cls()
 
 
-class BillPositionElementsType: # EEBus_SPINE_TS_Bill.xsd: ComplexType
+class BillPositionElementsType: # EEBus_SPINE_TS_Bill.xsd:ns_p:BillPositionElementsType -> ComplexType
     def __init__(
             self,
             position_id: ElementTagType = None,
@@ -847,7 +718,7 @@ class BillPositionElementsType: # EEBus_SPINE_TS_Bill.xsd: ComplexType
             return cls()
 
 
-class BillPositionType: # EEBus_SPINE_TS_Bill.xsd: ComplexType
+class BillPositionType: # EEBus_SPINE_TS_Bill.xsd:ns_p:BillPositionType -> ComplexType
     def __init__(
             self,
             position_id: BillPositionIdType = None,
@@ -956,7 +827,136 @@ class BillPositionType: # EEBus_SPINE_TS_Bill.xsd: ComplexType
             return cls()
 
 
-class BillDescriptionDataElementsType: # EEBus_SPINE_TS_Bill.xsd: ComplexType
+class BillListDataType: # EEBus_SPINE_TS_Bill.xsd:ns_p:BillListDataType -> ComplexType
+    def __init__(
+            self,
+            bill_data: list[BillDataType] = None,
+    ):
+        super().__init__()
+        
+        self.bill_data = bill_data
+
+        if not isinstance(self.bill_data, list | NoneType):
+            raise TypeError("bill_data is not of type list[BillDataType]")
+        
+    def get_data(self):
+
+        msg_data = []
+        
+        if self.bill_data is not None:
+            msg_data.append({"billData": [d.get_data() for d in self.bill_data]})
+        
+        return msg_data
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        if self.bill_data is not None:
+            result_str += f"{sep}billData: {self.bill_data}"
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+                bill_data=data_dict.get('billData'),
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class BillDescriptionListDataType: # EEBus_SPINE_TS_Bill.xsd:ns_p:BillDescriptionListDataType -> ComplexType
+    def __init__(
+            self,
+            bill_description_data: list[BillDescriptionDataType] = None,
+    ):
+        super().__init__()
+        
+        self.bill_description_data = bill_description_data
+
+        if not isinstance(self.bill_description_data, list | NoneType):
+            raise TypeError("bill_description_data is not of type list[BillDescriptionDataType]")
+        
+    def get_data(self):
+
+        msg_data = []
+        
+        if self.bill_description_data is not None:
+            msg_data.append({"billDescriptionData": [d.get_data() for d in self.bill_description_data]})
+        
+        return msg_data
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        if self.bill_description_data is not None:
+            result_str += f"{sep}billDescriptionData: {self.bill_description_data}"
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+                bill_description_data=data_dict.get('billDescriptionData'),
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class BillConstraintsListDataType: # EEBus_SPINE_TS_Bill.xsd:ns_p:BillConstraintsListDataType -> ComplexType
+    def __init__(
+            self,
+            bill_constraints_data: list[BillConstraintsDataType] = None,
+    ):
+        super().__init__()
+        
+        self.bill_constraints_data = bill_constraints_data
+
+        if not isinstance(self.bill_constraints_data, list | NoneType):
+            raise TypeError("bill_constraints_data is not of type list[BillConstraintsDataType]")
+        
+    def get_data(self):
+
+        msg_data = []
+        
+        if self.bill_constraints_data is not None:
+            msg_data.append({"billConstraintsData": [d.get_data() for d in self.bill_constraints_data]})
+        
+        return msg_data
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        if self.bill_constraints_data is not None:
+            result_str += f"{sep}billConstraintsData: {self.bill_constraints_data}"
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+                bill_constraints_data=data_dict.get('billConstraintsData'),
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class BillDescriptionDataElementsType: # EEBus_SPINE_TS_Bill.xsd:ns_p:BillDescriptionDataElementsType -> ComplexType
     def __init__(
             self,
             bill_id: ElementTagType = None,
@@ -1043,7 +1043,7 @@ class BillDescriptionDataElementsType: # EEBus_SPINE_TS_Bill.xsd: ComplexType
             return cls()
 
 
-class BillDataElementsType: # EEBus_SPINE_TS_Bill.xsd: ComplexType
+class BillDataElementsType: # EEBus_SPINE_TS_Bill.xsd:ns_p:BillDataElementsType -> ComplexType
     def __init__(
             self,
             bill_id: ElementTagType = None,
@@ -1108,7 +1108,7 @@ class BillDataElementsType: # EEBus_SPINE_TS_Bill.xsd: ComplexType
             return cls()
 
 
-class BillConstraintsDataElementsType: # EEBus_SPINE_TS_Bill.xsd: ComplexType
+class BillConstraintsDataElementsType: # EEBus_SPINE_TS_Bill.xsd:ns_p:BillConstraintsDataElementsType -> ComplexType
     def __init__(
             self,
             bill_id: ElementTagType = None,
@@ -1173,7 +1173,7 @@ class BillConstraintsDataElementsType: # EEBus_SPINE_TS_Bill.xsd: ComplexType
             return cls()
 
 
-class BillListDataSelectorsType: # EEBus_SPINE_TS_Bill.xsd: ComplexType
+class BillListDataSelectorsType: # EEBus_SPINE_TS_Bill.xsd:ns_p:BillListDataSelectorsType -> ComplexType
     def __init__(
             self,
             bill_id: BillIdType = None,
@@ -1227,7 +1227,7 @@ class BillListDataSelectorsType: # EEBus_SPINE_TS_Bill.xsd: ComplexType
             return cls()
 
 
-class BillDescriptionListDataSelectorsType: # EEBus_SPINE_TS_Bill.xsd: ComplexType
+class BillDescriptionListDataSelectorsType: # EEBus_SPINE_TS_Bill.xsd:ns_p:BillDescriptionListDataSelectorsType -> ComplexType
     def __init__(
             self,
             bill_id: BillIdType = None,
@@ -1270,7 +1270,7 @@ class BillDescriptionListDataSelectorsType: # EEBus_SPINE_TS_Bill.xsd: ComplexTy
             return cls()
 
 
-class BillConstraintsListDataSelectorsType: # EEBus_SPINE_TS_Bill.xsd: ComplexType
+class BillConstraintsListDataSelectorsType: # EEBus_SPINE_TS_Bill.xsd:ns_p:BillConstraintsListDataSelectorsType -> ComplexType
     def __init__(
             self,
             bill_id: BillIdType = None,

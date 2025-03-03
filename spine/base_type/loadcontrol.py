@@ -22,7 +22,192 @@ from types import NoneType
 from spine import array_2_dict
 
 
-class LoadControlLimitDescriptionDataType: # EEBus_SPINE_TS_LoadControl.xsd: ComplexType
+class LoadControlStateDataType: # EEBus_SPINE_TS_LoadControl.xsd:ns_p:LoadControlStateDataType -> ComplexType
+    def __init__(
+            self,
+            timestamp: AbsoluteOrRelativeTimeType = None,
+            event_id: LoadControlEventIdType = None,
+            event_state_consume: LoadControlEventStateType = None,
+            applied_event_action_consume: LoadControlEventActionType = None,
+            event_state_produce: LoadControlEventStateType = None,
+            applied_event_action_produce: LoadControlEventActionType = None,
+    ):
+        super().__init__()
+        
+        self.timestamp = timestamp
+        self.event_id = event_id
+        self.event_state_consume = event_state_consume
+        self.applied_event_action_consume = applied_event_action_consume
+        self.event_state_produce = event_state_produce
+        self.applied_event_action_produce = applied_event_action_produce
+
+        if not isinstance(self.timestamp, AbsoluteOrRelativeTimeType | NoneType):
+            raise TypeError("timestamp is not of type AbsoluteOrRelativeTimeType")
+        
+        if not isinstance(self.event_id, LoadControlEventIdType | NoneType):
+            raise TypeError("event_id is not of type LoadControlEventIdType")
+        
+        if not isinstance(self.event_state_consume, LoadControlEventStateType | NoneType):
+            raise TypeError("event_state_consume is not of type LoadControlEventStateType")
+        
+        if not isinstance(self.applied_event_action_consume, LoadControlEventActionType | NoneType):
+            raise TypeError("applied_event_action_consume is not of type LoadControlEventActionType")
+        
+        if not isinstance(self.event_state_produce, LoadControlEventStateType | NoneType):
+            raise TypeError("event_state_produce is not of type LoadControlEventStateType")
+        
+        if not isinstance(self.applied_event_action_produce, LoadControlEventActionType | NoneType):
+            raise TypeError("applied_event_action_produce is not of type LoadControlEventActionType")
+        
+    def get_data(self):
+
+        msg_data = []
+        
+        if self.timestamp is not None:
+            msg_data.append({"timestamp": self.timestamp.get_data()})
+        if self.event_id is not None:
+            msg_data.append({"eventId": self.event_id.get_data()})
+        if self.event_state_consume is not None:
+            msg_data.append({"eventStateConsume": self.event_state_consume.get_data()})
+        if self.applied_event_action_consume is not None:
+            msg_data.append({"appliedEventActionConsume": self.applied_event_action_consume.get_data()})
+        if self.event_state_produce is not None:
+            msg_data.append({"eventStateProduce": self.event_state_produce.get_data()})
+        if self.applied_event_action_produce is not None:
+            msg_data.append({"appliedEventActionProduce": self.applied_event_action_produce.get_data()})
+        
+        return msg_data
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        if self.timestamp is not None:
+            result_str += f"{sep}timestamp: {self.timestamp}"
+            sep = ", "
+        if self.event_id is not None:
+            result_str += f"{sep}eventId: {self.event_id}"
+            sep = ", "
+        if self.event_state_consume is not None:
+            result_str += f"{sep}eventStateConsume: {self.event_state_consume}"
+            sep = ", "
+        if self.applied_event_action_consume is not None:
+            result_str += f"{sep}appliedEventActionConsume: {self.applied_event_action_consume}"
+            sep = ", "
+        if self.event_state_produce is not None:
+            result_str += f"{sep}eventStateProduce: {self.event_state_produce}"
+            sep = ", "
+        if self.applied_event_action_produce is not None:
+            result_str += f"{sep}appliedEventActionProduce: {self.applied_event_action_produce}"
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+                timestamp=data_dict.get('timestamp'),
+                event_id=data_dict.get('eventId'),
+                event_state_consume=data_dict.get('eventStateConsume'),
+                applied_event_action_consume=data_dict.get('appliedEventActionConsume'),
+                event_state_produce=data_dict.get('eventStateProduce'),
+                applied_event_action_produce=data_dict.get('appliedEventActionProduce'),
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class LoadControlLimitDataType: # EEBus_SPINE_TS_LoadControl.xsd:ns_p:LoadControlLimitDataType -> ComplexType
+    def __init__(
+            self,
+            limit_id: LoadControlLimitIdType = None,
+            is_limit_changeable: bool = None,
+            is_limit_active: bool = None,
+            time_period: TimePeriodType = None,
+            value: ScaledNumberType = None,
+    ):
+        super().__init__()
+        
+        self.limit_id = limit_id
+        self.is_limit_changeable = is_limit_changeable
+        self.is_limit_active = is_limit_active
+        self.time_period = time_period
+        self.value = value
+
+        if not isinstance(self.limit_id, LoadControlLimitIdType | NoneType):
+            raise TypeError("limit_id is not of type LoadControlLimitIdType")
+        
+        if not isinstance(self.is_limit_changeable, bool | NoneType):
+            raise TypeError("is_limit_changeable is not of type bool")
+        
+        if not isinstance(self.is_limit_active, bool | NoneType):
+            raise TypeError("is_limit_active is not of type bool")
+        
+        if not isinstance(self.time_period, TimePeriodType | NoneType):
+            raise TypeError("time_period is not of type TimePeriodType")
+        
+        if not isinstance(self.value, ScaledNumberType | NoneType):
+            raise TypeError("value is not of type ScaledNumberType")
+        
+    def get_data(self):
+
+        msg_data = []
+        
+        if self.limit_id is not None:
+            msg_data.append({"limitId": self.limit_id.get_data()})
+        if self.is_limit_changeable is not None:
+            msg_data.append({"isLimitChangeable": self.is_limit_changeable})
+        if self.is_limit_active is not None:
+            msg_data.append({"isLimitActive": self.is_limit_active})
+        if self.time_period is not None:
+            msg_data.append({"timePeriod": self.time_period.get_data()})
+        if self.value is not None:
+            msg_data.append({"value": self.value.get_data()})
+        
+        return msg_data
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        if self.limit_id is not None:
+            result_str += f"{sep}limitId: {self.limit_id}"
+            sep = ", "
+        if self.is_limit_changeable is not None:
+            result_str += f"{sep}isLimitChangeable: {self.is_limit_changeable}"
+            sep = ", "
+        if self.is_limit_active is not None:
+            result_str += f"{sep}isLimitActive: {self.is_limit_active}"
+            sep = ", "
+        if self.time_period is not None:
+            result_str += f"{sep}timePeriod: {self.time_period}"
+            sep = ", "
+        if self.value is not None:
+            result_str += f"{sep}value: {self.value}"
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+                limit_id=data_dict.get('limitId'),
+                is_limit_changeable=data_dict.get('isLimitChangeable'),
+                is_limit_active=data_dict.get('isLimitActive'),
+                time_period=data_dict.get('timePeriod'),
+                value=data_dict.get('value'),
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class LoadControlLimitDescriptionDataType: # EEBus_SPINE_TS_LoadControl.xsd:ns_p:LoadControlLimitDescriptionDataType -> ComplexType
     def __init__(
             self,
             limit_id: LoadControlLimitIdType = None,
@@ -153,7 +338,7 @@ class LoadControlLimitDescriptionDataType: # EEBus_SPINE_TS_LoadControl.xsd: Com
             return cls()
 
 
-class LoadControlLimitConstraintsDataType: # EEBus_SPINE_TS_LoadControl.xsd: ComplexType
+class LoadControlLimitConstraintsDataType: # EEBus_SPINE_TS_LoadControl.xsd:ns_p:LoadControlLimitConstraintsDataType -> ComplexType
     def __init__(
             self,
             limit_id: LoadControlLimitIdType = None,
@@ -229,192 +414,7 @@ class LoadControlLimitConstraintsDataType: # EEBus_SPINE_TS_LoadControl.xsd: Com
             return cls()
 
 
-class LoadControlLimitDataType: # EEBus_SPINE_TS_LoadControl.xsd: ComplexType
-    def __init__(
-            self,
-            limit_id: LoadControlLimitIdType = None,
-            is_limit_changeable: bool = None,
-            is_limit_active: bool = None,
-            time_period: TimePeriodType = None,
-            value: ScaledNumberType = None,
-    ):
-        super().__init__()
-        
-        self.limit_id = limit_id
-        self.is_limit_changeable = is_limit_changeable
-        self.is_limit_active = is_limit_active
-        self.time_period = time_period
-        self.value = value
-
-        if not isinstance(self.limit_id, LoadControlLimitIdType | NoneType):
-            raise TypeError("limit_id is not of type LoadControlLimitIdType")
-        
-        if not isinstance(self.is_limit_changeable, bool | NoneType):
-            raise TypeError("is_limit_changeable is not of type bool")
-        
-        if not isinstance(self.is_limit_active, bool | NoneType):
-            raise TypeError("is_limit_active is not of type bool")
-        
-        if not isinstance(self.time_period, TimePeriodType | NoneType):
-            raise TypeError("time_period is not of type TimePeriodType")
-        
-        if not isinstance(self.value, ScaledNumberType | NoneType):
-            raise TypeError("value is not of type ScaledNumberType")
-        
-    def get_data(self):
-
-        msg_data = []
-        
-        if self.limit_id is not None:
-            msg_data.append({"limitId": self.limit_id.get_data()})
-        if self.is_limit_changeable is not None:
-            msg_data.append({"isLimitChangeable": self.is_limit_changeable})
-        if self.is_limit_active is not None:
-            msg_data.append({"isLimitActive": self.is_limit_active})
-        if self.time_period is not None:
-            msg_data.append({"timePeriod": self.time_period.get_data()})
-        if self.value is not None:
-            msg_data.append({"value": self.value.get_data()})
-        
-        return msg_data
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        if self.limit_id is not None:
-            result_str += f"{sep}limitId: {self.limit_id}"
-            sep = ", "
-        if self.is_limit_changeable is not None:
-            result_str += f"{sep}isLimitChangeable: {self.is_limit_changeable}"
-            sep = ", "
-        if self.is_limit_active is not None:
-            result_str += f"{sep}isLimitActive: {self.is_limit_active}"
-            sep = ", "
-        if self.time_period is not None:
-            result_str += f"{sep}timePeriod: {self.time_period}"
-            sep = ", "
-        if self.value is not None:
-            result_str += f"{sep}value: {self.value}"
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
-                limit_id=data_dict.get('limitId'),
-                is_limit_changeable=data_dict.get('isLimitChangeable'),
-                is_limit_active=data_dict.get('isLimitActive'),
-                time_period=data_dict.get('timePeriod'),
-                value=data_dict.get('value'),
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class LoadControlStateDataType: # EEBus_SPINE_TS_LoadControl.xsd: ComplexType
-    def __init__(
-            self,
-            timestamp: AbsoluteOrRelativeTimeType = None,
-            event_id: LoadControlEventIdType = None,
-            event_state_consume: LoadControlEventStateType = None,
-            applied_event_action_consume: LoadControlEventActionType = None,
-            event_state_produce: LoadControlEventStateType = None,
-            applied_event_action_produce: LoadControlEventActionType = None,
-    ):
-        super().__init__()
-        
-        self.timestamp = timestamp
-        self.event_id = event_id
-        self.event_state_consume = event_state_consume
-        self.applied_event_action_consume = applied_event_action_consume
-        self.event_state_produce = event_state_produce
-        self.applied_event_action_produce = applied_event_action_produce
-
-        if not isinstance(self.timestamp, AbsoluteOrRelativeTimeType | NoneType):
-            raise TypeError("timestamp is not of type AbsoluteOrRelativeTimeType")
-        
-        if not isinstance(self.event_id, LoadControlEventIdType | NoneType):
-            raise TypeError("event_id is not of type LoadControlEventIdType")
-        
-        if not isinstance(self.event_state_consume, LoadControlEventStateType | NoneType):
-            raise TypeError("event_state_consume is not of type LoadControlEventStateType")
-        
-        if not isinstance(self.applied_event_action_consume, LoadControlEventActionType | NoneType):
-            raise TypeError("applied_event_action_consume is not of type LoadControlEventActionType")
-        
-        if not isinstance(self.event_state_produce, LoadControlEventStateType | NoneType):
-            raise TypeError("event_state_produce is not of type LoadControlEventStateType")
-        
-        if not isinstance(self.applied_event_action_produce, LoadControlEventActionType | NoneType):
-            raise TypeError("applied_event_action_produce is not of type LoadControlEventActionType")
-        
-    def get_data(self):
-
-        msg_data = []
-        
-        if self.timestamp is not None:
-            msg_data.append({"timestamp": self.timestamp.get_data()})
-        if self.event_id is not None:
-            msg_data.append({"eventId": self.event_id.get_data()})
-        if self.event_state_consume is not None:
-            msg_data.append({"eventStateConsume": self.event_state_consume.get_data()})
-        if self.applied_event_action_consume is not None:
-            msg_data.append({"appliedEventActionConsume": self.applied_event_action_consume.get_data()})
-        if self.event_state_produce is not None:
-            msg_data.append({"eventStateProduce": self.event_state_produce.get_data()})
-        if self.applied_event_action_produce is not None:
-            msg_data.append({"appliedEventActionProduce": self.applied_event_action_produce.get_data()})
-        
-        return msg_data
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        if self.timestamp is not None:
-            result_str += f"{sep}timestamp: {self.timestamp}"
-            sep = ", "
-        if self.event_id is not None:
-            result_str += f"{sep}eventId: {self.event_id}"
-            sep = ", "
-        if self.event_state_consume is not None:
-            result_str += f"{sep}eventStateConsume: {self.event_state_consume}"
-            sep = ", "
-        if self.applied_event_action_consume is not None:
-            result_str += f"{sep}appliedEventActionConsume: {self.applied_event_action_consume}"
-            sep = ", "
-        if self.event_state_produce is not None:
-            result_str += f"{sep}eventStateProduce: {self.event_state_produce}"
-            sep = ", "
-        if self.applied_event_action_produce is not None:
-            result_str += f"{sep}appliedEventActionProduce: {self.applied_event_action_produce}"
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
-                timestamp=data_dict.get('timestamp'),
-                event_id=data_dict.get('eventId'),
-                event_state_consume=data_dict.get('eventStateConsume'),
-                applied_event_action_consume=data_dict.get('appliedEventActionConsume'),
-                event_state_produce=data_dict.get('eventStateProduce'),
-                applied_event_action_produce=data_dict.get('appliedEventActionProduce'),
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class LoadControlEventDataType: # EEBus_SPINE_TS_LoadControl.xsd: ComplexType
+class LoadControlEventDataType: # EEBus_SPINE_TS_LoadControl.xsd:ns_p:LoadControlEventDataType -> ComplexType
     def __init__(
             self,
             timestamp: AbsoluteOrRelativeTimeType = None,
@@ -501,136 +501,7 @@ class LoadControlEventDataType: # EEBus_SPINE_TS_LoadControl.xsd: ComplexType
             return cls()
 
 
-class LoadControlLimitDescriptionListDataType: # EEBus_SPINE_TS_LoadControl.xsd: ComplexType
-    def __init__(
-            self,
-            load_control_limit_description_data: list[LoadControlLimitDescriptionDataType] = None,
-    ):
-        super().__init__()
-        
-        self.load_control_limit_description_data = load_control_limit_description_data
-
-        if not isinstance(self.load_control_limit_description_data, list | NoneType):
-            raise TypeError("load_control_limit_description_data is not of type list[LoadControlLimitDescriptionDataType]")
-        
-    def get_data(self):
-
-        msg_data = []
-        
-        if self.load_control_limit_description_data is not None:
-            msg_data.append({"loadControlLimitDescriptionData": [d.get_data() for d in self.load_control_limit_description_data]})
-        
-        return msg_data
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        if self.load_control_limit_description_data is not None:
-            result_str += f"{sep}loadControlLimitDescriptionData: {self.load_control_limit_description_data}"
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
-                load_control_limit_description_data=data_dict.get('loadControlLimitDescriptionData'),
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class LoadControlLimitConstraintsListDataType: # EEBus_SPINE_TS_LoadControl.xsd: ComplexType
-    def __init__(
-            self,
-            load_control_limit_constraints_data: list[LoadControlLimitConstraintsDataType] = None,
-    ):
-        super().__init__()
-        
-        self.load_control_limit_constraints_data = load_control_limit_constraints_data
-
-        if not isinstance(self.load_control_limit_constraints_data, list | NoneType):
-            raise TypeError("load_control_limit_constraints_data is not of type list[LoadControlLimitConstraintsDataType]")
-        
-    def get_data(self):
-
-        msg_data = []
-        
-        if self.load_control_limit_constraints_data is not None:
-            msg_data.append({"loadControlLimitConstraintsData": [d.get_data() for d in self.load_control_limit_constraints_data]})
-        
-        return msg_data
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        if self.load_control_limit_constraints_data is not None:
-            result_str += f"{sep}loadControlLimitConstraintsData: {self.load_control_limit_constraints_data}"
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
-                load_control_limit_constraints_data=data_dict.get('loadControlLimitConstraintsData'),
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class LoadControlLimitListDataType: # EEBus_SPINE_TS_LoadControl.xsd: ComplexType
-    def __init__(
-            self,
-            load_control_limit_data: list[LoadControlLimitDataType] = None,
-    ):
-        super().__init__()
-        
-        self.load_control_limit_data = load_control_limit_data
-
-        if not isinstance(self.load_control_limit_data, list | NoneType):
-            raise TypeError("load_control_limit_data is not of type list[LoadControlLimitDataType]")
-        
-    def get_data(self):
-
-        msg_data = []
-        
-        if self.load_control_limit_data is not None:
-            msg_data.append({"loadControlLimitData": [d.get_data() for d in self.load_control_limit_data]})
-        
-        return msg_data
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        if self.load_control_limit_data is not None:
-            result_str += f"{sep}loadControlLimitData: {self.load_control_limit_data}"
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
-                load_control_limit_data=data_dict.get('loadControlLimitData'),
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class LoadControlStateListDataType: # EEBus_SPINE_TS_LoadControl.xsd: ComplexType
+class LoadControlStateListDataType: # EEBus_SPINE_TS_LoadControl.xsd:ns_p:LoadControlStateListDataType -> ComplexType
     def __init__(
             self,
             load_control_state_data: list[LoadControlStateDataType] = None,
@@ -673,50 +544,7 @@ class LoadControlStateListDataType: # EEBus_SPINE_TS_LoadControl.xsd: ComplexTyp
             return cls()
 
 
-class LoadControlEventListDataType: # EEBus_SPINE_TS_LoadControl.xsd: ComplexType
-    def __init__(
-            self,
-            load_control_event_data: list[LoadControlEventDataType] = None,
-    ):
-        super().__init__()
-        
-        self.load_control_event_data = load_control_event_data
-
-        if not isinstance(self.load_control_event_data, list | NoneType):
-            raise TypeError("load_control_event_data is not of type list[LoadControlEventDataType]")
-        
-    def get_data(self):
-
-        msg_data = []
-        
-        if self.load_control_event_data is not None:
-            msg_data.append({"loadControlEventData": [d.get_data() for d in self.load_control_event_data]})
-        
-        return msg_data
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        if self.load_control_event_data is not None:
-            result_str += f"{sep}loadControlEventData: {self.load_control_event_data}"
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
-                load_control_event_data=data_dict.get('loadControlEventData'),
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class LoadControlNodeDataType: # EEBus_SPINE_TS_LoadControl.xsd: ComplexType
+class LoadControlNodeDataType: # EEBus_SPINE_TS_LoadControl.xsd:ns_p:LoadControlNodeDataType -> ComplexType
     def __init__(
             self,
             is_node_remote_controllable: bool = None,
@@ -759,7 +587,179 @@ class LoadControlNodeDataType: # EEBus_SPINE_TS_LoadControl.xsd: ComplexType
             return cls()
 
 
-class LoadControlStateDataElementsType: # EEBus_SPINE_TS_LoadControl.xsd: ComplexType
+class LoadControlLimitListDataType: # EEBus_SPINE_TS_LoadControl.xsd:ns_p:LoadControlLimitListDataType -> ComplexType
+    def __init__(
+            self,
+            load_control_limit_data: list[LoadControlLimitDataType] = None,
+    ):
+        super().__init__()
+        
+        self.load_control_limit_data = load_control_limit_data
+
+        if not isinstance(self.load_control_limit_data, list | NoneType):
+            raise TypeError("load_control_limit_data is not of type list[LoadControlLimitDataType]")
+        
+    def get_data(self):
+
+        msg_data = []
+        
+        if self.load_control_limit_data is not None:
+            msg_data.append({"loadControlLimitData": [d.get_data() for d in self.load_control_limit_data]})
+        
+        return msg_data
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        if self.load_control_limit_data is not None:
+            result_str += f"{sep}loadControlLimitData: {self.load_control_limit_data}"
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+                load_control_limit_data=data_dict.get('loadControlLimitData'),
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class LoadControlLimitDescriptionListDataType: # EEBus_SPINE_TS_LoadControl.xsd:ns_p:LoadControlLimitDescriptionListDataType -> ComplexType
+    def __init__(
+            self,
+            load_control_limit_description_data: list[LoadControlLimitDescriptionDataType] = None,
+    ):
+        super().__init__()
+        
+        self.load_control_limit_description_data = load_control_limit_description_data
+
+        if not isinstance(self.load_control_limit_description_data, list | NoneType):
+            raise TypeError("load_control_limit_description_data is not of type list[LoadControlLimitDescriptionDataType]")
+        
+    def get_data(self):
+
+        msg_data = []
+        
+        if self.load_control_limit_description_data is not None:
+            msg_data.append({"loadControlLimitDescriptionData": [d.get_data() for d in self.load_control_limit_description_data]})
+        
+        return msg_data
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        if self.load_control_limit_description_data is not None:
+            result_str += f"{sep}loadControlLimitDescriptionData: {self.load_control_limit_description_data}"
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+                load_control_limit_description_data=data_dict.get('loadControlLimitDescriptionData'),
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class LoadControlLimitConstraintsListDataType: # EEBus_SPINE_TS_LoadControl.xsd:ns_p:LoadControlLimitConstraintsListDataType -> ComplexType
+    def __init__(
+            self,
+            load_control_limit_constraints_data: list[LoadControlLimitConstraintsDataType] = None,
+    ):
+        super().__init__()
+        
+        self.load_control_limit_constraints_data = load_control_limit_constraints_data
+
+        if not isinstance(self.load_control_limit_constraints_data, list | NoneType):
+            raise TypeError("load_control_limit_constraints_data is not of type list[LoadControlLimitConstraintsDataType]")
+        
+    def get_data(self):
+
+        msg_data = []
+        
+        if self.load_control_limit_constraints_data is not None:
+            msg_data.append({"loadControlLimitConstraintsData": [d.get_data() for d in self.load_control_limit_constraints_data]})
+        
+        return msg_data
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        if self.load_control_limit_constraints_data is not None:
+            result_str += f"{sep}loadControlLimitConstraintsData: {self.load_control_limit_constraints_data}"
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+                load_control_limit_constraints_data=data_dict.get('loadControlLimitConstraintsData'),
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class LoadControlEventListDataType: # EEBus_SPINE_TS_LoadControl.xsd:ns_p:LoadControlEventListDataType -> ComplexType
+    def __init__(
+            self,
+            load_control_event_data: list[LoadControlEventDataType] = None,
+    ):
+        super().__init__()
+        
+        self.load_control_event_data = load_control_event_data
+
+        if not isinstance(self.load_control_event_data, list | NoneType):
+            raise TypeError("load_control_event_data is not of type list[LoadControlEventDataType]")
+        
+    def get_data(self):
+
+        msg_data = []
+        
+        if self.load_control_event_data is not None:
+            msg_data.append({"loadControlEventData": [d.get_data() for d in self.load_control_event_data]})
+        
+        return msg_data
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        if self.load_control_event_data is not None:
+            result_str += f"{sep}loadControlEventData: {self.load_control_event_data}"
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+                load_control_event_data=data_dict.get('loadControlEventData'),
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class LoadControlStateDataElementsType: # EEBus_SPINE_TS_LoadControl.xsd:ns_p:LoadControlStateDataElementsType -> ComplexType
     def __init__(
             self,
             timestamp: ElementTagType = None,
@@ -857,7 +857,7 @@ class LoadControlStateDataElementsType: # EEBus_SPINE_TS_LoadControl.xsd: Comple
             return cls()
 
 
-class LoadControlNodeDataElementsType: # EEBus_SPINE_TS_LoadControl.xsd: ComplexType
+class LoadControlNodeDataElementsType: # EEBus_SPINE_TS_LoadControl.xsd:ns_p:LoadControlNodeDataElementsType -> ComplexType
     def __init__(
             self,
             is_node_remote_controllable: ElementTagType = None,
@@ -900,7 +900,7 @@ class LoadControlNodeDataElementsType: # EEBus_SPINE_TS_LoadControl.xsd: Complex
             return cls()
 
 
-class LoadControlLimitDescriptionDataElementsType: # EEBus_SPINE_TS_LoadControl.xsd: ComplexType
+class LoadControlLimitDescriptionDataElementsType: # EEBus_SPINE_TS_LoadControl.xsd:ns_p:LoadControlLimitDescriptionDataElementsType -> ComplexType
     def __init__(
             self,
             limit_id: ElementTagType = None,
@@ -1031,7 +1031,7 @@ class LoadControlLimitDescriptionDataElementsType: # EEBus_SPINE_TS_LoadControl.
             return cls()
 
 
-class LoadControlLimitDataElementsType: # EEBus_SPINE_TS_LoadControl.xsd: ComplexType
+class LoadControlLimitDataElementsType: # EEBus_SPINE_TS_LoadControl.xsd:ns_p:LoadControlLimitDataElementsType -> ComplexType
     def __init__(
             self,
             limit_id: ElementTagType = None,
@@ -1118,7 +1118,7 @@ class LoadControlLimitDataElementsType: # EEBus_SPINE_TS_LoadControl.xsd: Comple
             return cls()
 
 
-class LoadControlLimitConstraintsDataElementsType: # EEBus_SPINE_TS_LoadControl.xsd: ComplexType
+class LoadControlLimitConstraintsDataElementsType: # EEBus_SPINE_TS_LoadControl.xsd:ns_p:LoadControlLimitConstraintsDataElementsType -> ComplexType
     def __init__(
             self,
             limit_id: ElementTagType = None,
@@ -1194,7 +1194,7 @@ class LoadControlLimitConstraintsDataElementsType: # EEBus_SPINE_TS_LoadControl.
             return cls()
 
 
-class LoadControlEventDataElementsType: # EEBus_SPINE_TS_LoadControl.xsd: ComplexType
+class LoadControlEventDataElementsType: # EEBus_SPINE_TS_LoadControl.xsd:ns_p:LoadControlEventDataElementsType -> ComplexType
     def __init__(
             self,
             timestamp: ElementTagType = None,
@@ -1281,7 +1281,7 @@ class LoadControlEventDataElementsType: # EEBus_SPINE_TS_LoadControl.xsd: Comple
             return cls()
 
 
-class LoadControlStateListDataSelectorsType: # EEBus_SPINE_TS_LoadControl.xsd: ComplexType
+class LoadControlStateListDataSelectorsType: # EEBus_SPINE_TS_LoadControl.xsd:ns_p:LoadControlStateListDataSelectorsType -> ComplexType
     def __init__(
             self,
             timestamp_interval: TimestampIntervalType = None,
@@ -1335,7 +1335,7 @@ class LoadControlStateListDataSelectorsType: # EEBus_SPINE_TS_LoadControl.xsd: C
             return cls()
 
 
-class LoadControlLimitListDataSelectorsType: # EEBus_SPINE_TS_LoadControl.xsd: ComplexType
+class LoadControlLimitListDataSelectorsType: # EEBus_SPINE_TS_LoadControl.xsd:ns_p:LoadControlLimitListDataSelectorsType -> ComplexType
     def __init__(
             self,
             limit_id: LoadControlLimitIdType = None,
@@ -1378,7 +1378,7 @@ class LoadControlLimitListDataSelectorsType: # EEBus_SPINE_TS_LoadControl.xsd: C
             return cls()
 
 
-class LoadControlLimitDescriptionListDataSelectorsType: # EEBus_SPINE_TS_LoadControl.xsd: ComplexType
+class LoadControlLimitDescriptionListDataSelectorsType: # EEBus_SPINE_TS_LoadControl.xsd:ns_p:LoadControlLimitDescriptionListDataSelectorsType -> ComplexType
     def __init__(
             self,
             limit_id: LoadControlLimitIdType = None,
@@ -1465,7 +1465,7 @@ class LoadControlLimitDescriptionListDataSelectorsType: # EEBus_SPINE_TS_LoadCon
             return cls()
 
 
-class LoadControlLimitConstraintsListDataSelectorsType: # EEBus_SPINE_TS_LoadControl.xsd: ComplexType
+class LoadControlLimitConstraintsListDataSelectorsType: # EEBus_SPINE_TS_LoadControl.xsd:ns_p:LoadControlLimitConstraintsListDataSelectorsType -> ComplexType
     def __init__(
             self,
             limit_id: LoadControlLimitIdType = None,
@@ -1508,7 +1508,7 @@ class LoadControlLimitConstraintsListDataSelectorsType: # EEBus_SPINE_TS_LoadCon
             return cls()
 
 
-class LoadControlEventListDataSelectorsType: # EEBus_SPINE_TS_LoadControl.xsd: ComplexType
+class LoadControlEventListDataSelectorsType: # EEBus_SPINE_TS_LoadControl.xsd:ns_p:LoadControlEventListDataSelectorsType -> ComplexType
     def __init__(
             self,
             timestamp_interval: TimestampIntervalType = None,

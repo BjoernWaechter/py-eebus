@@ -3,7 +3,7 @@ from types import NoneType
 from spine import array_2_dict
 
 
-class ThresholdIdType: # EEBus_SPINE_TS_Threshold.xsd: AliasType
+class ThresholdIdType: # EEBus_SPINE_TS_Threshold.xsd:ns_p:ThresholdIdType -> AliasType
     def __init__(
             self,
             value: int,

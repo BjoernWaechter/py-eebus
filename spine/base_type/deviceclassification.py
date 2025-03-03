@@ -8,7 +8,7 @@ from types import NoneType
 from spine import array_2_dict
 
 
-class DeviceClassificationUserDataType: # EEBus_SPINE_TS_DeviceClassification.xsd: ComplexType
+class DeviceClassificationUserDataType: # EEBus_SPINE_TS_DeviceClassification.xsd:ns_p:DeviceClassificationUserDataType -> ComplexType
     def __init__(
             self,
             user_node_identification: DeviceClassificationStringType = None,
@@ -73,7 +73,7 @@ class DeviceClassificationUserDataType: # EEBus_SPINE_TS_DeviceClassification.xs
             return cls()
 
 
-class DeviceClassificationManufacturerDataType: # EEBus_SPINE_TS_DeviceClassification.xsd: ComplexType
+class DeviceClassificationManufacturerDataType: # EEBus_SPINE_TS_DeviceClassification.xsd:ns_p:DeviceClassificationManufacturerDataType -> ComplexType
     def __init__(
             self,
             device_name: DeviceClassificationStringType = None,
@@ -237,7 +237,7 @@ class DeviceClassificationManufacturerDataType: # EEBus_SPINE_TS_DeviceClassific
             return cls()
 
 
-class DeviceClassificationUserDataElementsType: # EEBus_SPINE_TS_DeviceClassification.xsd: ComplexType
+class DeviceClassificationUserDataElementsType: # EEBus_SPINE_TS_DeviceClassification.xsd:ns_p:DeviceClassificationUserDataElementsType -> ComplexType
     def __init__(
             self,
             user_node_identification: ElementTagType = None,
@@ -302,7 +302,7 @@ class DeviceClassificationUserDataElementsType: # EEBus_SPINE_TS_DeviceClassific
             return cls()
 
 
-class DeviceClassificationManufacturerDataElementsType: # EEBus_SPINE_TS_DeviceClassification.xsd: ComplexType
+class DeviceClassificationManufacturerDataElementsType: # EEBus_SPINE_TS_DeviceClassification.xsd:ns_p:DeviceClassificationManufacturerDataElementsType -> ComplexType
     def __init__(
             self,
             device_name: ElementTagType = None,

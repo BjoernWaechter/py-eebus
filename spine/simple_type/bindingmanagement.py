@@ -3,7 +3,7 @@ from types import NoneType
 from spine import array_2_dict
 
 
-class BindingIdType: # EEBus_SPINE_TS_BindingManagement.xsd: AliasType
+class BindingIdType: # EEBus_SPINE_TS_BindingManagement.xsd:ns_p:BindingIdType -> AliasType
     def __init__(
             self,
             value: int,

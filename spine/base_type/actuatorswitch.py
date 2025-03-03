@@ -7,7 +7,7 @@ from types import NoneType
 from spine import array_2_dict
 
 
-class ActuatorSwitchDescriptionDataType: # EEBus_SPINE_TS_ActuatorSwitch.xsd: ComplexType
+class ActuatorSwitchDescriptionDataType: # EEBus_SPINE_TS_ActuatorSwitch.xsd:ns_p:ActuatorSwitchDescriptionDataType -> ComplexType
     def __init__(
             self,
             label: LabelType = None,
@@ -61,7 +61,7 @@ class ActuatorSwitchDescriptionDataType: # EEBus_SPINE_TS_ActuatorSwitch.xsd: Co
             return cls()
 
 
-class ActuatorSwitchDataType: # EEBus_SPINE_TS_ActuatorSwitch.xsd: ComplexType
+class ActuatorSwitchDataType: # EEBus_SPINE_TS_ActuatorSwitch.xsd:ns_p:ActuatorSwitchDataType -> ComplexType
     def __init__(
             self,
             function: ActuatorSwitchFctType = None,
@@ -104,7 +104,7 @@ class ActuatorSwitchDataType: # EEBus_SPINE_TS_ActuatorSwitch.xsd: ComplexType
             return cls()
 
 
-class ActuatorSwitchDescriptionDataElementsType: # EEBus_SPINE_TS_ActuatorSwitch.xsd: ComplexType
+class ActuatorSwitchDescriptionDataElementsType: # EEBus_SPINE_TS_ActuatorSwitch.xsd:ns_p:ActuatorSwitchDescriptionDataElementsType -> ComplexType
     def __init__(
             self,
             label: ElementTagType = None,
@@ -158,7 +158,7 @@ class ActuatorSwitchDescriptionDataElementsType: # EEBus_SPINE_TS_ActuatorSwitch
             return cls()
 
 
-class ActuatorSwitchDataElementsType: # EEBus_SPINE_TS_ActuatorSwitch.xsd: ComplexType
+class ActuatorSwitchDataElementsType: # EEBus_SPINE_TS_ActuatorSwitch.xsd:ns_p:ActuatorSwitchDataElementsType -> ComplexType
     def __init__(
             self,
             function: ElementTagType = None,

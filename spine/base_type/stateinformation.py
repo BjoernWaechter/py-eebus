@@ -8,7 +8,7 @@ from types import NoneType
 from spine import array_2_dict
 
 
-class StateInformationDataType: # EEBus_SPINE_TS_StateInformation.xsd: ComplexType
+class StateInformationDataType: # EEBus_SPINE_TS_StateInformation.xsd:ns_p:StateInformationDataType -> ComplexType
     def __init__(
             self,
             state_information_id: stateInformationIdType = None,
@@ -95,7 +95,7 @@ class StateInformationDataType: # EEBus_SPINE_TS_StateInformation.xsd: ComplexTy
             return cls()
 
 
-class StateInformationListDataType: # EEBus_SPINE_TS_StateInformation.xsd: ComplexType
+class StateInformationListDataType: # EEBus_SPINE_TS_StateInformation.xsd:ns_p:StateInformationListDataType -> ComplexType
     def __init__(
             self,
             state_information_data: list[StateInformationDataType] = None,
@@ -138,7 +138,7 @@ class StateInformationListDataType: # EEBus_SPINE_TS_StateInformation.xsd: Compl
             return cls()
 
 
-class StateInformationDataElementsType: # EEBus_SPINE_TS_StateInformation.xsd: ComplexType
+class StateInformationDataElementsType: # EEBus_SPINE_TS_StateInformation.xsd:ns_p:StateInformationDataElementsType -> ComplexType
     def __init__(
             self,
             state_information_id: ElementTagType = None,
@@ -225,7 +225,7 @@ class StateInformationDataElementsType: # EEBus_SPINE_TS_StateInformation.xsd: C
             return cls()
 
 
-class StateInformationListDataSelectorsType: # EEBus_SPINE_TS_StateInformation.xsd: ComplexType
+class StateInformationListDataSelectorsType: # EEBus_SPINE_TS_StateInformation.xsd:ns_p:StateInformationListDataSelectorsType -> ComplexType
     def __init__(
             self,
             state_information_id: stateInformationIdType = None,

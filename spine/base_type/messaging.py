@@ -9,7 +9,7 @@ from types import NoneType
 from spine import array_2_dict
 
 
-class MessagingDataType: # EEBus_SPINE_TS_Messaging.xsd: ComplexType
+class MessagingDataType: # EEBus_SPINE_TS_Messaging.xsd:ns_p:MessagingDataType -> ComplexType
     def __init__(
             self,
             timestamp: AbsoluteOrRelativeTimeType = None,
@@ -85,7 +85,7 @@ class MessagingDataType: # EEBus_SPINE_TS_Messaging.xsd: ComplexType
             return cls()
 
 
-class MessagingListDataType: # EEBus_SPINE_TS_Messaging.xsd: ComplexType
+class MessagingListDataType: # EEBus_SPINE_TS_Messaging.xsd:ns_p:MessagingListDataType -> ComplexType
     def __init__(
             self,
             messaging_data: list[MessagingDataType] = None,
@@ -128,7 +128,7 @@ class MessagingListDataType: # EEBus_SPINE_TS_Messaging.xsd: ComplexType
             return cls()
 
 
-class MessagingDataElementsType: # EEBus_SPINE_TS_Messaging.xsd: ComplexType
+class MessagingDataElementsType: # EEBus_SPINE_TS_Messaging.xsd:ns_p:MessagingDataElementsType -> ComplexType
     def __init__(
             self,
             timestamp: ElementTagType = None,
@@ -204,7 +204,7 @@ class MessagingDataElementsType: # EEBus_SPINE_TS_Messaging.xsd: ComplexType
             return cls()
 
 
-class MessagingListDataSelectorsType: # EEBus_SPINE_TS_Messaging.xsd: ComplexType
+class MessagingListDataSelectorsType: # EEBus_SPINE_TS_Messaging.xsd:ns_p:MessagingListDataSelectorsType -> ComplexType
     def __init__(
             self,
             timestamp_interval: TimestampIntervalType = None,

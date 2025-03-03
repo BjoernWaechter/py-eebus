@@ -16,203 +16,7 @@ from types import NoneType
 from spine import array_2_dict
 
 
-class SetpointDescriptionDataType: # EEBus_SPINE_TS_Setpoint.xsd: ComplexType
-    def __init__(
-            self,
-            setpoint_id: SetpointIdType = None,
-            measurement_id: MeasurementIdType = None,
-            time_table_id: TimeTableIdType = None,
-            setpoint_type: SetpointTypeType = None,
-            unit: UnitOfMeasurementType = None,
-            scope_type: ScopeTypeType = None,
-            label: LabelType = None,
-            description: DescriptionType = None,
-    ):
-        super().__init__()
-        
-        self.setpoint_id = setpoint_id
-        self.measurement_id = measurement_id
-        self.time_table_id = time_table_id
-        self.setpoint_type = setpoint_type
-        self.unit = unit
-        self.scope_type = scope_type
-        self.label = label
-        self.description = description
-
-        if not isinstance(self.setpoint_id, SetpointIdType | NoneType):
-            raise TypeError("setpoint_id is not of type SetpointIdType")
-        
-        if not isinstance(self.measurement_id, MeasurementIdType | NoneType):
-            raise TypeError("measurement_id is not of type MeasurementIdType")
-        
-        if not isinstance(self.time_table_id, TimeTableIdType | NoneType):
-            raise TypeError("time_table_id is not of type TimeTableIdType")
-        
-        if not isinstance(self.setpoint_type, SetpointTypeType | NoneType):
-            raise TypeError("setpoint_type is not of type SetpointTypeType")
-        
-        if not isinstance(self.unit, UnitOfMeasurementType | NoneType):
-            raise TypeError("unit is not of type UnitOfMeasurementType")
-        
-        if not isinstance(self.scope_type, ScopeTypeType | NoneType):
-            raise TypeError("scope_type is not of type ScopeTypeType")
-        
-        if not isinstance(self.label, LabelType | NoneType):
-            raise TypeError("label is not of type LabelType")
-        
-        if not isinstance(self.description, DescriptionType | NoneType):
-            raise TypeError("description is not of type DescriptionType")
-        
-    def get_data(self):
-
-        msg_data = []
-        
-        if self.setpoint_id is not None:
-            msg_data.append({"setpointId": self.setpoint_id.get_data()})
-        if self.measurement_id is not None:
-            msg_data.append({"measurementId": self.measurement_id.get_data()})
-        if self.time_table_id is not None:
-            msg_data.append({"timeTableId": self.time_table_id.get_data()})
-        if self.setpoint_type is not None:
-            msg_data.append({"setpointType": self.setpoint_type.get_data()})
-        if self.unit is not None:
-            msg_data.append({"unit": self.unit.get_data()})
-        if self.scope_type is not None:
-            msg_data.append({"scopeType": self.scope_type.get_data()})
-        if self.label is not None:
-            msg_data.append({"label": self.label.get_data()})
-        if self.description is not None:
-            msg_data.append({"description": self.description.get_data()})
-        
-        return msg_data
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        if self.setpoint_id is not None:
-            result_str += f"{sep}setpointId: {self.setpoint_id}"
-            sep = ", "
-        if self.measurement_id is not None:
-            result_str += f"{sep}measurementId: {self.measurement_id}"
-            sep = ", "
-        if self.time_table_id is not None:
-            result_str += f"{sep}timeTableId: {self.time_table_id}"
-            sep = ", "
-        if self.setpoint_type is not None:
-            result_str += f"{sep}setpointType: {self.setpoint_type}"
-            sep = ", "
-        if self.unit is not None:
-            result_str += f"{sep}unit: {self.unit}"
-            sep = ", "
-        if self.scope_type is not None:
-            result_str += f"{sep}scopeType: {self.scope_type}"
-            sep = ", "
-        if self.label is not None:
-            result_str += f"{sep}label: {self.label}"
-            sep = ", "
-        if self.description is not None:
-            result_str += f"{sep}description: {self.description}"
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
-                setpoint_id=data_dict.get('setpointId'),
-                measurement_id=data_dict.get('measurementId'),
-                time_table_id=data_dict.get('timeTableId'),
-                setpoint_type=data_dict.get('setpointType'),
-                unit=data_dict.get('unit'),
-                scope_type=data_dict.get('scopeType'),
-                label=data_dict.get('label'),
-                description=data_dict.get('description'),
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class SetpointConstraintsDataType: # EEBus_SPINE_TS_Setpoint.xsd: ComplexType
-    def __init__(
-            self,
-            setpoint_id: SetpointIdType = None,
-            setpoint_range_min: ScaledNumberType = None,
-            setpoint_range_max: ScaledNumberType = None,
-            setpoint_step_size: ScaledNumberType = None,
-    ):
-        super().__init__()
-        
-        self.setpoint_id = setpoint_id
-        self.setpoint_range_min = setpoint_range_min
-        self.setpoint_range_max = setpoint_range_max
-        self.setpoint_step_size = setpoint_step_size
-
-        if not isinstance(self.setpoint_id, SetpointIdType | NoneType):
-            raise TypeError("setpoint_id is not of type SetpointIdType")
-        
-        if not isinstance(self.setpoint_range_min, ScaledNumberType | NoneType):
-            raise TypeError("setpoint_range_min is not of type ScaledNumberType")
-        
-        if not isinstance(self.setpoint_range_max, ScaledNumberType | NoneType):
-            raise TypeError("setpoint_range_max is not of type ScaledNumberType")
-        
-        if not isinstance(self.setpoint_step_size, ScaledNumberType | NoneType):
-            raise TypeError("setpoint_step_size is not of type ScaledNumberType")
-        
-    def get_data(self):
-
-        msg_data = []
-        
-        if self.setpoint_id is not None:
-            msg_data.append({"setpointId": self.setpoint_id.get_data()})
-        if self.setpoint_range_min is not None:
-            msg_data.append({"setpointRangeMin": self.setpoint_range_min.get_data()})
-        if self.setpoint_range_max is not None:
-            msg_data.append({"setpointRangeMax": self.setpoint_range_max.get_data()})
-        if self.setpoint_step_size is not None:
-            msg_data.append({"setpointStepSize": self.setpoint_step_size.get_data()})
-        
-        return msg_data
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        if self.setpoint_id is not None:
-            result_str += f"{sep}setpointId: {self.setpoint_id}"
-            sep = ", "
-        if self.setpoint_range_min is not None:
-            result_str += f"{sep}setpointRangeMin: {self.setpoint_range_min}"
-            sep = ", "
-        if self.setpoint_range_max is not None:
-            result_str += f"{sep}setpointRangeMax: {self.setpoint_range_max}"
-            sep = ", "
-        if self.setpoint_step_size is not None:
-            result_str += f"{sep}setpointStepSize: {self.setpoint_step_size}"
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
-                setpoint_id=data_dict.get('setpointId'),
-                setpoint_range_min=data_dict.get('setpointRangeMin'),
-                setpoint_range_max=data_dict.get('setpointRangeMax'),
-                setpoint_step_size=data_dict.get('setpointStepSize'),
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class SetpointDataType: # EEBus_SPINE_TS_Setpoint.xsd: ComplexType
+class SetpointDataType: # EEBus_SPINE_TS_Setpoint.xsd:ns_p:SetpointDataType -> ComplexType
     def __init__(
             self,
             setpoint_id: SetpointIdType = None,
@@ -343,24 +147,73 @@ class SetpointDataType: # EEBus_SPINE_TS_Setpoint.xsd: ComplexType
             return cls()
 
 
-class SetpointDescriptionListDataType: # EEBus_SPINE_TS_Setpoint.xsd: ComplexType
+class SetpointDescriptionDataType: # EEBus_SPINE_TS_Setpoint.xsd:ns_p:SetpointDescriptionDataType -> ComplexType
     def __init__(
             self,
-            setpoint_description_data: list[SetpointDescriptionDataType] = None,
+            setpoint_id: SetpointIdType = None,
+            measurement_id: MeasurementIdType = None,
+            time_table_id: TimeTableIdType = None,
+            setpoint_type: SetpointTypeType = None,
+            unit: UnitOfMeasurementType = None,
+            scope_type: ScopeTypeType = None,
+            label: LabelType = None,
+            description: DescriptionType = None,
     ):
         super().__init__()
         
-        self.setpoint_description_data = setpoint_description_data
+        self.setpoint_id = setpoint_id
+        self.measurement_id = measurement_id
+        self.time_table_id = time_table_id
+        self.setpoint_type = setpoint_type
+        self.unit = unit
+        self.scope_type = scope_type
+        self.label = label
+        self.description = description
 
-        if not isinstance(self.setpoint_description_data, list | NoneType):
-            raise TypeError("setpoint_description_data is not of type list[SetpointDescriptionDataType]")
+        if not isinstance(self.setpoint_id, SetpointIdType | NoneType):
+            raise TypeError("setpoint_id is not of type SetpointIdType")
+        
+        if not isinstance(self.measurement_id, MeasurementIdType | NoneType):
+            raise TypeError("measurement_id is not of type MeasurementIdType")
+        
+        if not isinstance(self.time_table_id, TimeTableIdType | NoneType):
+            raise TypeError("time_table_id is not of type TimeTableIdType")
+        
+        if not isinstance(self.setpoint_type, SetpointTypeType | NoneType):
+            raise TypeError("setpoint_type is not of type SetpointTypeType")
+        
+        if not isinstance(self.unit, UnitOfMeasurementType | NoneType):
+            raise TypeError("unit is not of type UnitOfMeasurementType")
+        
+        if not isinstance(self.scope_type, ScopeTypeType | NoneType):
+            raise TypeError("scope_type is not of type ScopeTypeType")
+        
+        if not isinstance(self.label, LabelType | NoneType):
+            raise TypeError("label is not of type LabelType")
+        
+        if not isinstance(self.description, DescriptionType | NoneType):
+            raise TypeError("description is not of type DescriptionType")
         
     def get_data(self):
 
         msg_data = []
         
-        if self.setpoint_description_data is not None:
-            msg_data.append({"setpointDescriptionData": [d.get_data() for d in self.setpoint_description_data]})
+        if self.setpoint_id is not None:
+            msg_data.append({"setpointId": self.setpoint_id.get_data()})
+        if self.measurement_id is not None:
+            msg_data.append({"measurementId": self.measurement_id.get_data()})
+        if self.time_table_id is not None:
+            msg_data.append({"timeTableId": self.time_table_id.get_data()})
+        if self.setpoint_type is not None:
+            msg_data.append({"setpointType": self.setpoint_type.get_data()})
+        if self.unit is not None:
+            msg_data.append({"unit": self.unit.get_data()})
+        if self.scope_type is not None:
+            msg_data.append({"scopeType": self.scope_type.get_data()})
+        if self.label is not None:
+            msg_data.append({"label": self.label.get_data()})
+        if self.description is not None:
+            msg_data.append({"description": self.description.get_data()})
         
         return msg_data
 
@@ -368,8 +221,29 @@ class SetpointDescriptionListDataType: # EEBus_SPINE_TS_Setpoint.xsd: ComplexTyp
     def __str__(self):
         result_str = ""
         sep = ""
-        if self.setpoint_description_data is not None:
-            result_str += f"{sep}setpointDescriptionData: {self.setpoint_description_data}"
+        if self.setpoint_id is not None:
+            result_str += f"{sep}setpointId: {self.setpoint_id}"
+            sep = ", "
+        if self.measurement_id is not None:
+            result_str += f"{sep}measurementId: {self.measurement_id}"
+            sep = ", "
+        if self.time_table_id is not None:
+            result_str += f"{sep}timeTableId: {self.time_table_id}"
+            sep = ", "
+        if self.setpoint_type is not None:
+            result_str += f"{sep}setpointType: {self.setpoint_type}"
+            sep = ", "
+        if self.unit is not None:
+            result_str += f"{sep}unit: {self.unit}"
+            sep = ", "
+        if self.scope_type is not None:
+            result_str += f"{sep}scopeType: {self.scope_type}"
+            sep = ", "
+        if self.label is not None:
+            result_str += f"{sep}label: {self.label}"
+            sep = ", "
+        if self.description is not None:
+            result_str += f"{sep}description: {self.description}"
         
         return result_str
 
@@ -378,7 +252,14 @@ class SetpointDescriptionListDataType: # EEBus_SPINE_TS_Setpoint.xsd: ComplexTyp
         if type(data) == list:
             data_dict = array_2_dict(data)
             return cls(
-                setpoint_description_data=data_dict.get('setpointDescriptionData'),
+                setpoint_id=data_dict.get('setpointId'),
+                measurement_id=data_dict.get('measurementId'),
+                time_table_id=data_dict.get('timeTableId'),
+                setpoint_type=data_dict.get('setpointType'),
+                unit=data_dict.get('unit'),
+                scope_type=data_dict.get('scopeType'),
+                label=data_dict.get('label'),
+                description=data_dict.get('description'),
             )
         elif data:
             return cls(data)
@@ -386,24 +267,45 @@ class SetpointDescriptionListDataType: # EEBus_SPINE_TS_Setpoint.xsd: ComplexTyp
             return cls()
 
 
-class SetpointConstraintsListDataType: # EEBus_SPINE_TS_Setpoint.xsd: ComplexType
+class SetpointConstraintsDataType: # EEBus_SPINE_TS_Setpoint.xsd:ns_p:SetpointConstraintsDataType -> ComplexType
     def __init__(
             self,
-            setpoint_constraints_data: list[SetpointConstraintsDataType] = None,
+            setpoint_id: SetpointIdType = None,
+            setpoint_range_min: ScaledNumberType = None,
+            setpoint_range_max: ScaledNumberType = None,
+            setpoint_step_size: ScaledNumberType = None,
     ):
         super().__init__()
         
-        self.setpoint_constraints_data = setpoint_constraints_data
+        self.setpoint_id = setpoint_id
+        self.setpoint_range_min = setpoint_range_min
+        self.setpoint_range_max = setpoint_range_max
+        self.setpoint_step_size = setpoint_step_size
 
-        if not isinstance(self.setpoint_constraints_data, list | NoneType):
-            raise TypeError("setpoint_constraints_data is not of type list[SetpointConstraintsDataType]")
+        if not isinstance(self.setpoint_id, SetpointIdType | NoneType):
+            raise TypeError("setpoint_id is not of type SetpointIdType")
+        
+        if not isinstance(self.setpoint_range_min, ScaledNumberType | NoneType):
+            raise TypeError("setpoint_range_min is not of type ScaledNumberType")
+        
+        if not isinstance(self.setpoint_range_max, ScaledNumberType | NoneType):
+            raise TypeError("setpoint_range_max is not of type ScaledNumberType")
+        
+        if not isinstance(self.setpoint_step_size, ScaledNumberType | NoneType):
+            raise TypeError("setpoint_step_size is not of type ScaledNumberType")
         
     def get_data(self):
 
         msg_data = []
         
-        if self.setpoint_constraints_data is not None:
-            msg_data.append({"setpointConstraintsData": [d.get_data() for d in self.setpoint_constraints_data]})
+        if self.setpoint_id is not None:
+            msg_data.append({"setpointId": self.setpoint_id.get_data()})
+        if self.setpoint_range_min is not None:
+            msg_data.append({"setpointRangeMin": self.setpoint_range_min.get_data()})
+        if self.setpoint_range_max is not None:
+            msg_data.append({"setpointRangeMax": self.setpoint_range_max.get_data()})
+        if self.setpoint_step_size is not None:
+            msg_data.append({"setpointStepSize": self.setpoint_step_size.get_data()})
         
         return msg_data
 
@@ -411,8 +313,17 @@ class SetpointConstraintsListDataType: # EEBus_SPINE_TS_Setpoint.xsd: ComplexTyp
     def __str__(self):
         result_str = ""
         sep = ""
-        if self.setpoint_constraints_data is not None:
-            result_str += f"{sep}setpointConstraintsData: {self.setpoint_constraints_data}"
+        if self.setpoint_id is not None:
+            result_str += f"{sep}setpointId: {self.setpoint_id}"
+            sep = ", "
+        if self.setpoint_range_min is not None:
+            result_str += f"{sep}setpointRangeMin: {self.setpoint_range_min}"
+            sep = ", "
+        if self.setpoint_range_max is not None:
+            result_str += f"{sep}setpointRangeMax: {self.setpoint_range_max}"
+            sep = ", "
+        if self.setpoint_step_size is not None:
+            result_str += f"{sep}setpointStepSize: {self.setpoint_step_size}"
         
         return result_str
 
@@ -421,7 +332,10 @@ class SetpointConstraintsListDataType: # EEBus_SPINE_TS_Setpoint.xsd: ComplexTyp
         if type(data) == list:
             data_dict = array_2_dict(data)
             return cls(
-                setpoint_constraints_data=data_dict.get('setpointConstraintsData'),
+                setpoint_id=data_dict.get('setpointId'),
+                setpoint_range_min=data_dict.get('setpointRangeMin'),
+                setpoint_range_max=data_dict.get('setpointRangeMax'),
+                setpoint_step_size=data_dict.get('setpointStepSize'),
             )
         elif data:
             return cls(data)
@@ -429,7 +343,7 @@ class SetpointConstraintsListDataType: # EEBus_SPINE_TS_Setpoint.xsd: ComplexTyp
             return cls()
 
 
-class SetpointListDataType: # EEBus_SPINE_TS_Setpoint.xsd: ComplexType
+class SetpointListDataType: # EEBus_SPINE_TS_Setpoint.xsd:ns_p:SetpointListDataType -> ComplexType
     def __init__(
             self,
             setpoint_data: list[SetpointDataType] = None,
@@ -472,7 +386,93 @@ class SetpointListDataType: # EEBus_SPINE_TS_Setpoint.xsd: ComplexType
             return cls()
 
 
-class SetpointDescriptionDataElementsType: # EEBus_SPINE_TS_Setpoint.xsd: ComplexType
+class SetpointDescriptionListDataType: # EEBus_SPINE_TS_Setpoint.xsd:ns_p:SetpointDescriptionListDataType -> ComplexType
+    def __init__(
+            self,
+            setpoint_description_data: list[SetpointDescriptionDataType] = None,
+    ):
+        super().__init__()
+        
+        self.setpoint_description_data = setpoint_description_data
+
+        if not isinstance(self.setpoint_description_data, list | NoneType):
+            raise TypeError("setpoint_description_data is not of type list[SetpointDescriptionDataType]")
+        
+    def get_data(self):
+
+        msg_data = []
+        
+        if self.setpoint_description_data is not None:
+            msg_data.append({"setpointDescriptionData": [d.get_data() for d in self.setpoint_description_data]})
+        
+        return msg_data
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        if self.setpoint_description_data is not None:
+            result_str += f"{sep}setpointDescriptionData: {self.setpoint_description_data}"
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+                setpoint_description_data=data_dict.get('setpointDescriptionData'),
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class SetpointConstraintsListDataType: # EEBus_SPINE_TS_Setpoint.xsd:ns_p:SetpointConstraintsListDataType -> ComplexType
+    def __init__(
+            self,
+            setpoint_constraints_data: list[SetpointConstraintsDataType] = None,
+    ):
+        super().__init__()
+        
+        self.setpoint_constraints_data = setpoint_constraints_data
+
+        if not isinstance(self.setpoint_constraints_data, list | NoneType):
+            raise TypeError("setpoint_constraints_data is not of type list[SetpointConstraintsDataType]")
+        
+    def get_data(self):
+
+        msg_data = []
+        
+        if self.setpoint_constraints_data is not None:
+            msg_data.append({"setpointConstraintsData": [d.get_data() for d in self.setpoint_constraints_data]})
+        
+        return msg_data
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        if self.setpoint_constraints_data is not None:
+            result_str += f"{sep}setpointConstraintsData: {self.setpoint_constraints_data}"
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+                setpoint_constraints_data=data_dict.get('setpointConstraintsData'),
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class SetpointDescriptionDataElementsType: # EEBus_SPINE_TS_Setpoint.xsd:ns_p:SetpointDescriptionDataElementsType -> ComplexType
     def __init__(
             self,
             setpoint_id: ElementTagType = None,
@@ -592,7 +592,7 @@ class SetpointDescriptionDataElementsType: # EEBus_SPINE_TS_Setpoint.xsd: Comple
             return cls()
 
 
-class SetpointDataElementsType: # EEBus_SPINE_TS_Setpoint.xsd: ComplexType
+class SetpointDataElementsType: # EEBus_SPINE_TS_Setpoint.xsd:ns_p:SetpointDataElementsType -> ComplexType
     def __init__(
             self,
             setpoint_id: ElementTagType = None,
@@ -723,7 +723,7 @@ class SetpointDataElementsType: # EEBus_SPINE_TS_Setpoint.xsd: ComplexType
             return cls()
 
 
-class SetpointConstraintsDataElementsType: # EEBus_SPINE_TS_Setpoint.xsd: ComplexType
+class SetpointConstraintsDataElementsType: # EEBus_SPINE_TS_Setpoint.xsd:ns_p:SetpointConstraintsDataElementsType -> ComplexType
     def __init__(
             self,
             setpoint_id: ElementTagType = None,
@@ -799,7 +799,7 @@ class SetpointConstraintsDataElementsType: # EEBus_SPINE_TS_Setpoint.xsd: Comple
             return cls()
 
 
-class SetpointListDataSelectorsType: # EEBus_SPINE_TS_Setpoint.xsd: ComplexType
+class SetpointListDataSelectorsType: # EEBus_SPINE_TS_Setpoint.xsd:ns_p:SetpointListDataSelectorsType -> ComplexType
     def __init__(
             self,
             setpoint_id: SetpointIdType = None,
@@ -842,7 +842,7 @@ class SetpointListDataSelectorsType: # EEBus_SPINE_TS_Setpoint.xsd: ComplexType
             return cls()
 
 
-class SetpointDescriptionListDataSelectorsType: # EEBus_SPINE_TS_Setpoint.xsd: ComplexType
+class SetpointDescriptionListDataSelectorsType: # EEBus_SPINE_TS_Setpoint.xsd:ns_p:SetpointDescriptionListDataSelectorsType -> ComplexType
     def __init__(
             self,
             setpoint_id: SetpointIdType = None,
@@ -929,7 +929,7 @@ class SetpointDescriptionListDataSelectorsType: # EEBus_SPINE_TS_Setpoint.xsd: C
             return cls()
 
 
-class SetpointConstraintsListDataSelectorsType: # EEBus_SPINE_TS_Setpoint.xsd: ComplexType
+class SetpointConstraintsListDataSelectorsType: # EEBus_SPINE_TS_Setpoint.xsd:ns_p:SetpointConstraintsListDataSelectorsType -> ComplexType
     def __init__(
             self,
             setpoint_id: SetpointIdType = None,

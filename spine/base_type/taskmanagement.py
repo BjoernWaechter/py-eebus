@@ -13,7 +13,7 @@ from types import NoneType
 from spine import array_2_dict
 
 
-class TaskManagementSmartEnergyManagementPsRelatedType: # EEBus_SPINE_TS_TaskManagement.xsd: ComplexType
+class TaskManagementSmartEnergyManagementPsRelatedType: # EEBus_SPINE_TS_TaskManagement.xsd:ns_p:TaskManagementSmartEnergyManagementPsRelatedType -> ComplexType
     def __init__(
             self,
             sequence_id: PowerSequenceIdType = None,
@@ -56,7 +56,7 @@ class TaskManagementSmartEnergyManagementPsRelatedType: # EEBus_SPINE_TS_TaskMan
             return cls()
 
 
-class TaskManagementPowerSequencesRelatedType: # EEBus_SPINE_TS_TaskManagement.xsd: ComplexType
+class TaskManagementPowerSequencesRelatedType: # EEBus_SPINE_TS_TaskManagement.xsd:ns_p:TaskManagementPowerSequencesRelatedType -> ComplexType
     def __init__(
             self,
             sequence_id: PowerSequenceIdType = None,
@@ -99,7 +99,7 @@ class TaskManagementPowerSequencesRelatedType: # EEBus_SPINE_TS_TaskManagement.x
             return cls()
 
 
-class TaskManagementLoadControlReleatedType: # EEBus_SPINE_TS_TaskManagement.xsd: ComplexType
+class TaskManagementLoadControlReleatedType: # EEBus_SPINE_TS_TaskManagement.xsd:ns_p:TaskManagementLoadControlReleatedType -> ComplexType
     def __init__(
             self,
             event_id: LoadControlEventIdType = None,
@@ -142,7 +142,7 @@ class TaskManagementLoadControlReleatedType: # EEBus_SPINE_TS_TaskManagement.xsd
             return cls()
 
 
-class TaskManagementHvacRelatedType: # EEBus_SPINE_TS_TaskManagement.xsd: ComplexType
+class TaskManagementHvacRelatedType: # EEBus_SPINE_TS_TaskManagement.xsd:ns_p:TaskManagementHvacRelatedType -> ComplexType
     def __init__(
             self,
             overrun_id: HvacOverrunIdType = None,
@@ -185,7 +185,7 @@ class TaskManagementHvacRelatedType: # EEBus_SPINE_TS_TaskManagement.xsd: Comple
             return cls()
 
 
-class TaskManagementDirectControlRelatedType: # EEBus_SPINE_TS_TaskManagement.xsd: ComplexType
+class TaskManagementDirectControlRelatedType: # EEBus_SPINE_TS_TaskManagement.xsd:ns_p:TaskManagementDirectControlRelatedType -> ComplexType
     def __init__(
             self,
     ):
@@ -218,83 +218,7 @@ class TaskManagementDirectControlRelatedType: # EEBus_SPINE_TS_TaskManagement.xs
             return cls()
 
 
-class TaskManagementJobDescriptionDataType: # EEBus_SPINE_TS_TaskManagement.xsd: ComplexType
-    def __init__(
-            self,
-            job_id: TaskManagementJobIdType = None,
-            job_source: TaskManagementJobSourceType = None,
-            label: LabelType = None,
-            description: DescriptionType = None,
-    ):
-        super().__init__()
-        
-        self.job_id = job_id
-        self.job_source = job_source
-        self.label = label
-        self.description = description
-
-        if not isinstance(self.job_id, TaskManagementJobIdType | NoneType):
-            raise TypeError("job_id is not of type TaskManagementJobIdType")
-        
-        if not isinstance(self.job_source, TaskManagementJobSourceType | NoneType):
-            raise TypeError("job_source is not of type TaskManagementJobSourceType")
-        
-        if not isinstance(self.label, LabelType | NoneType):
-            raise TypeError("label is not of type LabelType")
-        
-        if not isinstance(self.description, DescriptionType | NoneType):
-            raise TypeError("description is not of type DescriptionType")
-        
-    def get_data(self):
-
-        msg_data = []
-        
-        if self.job_id is not None:
-            msg_data.append({"jobId": self.job_id.get_data()})
-        if self.job_source is not None:
-            msg_data.append({"jobSource": self.job_source.get_data()})
-        if self.label is not None:
-            msg_data.append({"label": self.label.get_data()})
-        if self.description is not None:
-            msg_data.append({"description": self.description.get_data()})
-        
-        return msg_data
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        if self.job_id is not None:
-            result_str += f"{sep}jobId: {self.job_id}"
-            sep = ", "
-        if self.job_source is not None:
-            result_str += f"{sep}jobSource: {self.job_source}"
-            sep = ", "
-        if self.label is not None:
-            result_str += f"{sep}label: {self.label}"
-            sep = ", "
-        if self.description is not None:
-            result_str += f"{sep}description: {self.description}"
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
-                job_id=data_dict.get('jobId'),
-                job_source=data_dict.get('jobSource'),
-                label=data_dict.get('label'),
-                description=data_dict.get('description'),
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class TaskManagementJobRelationDataType: # EEBus_SPINE_TS_TaskManagement.xsd: ComplexType
+class TaskManagementJobRelationDataType: # EEBus_SPINE_TS_TaskManagement.xsd:ns_p:TaskManagementJobRelationDataType -> ComplexType
     def __init__(
             self,
             job_id: TaskManagementJobIdType = None,
@@ -392,7 +316,7 @@ class TaskManagementJobRelationDataType: # EEBus_SPINE_TS_TaskManagement.xsd: Co
             return cls()
 
 
-class TaskManagementJobDataType: # EEBus_SPINE_TS_TaskManagement.xsd: ComplexType
+class TaskManagementJobDataType: # EEBus_SPINE_TS_TaskManagement.xsd:ns_p:TaskManagementJobDataType -> ComplexType
     def __init__(
             self,
             job_id: TaskManagementJobIdType = None,
@@ -479,7 +403,83 @@ class TaskManagementJobDataType: # EEBus_SPINE_TS_TaskManagement.xsd: ComplexTyp
             return cls()
 
 
-class TaskManagementSmartEnergyManagementPsRelatedElementsType: # EEBus_SPINE_TS_TaskManagement.xsd: ComplexType
+class TaskManagementJobDescriptionDataType: # EEBus_SPINE_TS_TaskManagement.xsd:ns_p:TaskManagementJobDescriptionDataType -> ComplexType
+    def __init__(
+            self,
+            job_id: TaskManagementJobIdType = None,
+            job_source: TaskManagementJobSourceType = None,
+            label: LabelType = None,
+            description: DescriptionType = None,
+    ):
+        super().__init__()
+        
+        self.job_id = job_id
+        self.job_source = job_source
+        self.label = label
+        self.description = description
+
+        if not isinstance(self.job_id, TaskManagementJobIdType | NoneType):
+            raise TypeError("job_id is not of type TaskManagementJobIdType")
+        
+        if not isinstance(self.job_source, TaskManagementJobSourceType | NoneType):
+            raise TypeError("job_source is not of type TaskManagementJobSourceType")
+        
+        if not isinstance(self.label, LabelType | NoneType):
+            raise TypeError("label is not of type LabelType")
+        
+        if not isinstance(self.description, DescriptionType | NoneType):
+            raise TypeError("description is not of type DescriptionType")
+        
+    def get_data(self):
+
+        msg_data = []
+        
+        if self.job_id is not None:
+            msg_data.append({"jobId": self.job_id.get_data()})
+        if self.job_source is not None:
+            msg_data.append({"jobSource": self.job_source.get_data()})
+        if self.label is not None:
+            msg_data.append({"label": self.label.get_data()})
+        if self.description is not None:
+            msg_data.append({"description": self.description.get_data()})
+        
+        return msg_data
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        if self.job_id is not None:
+            result_str += f"{sep}jobId: {self.job_id}"
+            sep = ", "
+        if self.job_source is not None:
+            result_str += f"{sep}jobSource: {self.job_source}"
+            sep = ", "
+        if self.label is not None:
+            result_str += f"{sep}label: {self.label}"
+            sep = ", "
+        if self.description is not None:
+            result_str += f"{sep}description: {self.description}"
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+                job_id=data_dict.get('jobId'),
+                job_source=data_dict.get('jobSource'),
+                label=data_dict.get('label'),
+                description=data_dict.get('description'),
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class TaskManagementSmartEnergyManagementPsRelatedElementsType: # EEBus_SPINE_TS_TaskManagement.xsd:ns_p:TaskManagementSmartEnergyManagementPsRelatedElementsType -> ComplexType
     def __init__(
             self,
             sequence_id: ElementTagType = None,
@@ -522,7 +522,7 @@ class TaskManagementSmartEnergyManagementPsRelatedElementsType: # EEBus_SPINE_TS
             return cls()
 
 
-class TaskManagementPowerSequencesRelatedElementsType: # EEBus_SPINE_TS_TaskManagement.xsd: ComplexType
+class TaskManagementPowerSequencesRelatedElementsType: # EEBus_SPINE_TS_TaskManagement.xsd:ns_p:TaskManagementPowerSequencesRelatedElementsType -> ComplexType
     def __init__(
             self,
             sequence_id: ElementTagType = None,
@@ -565,7 +565,7 @@ class TaskManagementPowerSequencesRelatedElementsType: # EEBus_SPINE_TS_TaskMana
             return cls()
 
 
-class TaskManagementLoadControlReleatedElementsType: # EEBus_SPINE_TS_TaskManagement.xsd: ComplexType
+class TaskManagementLoadControlReleatedElementsType: # EEBus_SPINE_TS_TaskManagement.xsd:ns_p:TaskManagementLoadControlReleatedElementsType -> ComplexType
     def __init__(
             self,
             event_id: ElementTagType = None,
@@ -608,7 +608,7 @@ class TaskManagementLoadControlReleatedElementsType: # EEBus_SPINE_TS_TaskManage
             return cls()
 
 
-class TaskManagementHvacRelatedElementsType: # EEBus_SPINE_TS_TaskManagement.xsd: ComplexType
+class TaskManagementHvacRelatedElementsType: # EEBus_SPINE_TS_TaskManagement.xsd:ns_p:TaskManagementHvacRelatedElementsType -> ComplexType
     def __init__(
             self,
             overrun_id: ElementTagType = None,
@@ -651,7 +651,7 @@ class TaskManagementHvacRelatedElementsType: # EEBus_SPINE_TS_TaskManagement.xsd
             return cls()
 
 
-class TaskManagementDirectControlRelatedElementsType: # EEBus_SPINE_TS_TaskManagement.xsd: ComplexType
+class TaskManagementDirectControlRelatedElementsType: # EEBus_SPINE_TS_TaskManagement.xsd:ns_p:TaskManagementDirectControlRelatedElementsType -> ComplexType
     def __init__(
             self,
     ):
@@ -684,7 +684,7 @@ class TaskManagementDirectControlRelatedElementsType: # EEBus_SPINE_TS_TaskManag
             return cls()
 
 
-class TaskManagementOverviewDataType: # EEBus_SPINE_TS_TaskManagement.xsd: ComplexType
+class TaskManagementOverviewDataType: # EEBus_SPINE_TS_TaskManagement.xsd:ns_p:TaskManagementOverviewDataType -> ComplexType
     def __init__(
             self,
             remote_controllable: bool = None,
@@ -738,50 +738,7 @@ class TaskManagementOverviewDataType: # EEBus_SPINE_TS_TaskManagement.xsd: Compl
             return cls()
 
 
-class TaskManagementJobDescriptionListDataType: # EEBus_SPINE_TS_TaskManagement.xsd: ComplexType
-    def __init__(
-            self,
-            task_management_job_description_data: list[TaskManagementJobDescriptionDataType] = None,
-    ):
-        super().__init__()
-        
-        self.task_management_job_description_data = task_management_job_description_data
-
-        if not isinstance(self.task_management_job_description_data, list | NoneType):
-            raise TypeError("task_management_job_description_data is not of type list[TaskManagementJobDescriptionDataType]")
-        
-    def get_data(self):
-
-        msg_data = []
-        
-        if self.task_management_job_description_data is not None:
-            msg_data.append({"taskManagementJobDescriptionData": [d.get_data() for d in self.task_management_job_description_data]})
-        
-        return msg_data
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        if self.task_management_job_description_data is not None:
-            result_str += f"{sep}taskManagementJobDescriptionData: {self.task_management_job_description_data}"
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
-                task_management_job_description_data=data_dict.get('taskManagementJobDescriptionData'),
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class TaskManagementJobRelationListDataType: # EEBus_SPINE_TS_TaskManagement.xsd: ComplexType
+class TaskManagementJobRelationListDataType: # EEBus_SPINE_TS_TaskManagement.xsd:ns_p:TaskManagementJobRelationListDataType -> ComplexType
     def __init__(
             self,
             task_management_job_relation_data: list[TaskManagementJobRelationDataType] = None,
@@ -824,7 +781,7 @@ class TaskManagementJobRelationListDataType: # EEBus_SPINE_TS_TaskManagement.xsd
             return cls()
 
 
-class TaskManagementJobListDataType: # EEBus_SPINE_TS_TaskManagement.xsd: ComplexType
+class TaskManagementJobListDataType: # EEBus_SPINE_TS_TaskManagement.xsd:ns_p:TaskManagementJobListDataType -> ComplexType
     def __init__(
             self,
             task_management_job_data: list[TaskManagementJobDataType] = None,
@@ -867,7 +824,50 @@ class TaskManagementJobListDataType: # EEBus_SPINE_TS_TaskManagement.xsd: Comple
             return cls()
 
 
-class TaskManagementOverviewDataElementsType: # EEBus_SPINE_TS_TaskManagement.xsd: ComplexType
+class TaskManagementJobDescriptionListDataType: # EEBus_SPINE_TS_TaskManagement.xsd:ns_p:TaskManagementJobDescriptionListDataType -> ComplexType
+    def __init__(
+            self,
+            task_management_job_description_data: list[TaskManagementJobDescriptionDataType] = None,
+    ):
+        super().__init__()
+        
+        self.task_management_job_description_data = task_management_job_description_data
+
+        if not isinstance(self.task_management_job_description_data, list | NoneType):
+            raise TypeError("task_management_job_description_data is not of type list[TaskManagementJobDescriptionDataType]")
+        
+    def get_data(self):
+
+        msg_data = []
+        
+        if self.task_management_job_description_data is not None:
+            msg_data.append({"taskManagementJobDescriptionData": [d.get_data() for d in self.task_management_job_description_data]})
+        
+        return msg_data
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        if self.task_management_job_description_data is not None:
+            result_str += f"{sep}taskManagementJobDescriptionData: {self.task_management_job_description_data}"
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+                task_management_job_description_data=data_dict.get('taskManagementJobDescriptionData'),
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class TaskManagementOverviewDataElementsType: # EEBus_SPINE_TS_TaskManagement.xsd:ns_p:TaskManagementOverviewDataElementsType -> ComplexType
     def __init__(
             self,
             remote_controllable: ElementTagType = None,
@@ -921,7 +921,7 @@ class TaskManagementOverviewDataElementsType: # EEBus_SPINE_TS_TaskManagement.xs
             return cls()
 
 
-class TaskManagementJobRelationDataElementsType: # EEBus_SPINE_TS_TaskManagement.xsd: ComplexType
+class TaskManagementJobRelationDataElementsType: # EEBus_SPINE_TS_TaskManagement.xsd:ns_p:TaskManagementJobRelationDataElementsType -> ComplexType
     def __init__(
             self,
             job_id: ElementTagType = None,
@@ -1019,7 +1019,7 @@ class TaskManagementJobRelationDataElementsType: # EEBus_SPINE_TS_TaskManagement
             return cls()
 
 
-class TaskManagementJobDescriptionDataElementsType: # EEBus_SPINE_TS_TaskManagement.xsd: ComplexType
+class TaskManagementJobDescriptionDataElementsType: # EEBus_SPINE_TS_TaskManagement.xsd:ns_p:TaskManagementJobDescriptionDataElementsType -> ComplexType
     def __init__(
             self,
             job_id: ElementTagType = None,
@@ -1095,7 +1095,7 @@ class TaskManagementJobDescriptionDataElementsType: # EEBus_SPINE_TS_TaskManagem
             return cls()
 
 
-class TaskManagementJobDataElementsType: # EEBus_SPINE_TS_TaskManagement.xsd: ComplexType
+class TaskManagementJobDataElementsType: # EEBus_SPINE_TS_TaskManagement.xsd:ns_p:TaskManagementJobDataElementsType -> ComplexType
     def __init__(
             self,
             job_id: ElementTagType = None,
@@ -1182,7 +1182,7 @@ class TaskManagementJobDataElementsType: # EEBus_SPINE_TS_TaskManagement.xsd: Co
             return cls()
 
 
-class TaskManagementJobRelationListDataSelectorsType: # EEBus_SPINE_TS_TaskManagement.xsd: ComplexType
+class TaskManagementJobRelationListDataSelectorsType: # EEBus_SPINE_TS_TaskManagement.xsd:ns_p:TaskManagementJobRelationListDataSelectorsType -> ComplexType
     def __init__(
             self,
             job_id: TaskManagementJobIdType = None,
@@ -1225,7 +1225,7 @@ class TaskManagementJobRelationListDataSelectorsType: # EEBus_SPINE_TS_TaskManag
             return cls()
 
 
-class TaskManagementJobListDataSelectorsType: # EEBus_SPINE_TS_TaskManagement.xsd: ComplexType
+class TaskManagementJobListDataSelectorsType: # EEBus_SPINE_TS_TaskManagement.xsd:ns_p:TaskManagementJobListDataSelectorsType -> ComplexType
     def __init__(
             self,
             job_id: TaskManagementJobIdType = None,
@@ -1279,7 +1279,7 @@ class TaskManagementJobListDataSelectorsType: # EEBus_SPINE_TS_TaskManagement.xs
             return cls()
 
 
-class TaskManagementJobDescriptionListDataSelectorsType: # EEBus_SPINE_TS_TaskManagement.xsd: ComplexType
+class TaskManagementJobDescriptionListDataSelectorsType: # EEBus_SPINE_TS_TaskManagement.xsd:ns_p:TaskManagementJobDescriptionListDataSelectorsType -> ComplexType
     def __init__(
             self,
             job_id: TaskManagementJobIdType = None,

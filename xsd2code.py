@@ -204,7 +204,7 @@ for schema_cfg in schemas:
     #
     for grp in schema.groups:
         grp_obj = schema.groups[grp]
-        print(f"{folder}-{grp_obj.display_name}")
+        #print(f"{folder}-{grp_obj.display_name}")
 
         xsd2code.ALL_TYPES.get_or_create(
             xsd2code.create_type_from_xsd(grp_obj)

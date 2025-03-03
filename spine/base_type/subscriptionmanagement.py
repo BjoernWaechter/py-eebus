@@ -10,7 +10,7 @@ from types import NoneType
 from spine import array_2_dict
 
 
-class SubscriptionManagementEntryDataType: # EEBus_SPINE_TS_SubscriptionManagement.xsd: ComplexType
+class SubscriptionManagementEntryDataType: # EEBus_SPINE_TS_SubscriptionManagement.xsd:ns_p:SubscriptionManagementEntryDataType -> ComplexType
     def __init__(
             self,
             subscription_id: SubscriptionIdType = None,
@@ -97,72 +97,7 @@ class SubscriptionManagementEntryDataType: # EEBus_SPINE_TS_SubscriptionManageme
             return cls()
 
 
-class SubscriptionManagementDeleteCallType: # EEBus_SPINE_TS_SubscriptionManagement.xsd: ComplexType
-    def __init__(
-            self,
-            subscription_id: SubscriptionIdType = None,
-            client_address: FeatureAddressType = None,
-            server_address: FeatureAddressType = None,
-    ):
-        super().__init__()
-        
-        self.subscription_id = subscription_id
-        self.client_address = client_address
-        self.server_address = server_address
-
-        if not isinstance(self.subscription_id, SubscriptionIdType | NoneType):
-            raise TypeError("subscription_id is not of type SubscriptionIdType")
-        
-        if not isinstance(self.client_address, FeatureAddressType | NoneType):
-            raise TypeError("client_address is not of type FeatureAddressType")
-        
-        if not isinstance(self.server_address, FeatureAddressType | NoneType):
-            raise TypeError("server_address is not of type FeatureAddressType")
-        
-    def get_data(self):
-
-        msg_data = []
-        
-        if self.subscription_id is not None:
-            msg_data.append({"subscriptionId": self.subscription_id.get_data()})
-        if self.client_address is not None:
-            msg_data.append({"clientAddress": self.client_address.get_data()})
-        if self.server_address is not None:
-            msg_data.append({"serverAddress": self.server_address.get_data()})
-        
-        return msg_data
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        if self.subscription_id is not None:
-            result_str += f"{sep}subscriptionId: {self.subscription_id}"
-            sep = ", "
-        if self.client_address is not None:
-            result_str += f"{sep}clientAddress: {self.client_address}"
-            sep = ", "
-        if self.server_address is not None:
-            result_str += f"{sep}serverAddress: {self.server_address}"
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
-                subscription_id=data_dict.get('subscriptionId'),
-                client_address=data_dict.get('clientAddress'),
-                server_address=data_dict.get('serverAddress'),
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class SubscriptionManagementRequestCallType: # EEBus_SPINE_TS_SubscriptionManagement.xsd: ComplexType
+class SubscriptionManagementRequestCallType: # EEBus_SPINE_TS_SubscriptionManagement.xsd:ns_p:SubscriptionManagementRequestCallType -> ComplexType
     def __init__(
             self,
             client_address: FeatureAddressType = None,
@@ -227,7 +162,7 @@ class SubscriptionManagementRequestCallType: # EEBus_SPINE_TS_SubscriptionManage
             return cls()
 
 
-class SubscriptionManagementEntryListDataType: # EEBus_SPINE_TS_SubscriptionManagement.xsd: ComplexType
+class SubscriptionManagementEntryListDataType: # EEBus_SPINE_TS_SubscriptionManagement.xsd:ns_p:SubscriptionManagementEntryListDataType -> ComplexType
     def __init__(
             self,
             subscription_management_entry_data: list[SubscriptionManagementEntryDataType] = None,
@@ -270,7 +205,72 @@ class SubscriptionManagementEntryListDataType: # EEBus_SPINE_TS_SubscriptionMana
             return cls()
 
 
-class SubscriptionManagementRequestCallElementsType: # EEBus_SPINE_TS_SubscriptionManagement.xsd: ComplexType
+class SubscriptionManagementDeleteCallType: # EEBus_SPINE_TS_SubscriptionManagement.xsd:ns_p:SubscriptionManagementDeleteCallType -> ComplexType
+    def __init__(
+            self,
+            subscription_id: SubscriptionIdType = None,
+            client_address: FeatureAddressType = None,
+            server_address: FeatureAddressType = None,
+    ):
+        super().__init__()
+        
+        self.subscription_id = subscription_id
+        self.client_address = client_address
+        self.server_address = server_address
+
+        if not isinstance(self.subscription_id, SubscriptionIdType | NoneType):
+            raise TypeError("subscription_id is not of type SubscriptionIdType")
+        
+        if not isinstance(self.client_address, FeatureAddressType | NoneType):
+            raise TypeError("client_address is not of type FeatureAddressType")
+        
+        if not isinstance(self.server_address, FeatureAddressType | NoneType):
+            raise TypeError("server_address is not of type FeatureAddressType")
+        
+    def get_data(self):
+
+        msg_data = []
+        
+        if self.subscription_id is not None:
+            msg_data.append({"subscriptionId": self.subscription_id.get_data()})
+        if self.client_address is not None:
+            msg_data.append({"clientAddress": self.client_address.get_data()})
+        if self.server_address is not None:
+            msg_data.append({"serverAddress": self.server_address.get_data()})
+        
+        return msg_data
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        if self.subscription_id is not None:
+            result_str += f"{sep}subscriptionId: {self.subscription_id}"
+            sep = ", "
+        if self.client_address is not None:
+            result_str += f"{sep}clientAddress: {self.client_address}"
+            sep = ", "
+        if self.server_address is not None:
+            result_str += f"{sep}serverAddress: {self.server_address}"
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+                subscription_id=data_dict.get('subscriptionId'),
+                client_address=data_dict.get('clientAddress'),
+                server_address=data_dict.get('serverAddress'),
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class SubscriptionManagementRequestCallElementsType: # EEBus_SPINE_TS_SubscriptionManagement.xsd:ns_p:SubscriptionManagementRequestCallElementsType -> ComplexType
     def __init__(
             self,
             client_address: FeatureAddressElementsType = None,
@@ -335,7 +335,7 @@ class SubscriptionManagementRequestCallElementsType: # EEBus_SPINE_TS_Subscripti
             return cls()
 
 
-class SubscriptionManagementEntryDataElementsType: # EEBus_SPINE_TS_SubscriptionManagement.xsd: ComplexType
+class SubscriptionManagementEntryDataElementsType: # EEBus_SPINE_TS_SubscriptionManagement.xsd:ns_p:SubscriptionManagementEntryDataElementsType -> ComplexType
     def __init__(
             self,
             subscription_id: ElementTagType = None,
@@ -422,7 +422,7 @@ class SubscriptionManagementEntryDataElementsType: # EEBus_SPINE_TS_Subscription
             return cls()
 
 
-class SubscriptionManagementDeleteCallElementsType: # EEBus_SPINE_TS_SubscriptionManagement.xsd: ComplexType
+class SubscriptionManagementDeleteCallElementsType: # EEBus_SPINE_TS_SubscriptionManagement.xsd:ns_p:SubscriptionManagementDeleteCallElementsType -> ComplexType
     def __init__(
             self,
             subscription_id: ElementTagType = None,
@@ -487,7 +487,7 @@ class SubscriptionManagementDeleteCallElementsType: # EEBus_SPINE_TS_Subscriptio
             return cls()
 
 
-class SubscriptionManagementEntryListDataSelectorsType: # EEBus_SPINE_TS_SubscriptionManagement.xsd: ComplexType
+class SubscriptionManagementEntryListDataSelectorsType: # EEBus_SPINE_TS_SubscriptionManagement.xsd:ns_p:SubscriptionManagementEntryListDataSelectorsType -> ComplexType
     def __init__(
             self,
             subscription_id: SubscriptionIdType = None,

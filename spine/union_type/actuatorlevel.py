@@ -3,7 +3,7 @@ from types import NoneType
 from spine import array_2_dict
 
 
-class ActuatorLevelFctType: # EEBus_SPINE_TS_ActuatorLevel.xsd: UnionType
+class ActuatorLevelFctType: # EEBus_SPINE_TS_ActuatorLevel.xsd:ns_p:ActuatorLevelFctType -> UnionType
     def __init__(
             self,
     ):

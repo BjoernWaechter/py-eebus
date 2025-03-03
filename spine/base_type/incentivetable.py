@@ -3,7 +3,7 @@ from types import NoneType
 from spine import array_2_dict
 
 
-class IncentiveTableTierType: # EEBus_SPINE_TS_IncentiveTable.xsd: ComplexType
+class IncentiveTableTierType: # EEBus_SPINE_TS_IncentiveTable.xsd:ns_p:IncentiveTableTierType -> ComplexType
     def __init__(
             self,
     ):
@@ -36,7 +36,7 @@ class IncentiveTableTierType: # EEBus_SPINE_TS_IncentiveTable.xsd: ComplexType
             return cls()
 
 
-class IncentiveTableTierElementsType: # EEBus_SPINE_TS_IncentiveTable.xsd: ComplexType
+class IncentiveTableTierElementsType: # EEBus_SPINE_TS_IncentiveTable.xsd:ns_p:IncentiveTableTierElementsType -> ComplexType
     def __init__(
             self,
     ):
@@ -69,7 +69,7 @@ class IncentiveTableTierElementsType: # EEBus_SPINE_TS_IncentiveTable.xsd: Compl
             return cls()
 
 
-class IncentiveTableDescriptionTierType: # EEBus_SPINE_TS_IncentiveTable.xsd: ComplexType
+class IncentiveTableDescriptionTierType: # EEBus_SPINE_TS_IncentiveTable.xsd:ns_p:IncentiveTableDescriptionTierType -> ComplexType
     def __init__(
             self,
     ):
@@ -102,7 +102,7 @@ class IncentiveTableDescriptionTierType: # EEBus_SPINE_TS_IncentiveTable.xsd: Co
             return cls()
 
 
-class IncentiveTableIncentiveSlotType: # EEBus_SPINE_TS_IncentiveTable.xsd: ComplexType
+class IncentiveTableIncentiveSlotType: # EEBus_SPINE_TS_IncentiveTable.xsd:ns_p:IncentiveTableIncentiveSlotType -> ComplexType
     def __init__(
             self,
             tier: list[IncentiveTableTierType] = None,
@@ -145,7 +145,7 @@ class IncentiveTableIncentiveSlotType: # EEBus_SPINE_TS_IncentiveTable.xsd: Comp
             return cls()
 
 
-class IncentiveTableDescriptionTierElementsType: # EEBus_SPINE_TS_IncentiveTable.xsd: ComplexType
+class IncentiveTableDescriptionTierElementsType: # EEBus_SPINE_TS_IncentiveTable.xsd:ns_p:IncentiveTableDescriptionTierElementsType -> ComplexType
     def __init__(
             self,
     ):
@@ -178,7 +178,7 @@ class IncentiveTableDescriptionTierElementsType: # EEBus_SPINE_TS_IncentiveTable
             return cls()
 
 
-class IncentiveTableIncentiveSlotElementsType: # EEBus_SPINE_TS_IncentiveTable.xsd: ComplexType
+class IncentiveTableIncentiveSlotElementsType: # EEBus_SPINE_TS_IncentiveTable.xsd:ns_p:IncentiveTableIncentiveSlotElementsType -> ComplexType
     def __init__(
             self,
             tier: IncentiveTableTierElementsType = None,
@@ -221,40 +221,7 @@ class IncentiveTableIncentiveSlotElementsType: # EEBus_SPINE_TS_IncentiveTable.x
             return cls()
 
 
-class IncentiveTableConstraintsType: # EEBus_SPINE_TS_IncentiveTable.xsd: ComplexType
-    def __init__(
-            self,
-    ):
-        super().__init__()
-        
-
-    def get_data(self):
-
-        msg_data = []
-        
-        
-        return msg_data
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class IncentiveTableDescriptionType: # EEBus_SPINE_TS_IncentiveTable.xsd: ComplexType
+class IncentiveTableDescriptionType: # EEBus_SPINE_TS_IncentiveTable.xsd:ns_p:IncentiveTableDescriptionType -> ComplexType
     def __init__(
             self,
             tier: list[IncentiveTableDescriptionTierType] = None,
@@ -297,7 +264,7 @@ class IncentiveTableDescriptionType: # EEBus_SPINE_TS_IncentiveTable.xsd: Comple
             return cls()
 
 
-class IncentiveTableType: # EEBus_SPINE_TS_IncentiveTable.xsd: ComplexType
+class IncentiveTableType: # EEBus_SPINE_TS_IncentiveTable.xsd:ns_p:IncentiveTableType -> ComplexType
     def __init__(
             self,
             incentive_slot: list[IncentiveTableIncentiveSlotType] = None,
@@ -340,7 +307,40 @@ class IncentiveTableType: # EEBus_SPINE_TS_IncentiveTable.xsd: ComplexType
             return cls()
 
 
-class IncentiveTableDescriptionElementsType: # EEBus_SPINE_TS_IncentiveTable.xsd: ComplexType
+class IncentiveTableConstraintsType: # EEBus_SPINE_TS_IncentiveTable.xsd:ns_p:IncentiveTableConstraintsType -> ComplexType
+    def __init__(
+            self,
+    ):
+        super().__init__()
+        
+
+    def get_data(self):
+
+        msg_data = []
+        
+        
+        return msg_data
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class IncentiveTableDescriptionElementsType: # EEBus_SPINE_TS_IncentiveTable.xsd:ns_p:IncentiveTableDescriptionElementsType -> ComplexType
     def __init__(
             self,
             tier: IncentiveTableDescriptionTierElementsType = None,
@@ -383,7 +383,7 @@ class IncentiveTableDescriptionElementsType: # EEBus_SPINE_TS_IncentiveTable.xsd
             return cls()
 
 
-class IncentiveTableElementsType: # EEBus_SPINE_TS_IncentiveTable.xsd: ComplexType
+class IncentiveTableElementsType: # EEBus_SPINE_TS_IncentiveTable.xsd:ns_p:IncentiveTableElementsType -> ComplexType
     def __init__(
             self,
             incentive_slot: IncentiveTableIncentiveSlotElementsType = None,
@@ -426,7 +426,7 @@ class IncentiveTableElementsType: # EEBus_SPINE_TS_IncentiveTable.xsd: ComplexTy
             return cls()
 
 
-class IncentiveTableConstraintsElementsType: # EEBus_SPINE_TS_IncentiveTable.xsd: ComplexType
+class IncentiveTableConstraintsElementsType: # EEBus_SPINE_TS_IncentiveTable.xsd:ns_p:IncentiveTableConstraintsElementsType -> ComplexType
     def __init__(
             self,
     ):
@@ -459,50 +459,7 @@ class IncentiveTableConstraintsElementsType: # EEBus_SPINE_TS_IncentiveTable.xsd
             return cls()
 
 
-class IncentiveTableConstraintsDataType: # EEBus_SPINE_TS_IncentiveTable.xsd: ComplexType
-    def __init__(
-            self,
-            incentive_table_constraints: list[IncentiveTableConstraintsType] = None,
-    ):
-        super().__init__()
-        
-        self.incentive_table_constraints = incentive_table_constraints
-
-        if not isinstance(self.incentive_table_constraints, list | NoneType):
-            raise TypeError("incentive_table_constraints is not of type list[IncentiveTableConstraintsType]")
-        
-    def get_data(self):
-
-        msg_data = []
-        
-        if self.incentive_table_constraints is not None:
-            msg_data.append({"incentiveTableConstraints": [d.get_data() for d in self.incentive_table_constraints]})
-        
-        return msg_data
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        if self.incentive_table_constraints is not None:
-            result_str += f"{sep}incentiveTableConstraints: {self.incentive_table_constraints}"
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
-                incentive_table_constraints=data_dict.get('incentiveTableConstraints'),
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class IncentiveTableDescriptionDataType: # EEBus_SPINE_TS_IncentiveTable.xsd: ComplexType
+class IncentiveTableDescriptionDataType: # EEBus_SPINE_TS_IncentiveTable.xsd:ns_p:IncentiveTableDescriptionDataType -> ComplexType
     def __init__(
             self,
             incentive_table_description: list[IncentiveTableDescriptionType] = None,
@@ -545,7 +502,7 @@ class IncentiveTableDescriptionDataType: # EEBus_SPINE_TS_IncentiveTable.xsd: Co
             return cls()
 
 
-class IncentiveTableDataType: # EEBus_SPINE_TS_IncentiveTable.xsd: ComplexType
+class IncentiveTableDataType: # EEBus_SPINE_TS_IncentiveTable.xsd:ns_p:IncentiveTableDataType -> ComplexType
     def __init__(
             self,
             incentive_table: list[IncentiveTableType] = None,
@@ -588,7 +545,50 @@ class IncentiveTableDataType: # EEBus_SPINE_TS_IncentiveTable.xsd: ComplexType
             return cls()
 
 
-class IncentiveTableDescriptionDataElementsType: # EEBus_SPINE_TS_IncentiveTable.xsd: ComplexType
+class IncentiveTableConstraintsDataType: # EEBus_SPINE_TS_IncentiveTable.xsd:ns_p:IncentiveTableConstraintsDataType -> ComplexType
+    def __init__(
+            self,
+            incentive_table_constraints: list[IncentiveTableConstraintsType] = None,
+    ):
+        super().__init__()
+        
+        self.incentive_table_constraints = incentive_table_constraints
+
+        if not isinstance(self.incentive_table_constraints, list | NoneType):
+            raise TypeError("incentive_table_constraints is not of type list[IncentiveTableConstraintsType]")
+        
+    def get_data(self):
+
+        msg_data = []
+        
+        if self.incentive_table_constraints is not None:
+            msg_data.append({"incentiveTableConstraints": [d.get_data() for d in self.incentive_table_constraints]})
+        
+        return msg_data
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        if self.incentive_table_constraints is not None:
+            result_str += f"{sep}incentiveTableConstraints: {self.incentive_table_constraints}"
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+                incentive_table_constraints=data_dict.get('incentiveTableConstraints'),
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class IncentiveTableDescriptionDataElementsType: # EEBus_SPINE_TS_IncentiveTable.xsd:ns_p:IncentiveTableDescriptionDataElementsType -> ComplexType
     def __init__(
             self,
             incentive_table_description: IncentiveTableDescriptionElementsType = None,
@@ -631,7 +631,7 @@ class IncentiveTableDescriptionDataElementsType: # EEBus_SPINE_TS_IncentiveTable
             return cls()
 
 
-class IncentiveTableDataElementsType: # EEBus_SPINE_TS_IncentiveTable.xsd: ComplexType
+class IncentiveTableDataElementsType: # EEBus_SPINE_TS_IncentiveTable.xsd:ns_p:IncentiveTableDataElementsType -> ComplexType
     def __init__(
             self,
             incentive_table: IncentiveTableElementsType = None,
@@ -674,7 +674,7 @@ class IncentiveTableDataElementsType: # EEBus_SPINE_TS_IncentiveTable.xsd: Compl
             return cls()
 
 
-class IncentiveTableConstraintsDataElementsType: # EEBus_SPINE_TS_IncentiveTable.xsd: ComplexType
+class IncentiveTableConstraintsDataElementsType: # EEBus_SPINE_TS_IncentiveTable.xsd:ns_p:IncentiveTableConstraintsDataElementsType -> ComplexType
     def __init__(
             self,
             incentive_table_constraints: IncentiveTableConstraintsElementsType = None,
@@ -717,7 +717,7 @@ class IncentiveTableConstraintsDataElementsType: # EEBus_SPINE_TS_IncentiveTable
             return cls()
 
 
-class IncentiveTableDescriptionDataSelectorsType: # EEBus_SPINE_TS_IncentiveTable.xsd: ComplexType
+class IncentiveTableDescriptionDataSelectorsType: # EEBus_SPINE_TS_IncentiveTable.xsd:ns_p:IncentiveTableDescriptionDataSelectorsType -> ComplexType
     def __init__(
             self,
     ):
@@ -750,7 +750,7 @@ class IncentiveTableDescriptionDataSelectorsType: # EEBus_SPINE_TS_IncentiveTabl
             return cls()
 
 
-class IncentiveTableDataSelectorsType: # EEBus_SPINE_TS_IncentiveTable.xsd: ComplexType
+class IncentiveTableDataSelectorsType: # EEBus_SPINE_TS_IncentiveTable.xsd:ns_p:IncentiveTableDataSelectorsType -> ComplexType
     def __init__(
             self,
     ):
@@ -783,7 +783,7 @@ class IncentiveTableDataSelectorsType: # EEBus_SPINE_TS_IncentiveTable.xsd: Comp
             return cls()
 
 
-class IncentiveTableConstraintsDataSelectorsType: # EEBus_SPINE_TS_IncentiveTable.xsd: ComplexType
+class IncentiveTableConstraintsDataSelectorsType: # EEBus_SPINE_TS_IncentiveTable.xsd:ns_p:IncentiveTableConstraintsDataSelectorsType -> ComplexType
     def __init__(
             self,
     ):

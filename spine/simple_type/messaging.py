@@ -3,7 +3,7 @@ from types import NoneType
 from spine import array_2_dict
 
 
-class MessagingDataTextType: # EEBus_SPINE_TS_Messaging.xsd: AliasType
+class MessagingDataTextType: # EEBus_SPINE_TS_Messaging.xsd:ns_p:MessagingDataTextType -> AliasType
     def __init__(
             self,
             value: str,
@@ -41,7 +41,7 @@ class MessagingDataTextType: # EEBus_SPINE_TS_Messaging.xsd: AliasType
             return cls()
 
 
-class MessagingNumberType: # EEBus_SPINE_TS_Messaging.xsd: AliasType
+class MessagingNumberType: # EEBus_SPINE_TS_Messaging.xsd:ns_p:MessagingNumberType -> AliasType
     def __init__(
             self,
             value: int,

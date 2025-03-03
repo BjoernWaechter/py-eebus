@@ -241,12 +241,15 @@ from spine.base_type.usecaseinformation import UseCaseInformationDataElementsTyp
 from spine.base_type.usecaseinformation import UseCaseInformationListDataSelectorsType
 from spine.base_type.version import SpecificationVersionDataElementsType
 from spine.base_type.version import SpecificationVersionListDataSelectorsType
+from spine.choice_type.commandframe import DataElementsChoiceGroup
+from spine.choice_type.commandframe import DataSelectorsChoiceGroup
+from spine.choice_type.commandframe import PayloadContributionGroup
 from spine.simple_type.commandframe import FilterIdType
 from types import NoneType
 from spine import array_2_dict
 
 
-class CmdControlType: # EEBus_SPINE_TS_CommandFrame.xsd: ComplexType
+class CmdControlType: # EEBus_SPINE_TS_CommandFrame.xsd:ns_p:CmdControlType -> ComplexType
     def __init__(
             self,
             delete: ElementTagType = None,
@@ -300,7 +303,50 @@ class CmdControlType: # EEBus_SPINE_TS_CommandFrame.xsd: ComplexType
             return cls()
 
 
-class FilterType: # EEBus_SPINE_TS_CommandFrame.xsd: ComplexType
+class CmdType: # EEBus_SPINE_TS_CommandFrame.xsd:ns_p:CmdType -> ComplexType
+    def __init__(
+            self,
+            payload_contribution_group: PayloadContributionGroup,
+    ):
+        super().__init__()
+        
+        self.payload_contribution_group = payload_contribution_group
+
+        if not isinstance(self.payload_contribution_group, PayloadContributionGroup):
+            raise TypeError("payload_contribution_group is not of type PayloadContributionGroup")
+        
+    def get_data(self):
+
+        msg_data = []
+        
+        if self.payload_contribution_group is not None:
+            msg_data.append({"payload_contribution_group": self.payload_contribution_group.get_data()})
+        
+        return msg_data
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        if self.payload_contribution_group is not None:
+            result_str += f"{sep}payload_contribution_group: {self.payload_contribution_group}"
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+                payload_contribution_group=data_dict.get('payload_contribution_group'),
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class FilterType: # EEBus_SPINE_TS_CommandFrame.xsd:ns_p:FilterType -> ComplexType
     def __init__(
             self,
             filter_id: FilterIdType = None,
@@ -546,6 +592,8 @@ class FilterType: # EEBus_SPINE_TS_CommandFrame.xsd: ComplexType
             time_table_data_elements: TimeTableDataElementsType = None,
             time_table_description_data_elements: TimeTableDescriptionDataElementsType = None,
             use_case_information_data_elements: UseCaseInformationDataElementsType = None,
+            data_selectors_choice_group: DataSelectorsChoiceGroup,
+            data_elements_choice_group: DataElementsChoiceGroup,
     ):
         super().__init__()
         
@@ -792,6 +840,8 @@ class FilterType: # EEBus_SPINE_TS_CommandFrame.xsd: ComplexType
         self.time_table_data_elements = time_table_data_elements
         self.time_table_description_data_elements = time_table_description_data_elements
         self.use_case_information_data_elements = use_case_information_data_elements
+        self.data_selectors_choice_group = data_selectors_choice_group
+        self.data_elements_choice_group = data_elements_choice_group
 
         if not isinstance(self.filter_id, FilterIdType | NoneType):
             raise TypeError("filter_id is not of type FilterIdType")
@@ -1522,6 +1572,12 @@ class FilterType: # EEBus_SPINE_TS_CommandFrame.xsd: ComplexType
         if not isinstance(self.use_case_information_data_elements, UseCaseInformationDataElementsType | NoneType):
             raise TypeError("use_case_information_data_elements is not of type UseCaseInformationDataElementsType")
         
+        if not isinstance(self.data_selectors_choice_group, DataSelectorsChoiceGroup):
+            raise TypeError("data_selectors_choice_group is not of type DataSelectorsChoiceGroup")
+        
+        if not isinstance(self.data_elements_choice_group, DataElementsChoiceGroup):
+            raise TypeError("data_elements_choice_group is not of type DataElementsChoiceGroup")
+        
     def get_data(self):
 
         msg_data = []
@@ -2012,6 +2068,10 @@ class FilterType: # EEBus_SPINE_TS_CommandFrame.xsd: ComplexType
             msg_data.append({"timeTableDescriptionDataElements": self.time_table_description_data_elements.get_data()})
         if self.use_case_information_data_elements is not None:
             msg_data.append({"useCaseInformationDataElements": self.use_case_information_data_elements.get_data()})
+        if self.data_selectors_choice_group is not None:
+            msg_data.append({"data_selectors_choice_group": self.data_selectors_choice_group.get_data()})
+        if self.data_elements_choice_group is not None:
+            msg_data.append({"data_elements_choice_group": self.data_elements_choice_group.get_data()})
         
         return msg_data
 
@@ -2747,6 +2807,12 @@ class FilterType: # EEBus_SPINE_TS_CommandFrame.xsd: ComplexType
             sep = ", "
         if self.use_case_information_data_elements is not None:
             result_str += f"{sep}useCaseInformationDataElements: {self.use_case_information_data_elements}"
+            sep = ", "
+        if self.data_selectors_choice_group is not None:
+            result_str += f"{sep}data_selectors_choice_group: {self.data_selectors_choice_group}"
+            sep = ", "
+        if self.data_elements_choice_group is not None:
+            result_str += f"{sep}data_elements_choice_group: {self.data_elements_choice_group}"
         
         return result_str
 
@@ -2998,39 +3064,8 @@ class FilterType: # EEBus_SPINE_TS_CommandFrame.xsd: ComplexType
                 time_table_data_elements=data_dict.get('timeTableDataElements'),
                 time_table_description_data_elements=data_dict.get('timeTableDescriptionDataElements'),
                 use_case_information_data_elements=data_dict.get('useCaseInformationDataElements'),
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class CmdType: # EEBus_SPINE_TS_CommandFrame.xsd: ComplexType
-    def __init__(
-            self,
-    ):
-        super().__init__()
-        
-
-    def get_data(self):
-
-        msg_data = []
-        
-        
-        return msg_data
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
+                data_selectors_choice_group=data_dict.get('data_selectors_choice_group'),
+                data_elements_choice_group=data_dict.get('data_elements_choice_group'),
             )
         elif data:
             return cls(data)

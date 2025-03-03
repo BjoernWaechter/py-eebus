@@ -22,7 +22,7 @@ from types import NoneType
 from spine import array_2_dict
 
 
-class MeasurementThresholdRelationDataType: # EEBus_SPINE_TS_Measurement.xsd: ComplexType
+class MeasurementThresholdRelationDataType: # EEBus_SPINE_TS_Measurement.xsd:ns_p:MeasurementThresholdRelationDataType -> ComplexType
     def __init__(
             self,
             measurement_id: MeasurementIdType = None,
@@ -76,7 +76,247 @@ class MeasurementThresholdRelationDataType: # EEBus_SPINE_TS_Measurement.xsd: Co
             return cls()
 
 
-class MeasurementDescriptionDataType: # EEBus_SPINE_TS_Measurement.xsd: ComplexType
+class MeasurementSeriesDataType: # EEBus_SPINE_TS_Measurement.xsd:ns_p:MeasurementSeriesDataType -> ComplexType
+    def __init__(
+            self,
+            measurement_id: MeasurementIdType = None,
+            value_type: MeasurementValueTypeType = None,
+            timestamp: AbsoluteOrRelativeTimeType = None,
+            value: ScaledNumberType = None,
+            evaluation_period: TimePeriodType = None,
+            value_source: MeasurementValueSourceType = None,
+            value_tendency: MeasurementValueTendencyType = None,
+            value_state: MeasurementValueStateType = None,
+    ):
+        super().__init__()
+        
+        self.measurement_id = measurement_id
+        self.value_type = value_type
+        self.timestamp = timestamp
+        self.value = value
+        self.evaluation_period = evaluation_period
+        self.value_source = value_source
+        self.value_tendency = value_tendency
+        self.value_state = value_state
+
+        if not isinstance(self.measurement_id, MeasurementIdType | NoneType):
+            raise TypeError("measurement_id is not of type MeasurementIdType")
+        
+        if not isinstance(self.value_type, MeasurementValueTypeType | NoneType):
+            raise TypeError("value_type is not of type MeasurementValueTypeType")
+        
+        if not isinstance(self.timestamp, AbsoluteOrRelativeTimeType | NoneType):
+            raise TypeError("timestamp is not of type AbsoluteOrRelativeTimeType")
+        
+        if not isinstance(self.value, ScaledNumberType | NoneType):
+            raise TypeError("value is not of type ScaledNumberType")
+        
+        if not isinstance(self.evaluation_period, TimePeriodType | NoneType):
+            raise TypeError("evaluation_period is not of type TimePeriodType")
+        
+        if not isinstance(self.value_source, MeasurementValueSourceType | NoneType):
+            raise TypeError("value_source is not of type MeasurementValueSourceType")
+        
+        if not isinstance(self.value_tendency, MeasurementValueTendencyType | NoneType):
+            raise TypeError("value_tendency is not of type MeasurementValueTendencyType")
+        
+        if not isinstance(self.value_state, MeasurementValueStateType | NoneType):
+            raise TypeError("value_state is not of type MeasurementValueStateType")
+        
+    def get_data(self):
+
+        msg_data = []
+        
+        if self.measurement_id is not None:
+            msg_data.append({"measurementId": self.measurement_id.get_data()})
+        if self.value_type is not None:
+            msg_data.append({"valueType": self.value_type.get_data()})
+        if self.timestamp is not None:
+            msg_data.append({"timestamp": self.timestamp.get_data()})
+        if self.value is not None:
+            msg_data.append({"value": self.value.get_data()})
+        if self.evaluation_period is not None:
+            msg_data.append({"evaluationPeriod": self.evaluation_period.get_data()})
+        if self.value_source is not None:
+            msg_data.append({"valueSource": self.value_source.get_data()})
+        if self.value_tendency is not None:
+            msg_data.append({"valueTendency": self.value_tendency.get_data()})
+        if self.value_state is not None:
+            msg_data.append({"valueState": self.value_state.get_data()})
+        
+        return msg_data
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        if self.measurement_id is not None:
+            result_str += f"{sep}measurementId: {self.measurement_id}"
+            sep = ", "
+        if self.value_type is not None:
+            result_str += f"{sep}valueType: {self.value_type}"
+            sep = ", "
+        if self.timestamp is not None:
+            result_str += f"{sep}timestamp: {self.timestamp}"
+            sep = ", "
+        if self.value is not None:
+            result_str += f"{sep}value: {self.value}"
+            sep = ", "
+        if self.evaluation_period is not None:
+            result_str += f"{sep}evaluationPeriod: {self.evaluation_period}"
+            sep = ", "
+        if self.value_source is not None:
+            result_str += f"{sep}valueSource: {self.value_source}"
+            sep = ", "
+        if self.value_tendency is not None:
+            result_str += f"{sep}valueTendency: {self.value_tendency}"
+            sep = ", "
+        if self.value_state is not None:
+            result_str += f"{sep}valueState: {self.value_state}"
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+                measurement_id=data_dict.get('measurementId'),
+                value_type=data_dict.get('valueType'),
+                timestamp=data_dict.get('timestamp'),
+                value=data_dict.get('value'),
+                evaluation_period=data_dict.get('evaluationPeriod'),
+                value_source=data_dict.get('valueSource'),
+                value_tendency=data_dict.get('valueTendency'),
+                value_state=data_dict.get('valueState'),
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class MeasurementDataType: # EEBus_SPINE_TS_Measurement.xsd:ns_p:MeasurementDataType -> ComplexType
+    def __init__(
+            self,
+            measurement_id: MeasurementIdType = None,
+            value_type: MeasurementValueTypeType = None,
+            timestamp: AbsoluteOrRelativeTimeType = None,
+            value: ScaledNumberType = None,
+            evaluation_period: TimePeriodType = None,
+            value_source: MeasurementValueSourceType = None,
+            value_tendency: MeasurementValueTendencyType = None,
+            value_state: MeasurementValueStateType = None,
+    ):
+        super().__init__()
+        
+        self.measurement_id = measurement_id
+        self.value_type = value_type
+        self.timestamp = timestamp
+        self.value = value
+        self.evaluation_period = evaluation_period
+        self.value_source = value_source
+        self.value_tendency = value_tendency
+        self.value_state = value_state
+
+        if not isinstance(self.measurement_id, MeasurementIdType | NoneType):
+            raise TypeError("measurement_id is not of type MeasurementIdType")
+        
+        if not isinstance(self.value_type, MeasurementValueTypeType | NoneType):
+            raise TypeError("value_type is not of type MeasurementValueTypeType")
+        
+        if not isinstance(self.timestamp, AbsoluteOrRelativeTimeType | NoneType):
+            raise TypeError("timestamp is not of type AbsoluteOrRelativeTimeType")
+        
+        if not isinstance(self.value, ScaledNumberType | NoneType):
+            raise TypeError("value is not of type ScaledNumberType")
+        
+        if not isinstance(self.evaluation_period, TimePeriodType | NoneType):
+            raise TypeError("evaluation_period is not of type TimePeriodType")
+        
+        if not isinstance(self.value_source, MeasurementValueSourceType | NoneType):
+            raise TypeError("value_source is not of type MeasurementValueSourceType")
+        
+        if not isinstance(self.value_tendency, MeasurementValueTendencyType | NoneType):
+            raise TypeError("value_tendency is not of type MeasurementValueTendencyType")
+        
+        if not isinstance(self.value_state, MeasurementValueStateType | NoneType):
+            raise TypeError("value_state is not of type MeasurementValueStateType")
+        
+    def get_data(self):
+
+        msg_data = []
+        
+        if self.measurement_id is not None:
+            msg_data.append({"measurementId": self.measurement_id.get_data()})
+        if self.value_type is not None:
+            msg_data.append({"valueType": self.value_type.get_data()})
+        if self.timestamp is not None:
+            msg_data.append({"timestamp": self.timestamp.get_data()})
+        if self.value is not None:
+            msg_data.append({"value": self.value.get_data()})
+        if self.evaluation_period is not None:
+            msg_data.append({"evaluationPeriod": self.evaluation_period.get_data()})
+        if self.value_source is not None:
+            msg_data.append({"valueSource": self.value_source.get_data()})
+        if self.value_tendency is not None:
+            msg_data.append({"valueTendency": self.value_tendency.get_data()})
+        if self.value_state is not None:
+            msg_data.append({"valueState": self.value_state.get_data()})
+        
+        return msg_data
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        if self.measurement_id is not None:
+            result_str += f"{sep}measurementId: {self.measurement_id}"
+            sep = ", "
+        if self.value_type is not None:
+            result_str += f"{sep}valueType: {self.value_type}"
+            sep = ", "
+        if self.timestamp is not None:
+            result_str += f"{sep}timestamp: {self.timestamp}"
+            sep = ", "
+        if self.value is not None:
+            result_str += f"{sep}value: {self.value}"
+            sep = ", "
+        if self.evaluation_period is not None:
+            result_str += f"{sep}evaluationPeriod: {self.evaluation_period}"
+            sep = ", "
+        if self.value_source is not None:
+            result_str += f"{sep}valueSource: {self.value_source}"
+            sep = ", "
+        if self.value_tendency is not None:
+            result_str += f"{sep}valueTendency: {self.value_tendency}"
+            sep = ", "
+        if self.value_state is not None:
+            result_str += f"{sep}valueState: {self.value_state}"
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+                measurement_id=data_dict.get('measurementId'),
+                value_type=data_dict.get('valueType'),
+                timestamp=data_dict.get('timestamp'),
+                value=data_dict.get('value'),
+                evaluation_period=data_dict.get('evaluationPeriod'),
+                value_source=data_dict.get('valueSource'),
+                value_tendency=data_dict.get('valueTendency'),
+                value_state=data_dict.get('valueState'),
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class MeasurementDescriptionDataType: # EEBus_SPINE_TS_Measurement.xsd:ns_p:MeasurementDescriptionDataType -> ComplexType
     def __init__(
             self,
             measurement_id: MeasurementIdType = None,
@@ -196,7 +436,7 @@ class MeasurementDescriptionDataType: # EEBus_SPINE_TS_Measurement.xsd: ComplexT
             return cls()
 
 
-class MeasurementConstraintsDataType: # EEBus_SPINE_TS_Measurement.xsd: ComplexType
+class MeasurementConstraintsDataType: # EEBus_SPINE_TS_Measurement.xsd:ns_p:MeasurementConstraintsDataType -> ComplexType
     def __init__(
             self,
             measurement_id: MeasurementIdType = None,
@@ -272,247 +512,7 @@ class MeasurementConstraintsDataType: # EEBus_SPINE_TS_Measurement.xsd: ComplexT
             return cls()
 
 
-class MeasurementSeriesDataType: # EEBus_SPINE_TS_Measurement.xsd: ComplexType
-    def __init__(
-            self,
-            measurement_id: MeasurementIdType = None,
-            value_type: MeasurementValueTypeType = None,
-            timestamp: AbsoluteOrRelativeTimeType = None,
-            value: ScaledNumberType = None,
-            evaluation_period: TimePeriodType = None,
-            value_source: MeasurementValueSourceType = None,
-            value_tendency: MeasurementValueTendencyType = None,
-            value_state: MeasurementValueStateType = None,
-    ):
-        super().__init__()
-        
-        self.measurement_id = measurement_id
-        self.value_type = value_type
-        self.timestamp = timestamp
-        self.value = value
-        self.evaluation_period = evaluation_period
-        self.value_source = value_source
-        self.value_tendency = value_tendency
-        self.value_state = value_state
-
-        if not isinstance(self.measurement_id, MeasurementIdType | NoneType):
-            raise TypeError("measurement_id is not of type MeasurementIdType")
-        
-        if not isinstance(self.value_type, MeasurementValueTypeType | NoneType):
-            raise TypeError("value_type is not of type MeasurementValueTypeType")
-        
-        if not isinstance(self.timestamp, AbsoluteOrRelativeTimeType | NoneType):
-            raise TypeError("timestamp is not of type AbsoluteOrRelativeTimeType")
-        
-        if not isinstance(self.value, ScaledNumberType | NoneType):
-            raise TypeError("value is not of type ScaledNumberType")
-        
-        if not isinstance(self.evaluation_period, TimePeriodType | NoneType):
-            raise TypeError("evaluation_period is not of type TimePeriodType")
-        
-        if not isinstance(self.value_source, MeasurementValueSourceType | NoneType):
-            raise TypeError("value_source is not of type MeasurementValueSourceType")
-        
-        if not isinstance(self.value_tendency, MeasurementValueTendencyType | NoneType):
-            raise TypeError("value_tendency is not of type MeasurementValueTendencyType")
-        
-        if not isinstance(self.value_state, MeasurementValueStateType | NoneType):
-            raise TypeError("value_state is not of type MeasurementValueStateType")
-        
-    def get_data(self):
-
-        msg_data = []
-        
-        if self.measurement_id is not None:
-            msg_data.append({"measurementId": self.measurement_id.get_data()})
-        if self.value_type is not None:
-            msg_data.append({"valueType": self.value_type.get_data()})
-        if self.timestamp is not None:
-            msg_data.append({"timestamp": self.timestamp.get_data()})
-        if self.value is not None:
-            msg_data.append({"value": self.value.get_data()})
-        if self.evaluation_period is not None:
-            msg_data.append({"evaluationPeriod": self.evaluation_period.get_data()})
-        if self.value_source is not None:
-            msg_data.append({"valueSource": self.value_source.get_data()})
-        if self.value_tendency is not None:
-            msg_data.append({"valueTendency": self.value_tendency.get_data()})
-        if self.value_state is not None:
-            msg_data.append({"valueState": self.value_state.get_data()})
-        
-        return msg_data
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        if self.measurement_id is not None:
-            result_str += f"{sep}measurementId: {self.measurement_id}"
-            sep = ", "
-        if self.value_type is not None:
-            result_str += f"{sep}valueType: {self.value_type}"
-            sep = ", "
-        if self.timestamp is not None:
-            result_str += f"{sep}timestamp: {self.timestamp}"
-            sep = ", "
-        if self.value is not None:
-            result_str += f"{sep}value: {self.value}"
-            sep = ", "
-        if self.evaluation_period is not None:
-            result_str += f"{sep}evaluationPeriod: {self.evaluation_period}"
-            sep = ", "
-        if self.value_source is not None:
-            result_str += f"{sep}valueSource: {self.value_source}"
-            sep = ", "
-        if self.value_tendency is not None:
-            result_str += f"{sep}valueTendency: {self.value_tendency}"
-            sep = ", "
-        if self.value_state is not None:
-            result_str += f"{sep}valueState: {self.value_state}"
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
-                measurement_id=data_dict.get('measurementId'),
-                value_type=data_dict.get('valueType'),
-                timestamp=data_dict.get('timestamp'),
-                value=data_dict.get('value'),
-                evaluation_period=data_dict.get('evaluationPeriod'),
-                value_source=data_dict.get('valueSource'),
-                value_tendency=data_dict.get('valueTendency'),
-                value_state=data_dict.get('valueState'),
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class MeasurementDataType: # EEBus_SPINE_TS_Measurement.xsd: ComplexType
-    def __init__(
-            self,
-            measurement_id: MeasurementIdType = None,
-            value_type: MeasurementValueTypeType = None,
-            timestamp: AbsoluteOrRelativeTimeType = None,
-            value: ScaledNumberType = None,
-            evaluation_period: TimePeriodType = None,
-            value_source: MeasurementValueSourceType = None,
-            value_tendency: MeasurementValueTendencyType = None,
-            value_state: MeasurementValueStateType = None,
-    ):
-        super().__init__()
-        
-        self.measurement_id = measurement_id
-        self.value_type = value_type
-        self.timestamp = timestamp
-        self.value = value
-        self.evaluation_period = evaluation_period
-        self.value_source = value_source
-        self.value_tendency = value_tendency
-        self.value_state = value_state
-
-        if not isinstance(self.measurement_id, MeasurementIdType | NoneType):
-            raise TypeError("measurement_id is not of type MeasurementIdType")
-        
-        if not isinstance(self.value_type, MeasurementValueTypeType | NoneType):
-            raise TypeError("value_type is not of type MeasurementValueTypeType")
-        
-        if not isinstance(self.timestamp, AbsoluteOrRelativeTimeType | NoneType):
-            raise TypeError("timestamp is not of type AbsoluteOrRelativeTimeType")
-        
-        if not isinstance(self.value, ScaledNumberType | NoneType):
-            raise TypeError("value is not of type ScaledNumberType")
-        
-        if not isinstance(self.evaluation_period, TimePeriodType | NoneType):
-            raise TypeError("evaluation_period is not of type TimePeriodType")
-        
-        if not isinstance(self.value_source, MeasurementValueSourceType | NoneType):
-            raise TypeError("value_source is not of type MeasurementValueSourceType")
-        
-        if not isinstance(self.value_tendency, MeasurementValueTendencyType | NoneType):
-            raise TypeError("value_tendency is not of type MeasurementValueTendencyType")
-        
-        if not isinstance(self.value_state, MeasurementValueStateType | NoneType):
-            raise TypeError("value_state is not of type MeasurementValueStateType")
-        
-    def get_data(self):
-
-        msg_data = []
-        
-        if self.measurement_id is not None:
-            msg_data.append({"measurementId": self.measurement_id.get_data()})
-        if self.value_type is not None:
-            msg_data.append({"valueType": self.value_type.get_data()})
-        if self.timestamp is not None:
-            msg_data.append({"timestamp": self.timestamp.get_data()})
-        if self.value is not None:
-            msg_data.append({"value": self.value.get_data()})
-        if self.evaluation_period is not None:
-            msg_data.append({"evaluationPeriod": self.evaluation_period.get_data()})
-        if self.value_source is not None:
-            msg_data.append({"valueSource": self.value_source.get_data()})
-        if self.value_tendency is not None:
-            msg_data.append({"valueTendency": self.value_tendency.get_data()})
-        if self.value_state is not None:
-            msg_data.append({"valueState": self.value_state.get_data()})
-        
-        return msg_data
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        if self.measurement_id is not None:
-            result_str += f"{sep}measurementId: {self.measurement_id}"
-            sep = ", "
-        if self.value_type is not None:
-            result_str += f"{sep}valueType: {self.value_type}"
-            sep = ", "
-        if self.timestamp is not None:
-            result_str += f"{sep}timestamp: {self.timestamp}"
-            sep = ", "
-        if self.value is not None:
-            result_str += f"{sep}value: {self.value}"
-            sep = ", "
-        if self.evaluation_period is not None:
-            result_str += f"{sep}evaluationPeriod: {self.evaluation_period}"
-            sep = ", "
-        if self.value_source is not None:
-            result_str += f"{sep}valueSource: {self.value_source}"
-            sep = ", "
-        if self.value_tendency is not None:
-            result_str += f"{sep}valueTendency: {self.value_tendency}"
-            sep = ", "
-        if self.value_state is not None:
-            result_str += f"{sep}valueState: {self.value_state}"
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
-                measurement_id=data_dict.get('measurementId'),
-                value_type=data_dict.get('valueType'),
-                timestamp=data_dict.get('timestamp'),
-                value=data_dict.get('value'),
-                evaluation_period=data_dict.get('evaluationPeriod'),
-                value_source=data_dict.get('valueSource'),
-                value_tendency=data_dict.get('valueTendency'),
-                value_state=data_dict.get('valueState'),
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class MeasurementThresholdRelationListDataType: # EEBus_SPINE_TS_Measurement.xsd: ComplexType
+class MeasurementThresholdRelationListDataType: # EEBus_SPINE_TS_Measurement.xsd:ns_p:MeasurementThresholdRelationListDataType -> ComplexType
     def __init__(
             self,
             measurement_threshold_relation_data: list[MeasurementThresholdRelationDataType] = None,
@@ -555,93 +555,7 @@ class MeasurementThresholdRelationListDataType: # EEBus_SPINE_TS_Measurement.xsd
             return cls()
 
 
-class MeasurementDescriptionListDataType: # EEBus_SPINE_TS_Measurement.xsd: ComplexType
-    def __init__(
-            self,
-            measurement_description_data: list[MeasurementDescriptionDataType] = None,
-    ):
-        super().__init__()
-        
-        self.measurement_description_data = measurement_description_data
-
-        if not isinstance(self.measurement_description_data, list | NoneType):
-            raise TypeError("measurement_description_data is not of type list[MeasurementDescriptionDataType]")
-        
-    def get_data(self):
-
-        msg_data = []
-        
-        if self.measurement_description_data is not None:
-            msg_data.append({"measurementDescriptionData": [d.get_data() for d in self.measurement_description_data]})
-        
-        return msg_data
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        if self.measurement_description_data is not None:
-            result_str += f"{sep}measurementDescriptionData: {self.measurement_description_data}"
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
-                measurement_description_data=data_dict.get('measurementDescriptionData'),
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class MeasurementConstraintsListDataType: # EEBus_SPINE_TS_Measurement.xsd: ComplexType
-    def __init__(
-            self,
-            measurement_constraints_data: list[MeasurementConstraintsDataType] = None,
-    ):
-        super().__init__()
-        
-        self.measurement_constraints_data = measurement_constraints_data
-
-        if not isinstance(self.measurement_constraints_data, list | NoneType):
-            raise TypeError("measurement_constraints_data is not of type list[MeasurementConstraintsDataType]")
-        
-    def get_data(self):
-
-        msg_data = []
-        
-        if self.measurement_constraints_data is not None:
-            msg_data.append({"measurementConstraintsData": [d.get_data() for d in self.measurement_constraints_data]})
-        
-        return msg_data
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        if self.measurement_constraints_data is not None:
-            result_str += f"{sep}measurementConstraintsData: {self.measurement_constraints_data}"
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
-                measurement_constraints_data=data_dict.get('measurementConstraintsData'),
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class MeasurementSeriesListDataType: # EEBus_SPINE_TS_Measurement.xsd: ComplexType
+class MeasurementSeriesListDataType: # EEBus_SPINE_TS_Measurement.xsd:ns_p:MeasurementSeriesListDataType -> ComplexType
     def __init__(
             self,
             measurement_series_data: list[MeasurementSeriesDataType] = None,
@@ -684,7 +598,7 @@ class MeasurementSeriesListDataType: # EEBus_SPINE_TS_Measurement.xsd: ComplexTy
             return cls()
 
 
-class MeasurementListDataType: # EEBus_SPINE_TS_Measurement.xsd: ComplexType
+class MeasurementListDataType: # EEBus_SPINE_TS_Measurement.xsd:ns_p:MeasurementListDataType -> ComplexType
     def __init__(
             self,
             measurement_data: list[MeasurementDataType] = None,
@@ -727,7 +641,93 @@ class MeasurementListDataType: # EEBus_SPINE_TS_Measurement.xsd: ComplexType
             return cls()
 
 
-class MeasurementThresholdRelationDataElementsType: # EEBus_SPINE_TS_Measurement.xsd: ComplexType
+class MeasurementDescriptionListDataType: # EEBus_SPINE_TS_Measurement.xsd:ns_p:MeasurementDescriptionListDataType -> ComplexType
+    def __init__(
+            self,
+            measurement_description_data: list[MeasurementDescriptionDataType] = None,
+    ):
+        super().__init__()
+        
+        self.measurement_description_data = measurement_description_data
+
+        if not isinstance(self.measurement_description_data, list | NoneType):
+            raise TypeError("measurement_description_data is not of type list[MeasurementDescriptionDataType]")
+        
+    def get_data(self):
+
+        msg_data = []
+        
+        if self.measurement_description_data is not None:
+            msg_data.append({"measurementDescriptionData": [d.get_data() for d in self.measurement_description_data]})
+        
+        return msg_data
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        if self.measurement_description_data is not None:
+            result_str += f"{sep}measurementDescriptionData: {self.measurement_description_data}"
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+                measurement_description_data=data_dict.get('measurementDescriptionData'),
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class MeasurementConstraintsListDataType: # EEBus_SPINE_TS_Measurement.xsd:ns_p:MeasurementConstraintsListDataType -> ComplexType
+    def __init__(
+            self,
+            measurement_constraints_data: list[MeasurementConstraintsDataType] = None,
+    ):
+        super().__init__()
+        
+        self.measurement_constraints_data = measurement_constraints_data
+
+        if not isinstance(self.measurement_constraints_data, list | NoneType):
+            raise TypeError("measurement_constraints_data is not of type list[MeasurementConstraintsDataType]")
+        
+    def get_data(self):
+
+        msg_data = []
+        
+        if self.measurement_constraints_data is not None:
+            msg_data.append({"measurementConstraintsData": [d.get_data() for d in self.measurement_constraints_data]})
+        
+        return msg_data
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        if self.measurement_constraints_data is not None:
+            result_str += f"{sep}measurementConstraintsData: {self.measurement_constraints_data}"
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+                measurement_constraints_data=data_dict.get('measurementConstraintsData'),
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class MeasurementThresholdRelationDataElementsType: # EEBus_SPINE_TS_Measurement.xsd:ns_p:MeasurementThresholdRelationDataElementsType -> ComplexType
     def __init__(
             self,
             measurement_id: ElementTagType = None,
@@ -781,7 +781,7 @@ class MeasurementThresholdRelationDataElementsType: # EEBus_SPINE_TS_Measurement
             return cls()
 
 
-class MeasurementSeriesDataElementsType: # EEBus_SPINE_TS_Measurement.xsd: ComplexType
+class MeasurementSeriesDataElementsType: # EEBus_SPINE_TS_Measurement.xsd:ns_p:MeasurementSeriesDataElementsType -> ComplexType
     def __init__(
             self,
             measurement_id: ElementTagType = None,
@@ -901,7 +901,7 @@ class MeasurementSeriesDataElementsType: # EEBus_SPINE_TS_Measurement.xsd: Compl
             return cls()
 
 
-class MeasurementDescriptionDataElementsType: # EEBus_SPINE_TS_Measurement.xsd: ComplexType
+class MeasurementDescriptionDataElementsType: # EEBus_SPINE_TS_Measurement.xsd:ns_p:MeasurementDescriptionDataElementsType -> ComplexType
     def __init__(
             self,
             measurement_id: ElementTagType = None,
@@ -1021,7 +1021,7 @@ class MeasurementDescriptionDataElementsType: # EEBus_SPINE_TS_Measurement.xsd: 
             return cls()
 
 
-class MeasurementDataElementsType: # EEBus_SPINE_TS_Measurement.xsd: ComplexType
+class MeasurementDataElementsType: # EEBus_SPINE_TS_Measurement.xsd:ns_p:MeasurementDataElementsType -> ComplexType
     def __init__(
             self,
             measurement_id: ElementTagType = None,
@@ -1141,7 +1141,7 @@ class MeasurementDataElementsType: # EEBus_SPINE_TS_Measurement.xsd: ComplexType
             return cls()
 
 
-class MeasurementConstraintsDataElementsType: # EEBus_SPINE_TS_Measurement.xsd: ComplexType
+class MeasurementConstraintsDataElementsType: # EEBus_SPINE_TS_Measurement.xsd:ns_p:MeasurementConstraintsDataElementsType -> ComplexType
     def __init__(
             self,
             measurement_id: ElementTagType = None,
@@ -1217,7 +1217,7 @@ class MeasurementConstraintsDataElementsType: # EEBus_SPINE_TS_Measurement.xsd: 
             return cls()
 
 
-class MeasurementThresholdRelationListDataSelectorsType: # EEBus_SPINE_TS_Measurement.xsd: ComplexType
+class MeasurementThresholdRelationListDataSelectorsType: # EEBus_SPINE_TS_Measurement.xsd:ns_p:MeasurementThresholdRelationListDataSelectorsType -> ComplexType
     def __init__(
             self,
             measurement_id: MeasurementIdType = None,
@@ -1271,7 +1271,7 @@ class MeasurementThresholdRelationListDataSelectorsType: # EEBus_SPINE_TS_Measur
             return cls()
 
 
-class MeasurementSeriesListDataSelectorsType: # EEBus_SPINE_TS_Measurement.xsd: ComplexType
+class MeasurementSeriesListDataSelectorsType: # EEBus_SPINE_TS_Measurement.xsd:ns_p:MeasurementSeriesListDataSelectorsType -> ComplexType
     def __init__(
             self,
             measurement_id: MeasurementIdType = None,
@@ -1336,7 +1336,7 @@ class MeasurementSeriesListDataSelectorsType: # EEBus_SPINE_TS_Measurement.xsd: 
             return cls()
 
 
-class MeasurementListDataSelectorsType: # EEBus_SPINE_TS_Measurement.xsd: ComplexType
+class MeasurementListDataSelectorsType: # EEBus_SPINE_TS_Measurement.xsd:ns_p:MeasurementListDataSelectorsType -> ComplexType
     def __init__(
             self,
             measurement_id: MeasurementIdType = None,
@@ -1401,7 +1401,7 @@ class MeasurementListDataSelectorsType: # EEBus_SPINE_TS_Measurement.xsd: Comple
             return cls()
 
 
-class MeasurementDescriptionListDataSelectorsType: # EEBus_SPINE_TS_Measurement.xsd: ComplexType
+class MeasurementDescriptionListDataSelectorsType: # EEBus_SPINE_TS_Measurement.xsd:ns_p:MeasurementDescriptionListDataSelectorsType -> ComplexType
     def __init__(
             self,
             measurement_id: MeasurementIdType = None,
@@ -1477,7 +1477,7 @@ class MeasurementDescriptionListDataSelectorsType: # EEBus_SPINE_TS_Measurement.
             return cls()
 
 
-class MeasurementConstraintsListDataSelectorsType: # EEBus_SPINE_TS_Measurement.xsd: ComplexType
+class MeasurementConstraintsListDataSelectorsType: # EEBus_SPINE_TS_Measurement.xsd:ns_p:MeasurementConstraintsListDataSelectorsType -> ComplexType
     def __init__(
             self,
             measurement_id: MeasurementIdType = None,

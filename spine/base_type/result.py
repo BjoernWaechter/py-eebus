@@ -5,7 +5,7 @@ from types import NoneType
 from spine import array_2_dict
 
 
-class ResultDataType: # EEBus_SPINE_TS_Result.xsd: ComplexType
+class ResultDataType: # EEBus_SPINE_TS_Result.xsd:ns_p:ResultDataType -> ComplexType
     def __init__(
             self,
             error_number: ErrorNumberType = None,

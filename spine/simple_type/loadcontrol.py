@@ -3,7 +3,7 @@ from types import NoneType
 from spine import array_2_dict
 
 
-class LoadControlLimitIdType: # EEBus_SPINE_TS_LoadControl.xsd: AliasType
+class LoadControlLimitIdType: # EEBus_SPINE_TS_LoadControl.xsd:ns_p:LoadControlLimitIdType -> AliasType
     def __init__(
             self,
             value: int,
@@ -41,7 +41,7 @@ class LoadControlLimitIdType: # EEBus_SPINE_TS_LoadControl.xsd: AliasType
             return cls()
 
 
-class LoadControlEventIdType: # EEBus_SPINE_TS_LoadControl.xsd: AliasType
+class LoadControlEventIdType: # EEBus_SPINE_TS_LoadControl.xsd:ns_p:LoadControlEventIdType -> AliasType
     def __init__(
             self,
             value: int,

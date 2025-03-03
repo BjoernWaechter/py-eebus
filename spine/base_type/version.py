@@ -4,7 +4,7 @@ from types import NoneType
 from spine import array_2_dict
 
 
-class SpecificationVersionDataType: # EEBus_SPINE_TS_Version.xsd: ComplexType
+class SpecificationVersionDataType: # EEBus_SPINE_TS_Version.xsd:ns_p:SpecificationVersionDataType -> ComplexType
     def __init__(
             self,
             value: str,
@@ -47,7 +47,7 @@ class SpecificationVersionDataType: # EEBus_SPINE_TS_Version.xsd: ComplexType
             return cls()
 
 
-class SpecificationVersionListDataType: # EEBus_SPINE_TS_Version.xsd: ComplexType
+class SpecificationVersionListDataType: # EEBus_SPINE_TS_Version.xsd:ns_p:SpecificationVersionListDataType -> ComplexType
     def __init__(
             self,
             specification_version_data: list[SpecificationVersionDataType] = None,
@@ -90,7 +90,7 @@ class SpecificationVersionListDataType: # EEBus_SPINE_TS_Version.xsd: ComplexTyp
             return cls()
 
 
-class SpecificationVersionDataElementsType: # EEBus_SPINE_TS_Version.xsd: ComplexType
+class SpecificationVersionDataElementsType: # EEBus_SPINE_TS_Version.xsd:ns_p:SpecificationVersionDataElementsType -> ComplexType
     def __init__(
             self,
     ):
@@ -123,7 +123,7 @@ class SpecificationVersionDataElementsType: # EEBus_SPINE_TS_Version.xsd: Comple
             return cls()
 
 
-class SpecificationVersionListDataSelectorsType: # EEBus_SPINE_TS_Version.xsd: ComplexType
+class SpecificationVersionListDataSelectorsType: # EEBus_SPINE_TS_Version.xsd:ns_p:SpecificationVersionListDataSelectorsType -> ComplexType
     def __init__(
             self,
     ):

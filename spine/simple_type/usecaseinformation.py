@@ -3,7 +3,7 @@ from types import NoneType
 from spine import array_2_dict
 
 
-class UseCaseScenarioSupportType: # EEBus_SPINE_TS_UseCaseInformation.xsd: AliasType
+class UseCaseScenarioSupportType: # EEBus_SPINE_TS_UseCaseInformation.xsd:ns_p:UseCaseScenarioSupportType -> AliasType
     def __init__(
             self,
             value: int,

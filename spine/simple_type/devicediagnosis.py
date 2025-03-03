@@ -3,7 +3,7 @@ from types import NoneType
 from spine import array_2_dict
 
 
-class LastErrorCodeType: # EEBus_SPINE_TS_DeviceDiagnosis.xsd: AliasType
+class LastErrorCodeType: # EEBus_SPINE_TS_DeviceDiagnosis.xsd:ns_p:LastErrorCodeType -> AliasType
     def __init__(
             self,
             value: str,
@@ -41,7 +41,7 @@ class LastErrorCodeType: # EEBus_SPINE_TS_DeviceDiagnosis.xsd: AliasType
             return cls()
 
 
-class VendorStateCodeType: # EEBus_SPINE_TS_DeviceDiagnosis.xsd: AliasType
+class VendorStateCodeType: # EEBus_SPINE_TS_DeviceDiagnosis.xsd:ns_p:VendorStateCodeType -> AliasType
     def __init__(
             self,
             value: str,

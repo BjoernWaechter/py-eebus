@@ -3,7 +3,7 @@ from types import NoneType
 from spine import array_2_dict
 
 
-class AlarmIdType: # EEBus_SPINE_TS_Alarm.xsd: AliasType
+class AlarmIdType: # EEBus_SPINE_TS_Alarm.xsd:ns_p:AlarmIdType -> AliasType
     def __init__(
             self,
             value: int,

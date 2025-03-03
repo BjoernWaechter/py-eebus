@@ -9,148 +9,7 @@ from types import NoneType
 from spine import array_2_dict
 
 
-class DeviceDiagnosisServiceDataType: # EEBus_SPINE_TS_DeviceDiagnosis.xsd: ComplexType
-    def __init__(
-            self,
-            timestamp: AbsoluteOrRelativeTimeType = None,
-            installation_time: AbsoluteOrRelativeTimeType = None,
-            boot_counter: int = None,
-            next_service: AbsoluteOrRelativeTimeType = None,
-    ):
-        super().__init__()
-        
-        self.timestamp = timestamp
-        self.installation_time = installation_time
-        self.boot_counter = boot_counter
-        self.next_service = next_service
-
-        if not isinstance(self.timestamp, AbsoluteOrRelativeTimeType | NoneType):
-            raise TypeError("timestamp is not of type AbsoluteOrRelativeTimeType")
-        
-        if not isinstance(self.installation_time, AbsoluteOrRelativeTimeType | NoneType):
-            raise TypeError("installation_time is not of type AbsoluteOrRelativeTimeType")
-        
-        if not isinstance(self.boot_counter, int | NoneType):
-            raise TypeError("boot_counter is not of type int")
-        
-        if not isinstance(self.next_service, AbsoluteOrRelativeTimeType | NoneType):
-            raise TypeError("next_service is not of type AbsoluteOrRelativeTimeType")
-        
-    def get_data(self):
-
-        msg_data = []
-        
-        if self.timestamp is not None:
-            msg_data.append({"timestamp": self.timestamp.get_data()})
-        if self.installation_time is not None:
-            msg_data.append({"installationTime": self.installation_time.get_data()})
-        if self.boot_counter is not None:
-            msg_data.append({"bootCounter": self.boot_counter})
-        if self.next_service is not None:
-            msg_data.append({"nextService": self.next_service.get_data()})
-        
-        return msg_data
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        if self.timestamp is not None:
-            result_str += f"{sep}timestamp: {self.timestamp}"
-            sep = ", "
-        if self.installation_time is not None:
-            result_str += f"{sep}installationTime: {self.installation_time}"
-            sep = ", "
-        if self.boot_counter is not None:
-            result_str += f"{sep}bootCounter: {self.boot_counter}"
-            sep = ", "
-        if self.next_service is not None:
-            result_str += f"{sep}nextService: {self.next_service}"
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
-                timestamp=data_dict.get('timestamp'),
-                installation_time=data_dict.get('installationTime'),
-                boot_counter=data_dict.get('bootCounter'),
-                next_service=data_dict.get('nextService'),
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class DeviceDiagnosisHeartbeatDataType: # EEBus_SPINE_TS_DeviceDiagnosis.xsd: ComplexType
-    def __init__(
-            self,
-            timestamp: AbsoluteOrRelativeTimeType = None,
-            heartbeat_counter: int = None,
-            heartbeat_timeout: str = None,
-    ):
-        super().__init__()
-        
-        self.timestamp = timestamp
-        self.heartbeat_counter = heartbeat_counter
-        self.heartbeat_timeout = heartbeat_timeout
-
-        if not isinstance(self.timestamp, AbsoluteOrRelativeTimeType | NoneType):
-            raise TypeError("timestamp is not of type AbsoluteOrRelativeTimeType")
-        
-        if not isinstance(self.heartbeat_counter, int | NoneType):
-            raise TypeError("heartbeat_counter is not of type int")
-        
-        if not isinstance(self.heartbeat_timeout, str | NoneType):
-            raise TypeError("heartbeat_timeout is not of type str")
-        
-    def get_data(self):
-
-        msg_data = []
-        
-        if self.timestamp is not None:
-            msg_data.append({"timestamp": self.timestamp.get_data()})
-        if self.heartbeat_counter is not None:
-            msg_data.append({"heartbeatCounter": self.heartbeat_counter})
-        if self.heartbeat_timeout is not None:
-            msg_data.append({"heartbeatTimeout": self.heartbeat_timeout})
-        
-        return msg_data
-
-
-    def __str__(self):
-        result_str = ""
-        sep = ""
-        if self.timestamp is not None:
-            result_str += f"{sep}timestamp: {self.timestamp}"
-            sep = ", "
-        if self.heartbeat_counter is not None:
-            result_str += f"{sep}heartbeatCounter: {self.heartbeat_counter}"
-            sep = ", "
-        if self.heartbeat_timeout is not None:
-            result_str += f"{sep}heartbeatTimeout: {self.heartbeat_timeout}"
-        
-        return result_str
-
-    @classmethod
-    def from_data(cls, data):
-        if type(data) == list:
-            data_dict = array_2_dict(data)
-            return cls(
-                timestamp=data_dict.get('timestamp'),
-                heartbeat_counter=data_dict.get('heartbeatCounter'),
-                heartbeat_timeout=data_dict.get('heartbeatTimeout'),
-            )
-        elif data:
-            return cls(data)
-        else:
-            return cls()
-
-
-class DeviceDiagnosisStateDataType: # EEBus_SPINE_TS_DeviceDiagnosis.xsd: ComplexType
+class DeviceDiagnosisStateDataType: # EEBus_SPINE_TS_DeviceDiagnosis.xsd:ns_p:DeviceDiagnosisStateDataType -> ComplexType
     def __init__(
             self,
             timestamp: AbsoluteOrRelativeTimeType = None,
@@ -259,7 +118,148 @@ class DeviceDiagnosisStateDataType: # EEBus_SPINE_TS_DeviceDiagnosis.xsd: Comple
             return cls()
 
 
-class DeviceDiagnosisStateDataElementsType: # EEBus_SPINE_TS_DeviceDiagnosis.xsd: ComplexType
+class DeviceDiagnosisServiceDataType: # EEBus_SPINE_TS_DeviceDiagnosis.xsd:ns_p:DeviceDiagnosisServiceDataType -> ComplexType
+    def __init__(
+            self,
+            timestamp: AbsoluteOrRelativeTimeType = None,
+            installation_time: AbsoluteOrRelativeTimeType = None,
+            boot_counter: int = None,
+            next_service: AbsoluteOrRelativeTimeType = None,
+    ):
+        super().__init__()
+        
+        self.timestamp = timestamp
+        self.installation_time = installation_time
+        self.boot_counter = boot_counter
+        self.next_service = next_service
+
+        if not isinstance(self.timestamp, AbsoluteOrRelativeTimeType | NoneType):
+            raise TypeError("timestamp is not of type AbsoluteOrRelativeTimeType")
+        
+        if not isinstance(self.installation_time, AbsoluteOrRelativeTimeType | NoneType):
+            raise TypeError("installation_time is not of type AbsoluteOrRelativeTimeType")
+        
+        if not isinstance(self.boot_counter, int | NoneType):
+            raise TypeError("boot_counter is not of type int")
+        
+        if not isinstance(self.next_service, AbsoluteOrRelativeTimeType | NoneType):
+            raise TypeError("next_service is not of type AbsoluteOrRelativeTimeType")
+        
+    def get_data(self):
+
+        msg_data = []
+        
+        if self.timestamp is not None:
+            msg_data.append({"timestamp": self.timestamp.get_data()})
+        if self.installation_time is not None:
+            msg_data.append({"installationTime": self.installation_time.get_data()})
+        if self.boot_counter is not None:
+            msg_data.append({"bootCounter": self.boot_counter})
+        if self.next_service is not None:
+            msg_data.append({"nextService": self.next_service.get_data()})
+        
+        return msg_data
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        if self.timestamp is not None:
+            result_str += f"{sep}timestamp: {self.timestamp}"
+            sep = ", "
+        if self.installation_time is not None:
+            result_str += f"{sep}installationTime: {self.installation_time}"
+            sep = ", "
+        if self.boot_counter is not None:
+            result_str += f"{sep}bootCounter: {self.boot_counter}"
+            sep = ", "
+        if self.next_service is not None:
+            result_str += f"{sep}nextService: {self.next_service}"
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+                timestamp=data_dict.get('timestamp'),
+                installation_time=data_dict.get('installationTime'),
+                boot_counter=data_dict.get('bootCounter'),
+                next_service=data_dict.get('nextService'),
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class DeviceDiagnosisHeartbeatDataType: # EEBus_SPINE_TS_DeviceDiagnosis.xsd:ns_p:DeviceDiagnosisHeartbeatDataType -> ComplexType
+    def __init__(
+            self,
+            timestamp: AbsoluteOrRelativeTimeType = None,
+            heartbeat_counter: int = None,
+            heartbeat_timeout: str = None,
+    ):
+        super().__init__()
+        
+        self.timestamp = timestamp
+        self.heartbeat_counter = heartbeat_counter
+        self.heartbeat_timeout = heartbeat_timeout
+
+        if not isinstance(self.timestamp, AbsoluteOrRelativeTimeType | NoneType):
+            raise TypeError("timestamp is not of type AbsoluteOrRelativeTimeType")
+        
+        if not isinstance(self.heartbeat_counter, int | NoneType):
+            raise TypeError("heartbeat_counter is not of type int")
+        
+        if not isinstance(self.heartbeat_timeout, str | NoneType):
+            raise TypeError("heartbeat_timeout is not of type str")
+        
+    def get_data(self):
+
+        msg_data = []
+        
+        if self.timestamp is not None:
+            msg_data.append({"timestamp": self.timestamp.get_data()})
+        if self.heartbeat_counter is not None:
+            msg_data.append({"heartbeatCounter": self.heartbeat_counter})
+        if self.heartbeat_timeout is not None:
+            msg_data.append({"heartbeatTimeout": self.heartbeat_timeout})
+        
+        return msg_data
+
+
+    def __str__(self):
+        result_str = ""
+        sep = ""
+        if self.timestamp is not None:
+            result_str += f"{sep}timestamp: {self.timestamp}"
+            sep = ", "
+        if self.heartbeat_counter is not None:
+            result_str += f"{sep}heartbeatCounter: {self.heartbeat_counter}"
+            sep = ", "
+        if self.heartbeat_timeout is not None:
+            result_str += f"{sep}heartbeatTimeout: {self.heartbeat_timeout}"
+        
+        return result_str
+
+    @classmethod
+    def from_data(cls, data):
+        if type(data) == list:
+            data_dict = array_2_dict(data)
+            return cls(
+                timestamp=data_dict.get('timestamp'),
+                heartbeat_counter=data_dict.get('heartbeatCounter'),
+                heartbeat_timeout=data_dict.get('heartbeatTimeout'),
+            )
+        elif data:
+            return cls(data)
+        else:
+            return cls()
+
+
+class DeviceDiagnosisStateDataElementsType: # EEBus_SPINE_TS_DeviceDiagnosis.xsd:ns_p:DeviceDiagnosisStateDataElementsType -> ComplexType
     def __init__(
             self,
             timestamp: ElementTagType = None,
@@ -368,7 +368,7 @@ class DeviceDiagnosisStateDataElementsType: # EEBus_SPINE_TS_DeviceDiagnosis.xsd
             return cls()
 
 
-class DeviceDiagnosisServiceDataElementsType: # EEBus_SPINE_TS_DeviceDiagnosis.xsd: ComplexType
+class DeviceDiagnosisServiceDataElementsType: # EEBus_SPINE_TS_DeviceDiagnosis.xsd:ns_p:DeviceDiagnosisServiceDataElementsType -> ComplexType
     def __init__(
             self,
             timestamp: ElementTagType = None,
@@ -444,7 +444,7 @@ class DeviceDiagnosisServiceDataElementsType: # EEBus_SPINE_TS_DeviceDiagnosis.x
             return cls()
 
 
-class DeviceDiagnosisHeartbeatDataElementsType: # EEBus_SPINE_TS_DeviceDiagnosis.xsd: ComplexType
+class DeviceDiagnosisHeartbeatDataElementsType: # EEBus_SPINE_TS_DeviceDiagnosis.xsd:ns_p:DeviceDiagnosisHeartbeatDataElementsType -> ComplexType
     def __init__(
             self,
             timestamp: ElementTagType = None,

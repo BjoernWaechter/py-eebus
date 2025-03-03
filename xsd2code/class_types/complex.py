@@ -36,7 +36,8 @@ class ComplexType(xsd2code.DataType):
                     # print(f" - {mem}")
 
                     if hasattr(mem, "type") and mem.type.display_name:
-                        # print(f"create mem {xsd_type.display_name}.{mem.display_name}")
+                        if xsd_type.display_name == 'ns_p:CmdType':
+                            print(f"create mem {xsd_type.display_name}.{mem.display_name}")
                         added_members.append(mem.display_name)
                         mem_type = xsd2code.create_type_from_xsd(mem.type)
                         comp_type.add_member(xsd2code.Member(
@@ -47,14 +48,16 @@ class ComplexType(xsd2code.DataType):
                         ))
 
                     if isinstance(mem, XsdGroup) and hasattr(mem, "display_name") and mem.display_name:
-                        comp_type.add_group_type(
-                            xsd2code.ALL_TYPES.get_or_create(xsd2code.create_type_from_xsd(mem))
-                        )
+                        #print(f"add {xsd_type.display_name} - {mem.display_name}")
+                        group_type = xsd2code.ALL_TYPES.get_or_create(xsd2code.create_type_from_xsd(mem))
+                        #print(group_type)
+                        comp_type.add_group_type(group_type)
 
                     if hasattr(mem, "content"):
                         for mem_ref in mem.content:
                             if hasattr(mem_ref, "display_name") and hasattr(mem_ref, "type"):
-                                # print(f"create ref {comp_type.type_name}.{mem_ref.display_name}")
+                                if xsd_type.display_name == 'ns_p:CmdType':
+                                    print(f"create ref {comp_type.type_name}.{mem_ref.display_name}")
                                 comp_type.add_member(xsd2code.Member(
                                     fq_member_name=mem_ref.display_name,
                                     data_type=xsd2code.ALL_TYPES.get_or_create(xsd2code.create_type_from_xsd(mem_ref.type)),
@@ -69,7 +72,7 @@ class ComplexType(xsd2code.DataType):
         super().__init__(type_name, source_file)
 
         self._members = []
-        self._group_types = []
+        self._group_type_members = []
         self._base_type = None
 
     def add_member(self, add_member):
@@ -80,7 +83,17 @@ class ComplexType(xsd2code.DataType):
             self._members.append(add_member)
 
     def add_group_type(self, add_group_type):
-        self._group_types.append(add_group_type)
+        print(f"add_group_type members {self.fq_name} {add_group_type.fq_name}")
+        if add_group_type in self._group_type_members:
+            raise RuntimeError(f"Member group {add_group_type} was already added to type {self.type_name}")
+        else:
+
+            self._group_type_members.append(
+                xsd2code.Member(
+                    fq_member_name="internal:"+xsd2code.to_snake_case(add_group_type.type_name),
+                    data_type=add_group_type
+                )
+            )
 
     @property
     def members(self):
@@ -95,9 +108,19 @@ class ComplexType(xsd2code.DataType):
                         replaced_existing = True
                 if not replaced_existing:
                     result.append(m)
-            return result
+
         else:
-            return self._members
+            result = self._members.copy()
+
+        # for gt in self._group_type_members:
+        #     #print(f"members {self.fq_name} {[f.fq_name for f in gt.members]}")
+        #     result.append(gt)
+
+        result += self._group_type_members
+
+        if self.fq_name == 'ns_p:CmdType':
+            print(f"{self.fq_name}: {result}")
+        return result
 
     def get_as_code(self):
         return self.type_name

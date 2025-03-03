@@ -6,7 +6,7 @@ from types import NoneType
 from spine import array_2_dict
 
 
-class DataTunnelingHeaderType: # EEBus_SPINE_TS_DataTunneling.xsd: ComplexType
+class DataTunnelingHeaderType: # EEBus_SPINE_TS_DataTunneling.xsd:ns_p:DataTunnelingHeaderType -> ComplexType
     def __init__(
             self,
             purpose_id: PurposeIdType = None,
@@ -71,7 +71,7 @@ class DataTunnelingHeaderType: # EEBus_SPINE_TS_DataTunneling.xsd: ComplexType
             return cls()
 
 
-class DataTunnelingHeaderElementsType: # EEBus_SPINE_TS_DataTunneling.xsd: ComplexType
+class DataTunnelingHeaderElementsType: # EEBus_SPINE_TS_DataTunneling.xsd:ns_p:DataTunnelingHeaderElementsType -> ComplexType
     def __init__(
             self,
             purpose_id: ElementTagType = None,
@@ -136,7 +136,7 @@ class DataTunnelingHeaderElementsType: # EEBus_SPINE_TS_DataTunneling.xsd: Compl
             return cls()
 
 
-class DataTunnelingCallType: # EEBus_SPINE_TS_DataTunneling.xsd: ComplexType
+class DataTunnelingCallType: # EEBus_SPINE_TS_DataTunneling.xsd:ns_p:DataTunnelingCallType -> ComplexType
     def __init__(
             self,
             header: DataTunnelingHeaderType = None,
@@ -190,7 +190,7 @@ class DataTunnelingCallType: # EEBus_SPINE_TS_DataTunneling.xsd: ComplexType
             return cls()
 
 
-class DataTunnelingCallElementsType: # EEBus_SPINE_TS_DataTunneling.xsd: ComplexType
+class DataTunnelingCallElementsType: # EEBus_SPINE_TS_DataTunneling.xsd:ns_p:DataTunnelingCallElementsType -> ComplexType
     def __init__(
             self,
             header: DataTunnelingHeaderElementsType = None,

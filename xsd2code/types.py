@@ -1,10 +1,8 @@
 import inspect
 
-from xmlschema import XsdElement
-from xmlschema.validators import XsdAtomicRestriction, XsdType, XsdComplexType, XsdAtomicBuiltin, XsdUnion, XsdGroup
+from xmlschema.validators import XsdType
 
 import xsd2code
-from xsd2code.class_types.base import BaseType
 
 
 def show_selected_attr(obj, interest, depth=0):
